@@ -22,5 +22,6 @@ pipenv sync
 ```
 cd neon-uat
 pipenv shell
-pytest -rP
+pytest -rP --alluredir=allure-results
+allure serve
 ```
