@@ -3,14 +3,17 @@
 ## Preparation
 ### Globally
 ```
-npm i -g truffle
-npm audit fix
+brew install python
+brew install pipenv
+brew insall node
+brew install npm
 ```
 
 ### Solution-level Node.js
 ```
 cd neon-uat
 npm i
+npm audit fix
 ```
 ### Solution-level Python
 ```
