@@ -21,5 +21,5 @@ pipenv sync
 ```
 cd neon-uat
 pipenv shell
-pytest
+pytest -rP
 ```
