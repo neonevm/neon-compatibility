@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config({ path: '../.env' });
 const Web3 = require('web3');
 module.exports = {
     networks: {
