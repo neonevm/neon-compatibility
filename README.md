@@ -5,7 +5,7 @@
 ```
 brew install python
 brew install pipenv
-brew insall node
+brew install node
 brew install npm
 ```
 
