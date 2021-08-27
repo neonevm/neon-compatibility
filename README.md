@@ -4,6 +4,7 @@
 ### Globally
 ```
 npm i -g truffle
+npm audit fix
 ```
 
 ### Solution-level Node.js
