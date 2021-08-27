@@ -13,7 +13,7 @@ brew install npm
 ```
 cd neon-uat
 npm i
-npm audit fix
+npm audit fix --force
 ```
 ### Solution-level Python
 ```
