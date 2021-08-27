@@ -1,4 +1,4 @@
-#UAT for 3rd parties' compatibility
+# UAT for 3rd parties' compatibility
 
 ## Preparation
 ### Globally
