@@ -1,6 +1,6 @@
 import pytest
-from src.helpers.shell.processes import run_command_line
 from src.helpers.common.constants import NETWORK_NAME
+from src.helpers.shell.processes import run_command_line
 
 TRUFFLE = "../node_modules/.bin/truffle"
 CD_METACOIN = "cd Metacoin; pwd;"
