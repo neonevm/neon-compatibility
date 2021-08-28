@@ -1,0 +1,15 @@
+Terminal Solana:
+
+sudo docker run --rm -p 8888 --network=host -ti -e RUST_LOG=solana_runtime::system_instruction_processor=trace,solana_runtime::message_processor=debug,solana_bpf_loader=debug,solana_rbpf=debug --entrypoint /bin/bash --name=solana cybercoredev/solana:v1.7.9-resources
+
+
+Solana docker:
+
+export RUST_LOG=solana_runtime::system_instruction_processor=trace,solana_runtime::message_processor=debug,solana_bpf_loader=debug,solana_rbpf=debug,solana_bpf_loader_program=debug;./run.sh 2>solana.log & 
+
+tail -f solana.log | grep -v Vote111111111111111111111111111111111111111
+
+
+Terminal Proxy:
+
+sudo docker pull cybercoredev/proxy:latest; sudo docker run --rm -ti --network=host -e SOLANA_URL="http://localhost:8899" -e EVM_LOADER=deploy -e ETH_TOKEN_MINT=deploy -e COLLATERAL_POOL_BASE=deploy -e LOCAL_CLUSTER=local --name=proxy cybercoredev/proxy:latest

@@ -1,12 +1,13 @@
 import pytest
-from src.helpers.shell.processes import run_command_line
 from src.helpers.common.constants import NETWORK_NAME
+from src.helpers.shell.processes import run_command_line
 
 TRUFFLE = "../node_modules/.bin/truffle"
 CD_METACOIN = "cd Metacoin; pwd;"
 # ERROR_TAG_LATEST = "Error: Returned error: Invalid tag latest"
 ERROR_NO_ATTRIBUTE_ETH_ACCOUNTS = "Returned error: 'EthereumModel' object has no attribute 'eth_accounts'"
 ERROR_CONTRACTS_NOT_DEPLOYED = "Contracts have not been deployed to any network."
+ERROR_COULD_NOT_CONNECT = "Could not connect to your Ethereum client."
 CD_BACK = "; cd ..; pwd;"
 
 
@@ -15,6 +16,7 @@ def test_truffle_migration():
     actual_result = run_command_line(
         f"{CD_METACOIN} {TRUFFLE} migrate --network {NETWORK_NAME} {CD_BACK}")
     assert ERROR_NO_ATTRIBUTE_ETH_ACCOUNTS not in actual_result
+    assert ERROR_COULD_NOT_CONNECT not in actual_result
     print(actual_result)
 
 

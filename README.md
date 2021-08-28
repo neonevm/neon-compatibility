@@ -1,6 +1,7 @@
 # UAT for 3rd parties' compatibility
 
 ## Preparation
+
 ### Globally
 ```
 brew install python
@@ -20,6 +21,14 @@ npm audit fix --force
 cd neon-uat
 pipenv sync
 ```
+
+### Network
+Copy content of an envviroonment file into .env in the root of the solution
+| File name     | Goal                                 |
+| ------------- | ------------------------------------ |
+| .env          | Test solution uses this one as input |
+| .env.internal.testnet  | Our internal testnet        |
+| .env.local   | Connection to a dockerizedd env       |
 
 ## Run
 ```

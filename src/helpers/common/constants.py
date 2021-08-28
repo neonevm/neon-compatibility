@@ -1,1 +1,1 @@
-NETWORK_NAME = "network"
+NETWORK_NAME = "neonlabs"
