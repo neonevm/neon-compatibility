@@ -2,7 +2,7 @@ require('dotenv').config({ path: '../.env' });
 const Web3 = require('web3');
 module.exports = {
     networks: {
-        network: {
+        neonlabs: {
             provider: () => new Web3.providers.HttpProvider(process.env.HTTP_URL),
             network_id: process.env.NETWORK_ID,
             from: process.env.ADDRESS_FROM,
