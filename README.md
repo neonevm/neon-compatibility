@@ -28,7 +28,7 @@ pipenv sync
 ```
 
 ### Network
-Copy content of an envviroonment file into .env in the root of the solution
+Copy content of an envvironment file into .env in the root of the solution
 | File name     | Goal                                 |
 | ------------- | ------------------------------------ |
 | .env          | Test solution uses this one as input |
