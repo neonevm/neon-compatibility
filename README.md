@@ -18,8 +18,8 @@ brew install allure
 
 ### Globally (Ubuntu)
 ```
-brew install python@3.8
-brew install pipenv
+# if there is no Python 2.8 or 3.9: brew install python@3.8
+pip install pipenv
 brew install node
 brew install npm
 # brew install gcc
