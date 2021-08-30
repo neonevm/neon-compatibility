@@ -8,6 +8,7 @@ CD_METACOIN = "cd Metacoin; pwd;"
 ERROR_NO_ATTRIBUTE_ETH_ACCOUNTS = "Returned error: 'EthereumModel' object has no attribute 'eth_accounts'"
 ERROR_CONTRACTS_NOT_DEPLOYED = "Contracts have not been deployed to any network."
 ERROR_COULD_NOT_CONNECT = "Could not connect to your Ethereum client."
+ERROR_NOT_AUTHORIZED = "Invalid JSON RPC response:"
 CD_BACK = "; cd ..; pwd;"
 
 
@@ -17,6 +18,7 @@ def test_truffle_migration():
         f"{CD_METACOIN} {TRUFFLE} migrate --network {NETWORK_NAME} {CD_BACK}")
     assert ERROR_NO_ATTRIBUTE_ETH_ACCOUNTS not in actual_result
     assert ERROR_COULD_NOT_CONNECT not in actual_result
+    assert ERROR_NOT_AUTHORIZED not in actual_result
     print(actual_result)
 
 
