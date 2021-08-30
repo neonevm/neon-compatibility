@@ -16,10 +16,26 @@ brew install npm
 brew install allure
 ```
 
-### Globally (Ubuntu)
+### Globally (Ubuntu 20.04)
 ```
-# if there is no Python 2.8 or 3.9: brew install python@3.8
+# assuming that there already is Python 3.8.10, 
+# otherwise install it by issuing brew install python@3.8 
+# or any alternate package manager
+
+# pip
+# https://pip.pypa.io/en/stable/installation/
+sudo apt install python3-pip
+sudo -H pip3 install --upgrade pip
+
+# pipenv
+# https://pipenv.pypa.io/en/latest/
+# https://docs.pipenv.org/install/
+sudo apt install pipenv
 pip install pipenv
+
+# Do not use standard Linux package manager for installing Node.js
+# prefer using brew or nvm
+# https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04
 brew install node
 brew install npm
 # brew install gcc
