@@ -9,6 +9,7 @@ ERROR_NO_ATTRIBUTE_ETH_ACCOUNTS = "Returned error: 'EthereumModel' object has no
 ERROR_CONTRACTS_NOT_DEPLOYED = "Contracts have not been deployed to any network."
 ERROR_COULD_NOT_CONNECT = "Could not connect to your Ethereum client."
 ERROR_NOT_AUTHORIZED = "Invalid JSON RPC response:"
+ERROR_TIMEOUT = "Error: There was a timeout while attempting to connect to the network."
 CD_BACK = "; cd ..; pwd;"
 
 
@@ -19,6 +20,7 @@ def test_truffle_migration():
     assert ERROR_NO_ATTRIBUTE_ETH_ACCOUNTS not in actual_result
     assert ERROR_COULD_NOT_CONNECT not in actual_result
     assert ERROR_NOT_AUTHORIZED not in actual_result
+    assert ERROR_TIMEOUT not in actual_result
     print(actual_result)
 
 
