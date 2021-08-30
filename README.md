@@ -12,6 +12,7 @@ brew install python
 brew install pipenv
 brew install node
 brew install npm
+brew install gcc
 brew install allure
 ```
 
