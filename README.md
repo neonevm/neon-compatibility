@@ -6,14 +6,27 @@ This instruction suggest using package managers heavily, you can obtain brew her
 https://brew.sh/index
 or use any alternative solution like SDKMAN, native package managers, etc
 
-### Globally
+### Globally (Mac OSX)
 ```
-brew install python
+brew install python@3.8
 brew install pipenv
 brew install node
 brew install npm
-brew install gcc
+
 brew install allure
+```
+
+### Globally (Ubuntu)
+```
+brew install python@3.8
+brew install pipenv
+brew install node
+brew install npm
+# brew install gcc
+
+sudo apt-add-repository ppa:qameta/allure
+sudo apt-get update
+sudo apt-get install allure
 ```
 
 ### Solution-level Node.js
