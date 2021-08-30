@@ -34,13 +34,15 @@ sudo -H pip3 install --upgrade pip
 sudo apt install pipenv
 pip install pipenv
 
+# Node.js, npm
 # Do not use standard Linux package manager for installing Node.js
 # prefer using brew or nvm
 # https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04
 brew install node
 brew install npm
-# brew install gcc
 
+# Allure
+# brew install gcc
 sudo apt-add-repository ppa:qameta/allure
 sudo apt-get update
 sudo apt-get install allure
