@@ -57,6 +57,7 @@ npm audit fix --force
 ### Solution-level Python
 ```
 cd neon-uat
+pipenv --python 3.8
 pipenv sync
 ```
 
