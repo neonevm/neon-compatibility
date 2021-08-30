@@ -2,6 +2,10 @@
 
 ## Preparation
 
+This instruction suggest using package managers heavily, you can obtain brew here:
+https://brew.sh/index
+or use any alternative solution like SDKMAN, native package managers, etc
+
 ### Globally
 ```
 brew install python
