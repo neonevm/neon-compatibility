@@ -5,13 +5,14 @@
 This instruction suggest using package managers heavily, you can obtain brew here:
 https://brew.sh/index
 or use any alternative solution like SDKMAN, native package managers, etc
+Detailed instruction for Linux is here: https://docs.brew.sh/linux
 
 ### Globally (Mac OSX)
 ```
 brew install python@3.8
 brew install pipenv
 brew install node
-brew install npm
+# npm is already here, otherwise brew install npm
 
 brew install allure
 ```
