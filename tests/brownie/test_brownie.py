@@ -18,6 +18,6 @@ def setup_and_teardown():
     run_result = run_command_line(f"{CD_BROWNIE} brownie networks delete {NETWORK_NAME} {CD_BACK}")
     print(run_result)
 
-def test_1():
+def test_connect():
     aaa=f"{CD_BROWNIE} brownie networks add Development {NETWORK_NAME} host={HTTP_URL} {CD_BACK}"
     print(aaa)
