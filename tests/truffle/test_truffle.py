@@ -1,16 +1,18 @@
 import pytest
-from src.helpers.common.constants import NETWORK_NAME
+from src.helpers.common.constants import CD_BACK, NETWORK_NAME, TRUFFLE
 from src.helpers.shell.processes import run_command_line
 
-TRUFFLE = "../node_modules/.bin/truffle"
 CD_METACOIN = "cd Metacoin; pwd;"
 # ERROR_TAG_LATEST = "Error: Returned error: Invalid tag latest"
 ERROR_NO_ATTRIBUTE_ETH_ACCOUNTS = "Returned error: 'EthereumModel' object has no attribute 'eth_accounts'"
 ERROR_CONTRACTS_NOT_DEPLOYED = "Contracts have not been deployed to any network."
 ERROR_COULD_NOT_CONNECT = "Could not connect to your Ethereum client."
 ERROR_NOT_AUTHORIZED = "Invalid JSON RPC response:"
+<<<<<<< HEAD
 ERROR_TIMEOUT = "Error: There was a timeout while attempting to connect to the network."
 CD_BACK = "; cd ..; pwd;"
+=======
+>>>>>>> feature/119-openzeppelin-connection-test
 
 
 def test_truffle_migration():
