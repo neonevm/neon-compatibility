@@ -8,11 +8,7 @@ ERROR_NO_ATTRIBUTE_ETH_ACCOUNTS = "Returned error: 'EthereumModel' object has no
 ERROR_CONTRACTS_NOT_DEPLOYED = "Contracts have not been deployed to any network."
 ERROR_COULD_NOT_CONNECT = "Could not connect to your Ethereum client."
 ERROR_NOT_AUTHORIZED = "Invalid JSON RPC response:"
-<<<<<<< HEAD
 ERROR_TIMEOUT = "Error: There was a timeout while attempting to connect to the network."
-CD_BACK = "; cd ..; pwd;"
-=======
->>>>>>> feature/119-openzeppelin-connection-test
 
 
 def test_truffle_migration():
