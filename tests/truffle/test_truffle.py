@@ -1,12 +1,10 @@
 from src.helpers.common.config import CD_BACK
 from src.helpers.common.constants import NETWORK_NAME, TRUFFLE
+from src.helpers.common.error_message import ERROR_NO_ATTRIBUTE_ETH_ACCOUNTS
 from src.helpers.shell.processes import run_command_line
 
 CD_METACOIN = "cd Metacoin; pwd;"
 # ERROR_TAG_LATEST = "Error: Returned error: Invalid tag latest"
-ERROR_NO_ATTRIBUTE_ETH_ACCOUNTS = "Returned error: 'EthereumModel' \
-    object has no attribute 'eth_accounts'"
-
 ERROR_CONTRACTS_NOT_DEPLOYED = "Contracts have not been deployed \
     to any network."
 
