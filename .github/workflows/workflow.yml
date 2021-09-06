@@ -20,6 +20,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: show
+      run: |
+        echo "======================================"
+        echo $INPUT_NETWORK
+        echo `./.env.$INPUT_NETWORK`
 
   python:
     runs-on: ubuntu-latest
@@ -36,7 +41,7 @@ jobs:
       run: |
         echo "======================================"
         echo $INPUT_NETWORK
-        echo `.env.$INPUT_NETWORK`
+        echo `./.env.$INPUT_NETWORK`
         npm i
         # python -m pip install --upgrade pip
         pip install pipenv
