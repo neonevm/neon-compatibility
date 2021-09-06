@@ -8,11 +8,13 @@ CD_BROWNIE = "cd brownie; pwd;"
 
 @pytest.fixture(autouse=True)
 def setup_and_teardown():
-    aaa = f"{CD_BROWNIE} brownie networks add Development {NETWORK_NAME} host={HTTP_URL} {CD_BACK}"
+    aaa = f"{CD_BROWNIE} brownie networks add Development {NETWORK_NAME} \
+        host={HTTP_URL} {CD_BACK}"
+
     print(aaa)
     run_result = run_command_line(
-        f"{CD_BROWNIE} brownie networks add Development {NETWORK_NAME} host={HTTP_URL} {CD_BACK}"
-    )
+        f"{CD_BROWNIE} brownie networks add Development {NETWORK_NAME} \
+            host={HTTP_URL} {CD_BACK}")
     print(run_result)
     yield
     bbb = f"{CD_BROWNIE} brownie networks delete {NETWORK_NAME} {CD_BACK}"
@@ -24,5 +26,7 @@ def setup_and_teardown():
 
 @pytest.mark.skip(reason="now yet done")
 def test_one():
-    aaa = f"{CD_BROWNIE} brownie networks add Development {NETWORK_NAME} host={HTTP_URL} {CD_BACK}"
+    aaa = f"{CD_BROWNIE} brownie networks add Development {NETWORK_NAME} \
+        host={HTTP_URL} {CD_BACK}"
+
     print(aaa)
