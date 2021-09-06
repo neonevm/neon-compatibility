@@ -1,6 +1,6 @@
 import pytest
-from src.helpers.common.config import HTTP_URL
-from src.helpers.common.constants import CD_BACK, NETWORK_NAME
+from src.helpers.common.config import CD_BACK, HTTP_URL
+from src.helpers.common.constants import NETWORK_NAME
 from src.helpers.shell.processes import run_command_line
 
 CD_BROWNIE = "cd brownie; pwd;"

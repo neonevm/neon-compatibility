@@ -1,5 +1,6 @@
 import pytest
-from src.helpers.common.constants import CD_BACK, NETWORK_NAME, TRUFFLE
+from src.helpers.common.config import CD_BACK
+from src.helpers.common.constants import NETWORK_NAME, TRUFFLE
 from src.helpers.shell.processes import run_command_line
 
 CD_OPENZEPPELIN = "cd OpenZeppelin; pwd;"

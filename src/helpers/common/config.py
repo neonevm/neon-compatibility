@@ -1,6 +1,5 @@
 from dotenv import load_dotenv
 import os
-from src.helpers.common.constants import CD_BACK
 
 load_dotenv()
 
@@ -11,4 +10,4 @@ ADDRESS_TO = os.environ.get('ADDRESS_TO')
 DISABLE_CONFIRMATION = os.environ.get('DISABLE_CONFIRMATION')
 
 solution_root_path = os.path.abspath(os.getcwd())
-CD_BACK = CD_BACK.format(solution_root_path)
+CD_BACK = '; cd "{}"; pwd;'.format(solution_root_path)
