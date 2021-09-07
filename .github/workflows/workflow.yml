@@ -37,8 +37,8 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: 3.8
-
-    - name: Install dependencies
+    
+    - name: Switch to network of choice
       run: |
         echo "Log level: ${{ github.event.inputs.logLevel }}"
         echo "Tags: ${{ github.event.inputs.tags }}"
@@ -48,6 +48,9 @@ jobs:
         echo "./.env.$INPUT_NETWORK"
         cp "./env.${{ github.event.inputs.network }}" ./.env
         cat ./.env
+
+    - name: Install dependencies
+      run: |
         npm i
         # python -m pip install --upgrade pip
         pip install pipenv
