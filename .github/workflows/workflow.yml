@@ -21,22 +21,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: show
-      run: |
-        echo "==================== 1 =================="
-        echo $INPUT_NETWORK
-        echo "./.env.$INPUT_NETWORK"
-
-  python:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-    - uses: actions/checkout@v2
-    - uses: ./.github/actions/allure-prep
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.8
     
     - name: Switch to network of choice
       run: |
@@ -48,6 +32,17 @@ jobs:
         echo "./.env.$INPUT_NETWORK"
         cp "./.env.${{ github.event.inputs.network }}" ./.env
         cat ./.env
+
+  python:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions/allure-prep
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
 
     - name: Install dependencies
       run: |
