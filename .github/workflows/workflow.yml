@@ -4,10 +4,6 @@ on:
   push:
   workflow_dispatch:
     inputs:
-      logLevel:
-        description: 'Log level'     
-        required: true
-        default: 'warning'
       tags:
         description: 'Test scenario tags'
       network:
@@ -24,7 +20,6 @@ jobs:
     
     - name: Switch to network of choice
       run: |
-        echo "Log level: ${{ github.event.inputs.logLevel }}"
         echo "Tags: ${{ github.event.inputs.tags }}"
         echo "Network: ${{ github.event.inputs.network }}"
         if [ -z "${{ github.event.inputs.network }}" ]
