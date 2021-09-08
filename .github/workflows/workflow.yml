@@ -29,12 +29,14 @@ jobs:
         echo "Network: ${{ github.event.inputs.network }}"
         if [ -z "${{ github.event.inputs.network }}" ]
         then
-          ${{ github.event.inputs.network }} = 'devnet'
+          NETWORK='devnet'
+        else
+          NETWORK="${{ github.event.inputs.network }}"
         fi
         echo "==================== 2 =================="
         echo $INPUT_NETWORK
         echo "./.env.$INPUT_NETWORK"
-        cp "./.env.${{ github.event.inputs.network }}" ./.env
+        cp "./.env.$NETWORK" ./.env
         cat ./.env
 
   python:
