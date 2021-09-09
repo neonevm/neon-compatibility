@@ -26,9 +26,9 @@ def test_hardhat_simple():
 # defaultNetwork: "neonlabs",
 def test_hardhat_advanced():
     # REPORT_GAS=true npx hardhat test
+    command = "REPORT_GAS=true npx hardhat test"
     actual_result = run_command_line(
-        f"{Subfolder.CD_HARDHAT_ADVANCED} REPORT_GAS=true npx hardhat test {CD_BACK}"
-    )
+        f"{Subfolder.CD_HARDHAT_ADVANCED} {command} {CD_BACK}")
     assert HardhatError.ERROR_ETHEREUM_MODEL_WEB3 not in actual_result
     assert HardhatSuccess.DEPLOYING in actual_result
     assert HardhatSuccess.CHANGING in actual_result
