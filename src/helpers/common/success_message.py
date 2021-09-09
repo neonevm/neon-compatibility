@@ -5,4 +5,6 @@ class OpenZeppelinSuccess(object):
 
 
 class HardhatSuccess(object):
-    aaa = ""
+    DEPLOYING = "Deploying a Greeter with greeting: Hello, world!"
+    CHANGING = "Changing greeting from 'Hello, world!' to 'Hola, mundo!'"
+    TEST_OK = "✓ Should return the new greeting once it's changed"
