@@ -8,6 +8,7 @@ module.exports = {
             from: process.env.ADDRESS_FROM,
             to: process.env.ADDRESS_TO,
             disableConfirmationListener: process.env.DISABLE_CONFIRMATION === "true" ? true : false,
+            networkCheckTimeout:1000000,
             // gas
             // gasPrice
             // confirmations: - number of confirmations to wait between deployments (default: 0)
