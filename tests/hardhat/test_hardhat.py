@@ -20,8 +20,11 @@ def test_hardhat_simple():
     pass
 
 
-# @pytest.mark.skip(reason="now yet done")F
-def test_hardhatadvanced():
+# green test result:
+# go to hardhat-advanced/hardhat.config.js
+# and comment out the following line
+# defaultNetwork: "neonlabs",
+def test_hardhat_advanced():
     # REPORT_GAS=true npx hardhat test
     actual_result = run_command_line(
         f"{Subfolder.CD_HARDHAT_ADVANCED} REPORT_GAS=true npx hardhat test {CD_BACK}"
