@@ -29,13 +29,14 @@ jobs:
           NETWORK="${{ github.event.inputs.network }}"
         fi
         echo "======================================"
-        echo $NETWORK
-        echo $INPUT_NETWORK
-        echo "./.env.$NETWORK"
+        echo "NETWORK=$NETWORK"
+        echo "INPUT_NETWORK=$INPUT_NETWORK"
+        echo "copying ./.env.$NETWORK to ./.env"
         cp "./.env.$NETWORK" ./.env
         cat ./.env
         echo "copying to the hardhat-advanced folder..."
         cp "./.env.$NETWORK" ./hardhat-advanced/.env
+        cat ./hardhat-advanced/.env
 
   python:
     runs-on: ubuntu-latest
