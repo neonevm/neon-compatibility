@@ -1,7 +1,7 @@
 class TruffleBasedError(object):
     ERROR_NO_ATTRIBUTE_ETH_ACCOUNTS = (
-        "Returned error: 'EthereumModel' object has no attribute 'eth_accounts'"
-    )
+        "Returned error: 'EthereumModel' object has " +
+        "no attribute 'eth_accounts'")
 
 
 class TruffleError(object):
@@ -16,6 +16,5 @@ class TruffleError(object):
 
 
 class HardhatError(object):
-    ERROR_ETHEREUM_MODEL_WEB3 = (
-        "ProviderError: 'EthereumModel' object has no attribute 'web3_clientVersion'"
-    )
+    ERROR_ETHEREUM_MODEL_WEB3 = ("ProviderError: 'EthereumModel' object has " +
+                                 "no attribute 'web3_clientVersion'")
