@@ -1,7 +1,9 @@
 # UAT for 3rd parties' compatibility
 ## Reports
 http://docs.neon-labs.org/neon-compatibility/
+
 earlier reports are/were available by the link
+
 http://docs.neon-labs.org/neon-uat/
 
 ## Preparation
