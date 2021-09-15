@@ -14,6 +14,10 @@ class TruffleError(object):
     ERROR_TIMEOUT = "Error: There was a timeout while attempting \
         to connect to the network."
 
+    ERROR_NO_CONTRACTS_DEPLOYED = "No contracts deployed."
+
+    ERROR_CANNOT_READ_PROPERTIES = "TypeError: Cannot read properties of undefined (reading '_alreadyWrapped')"
+
 
 class HardhatError(object):
     ERROR_ETHEREUM_MODEL_WEB3 = ("ProviderError: 'EthereumModel' object has " +
