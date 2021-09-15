@@ -13,6 +13,7 @@ module.exports = {
       provider: () => {
         process.env.PRIVATE_KEY, process.env.HTTP_URL;
       },
+      network_id: process.env.NETWORK_ID,
 
       // gas
       // gasPrice

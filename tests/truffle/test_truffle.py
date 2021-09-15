@@ -1,3 +1,4 @@
+import os
 from web3 import HTTPProvider, Web3
 from src.helpers.common.config import CD_BACK, HTTP_URL
 from src.helpers.common.constants import NETWORK_NAME, RunCommand, Subfolder
@@ -11,9 +12,14 @@ def prepare_truffle_config():
     print(w3)
     account = w3.eth.account.create()
     print(account)
+    print(account.address)
+    print(account.key)
+    os.environ['PRIVATE_KEY'] = account.key
 
 
 def test_truffle_migration():
+    prepare_truffle_config()
+
     # truffle migrate --network neonlabs
     actual_result = run_command_line(
         f"{Subfolder.CD_METACOIN} {RunCommand.TRUFFLE} " +
@@ -27,6 +33,8 @@ def test_truffle_migration():
 
 
 def test_truffle_contract():
+    prepare_truffle_config()
+
     # truffle neonlabs ./test/TestMetaCoin.sol
     actual_result = run_command_line(
         f"{Subfolder.CD_METACOIN} {RunCommand.TRUFFLE} {NETWORK_NAME} \
@@ -36,6 +44,8 @@ def test_truffle_contract():
 
 
 def test_truffle_test():
+    prepare_truffle_config()
+
     # truffle neonlabs ./test/metacoin.js
     actual_result = run_command_line(
         f"{Subfolder.CD_METACOIN} {RunCommand.TRUFFLE} " +
