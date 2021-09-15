@@ -1,4 +1,5 @@
-from src.helpers.common.config import CD_BACK
+from web3 import HTTPProvider, Web3
+from src.helpers.common.config import CD_BACK, HTTP_URL
 from src.helpers.common.constants import NETWORK_NAME, TRUFFLE
 from src.helpers.common.error_message import ERROR_NO_ATTRIBUTE_ETH_ACCOUNTS
 from src.helpers.shell.processes import run_command_line
@@ -12,6 +13,14 @@ ERROR_COULD_NOT_CONNECT = "Could not connect to your Ethereum client."
 ERROR_NOT_AUTHORIZED = "Invalid JSON RPC response:"
 ERROR_TIMEOUT = "Error: There was a timeout while attempting \
     to connect to the network."
+
+
+def prepare_truffle_config():
+    url = HTTP_URL
+    w3 = Web3(HTTPProvider(url))
+    print(w3)
+    account = w3.eth.account.create()
+    print(account)
 
 
 def test_truffle_migration():
