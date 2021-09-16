@@ -32,7 +32,6 @@ INPUT_DATA = [
         "access/AccessControlEnumerable.sol",
         "access/IAccessControlEnumerable.sol",
         "utils/structs/EnumerableSet.sol", "access/AccessControl.sol"
-    ], "2_deploy_contracts.js"))
 ]
 
 
