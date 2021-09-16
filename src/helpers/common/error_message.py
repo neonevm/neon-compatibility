@@ -23,6 +23,8 @@ class TruffleError(object):
     ERROR_BLOCK_NOT_AVAILABLE = "Error: Unhandled error. \
         ({ code: -32000, message: 'Block not available for slot"
 
+    ERROR_SOCKET_TIMEOUT = "message: 'ESOCKETTIMEDOUT'"
+
 
 class HardhatError(object):
     ERROR_ETHEREUM_MODEL_WEB3 = ("ProviderError: 'EthereumModel' object has " +
