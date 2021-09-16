@@ -12,11 +12,14 @@ module.exports = {
             disableConfirmationListener: process.env.DISABLE_CONFIRMATION === "true" ? true : false,
             */
       provider: () => {
+        "use strict";
         return new HDWalletProvider(
           process.env.PRIVATE_KEY,
           process.env.HTTP_URL
         );
       },
+      from: process.env.ADDRESS_FROM,
+      to: process.env.ADDRESS_TO,
       network_id: process.env.NETWORK_ID,
 
       // gas

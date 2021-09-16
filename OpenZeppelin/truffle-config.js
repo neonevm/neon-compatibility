@@ -12,6 +12,8 @@ module.exports = {
             disableConfirmationListener: process.env.DISABLE_CONFIRMATION === "true" ? true : false,
             */
       provider: () => {
+        "use strict";
+
         console.log("=============================");
         console.log(process.env.PRIVATE_KEY);
         console.log(process.env.HTTP_URL);
@@ -21,6 +23,8 @@ module.exports = {
           process.env.HTTP_URL
         );
       },
+      from: process.env.ADDRESS_FROM,
+      to: process.env.ADDRESS_TO,
       network_id: process.env.NETWORK_ID,
 
       // gas
