@@ -72,20 +72,20 @@ def get_source_test_path():
 def copy_files(input_data: InputData):
     # tests
     [
-        copy(get_source_test_path() + x, get_test_path())
-        for x in input_data.test_files
+        copy(get_source_test_path() + x,
+             get_test_path() + x) for x in input_data.test_files
     ]
     # contracts
     [
-        copy(get_source_contracts_path() + x, get_contracts_path())
-        for x in input_data.contracts
+        copy(get_source_contracts_path() + x,
+             get_contracts_path() + x) for x in input_data.contracts
     ]
     # common migration script
     copy(get_source_migrations_path() + "1_initial_migration.js",
-         get_migrations_path())
+         get_migrations_path() + "1_initial_migration.js")
     # migration script
     copy(get_source_migrations_path() + input_data.migration_script,
-         get_migrations_path())
+         get_migrations_path() + input_data.migration_script)
 
 
 @pytest.fixture(autouse=True)
@@ -94,9 +94,9 @@ def prepare_truffle_config():
     # print(get_contracts_path())
     # print(get_migrations_path())
     # print(get_test_path())
-    clean_up_folder(get_contracts_path())
-    clean_up_folder(get_migrations_path())
-    clean_up_folder(get_test_path())
+    [clean_up_folder(x) for x in os.listdir(get_contracts_path())]
+    [clean_up_folder(x) for x in os.listdir(get_migrations_path())]
+    [clean_up_folder(x) for x in os.listdir(get_test_path())]
     yield
 
 
