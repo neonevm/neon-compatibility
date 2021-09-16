@@ -12,8 +12,6 @@ BUILT_CONTRACTS_PATH = "/OpenZeppelin/build/contracts"
 @pytest.fixture(autouse=True)
 def prepare_truffle_config():
     preset_variables()
-    # print(os.path.abspath(os.getcwd()) + BUILT_CONTRACTS_PATH)
-    # clean_up_folder(os.path.abspath(os.getcwd()) + BUILT_CONTRACTS_PATH)
     yield
 
 
@@ -29,10 +27,12 @@ def test_truffle_with_openzeppelin():
         not in actual_result
     print(actual_result)
 
+
 def test_ownable():
     # truffle test
     actual_result = run_command_line(
-        f"{Subfolder.CD_OPENZEPPELIN} {RunCommand.TRUFFLE} --network neonlabs test ./test/access/Ownable.test.js {CD_BACK}")
+        f"{Subfolder.CD_OPENZEPPELIN} {RunCommand.TRUFFLE} --network neonlabs test ./test/access/Ownable.test.js {CD_BACK}"
+    )
     # assert OpenZeppelinSuccess.SUCCESS_PASSING in actual_result
     # assert OpenZeppelinSuccess.SUCCESS_CONTRACT in actual_result
     # assert OpenZeppelinSuccess.SUCCESS_1_ETHER in actual_result
