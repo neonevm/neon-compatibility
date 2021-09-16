@@ -1,5 +1,6 @@
 require("dotenv").config({ path: "../.env" });
 const Web3 = require("web3");
+const HDWalletProvider = require("@truffle/hdwallet-provider");
 module.exports = {
   networks: {
     neonlabs: {
@@ -11,7 +12,10 @@ module.exports = {
             disableConfirmationListener: process.env.DISABLE_CONFIRMATION === "true" ? true : false,
             */
       provider: () => {
-        process.env.PRIVATE_KEY, process.env.HTTP_URL;
+        return new HDWalletProvider(
+          process.env.PRIVATE_KEY,
+          process.env.HTTP_URL
+        );
       },
       network_id: process.env.NETWORK_ID,
 
