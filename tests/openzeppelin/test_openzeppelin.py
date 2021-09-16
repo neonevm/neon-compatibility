@@ -20,17 +20,19 @@ INPUT_DATA = [
     (InputData("access/Ownable.test.js", ["access/Ownable.test.js"], [
         "access/Ownable.sol", "mocks/OwnableMock.sol",
         "mocks/AccessControlMock.sol", "mocks/AccessControlEnumerableMock.sol",
-        "access/AccessControlEnumerable.sol", "IAccessControlEnumerable.sol",
-        "AccessControl.sol", "utils/structs/EnumerableSet.sol",
-        "access/AccessControl.sol", "utils/Context.sol"
+        "access/AccessControlEnumerable.sol",
+        "access/IAccessControlEnumerable.sol",
+        "utils/structs/EnumerableSet.sol", "access/AccessControl.sol",
+        "utils/Context.sol"
     ], "2_deploy_contracts.js")),
-    (InputData(
-        "access/AccessControl.test.js",
-        ["access/AccessControl.test.js", "access/AccessControl.behavior.js"], [
-            "mocks/AccessControlMock.sol",
-            "mocks/AccessControlEnumerableMock.sol",
-            "access/AccessControlEnumerable.sol"
-        ], "2_deploy_contracts.js"))
+    (InputData("access/AccessControl.test.js", [
+        "access/AccessControl.test.js", "access/AccessControl.behavior.js"
+    ], [
+        "mocks/AccessControlMock.sol", "mocks/AccessControlEnumerableMock.sol",
+        "access/AccessControlEnumerable.sol",
+        "access/IAccessControlEnumerable.sol",
+        "utils/structs/EnumerableSet.sol", "access/AccessControl.sol"
+    ], "2_deploy_contracts.js"))
 ]
 
 

@@ -3,6 +3,8 @@ import shutil
 
 
 def clean_up_folder(folder: str):
+    if not os.path.exists(folder):
+        return
     for filename in os.listdir(folder):
         file_path = os.path.join(folder, filename)
         try:
