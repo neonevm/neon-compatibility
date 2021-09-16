@@ -1,7 +1,6 @@
 import pytest
-import os
 from src.helpers.common.success_message import OpenZeppelinSuccess
-from src.helpers.common.config import CD_BACK, HTTP_URL
+from src.helpers.common.config import CD_BACK
 from src.helpers.common.constants import RunCommand, Subfolder
 from src.helpers.common.error_message import TruffleBasedError
 from src.helpers.shell.processes import preset_variables, run_command_line
@@ -29,9 +28,10 @@ def test_truffle_with_openzeppelin():
 
 
 def test_ownable():
-    # truffle test
+    # truffle --network neonlabs test ./test/access/Ownable.test.js
+    command = "--network neonlabs test ./test/access/Ownable.test.js"
     actual_result = run_command_line(
-        f"{Subfolder.CD_OPENZEPPELIN} {RunCommand.TRUFFLE} --network neonlabs test ./test/access/Ownable.test.js {CD_BACK}"
+        f"{Subfolder.CD_OPENZEPPELIN} {RunCommand.TRUFFLE} {command} {CD_BACK}"
     )
     # assert OpenZeppelinSuccess.SUCCESS_PASSING in actual_result
     # assert OpenZeppelinSuccess.SUCCESS_CONTRACT in actual_result

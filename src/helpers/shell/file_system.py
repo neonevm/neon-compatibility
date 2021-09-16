@@ -1,4 +1,5 @@
-import os, shutil
+import os
+import shutil
 
 
 def clean_up_folder(folder: str):

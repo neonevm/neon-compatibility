@@ -1,6 +1,6 @@
 import pytest
 import os
-from src.helpers.common.config import CD_BACK, HTTP_URL
+from src.helpers.common.config import CD_BACK
 from src.helpers.common.constants import NETWORK_NAME, RunCommand, Subfolder
 from src.helpers.common.error_message import TruffleError, TruffleBasedError
 from src.helpers.shell.file_system import clean_up_folder

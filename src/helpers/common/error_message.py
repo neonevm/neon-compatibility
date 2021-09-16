@@ -16,7 +16,8 @@ class TruffleError(object):
 
     ERROR_NO_CONTRACTS_DEPLOYED = "No contracts deployed."
 
-    ERROR_CANNOT_READ_PROPERTIES = "TypeError: Cannot read properties of undefined (reading '_alreadyWrapped')"
+    ERROR_CANNOT_READ_PROPERTIES = "TypeError: Cannot read properties \
+        of undefined (reading '_alreadyWrapped')"
 
 
 class HardhatError(object):
