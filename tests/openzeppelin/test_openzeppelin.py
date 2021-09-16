@@ -1,6 +1,6 @@
 import os
 import pytest
-from shutil import copyfile
+from shutil import copy
 from src.helpers.common.success_message import OpenZeppelinSuccess
 from src.helpers.common.config import CD_BACK
 from src.helpers.common.constants import RunCommand, Subfolder
@@ -16,9 +16,22 @@ SOURCE_CONTRACTS_PATH = "/OpenZeppelin/source/contracts/"
 SOURCE_MIGRATIONS_PATH = "/OpenZeppelin/source/migrations/"
 SOURCE_TEST_PATH = "/OpenZeppelin/source/test/"
 
-INPUT_DATA = [(InputData("access/Ownable.test.js", ["Migrations.sol"], "333")),
-              (InputData("access/Ownable.test.js", ["ctr", "ctr2"],
-                         "script1111"))]
+INPUT_DATA = [
+    (InputData("access/Ownable.test.js", ["access/Ownable.test.js"], [
+        "access/Ownable.sol", "mocks/OwnableMock.sol",
+        "mocks/AccessControlMock.sol", "mocks/AccessControlEnumerableMock.sol",
+        "access/AccessControlEnumerable.sol", "IAccessControlEnumerable.sol",
+        "AccessControl.sol", "utils/structs/EnumerableSet.sol",
+        "access/AccessControl.sol", "utils/Context.sol"
+    ], "2_deploy_contracts.js")),
+    (InputData(
+        "access/AccessControl.test.js",
+        ["access/AccessControl.test.js", "access/AccessControl.behavior.js"], [
+            "mocks/AccessControlMock.sol",
+            "mocks/AccessControlEnumerableMock.sol",
+            "access/AccessControlEnumerable.sol"
+        ], "2_deploy_contracts.js"))
+]
 
 
 def get_contracts_path():
@@ -46,19 +59,29 @@ def get_source_test_path():
 
 
 def copy_files(input_data: InputData):
-    copyfile(get_source_test_path() + input_data.test_file, get_test_path())
+    [
+        copy(get_source_test_path() + x, get_test_path())
+        for x in input_data.test_files
+    ]
     # contracts
-    copyfile(SOURCE_MIGRATIONS_PATH + "1_initial_migration.js",
-             MIGRATIONS_PATH)
+    [
+        copy(get_source_contracts_path() + x, get_contracts_path())
+        for x in input_data.contracts
+    ]
+    # common migration script
+    copy(get_source_migrations_path() + "1_initial_migration.js",
+         get_migrations_path())
     # migration script
+    copy(get_source_migrations_path() + input_data.migration_script,
+         get_migrations_path())
 
 
 @pytest.fixture(autouse=True)
 def prepare_truffle_config():
     preset_variables()
-    print(get_contracts_path())
-    print(get_migrations_path())
-    print(get_test_path())
+    # print(get_contracts_path())
+    # print(get_migrations_path())
+    # print(get_test_path())
     clean_up_folder(get_contracts_path())
     clean_up_folder(get_migrations_path())
     clean_up_folder(get_test_path())
@@ -93,10 +116,11 @@ def prepare_truffle_config():
 
 @pytest.mark.parametrize("input_data", INPUT_DATA)
 def test_contracts(input_data: InputData):
-    print(input_data)
+    # print(input_data)
+    copy_files(input_data)
 
     # truffle --network neonlabs test ./test/access/[test file name]
-    command = f"--network neonlabs test {input_data.test_file}"
+    command = f"--network neonlabs test ./test/{input_data.test_files}"
     actual_result = run_command_line(
         f"{Subfolder.CD_OPENZEPPELIN} {RunCommand.TRUFFLE} {command} {CD_BACK}"
     )
