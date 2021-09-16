@@ -24,7 +24,7 @@ INPUT_DATA = [
         "access/IAccessControlEnumerable.sol",
         "utils/structs/EnumerableSet.sol", "access/AccessControl.sol",
         "utils/Context.sol", "access/IAccessControl.sol", "utils/Strings.sol",
-        "utils/introspection/ERC165.sol"
+        "utils/introspection/ERC165.sol", "utils/introspection/IERC165.sol"
     ], "2_deploy_contracts.js")),
     (InputData("access/AccessControl.test.js", [
         "access/AccessControl.test.js", "access/AccessControl.behavior.js"
@@ -34,7 +34,7 @@ INPUT_DATA = [
         "access/IAccessControlEnumerable.sol",
         "utils/structs/EnumerableSet.sol", "access/AccessControl.sol",
         "utils/Strings.sol", "utils/introspection/ERC165.sol",
-        "interfaces/IERC165.sol"
+        "interfaces/IERC165.sol", "utils/introspection/IERC165.sol"
     ], "2_deploy_contracts.js")),
     (InputData("access/AccessControlEnumerable.test.js", [
         "access/AccessControlEnumerable.test.js",
@@ -46,7 +46,7 @@ INPUT_DATA = [
                    "finance/PaymentSplitter.sol", "utils/Address.sol",
                    "utils/Context.sol", "access/IAccessControl.sol",
                    "utils/Strings.sol", "utils/introspection/ERC165.sol",
-                   "interfaces/IERC165.sol"
+                   "interfaces/IERC165.sol", "utils/introspection/IERC165.sol"
                ], "3_deploy_contracts.js"))
 ]
 
