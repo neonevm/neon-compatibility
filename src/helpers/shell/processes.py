@@ -8,7 +8,8 @@ def run_command_line(command: str):
     print(command)
     stream = os.popen(command)
     output = stream.read()
-    return output
+    errors = stream.errors
+    return output + errors
 
 
 def preset_variables():

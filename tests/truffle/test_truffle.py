@@ -29,6 +29,7 @@ def test_truffle_migration():
     assert TruffleError.ERROR_TIMEOUT not in actual_result
     assert TruffleError.ERROR_CANNOT_READ_PROPERTIES not in actual_result
     assert TruffleError.ERROR_DEPLOYMENT_FAILED not in actual_result
+    assert TruffleError.ERROR_BLOCK_NOT_AVAILABLE not in actual_result
     print(actual_result)
 
 

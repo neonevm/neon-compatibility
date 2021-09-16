@@ -20,8 +20,18 @@ class TruffleError(object):
         of undefined (reading '_alreadyWrapped')"
 
     ERROR_DEPLOYMENT_FAILED = "Error:  *** Deployment Failed ***"
+    ERROR_BLOCK_NOT_AVAILABLE = "Error: Unhandled error. \
+        ({ code: -32000, message: 'Block not available for slot"
 
 
 class HardhatError(object):
     ERROR_ETHEREUM_MODEL_WEB3 = ("ProviderError: 'EthereumModel' object has " +
                                  "no attribute 'web3_clientVersion'")
+
+
+class OpenZeppelinError(object):
+    ERROR_BLOCK_NOT_AVAILABLE = "Error: Unhandled error. \
+        ({ code: -32000, message: 'Block not available for slot"
+
+    ERROR_NO_ARTIFACTS = \
+        "Error: Could not find artifacts for Migrations from any sources"

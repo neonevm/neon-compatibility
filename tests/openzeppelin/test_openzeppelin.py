@@ -4,7 +4,7 @@ from shutil import copy
 from src.helpers.common.success_message import OpenZeppelinSuccess
 from src.helpers.common.config import CD_BACK
 from src.helpers.common.constants import RunCommand, Subfolder
-from src.helpers.common.error_message import TruffleBasedError
+from src.helpers.common.error_message import OpenZeppelinError, TruffleBasedError
 from src.helpers.shell.file_system import clean_up_folder
 from src.helpers.shell.processes import preset_variables, run_command_line
 from tests.openzeppelin.input_data import InputData
@@ -38,9 +38,11 @@ INPUT_DATA = [
     ], "2_deploy_contracts.js")),
     (InputData("access/AccessControlEnumerable.test.js", [
         "access/AccessControlEnumerable.test.js",
-        "access/AccessControl.behavior.js", "utils/Strings.sol",
-        "utils/introspection/ERC165.sol"
-    ], ["mocks/AccessControlEnumerableMock.sol"], "2_deploy_contracts.js")),
+        "access/AccessControl.behavior.js"
+    ], [
+        "utils/Strings.sol", "utils/introspection/ERC165.sol",
+        "mocks/AccessControlEnumerableMock.sol"
+    ], "2_deploy_contracts.js")),
     (InputData("finance/PaymentSplitter.test.js",
                ["finance/PaymentSplitter.test.js"], [
                    "finance/PaymentSplitter.sol", "utils/Address.sol",
@@ -147,4 +149,6 @@ def test_contracts(input_data: InputData):
     # assert OpenZeppelinSuccess.SUCCESS_1_ETHER in actual_result
     # assert TruffleBasedError.ERROR_NO_ATTRIBUTE_ETH_ACCOUNTS \
     #     not in actual_result
+    assert OpenZeppelinError.ERROR_NO_ARTIFACTS not in actual_result
+    assert OpenZeppelinError.ERROR_BLOCK_NOT_AVAILABLE not in actual_result
     print(actual_result)
