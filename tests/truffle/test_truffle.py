@@ -15,7 +15,7 @@ def prepare_truffle_config():
     url = HTTP_URL
     w3 = Web3(HTTPProvider(url))
     account = w3.eth.account.create()
-    os.environ['PRIVATE_KEY'] = str(account.key)
+    os.environ['PRIVATE_KEY'] = account.key.hex()
     print(os.path.abspath(os.getcwd()) + BUILT_CONTRACTS_PATH)
     clean_up_folder(os.path.abspath(os.getcwd()) + BUILT_CONTRACTS_PATH)
     yield
