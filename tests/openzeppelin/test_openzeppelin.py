@@ -23,7 +23,7 @@ INPUT_DATA = [
         "access/AccessControlEnumerable.sol",
         "access/IAccessControlEnumerable.sol",
         "utils/structs/EnumerableSet.sol", "access/AccessControl.sol",
-        "utils/Context.sol", "IAccessControl.sol"
+        "utils/Context.sol", "access/IAccessControl.sol"
     ], "2_deploy_contracts.js")),
     (InputData("access/AccessControl.test.js", [
         "access/AccessControl.test.js", "access/AccessControl.behavior.js"
@@ -40,7 +40,8 @@ INPUT_DATA = [
     (InputData("finance/PaymentSplitter.test.js",
                ["finance/PaymentSplitter.test.js"], [
                    "finance/PaymentSplitter.sol", "utils/Address.sol",
-                   "utils/Context.sol"
+                   "utils/Context.sol", "access/IAccessControl.sol",
+                   "utils/Strings.sol", "utils/introspection/ERC165.sol"
                ], "3_deploy_contracts.js"))
 ]
 
