@@ -21,8 +21,32 @@ INPUT_DATA = [(InputData("access/Ownable.test.js", ["Migrations.sol"], "333")),
                          "script1111"))]
 
 
+def get_contracts_path():
+    return os.path.abspath(os.getcwd()) + CONTRACTS_PATH
+
+
+def get_migrations_path():
+    return os.path.abspath(os.getcwd()) + MIGRATIONS_PATH
+
+
+def get_test_path():
+    return os.path.abspath(os.getcwd()) + TEST_PATH
+
+
+def get_source_contracts_path():
+    return os.path.abspath(os.getcwd()) + SOURCE_CONTRACTS_PATH
+
+
+def get_source_migrations_path():
+    return os.path.abspath(os.getcwd()) + SOURCE_MIGRATIONS_PATH
+
+
+def get_source_test_path():
+    return os.path.abspath(os.getcwd()) + SOURCE_TEST_PATH
+
+
 def copy_files(input_data: InputData):
-    copyfile(SOURCE_TEST_PATH + input_data.test_file, TEST_PATH)
+    copyfile(get_source_test_path() + input_data.test_file, get_test_path())
     # contracts
     copyfile(SOURCE_MIGRATIONS_PATH + "1_initial_migration.js",
              MIGRATIONS_PATH)
@@ -32,12 +56,12 @@ def copy_files(input_data: InputData):
 @pytest.fixture(autouse=True)
 def prepare_truffle_config():
     preset_variables()
-    print(os.path.abspath(os.getcwd()) + CONTRACTS_PATH)
-    print(os.path.abspath(os.getcwd()) + MIGRATIONS_PATH)
-    print(os.path.abspath(os.getcwd()) + TEST_PATH)
-    clean_up_folder(os.path.abspath(os.getcwd()) + CONTRACTS_PATH)
-    clean_up_folder(os.path.abspath(os.getcwd()) + MIGRATIONS_PATH)
-    clean_up_folder(os.path.abspath(os.getcwd()) + TEST_PATH)
+    print(get_contracts_path())
+    print(get_migrations_path())
+    print(get_test_path())
+    clean_up_folder(get_contracts_path())
+    clean_up_folder(get_migrations_path())
+    clean_up_folder(get_test_path())
     yield
 
 
