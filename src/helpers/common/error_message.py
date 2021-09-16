@@ -19,6 +19,8 @@ class TruffleError(object):
     ERROR_CANNOT_READ_PROPERTIES = "TypeError: Cannot read properties \
         of undefined (reading '_alreadyWrapped')"
 
+    ERROR_DEPLOYMENT_FAILED = "Error:  *** Deployment Failed ***"
+
 
 class HardhatError(object):
     ERROR_ETHEREUM_MODEL_WEB3 = ("ProviderError: 'EthereumModel' object has " +
