@@ -122,7 +122,7 @@ def test_contracts(input_data: InputData):
     copy_files(input_data)
 
     # truffle --network neonlabs test ./test/access/[test file name]
-    command = f"--network neonlabs test ./test/{input_data.test_files}"
+    command = f"--network neonlabs test ./test/{input_data.test_file}"
     actual_result = run_command_line(
         f"{Subfolder.CD_OPENZEPPELIN} {RunCommand.TRUFFLE} {command} {CD_BACK}"
     )
