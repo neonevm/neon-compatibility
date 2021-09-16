@@ -23,7 +23,7 @@ INPUT_DATA = [
         "access/AccessControlEnumerable.sol",
         "access/IAccessControlEnumerable.sol",
         "utils/structs/EnumerableSet.sol", "access/AccessControl.sol",
-        "utils/Context.sol"
+        "utils/Context.sol", "IAccessControl.sol"
     ], "2_deploy_contracts.js")),
     (InputData("access/AccessControl.test.js", [
         "access/AccessControl.test.js", "access/AccessControl.behavior.js"
@@ -32,6 +32,16 @@ INPUT_DATA = [
         "access/AccessControlEnumerable.sol",
         "access/IAccessControlEnumerable.sol",
         "utils/structs/EnumerableSet.sol", "access/AccessControl.sol"
+    ], "2_deploy_contracts.js")),
+    (InputData("access/IAccessControlEnumerable.test.js", [
+        "access/IAccessControlEnumerable.test.js",
+        "access/AccessControl.behavior.js"
+    ], ["mocks/AccessControlEnumerableMock.sol"], "2_deploy_contracts.js")),
+    (InputData("finance/PaymentSplitter.test.js",
+               ["finance/PaymentSplitter.test.js"], [
+                   "finance/PaymentSplitter.sol", "utils/Address.sol",
+                   "utils/Context.sol"
+               ], "3_deploy_contracts.js"))
 ]
 
 
@@ -60,6 +70,7 @@ def get_source_test_path():
 
 
 def copy_files(input_data: InputData):
+    # tests
     [
         copy(get_source_test_path() + x, get_test_path())
         for x in input_data.test_files
