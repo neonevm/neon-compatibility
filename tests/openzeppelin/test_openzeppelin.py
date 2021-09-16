@@ -33,8 +33,8 @@ INPUT_DATA = [
         "access/IAccessControlEnumerable.sol",
         "utils/structs/EnumerableSet.sol", "access/AccessControl.sol"
     ], "2_deploy_contracts.js")),
-    (InputData("access/IAccessControlEnumerable.test.js", [
-        "access/IAccessControlEnumerable.test.js",
+    (InputData("access/AccessControlEnumerable.test.js", [
+        "access/AccessControlEnumerable.test.js",
         "access/AccessControl.behavior.js"
     ], ["mocks/AccessControlEnumerableMock.sol"], "2_deploy_contracts.js")),
     (InputData("finance/PaymentSplitter.test.js",
