@@ -23,7 +23,8 @@ INPUT_DATA = [
         "access/AccessControlEnumerable.sol",
         "access/IAccessControlEnumerable.sol",
         "utils/structs/EnumerableSet.sol", "access/AccessControl.sol",
-        "utils/Context.sol", "access/IAccessControl.sol"
+        "utils/Context.sol", "access/IAccessControl.sol", "utils/Strings.sol",
+        "utils/introspection/ERC165.sol"
     ], "2_deploy_contracts.js")),
     (InputData("access/AccessControl.test.js", [
         "access/AccessControl.test.js", "access/AccessControl.behavior.js"
@@ -31,17 +32,21 @@ INPUT_DATA = [
         "mocks/AccessControlMock.sol", "mocks/AccessControlEnumerableMock.sol",
         "access/AccessControlEnumerable.sol",
         "access/IAccessControlEnumerable.sol",
-        "utils/structs/EnumerableSet.sol", "access/AccessControl.sol"
+        "utils/structs/EnumerableSet.sol", "access/AccessControl.sol",
+        "utils/Strings.sol", "utils/introspection/ERC165.sol",
+        "interfaces/IERC165.sol"
     ], "2_deploy_contracts.js")),
     (InputData("access/AccessControlEnumerable.test.js", [
         "access/AccessControlEnumerable.test.js",
-        "access/AccessControl.behavior.js"
+        "access/AccessControl.behavior.js", "utils/Strings.sol",
+        "utils/introspection/ERC165.sol"
     ], ["mocks/AccessControlEnumerableMock.sol"], "2_deploy_contracts.js")),
     (InputData("finance/PaymentSplitter.test.js",
                ["finance/PaymentSplitter.test.js"], [
                    "finance/PaymentSplitter.sol", "utils/Address.sol",
                    "utils/Context.sol", "access/IAccessControl.sol",
-                   "utils/Strings.sol", "utils/introspection/ERC165.sol"
+                   "utils/Strings.sol", "utils/introspection/ERC165.sol",
+                   "interfaces/IERC165.sol"
                ], "3_deploy_contracts.js"))
 ]
 
