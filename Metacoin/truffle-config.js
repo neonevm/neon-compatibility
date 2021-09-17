@@ -21,6 +21,9 @@ module.exports = {
       from: process.env.ADDRESS_FROM,
       to: process.env.ADDRESS_TO,
       network_id: process.env.NETWORK_ID,
+      gas: 3000000,
+      gasPrice: 1000000000,
+      timeoutBlocks: 100,
 
       // gas
       // gasPrice
@@ -31,7 +34,7 @@ module.exports = {
 
   // Set default mocha options here, use special reporters etc.
   mocha: {
-    timeout: 100000
+    timeout: 100000,
   },
 
   // Configure your compilers
