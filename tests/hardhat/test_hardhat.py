@@ -6,17 +6,18 @@ from src.helpers.common.success_message import HardhatSuccess
 from src.helpers.shell.processes import preset_variables, run_command_line
 
 
+@pytest.fixture(autouse=True)
+def prepare_truffle_config():
+    preset_variables()
+    yield
+
+
 # @pytest.mark.skip(reason="now yet done")
 def test_hardhat_simple():
-    preset_variables()
-    # truffle test
-    command = "npx hardhat test"
+    command = "npx hardhat run --network neonlabs scripts/sample-script.js"
     actual_result = run_command_line(
-        f"{Subfolder.CD_HARDHAT_SIMPLE} {command} test {CD_BACK}")
-    # assert SUCCESS_PASSING in actual_result
-    # assert SUCCESS_CONTRACT in actual_result
-    # assert SUCCESS_1_ETHER in actual_result
-    # assert ERROR_NO_ATTRIBUTE_ETH_ACCOUNTS not in actual_result
+        f"{Subfolder.CD_HARDHAT_SIMPLE} {command} {CD_BACK}")
+    assert HardhatError.ERROR_ETHEREUM_MODEL_WEB3 not in actual_result
     print(actual_result)
     pass
 
