@@ -3,20 +3,22 @@ from src.helpers.common.config import CD_BACK
 from src.helpers.common.constants import Subfolder
 from src.helpers.common.error_message import HardhatError
 from src.helpers.common.success_message import HardhatSuccess
-from src.helpers.shell.processes import run_command_line
+from src.helpers.shell.processes import preset_variables, run_command_line
 
 
-@pytest.mark.skip(reason="now yet done")
+@pytest.fixture(autouse=True)
+def prepare_truffle_config():
+    preset_variables()
+    yield
+
+
+# @pytest.mark.skip(reason="now yet done")
 def test_hardhat_simple():
-    # truffle test
-    # actual_result = run_command_line(
-    #     f"{Subfolder.CD_HARDHAT_ADVANCED} {TRUFFLE} test {CD_BACK}"
-    # )
-    # assert SUCCESS_PASSING in actual_result
-    # assert SUCCESS_CONTRACT in actual_result
-    # assert SUCCESS_1_ETHER in actual_result
-    # assert ERROR_NO_ATTRIBUTE_ETH_ACCOUNTS not in actual_result
-    # print(actual_result)
+    command = "npx hardhat run --network neonlabs scripts/sample-script.js"
+    actual_result = run_command_line(
+        f"{Subfolder.CD_HARDHAT_SIMPLE} {command} {CD_BACK}")
+    assert HardhatError.ERROR_ETHEREUM_MODEL_WEB3 not in actual_result
+    print(actual_result)
     pass
 
 

@@ -99,9 +99,6 @@ def copy_files(input_data: InputData):
 @pytest.fixture(autouse=True)
 def prepare_truffle_config():
     preset_variables()
-    # print(get_contracts_path())
-    # print(get_migrations_path())
-    # print(get_test_path())
     [clean_up_folder(x) for x in os.listdir(get_contracts_path())]
     [clean_up_folder(x) for x in os.listdir(get_migrations_path())]
     [clean_up_folder(x) for x in os.listdir(get_test_path())]
@@ -136,7 +133,6 @@ def prepare_truffle_config():
 
 @pytest.mark.parametrize("input_data", INPUT_DATA)
 def test_contracts(input_data: InputData):
-    # print(input_data)
     copy_files(input_data)
 
     # truffle --network neonlabs test ./test/access/[test file name]
