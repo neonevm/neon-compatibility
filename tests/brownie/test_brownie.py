@@ -1,25 +1,26 @@
 import pytest
-from src.helpers.common.config import CD_BACK, HTTP_URL
+from src.helpers.common.config import CD_BACK, HTTP_URL, NETWORK_ID
 from src.helpers.common.constants import NETWORK_NAME, Subfolder
 from src.helpers.shell.processes import run_command_line
 
-ADD_NETWORK = "brownie networks add Development"
+ADD_NETWORK = "brownie networks add Ethereum"
 DELETE_NETWORK = "brownie networks delete"
 
 
 @pytest.fixture(autouse=True)
 def setup_and_teardown():
-    aaa = f"{Subfolder.CD_BROWNIE} {ADD_NETWORK} {NETWORK_NAME} \
-        host={HTTP_URL} {CD_BACK}"
+    # brownie networks add Ethereum 110 host=https://proxy.devnet.neonlabs.org/solana chainid=110
+    command_add_network = f"{Subfolder.CD_BROWNIE} {ADD_NETWORK} {NETWORK_NAME} \
+        host={HTTP_URL} chainid={NETWORK_ID} {CD_BACK}"
 
-    print(aaa)
+    print(command_add_network)
     run_result = run_command_line(
         f"{Subfolder.CD_BROWNIE} {ADD_NETWORK} {NETWORK_NAME} \
             host={HTTP_URL} {CD_BACK}")
     print(run_result)
     yield
-    bbb = f"{Subfolder.CD_BROWNIE} {DELETE_NETWORK} {NETWORK_NAME} {CD_BACK}"
-    print(bbb)
+    command_delete_network = f"{Subfolder.CD_BROWNIE} {DELETE_NETWORK} {NETWORK_NAME} {CD_BACK}"
+    print(command_delete_network)
     run_result = run_command_line(
         f"{Subfolder.CD_BROWNIE} {DELETE_NETWORK} {NETWORK_NAME} {CD_BACK}")
     print(run_result)
