@@ -2,7 +2,7 @@ require("dotenv").config({ path: "../.env" });
 const Web3 = require("web3");
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 
-process.env.UV_THREADPOOL_SIZE=128;
+process.env.UV_THREADPOOL_SIZE = 128;
 
 n_maxLs = 100;
 EventEmitter = require('events').EventEmitter
@@ -17,10 +17,10 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
 const web3 = new Web3(new Web3.providers.HttpProvider(process.env.HTTP_URL));
 const account01 = web3.eth.accounts.create();
-process.env.ADDRESS_FROM=account01.address
-process.env.PRIVATE_KEY=account01.privateKey
+process.env.ADDRESS_FROM = account01.address
+process.env.PRIVATE_KEY = account01.privateKey
 const account02 = web3.eth.accounts.create();
-process.env.ADDRESS_TO=account02.address
+process.env.ADDRESS_TO = account02.address
 
 module.exports = {
   networks: {
@@ -48,8 +48,10 @@ module.exports = {
       network_id: process.env.NETWORK_ID,
       gas: 3000000,
       gasPrice: 1000000000,
-      timeoutBlocks: 1000,
+      timeoutBlocks: 2000,
       skipDryRun: true,
+      networkCheckTimeout: 10000,
+      confirmations: 10,
 
       // gas
       // gasPrice
