@@ -25,20 +25,15 @@ process.env.ADDRESS_TO=account02.address
 module.exports = {
   networks: {
     neonlabs: {
-      /*
-                  provider: () => new Web3.providers.HttpProvider(process.env.HTTP_URL),
-                  network_id: process.env.NETWORK_ID,
-                  from: process.env.ADDRESS_FROM,
-                  to: process.env.ADDRESS_TO,
-                  disableConfirmationListener: process.env.DISABLE_CONFIRMATION === "true" ? true : false,
-                  */
       provider: () => {
         "use strict";
 
-        /*
         console.log("=============================");
+        /*
         console.log(`private key = ${process.env.PRIVATE_KEY}`);
+        */
         console.log(`URL = ${process.env.HTTP_URL}`);
+        /*
         console.log(`address from = ${process.env.ADDRESS_FROM}`);
         console.log(`address to = ${process.env.ADDRESS_TO}`);
         */
@@ -53,7 +48,7 @@ module.exports = {
       network_id: process.env.NETWORK_ID,
       gas: 3000000,
       gasPrice: 1000000000,
-      timeoutBlocks: 100,
+      timeoutBlocks: 1000,
 
       // gas
       // gasPrice
