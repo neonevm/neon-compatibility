@@ -6,7 +6,7 @@ const path = require('path');
 const pathUpdates = {
   // 'access/AccessControl.sol': undefined,
   // 'access/Ownable.sol': undefined,
-  'access/TimelockController.sol': 'governance/TimelockController.sol',
+  // 'access/TimelockController.sol': 'governance/TimelockController.sol',
   'cryptography/ECDSA.sol': 'utils/cryptography/ECDSA.sol',
   'cryptography/MerkleProof.sol': 'utils/cryptography/MerkleProof.sol',
   'drafts/EIP712.sol': 'utils/cryptography/draft-EIP712.sol',
