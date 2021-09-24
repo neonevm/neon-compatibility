@@ -93,10 +93,16 @@ jobs:
         node-version: 16.x
     - run: npm ci
     - run: npm run build --if-present
-    - run: cd openzeppelin-contracts
-    - run: chmod 555 ./run_tests.sh
-    - run: ./run_tests.sh
-    - run: cd ..
+    - name: OpenZeppelin contracts
+      run: |
+        cd openzeppelin-contracts
+        echo "folder:"
+        pwd
+        echo "folder content:"
+        ls -la
+        chmod 555 run_tests.sh
+        ./run_tests.sh
+        cd ..
 
     - name: Look at Allure
       if: always()
