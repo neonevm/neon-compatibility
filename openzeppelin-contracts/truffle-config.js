@@ -50,7 +50,7 @@ module.exports = {
       gasPrice: 1000000000,
       timeoutBlocks: 2000,
       skipDryRun: true,
-      networkCheckTimeout: 10000,
+      networkCheckTimeout: 100000,
       confirmations: 10,
 
       // gas

@@ -19,26 +19,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Switch to network of choice
-      run: |
-        echo "Tags: ${{ github.event.inputs.tags }}"
-        echo "Network: ${{ github.event.inputs.network }}"
-        if [ -z "${{ github.event.inputs.network }}" ]
-        then
-          NETWORK='devnet'
-        else
-          NETWORK="${{ github.event.inputs.network }}"
-        fi
-        echo "======================================"
-        echo "NETWORK=$NETWORK"
-        echo "INPUT_NETWORK=$INPUT_NETWORK"
-        echo "copying ./.env.$NETWORK to ./.env"
-        cp "./.env.$NETWORK" ./.env
-        cat ./.env
-        echo "copying to the hardhat-advanced folder..."
-        cp "./.env.$NETWORK" ./hardhat-advanced/.env
-        cat ./hardhat-advanced/.env
 
   python:
     runs-on: ubuntu-latest
@@ -46,6 +26,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
     - name: Set up Python 3.8
       uses: actions/setup-python@v1
       with:
@@ -80,12 +61,13 @@ jobs:
         name: allure-results
         path: allure-results
 
-  node:
+  node-contracts:
     runs-on: ubuntu-latest
     needs: build
     steps:
     - uses: actions/checkout@v2
     - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
     - name: Use Node.js 16
       uses: actions/setup-node@v2
       if: always()
@@ -130,7 +112,7 @@ jobs:
     if: always()
     needs:
       - build
-      - node
+      - node-contracts
       - python
     steps:
 
