@@ -4,7 +4,7 @@ import { expect } from "chai";
 import { ethers } from "ethers";
 import { Config } from "../../../config/default";
 
-@suite
+@suite("Ethers.js")
 class EthersJsConnectionTests {
   @epic("Ethers.js")
   @feature("Connection test")
