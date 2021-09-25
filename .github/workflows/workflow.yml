@@ -19,26 +19,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Switch to network of choice
-      run: |
-        echo "Tags: ${{ github.event.inputs.tags }}"
-        echo "Network: ${{ github.event.inputs.network }}"
-        if [ -z "${{ github.event.inputs.network }}" ]
-        then
-          NETWORK='devnet'
-        else
-          NETWORK="${{ github.event.inputs.network }}"
-        fi
-        echo "======================================"
-        echo "NETWORK=$NETWORK"
-        echo "INPUT_NETWORK=$INPUT_NETWORK"
-        echo "copying ./.env.$NETWORK to ./.env"
-        cp "./.env.$NETWORK" ./.env
-        cat ./.env
-        echo "copying to the hardhat-advanced folder..."
-        cp "./.env.$NETWORK" ./hardhat-advanced/.env
-        cat ./hardhat-advanced/.env
 
   python:
     runs-on: ubuntu-latest
@@ -46,24 +26,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/choose-network
     - name: Set up Python 3.8
       uses: actions/setup-python@v1
       with:
         python-version: 3.8
-
-    - name: Switch to network of choice
-      run: |
-        echo "Tags: ${{ github.event.inputs.tags }}"
-        echo "Network: ${{ github.event.inputs.network }}"
-        if [ -z "${{ github.event.inputs.network }}" ]
-        then
-          NETWORK='devnet'
-        else
-          NETWORK="${{ github.event.inputs.network }}"
-        fi
-        echo "======================================"
-        echo "NETWORK=$NETWORK"
-        echo "INPUT_NETWORK=$INPUT_NETWORK"
 
     - name: Install dependencies
       run: |
@@ -100,6 +67,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/choose-network
     - name: Use Node.js 16
       uses: actions/setup-node@v2
       if: always()
@@ -107,21 +75,6 @@ jobs:
         node-version: 16.x
     - run: npm ci
     - run: npm run build --if-present
-    
-    - name: Switch to network of choice
-      run: |
-        echo "Tags: ${{ github.event.inputs.tags }}"
-        echo "Network: ${{ github.event.inputs.network }}"
-        if [ -z "${{ github.event.inputs.network }}" ]
-        then
-          NETWORK='devnet'
-        else
-          NETWORK="${{ github.event.inputs.network }}"
-        fi
-        echo "======================================"
-        echo "NETWORK=$NETWORK"
-        echo "INPUT_NETWORK=$INPUT_NETWORK"
-    
     - name: OpenZeppelin contracts
       run: |
         cd openzeppelin-contracts
