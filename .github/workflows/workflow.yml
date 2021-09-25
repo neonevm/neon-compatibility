@@ -51,6 +51,20 @@ jobs:
       with:
         python-version: 3.8
 
+    - name: Switch to network of choice
+      run: |
+        echo "Tags: ${{ github.event.inputs.tags }}"
+        echo "Network: ${{ github.event.inputs.network }}"
+        if [ -z "${{ github.event.inputs.network }}" ]
+        then
+          NETWORK='devnet'
+        else
+          NETWORK="${{ github.event.inputs.network }}"
+        fi
+        echo "======================================"
+        echo "NETWORK=$NETWORK"
+        echo "INPUT_NETWORK=$INPUT_NETWORK"
+
     - name: Install dependencies
       run: |
         npm i
@@ -93,6 +107,21 @@ jobs:
         node-version: 16.x
     - run: npm ci
     - run: npm run build --if-present
+    
+    - name: Switch to network of choice
+      run: |
+        echo "Tags: ${{ github.event.inputs.tags }}"
+        echo "Network: ${{ github.event.inputs.network }}"
+        if [ -z "${{ github.event.inputs.network }}" ]
+        then
+          NETWORK='devnet'
+        else
+          NETWORK="${{ github.event.inputs.network }}"
+        fi
+        echo "======================================"
+        echo "NETWORK=$NETWORK"
+        echo "INPUT_NETWORK=$INPUT_NETWORK"
+    
     - name: OpenZeppelin contracts
       run: |
         cd openzeppelin-contracts
