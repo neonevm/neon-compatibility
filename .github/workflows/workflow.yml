@@ -19,26 +19,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Switch to network of choice
-      run: |
-        echo "Tags: ${{ github.event.inputs.tags }}"
-        echo "Network: ${{ github.event.inputs.network }}"
-        if [ -z "${{ github.event.inputs.network }}" ]
-        then
-          NETWORK='devnet'
-        else
-          NETWORK="${{ github.event.inputs.network }}"
-        fi
-        echo "======================================"
-        echo "NETWORK=$NETWORK"
-        echo "INPUT_NETWORK=$INPUT_NETWORK"
-        echo "copying ./.env.$NETWORK to ./.env"
-        cp "./.env.$NETWORK" ./.env
-        cat ./.env
-        echo "copying to the hardhat-advanced folder..."
-        cp "./.env.$NETWORK" ./hardhat-advanced/.env
-        cat ./hardhat-advanced/.env
 
   python:
     runs-on: ubuntu-latest
@@ -46,6 +26,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
     - name: Set up Python 3.8
       uses: actions/setup-python@v1
       with:
@@ -67,7 +48,6 @@ jobs:
       run: |
         pwd
         pipenv run pytest --alluredir=allure-results
-
     - name: Look at Allure
       if: always()
       uses: ./.github/actions/allure-show
@@ -80,11 +60,41 @@ jobs:
         name: allure-results
         path: allure-results
 
+  node:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
+    - name: Use Node.js 16
+      uses: actions/setup-node@v2
+      if: always()
+      with:
+        node-version: 16.x
+    - run: npm ci
+    - run: npm run build --if-present
+    - name: OpenZeppelin contracts
+      run: |
+        npm run test
+    - name: Look at Allure
+      if: always()
+      uses: ./.github/actions/allure-show
+
+    # TODO: de-duplicate
+    - name: Archive Allure results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-results
+        path: report/allure-results
+
   allure:
     runs-on: ubuntu-latest
     if: always()
     needs:
       - build
+      - node
       - python
     steps:
 
