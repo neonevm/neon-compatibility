@@ -1,49 +1,82 @@
 {
-    "name": "neon-uat",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/neonlabsorg/neon-uat.git"
-    },
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/neonlabsorg/neon-uat/issues"
-    },
-    "homepage": "https://github.com/neonlabsorg/neon-uat#readme",
-    "dependencies": {
-        "@openzeppelin/contracts": "^4.3.1",
-        "@openzeppelin/test-helpers": "^0.5.13",
-        "@truffle/hdwallet-provider": "^1.5.0",
-        "dotenv": "^10.0.0",
-        "truffle": "^5.4.8",
-        "web3": "^1.5.2"
-    },
-    "devDependencies": {
-        "@nomiclabs/hardhat-ethers": "^2.0.2",
-        "@nomiclabs/hardhat-etherscan": "^2.1.6",
-        "@nomiclabs/hardhat-waffle": "^2.0.1",
-        "chai": "^4.3.4",
-        "dotenv": "^10.0.0",
-        "eslint": "^7.32.0",
-        "eslint-config-prettier": "^8.3.0",
-        "eslint-config-standard": "^16.0.3",
-        "eslint-plugin-import": "^2.24.2",
-        "eslint-plugin-node": "^11.1.0",
-        "eslint-plugin-prettier": "^3.4.1",
-        "eslint-plugin-promise": "^5.1.0",
-        "ethereum-waffle": "^3.4.0",
-        "ethers": "^5.4.6",
-        "hardhat": "^2.6.3",
-        "hardhat-gas-reporter": "^1.0.4",
-        "prettier": "^2.3.2",
-        "prettier-plugin-solidity": "^1.0.0-beta.13",
-        "solhint": "^3.3.6",
-        "solidity-coverage": "^0.7.17"
-    }
+  "name": "neon-uat",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "clean": "rimraf ./report ./allure-results ./allure",
+    "cleanup": "rimraf ./dist ./report ./allure-results ./allure",
+    "test": "rimraf ./dist && tsc && npm run clean && sleep 1 && mocha --config .mocharc.json",
+    "allure-report": "allure generate ./allure-results -c && allure open",
+    "tslint-fix": "tslint --fix --project .",
+    "tslint": "tslint --project .",
+    "precommit": "lint-staged",
+    "postcommit": "git update-index -g"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neonlabsorg/neon-uat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neonlabsorg/neon-uat/issues"
+  },
+  "homepage": "https://github.com/neonlabsorg/neon-uat#readme",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.3.1",
+    "@openzeppelin/test-helpers": "^0.5.13",
+    "@truffle/hdwallet-provider": "^1.5.0",
+    "dotenv": "^10.0.0",
+    "truffle": "^5.4.8",
+    "web3": "^1.5.2"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-etherscan": "^2.1.6",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@testdeck/mocha": "^0.1.2",
+    "@types/chai": "^4.2.22",
+    "@types/memory-cache": "^0.2.1",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.10.1",
+    "allure-decorators": "^2.0.0-beta.13",
+    "allure-js-commons": "^2.0.0-beta.13",
+    "allure-mocha": "^2.0.0-beta.13",
+    "chai": "^4.3.4",
+    "dotenv": "^10.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.1",
+    "eslint-plugin-promise": "^5.1.0",
+    "ethereum-waffle": "^3.4.0",
+    "ethers": "^5.4.6",
+    "hardhat": "^2.6.3",
+    "hardhat-gas-reporter": "^1.0.4",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2",
+    "memory-cache": "^0.2.0",
+    "mocha": "^9.1.2",
+    "mocha-multi-reporters": "^1.5.1",
+    "prettier": "^2.4.1",
+    "prettier-plugin-solidity": "^1.0.0-beta.13",
+    "solhint": "^3.3.6",
+    "solidity-coverage": "^0.7.17",
+    "source-map-support": "^0.5.20",
+    "ts-node": "^10.2.1",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "tslint-plugin-prettier": "^2.3.0",
+    "typescript": "^3.9.10",
+    "typescript-eslint-parser": "^22.0.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --parser typescript --write",
+      "git add"
+    ]
+  }
 }

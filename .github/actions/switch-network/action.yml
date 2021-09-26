@@ -1,0 +1,21 @@
+name: Switch to network of choice
+description: Use the network chosen in the manual input box
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        echo "Tags: ${{ github.event.inputs.tags }}"
+        echo "Network: ${{ github.event.inputs.network }}"
+        if [ -z "${{ github.event.inputs.network }}" ]
+        then
+          NETWORK='devnet'
+        else
+          NETWORK="${{ github.event.inputs.network }}"
+        fi
+        echo "======================================"
+        echo "NETWORK=$NETWORK"
+        echo "INPUT_NETWORK=$INPUT_NETWORK"
+        echo "copying ./.env.$NETWORK to ./.env"
+        cp "./.env.$NETWORK" ./.env
+        cat ./.env
+      shell: bash
