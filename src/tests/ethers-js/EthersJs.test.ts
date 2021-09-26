@@ -5,7 +5,6 @@ import { expect } from "chai";
 import { Config } from "../../../config/default";
 import { ConnectionManager } from "../../helpers/ethers-js/ConnectionManager";
 import { DataRetrieval } from "../../helpers/ethers-js/DataRetrieval";
-import contract from "web3/eth/contract";
 import { formatEther } from "@ethersproject/units";
 
 const EpicName = "Ethers.js";
@@ -18,12 +17,11 @@ const BalanceShouldNotBeEqual0 = "Balance should not be equal 0";
 const FormattedBalanceShouldIncludeDot = "Formatted Balance should include dot";
 const ParsedEtherShouldBeBigNumber = "Parsed Ether should be a BigNumber";
 const TransactionShouldNotBeNull = "Transaction should not be null";
-
 const TokenNameShouldNotBeEmpty = "Token name should not be empty";
 const FormattedDaiShouldContainDot = "Formatted Dai should contain dot";
 // https://docs.ethers.io/v5/getting-started/
 @suite(SuiteName)
-class EthersJsConnectionTests {
+class EthersJsTests {
   @epic(EpicName)
   @feature("Connection test")
   @test
