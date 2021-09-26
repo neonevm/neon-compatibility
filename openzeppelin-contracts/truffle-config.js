@@ -5,7 +5,7 @@ const HDWalletProvider = require("@truffle/hdwallet-provider");
 process.env.UV_THREADPOOL_SIZE = 128;
 
 n_maxLs = 100;
-EventEmitter = require('events').EventEmitter
+EventEmitter = require("events").EventEmitter;
 EventEmitter.prototype._maxListeners = n_maxLs;
 // var _fnNull = function(e){if(program && program.verbose)console.log(e)};
 // process.on('uncaughtException', _fnNull);
@@ -17,10 +17,10 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
 const web3 = new Web3(new Web3.providers.HttpProvider(process.env.HTTP_URL));
 const account01 = web3.eth.accounts.create();
-process.env.ADDRESS_FROM = account01.address
-process.env.PRIVATE_KEY = account01.privateKey
+process.env.ADDRESS_FROM = account01.address;
+process.env.PRIVATE_KEY = account01.privateKey;
 const account02 = web3.eth.accounts.create();
-process.env.ADDRESS_TO = account02.address
+process.env.ADDRESS_TO = account02.address;
 
 module.exports = {
   networks: {
@@ -52,6 +52,8 @@ module.exports = {
       skipDryRun: true,
       networkCheckTimeout: 10000000,
       confirmations: 10,
+      // experimental feature
+      disableConfirmations: true,
 
       // gas
       // gasPrice
@@ -80,4 +82,3 @@ module.exports = {
     },
   },
 };
-
