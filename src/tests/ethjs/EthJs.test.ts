@@ -1,35 +1,36 @@
-import { suite, test } from "@testdeck/mocha";
-import { epic, feature } from "allure-decorators";
-import { expect } from "chai";
-import { Eth } from "ethjs";
-import { HttpProvider } from "ethjs-provider-http";
-import { Config } from "../../../config/default";
+import { suite, test } from '@testdeck/mocha';
+import { epic, feature } from 'allure-decorators';
+import { expect } from 'chai';
+import { Eth } from 'ethjs';
+import { HttpProvider } from 'ethjs-provider-http';
+import { Config } from '../../../config/default';
+import { logger } from '../../utils/logger';
 
-const EpicName = "ethjs";
+const EpicName = 'ethjs';
 const SuiteName = EpicName;
 
-const EthObjectShouldNotBeNull = "Eth object should not be null";
-const BlockShouldBeGreaterThan0 = "Block should be greater than 0";
-const EtherValueShouldBeGreaterThan0 = "Ether value should be greater than 0";
+const EthObjectShouldNotBeNull = 'Eth object should not be null';
+const BlockShouldBeGreaterThan0 = 'Block should be greater than 0';
+const EtherValueShouldBeGreaterThan0 = 'Ether value should be greater than 0';
 // https://github.com/ethjs/ethjs
 @suite(SuiteName)
 class EthJsTests {
   @epic(EpicName)
-  @feature("Connection test")
+  @feature('Connection test')
   @test
   public async test01() {
     const eth = new Eth(new Eth.HttpProvider(Config.url));
-    console.log(`eth = ${eth}`);
+    logger.notice(`eth = ${eth}`);
     expect(eth, EthObjectShouldNotBeNull).to.not.be.null;
 
     eth.getBlockByNumber(45300, (err, block) => {
       // result null { ...block data... }
-      console.log(`Block = ${block}`);
+      logger.notice(`Block = ${block}`);
       expect(block, BlockShouldBeGreaterThan0).to.be.greaterThan(0);
     });
 
-    const etherValue = Eth.toWei(72, "ether");
-    console.log(`Ether value = ${etherValue}`);
+    const etherValue = Eth.toWei(72, 'ether');
+    logger.notice(`Ether value = ${etherValue}`);
     expect(etherValue, EtherValueShouldBeGreaterThan0).to.be.greaterThan(0);
 
     // result <BN ...>
@@ -38,23 +39,23 @@ class EthJsTests {
       {
         constant: true,
         inputs: [],
-        name: "totalSupply",
-        outputs: [{ name: "", type: "uint256" }],
+        name: 'totalSupply',
+        outputs: [{ name: '', type: 'uint256' }],
         payable: false,
-        type: "function",
+        type: 'function',
       },
     ];
 
     const token = eth
       .contract(tokenABI)
-      .at("0x6e0E0e02377Bc1d90E8a7c21f12BA385C2C35f78");
+      .at('0x6e0E0e02377Bc1d90E8a7c21f12BA385C2C35f78');
 
     token.totalSupply().then((totalSupply) => {
       // result <BN ...>  4500000
-      console.log(`Total supply = ${totalSupply}`);
+      logger.notice(`Total supply = ${totalSupply}`);
       expect(
         totalSupply,
-        "Total supply should be greater than 0"
+        'Total supply should be greater than 0'
       ).to.be.greaterThan(0);
     });
   }

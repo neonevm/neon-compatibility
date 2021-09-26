@@ -1,42 +1,43 @@
-import { suite, test } from "@testdeck/mocha";
-import { epic, feature } from "allure-decorators";
-import { ethers } from "ethers";
-import { expect } from "chai";
-import { Config } from "../../../config/default";
-import { ConnectionManager } from "../../helpers/ethers-js/ConnectionManager";
-import { DataRetrieval } from "../../helpers/ethers-js/DataRetrieval";
-import { formatEther } from "@ethersproject/units";
+import { suite, test } from '@testdeck/mocha';
+import { epic, feature } from 'allure-decorators';
+import { ethers } from 'ethers';
+import { expect } from 'chai';
+import { Config } from '../../../config/default';
+import { ConnectionManager } from '../../helpers/ethers-js/ConnectionManager';
+import { DataRetrieval } from '../../helpers/ethers-js/DataRetrieval';
+import { formatEther } from '@ethersproject/units';
+import { logger } from '../../utils/logger';
 
-const EpicName = "Ethers.js";
+const EpicName = 'Ethers.js';
 const SuiteName = EpicName;
 
-const JsonRpcProviderShouldNotBeNull = "JsonRpcProvider should not be null";
-const BlockNumberShouldBeNonZero = "Block number should be non-zero";
-const SignerShouldBeNotNull = "Signer should not be null";
-const BalanceShouldNotBeEqual0 = "Balance should not be equal 0";
-const FormattedBalanceShouldIncludeDot = "Formatted Balance should include dot";
-const ParsedEtherShouldBeBigNumber = "Parsed Ether should be a BigNumber";
-const TransactionShouldNotBeNull = "Transaction should not be null";
-const TokenNameShouldNotBeEmpty = "Token name should not be empty";
-const FormattedDaiShouldContainDot = "Formatted Dai should contain dot";
+const JsonRpcProviderShouldNotBeNull = 'JsonRpcProvider should not be null';
+const BlockNumberShouldBeNonZero = 'Block number should be non-zero';
+const SignerShouldBeNotNull = 'Signer should not be null';
+const BalanceShouldNotBeEqual0 = 'Balance should not be equal 0';
+const FormattedBalanceShouldIncludeDot = 'Formatted Balance should include dot';
+const ParsedEtherShouldBeBigNumber = 'Parsed Ether should be a BigNumber';
+const TransactionShouldNotBeNull = 'Transaction should not be null';
+const TokenNameShouldNotBeEmpty = 'Token name should not be empty';
+const FormattedDaiShouldContainDot = 'Formatted Dai should contain dot';
 // https://docs.ethers.io/v5/getting-started/
 @suite(SuiteName)
 class EthersJsTests {
   @epic(EpicName)
-  @feature("Connection test")
+  @feature('Connection test')
   @test
   public async shouldConnectViaEthersJs() {
     const provider = new ConnectionManager().connectToJsonRpc(Config.url);
-    console.log(`Provider: ${provider}`);
+    logger.notice(`Provider: ${provider}`);
     expect(provider, JsonRpcProviderShouldNotBeNull).to.not.be.null;
     expect(provider.connection.url).to.be.equal(Config.url);
     const blockNumber = await new DataRetrieval().getBlockNumber(provider);
-    console.log(`Current block number = ${blockNumber}`);
+    logger.notice(`Current block number = ${blockNumber}`);
     expect(blockNumber, BlockNumberShouldBeNonZero).to.be.greaterThan(0);
   }
 
   @epic(EpicName)
-  @feature("Signer")
+  @feature('Signer')
   @test
   public async testSigner() {
     const provider = new ConnectionManager().connectToJsonRpc(Config.url);
@@ -46,119 +47,119 @@ class EthersJsTests {
   }
 
   @epic(EpicName)
-  @feature("Querying the Blockchain")
+  @feature('Querying the Blockchain')
   @test
   public async testQueryingBlockchain() {
     const provider = new ConnectionManager().connectToJsonRpc(Config.url);
 
     // Look up the current block number
     const blockNumber = await provider.getBlockNumber();
-    console.log(`Block number = ${blockNumber}`);
+    logger.notice(`Block number = ${blockNumber}`);
     expect(blockNumber, BlockNumberShouldBeNonZero).to.be.greaterThan(0);
     // 13098598
 
     // Get the balance of an account (by address or ENS name, if supported by network)
-    const balance = await provider.getBalance("ethers.eth");
-    console.log(`Balance = ${balance}`);
-    expect(balance, BalanceShouldNotBeEqual0).to.not.be.equal("0");
+    const balance = await provider.getBalance('ethers.eth');
+    logger.notice(`Balance = ${balance}`);
+    expect(balance, BalanceShouldNotBeEqual0).to.not.be.equal('0');
     // { BigNumber: "2337132817842795605" }
 
     // Often you need to format the output to something more user-friendly,
     // such as in ether (instead of wei)
     const formattedBalance = ethers.utils.formatEther(balance);
-    console.log(`Formatted balance = ${formattedBalance}`);
-    expect(formattedBalance, FormattedBalanceShouldIncludeDot).to.include(".");
+    logger.notice(`Formatted balance = ${formattedBalance}`);
+    expect(formattedBalance, FormattedBalanceShouldIncludeDot).to.include('.');
     // '2.337132817842795605'
 
     // If a user enters a string in an input field, you may need
     // to convert it from ether (as a string) to wei (as a BigNumber)
-    const parsedEther = ethers.utils.parseEther("1.0");
-    console.log(`parsed Ether = ${parsedEther}`);
-    expect(parsedEther, ParsedEtherShouldBeBigNumber).to.contain("BigNumber");
+    const parsedEther = ethers.utils.parseEther('1.0');
+    logger.notice(`parsed Ether = ${parsedEther}`);
+    expect(parsedEther, ParsedEtherShouldBeBigNumber).to.contain('BigNumber');
     // { BigNumber: "1000000000000000000" }
   }
 
   @epic(EpicName)
-  @feature("Writing to the Blockchain")
+  @feature('Writing to the Blockchain')
   @test
   public async testWritingToTheBlockchain() {
     const signer = await this.testSigner();
 
     // Send 1 ether to an ens name.
     const tx = await signer.sendTransaction({
-      to: "ricmoo.firefly.eth",
-      value: ethers.utils.parseEther("1.0"),
+      to: 'ricmoo.firefly.eth',
+      value: ethers.utils.parseEther('1.0'),
     });
-    console.log(`Transaction = ${tx}`);
+    logger.notice(`Transaction = ${tx}`);
     expect(tx, TransactionShouldNotBeNull).to.not.be.null;
   }
 
   @epic(EpicName)
-  @feature("Contracts")
+  @feature('Contracts')
   @test
   public async testContracts() {
     const provider = new ConnectionManager().connectToJsonRpc(Config.url);
 
     // You can also use an ENS name for the contract address
-    const daiAddress = "dai.tokens.ethers.eth";
+    const daiAddress = 'dai.tokens.ethers.eth';
 
     // The ERC-20 Contract ABI, which is a common contract interface
     // for tokens (this is the Human-Readable ABI format)
     const daiAbi = [
       // Some details about the token
-      "function name() view returns (string)",
-      "function symbol() view returns (string)",
+      'function name() view returns (string)',
+      'function symbol() view returns (string)',
 
       // Get the account balance
-      "function balanceOf(address) view returns (uint)",
+      'function balanceOf(address) view returns (uint)',
 
       // Send some of your tokens to someone else
-      "function transfer(address to, uint amount)",
+      'function transfer(address to, uint amount)',
 
       // An event triggered whenever anyone transfers to someone else
-      "event Transfer(address indexed from, address indexed to, uint amount)",
+      'event Transfer(address indexed from, address indexed to, uint amount)',
     ];
 
     // The Contract object
     const daiContract = new ethers.Contract(daiAddress, daiAbi, provider);
-    console.log(`Contract object = ${daiContract}`);
-    expect(daiContract, "Contract object should not be null").to.not.be.null;
+    logger.notice(`Contract object = ${daiContract}`);
+    expect(daiContract, 'Contract object should not be null').to.not.be.null;
     return daiContract;
   }
 
   @epic(EpicName)
-  @feature("Read-Only Methods")
+  @feature('Read-Only Methods')
   @test
   public async testReadOnlyMethods() {
     const daiContract = await this.testContracts();
 
     // Get the ERC-20 token name
     const tokenName = await daiContract.name();
-    console.log(`Token name = ${tokenName}`);
+    logger.notice(`Token name = ${tokenName}`);
     expect(tokenName, TokenNameShouldNotBeEmpty).to.not.be.empty;
     // 'Dai Stablecoin'
 
     // Get the ERC-20 token symbol (for tickers and UIs)
     const tokenSymbol = await daiContract.symbol();
-    console.log(`Token symbol = ${tokenSymbol}`);
-    expect(tokenSymbol, "Token symbol should not be empty").to.not.be.empty;
+    logger.notice(`Token symbol = ${tokenSymbol}`);
+    expect(tokenSymbol, 'Token symbol should not be empty').to.not.be.empty;
     // 'DAI'
 
     // Get the balance of an address
-    const balance = await daiContract.balanceOf("ricmoo.firefly.eth");
-    console.log(`Balance = ${balance}`);
-    expect(balance, BalanceShouldNotBeEqual0).to.not.be.equal("0");
+    const balance = await daiContract.balanceOf('ricmoo.firefly.eth');
+    logger.notice(`Balance = ${balance}`);
+    expect(balance, BalanceShouldNotBeEqual0).to.not.be.equal('0');
     // { BigNumber: "14032899074838529727100" }
 
     // Format the DAI for displaying to the user
     const formattedDai = ethers.utils.formatUnits(balance, 18);
-    console.log(`Formatted Dai = ${formattedDai}`);
-    expect(formattedDai, FormattedDaiShouldContainDot).to.contain(".");
+    logger.notice(`Formatted Dai = ${formattedDai}`);
+    expect(formattedDai, FormattedDaiShouldContainDot).to.contain('.');
     // '14032.8990748385297271'
   }
 
   @epic(EpicName)
-  @feature("State Changing Methods")
+  @feature('State Changing Methods')
   @test
   public async testStateChangingMethods() {
     const signer = await this.testSigner();
@@ -170,28 +171,28 @@ class EthersJsTests {
     const daiWithSigner = contract.connect(signer);
 
     // Each DAI has 18 decimal places
-    const dai = ethers.utils.parseUnits("1.0", 18);
+    const dai = ethers.utils.parseUnits('1.0', 18);
 
     // Send 1 DAI to "ricmoo.firefly.eth"
-    const tx = daiWithSigner.transfer("ricmoo.firefly.eth", dai);
+    const tx = daiWithSigner.transfer('ricmoo.firefly.eth', dai);
   }
 
   @epic(EpicName)
-  @feature("Listening to Events")
+  @feature('Listening to Events')
   @test
   public async testListeningToEvents() {
     const daiContract = await this.testContracts();
 
     // Receive an event when ANY transfer occurs
-    daiContract.on("Transfer", (from, to, amount, event) => {
-      console.log(`${from} sent ${formatEther(amount)} to ${to}`);
+    daiContract.on('Transfer', (from, to, amount, event) => {
+      logger.notice(`${from} sent ${formatEther(amount)} to ${to}`);
       // The event object contains the verbatim log data, the
       // EventFragment and functions to fetch the block,
       // transaction and receipt and event functions
     });
 
     // A filter for when a specific address receives tokens
-    const myAddress = "0x8ba1f109551bD432803012645Ac136ddd64DBA72";
+    const myAddress = '0x8ba1f109551bD432803012645Ac136ddd64DBA72';
     const filter = daiContract.filters.Transfer(null, myAddress);
     // {
     //   address: 'dai.tokens.ethers.eth',
@@ -205,12 +206,12 @@ class EthersJsTests {
     // Receive an event when that filter occurs
     daiContract.on(filter, (from, to, amount, event) => {
       // The to will always be "address"
-      console.log(`I got ${formatEther(amount)} from ${from}.`);
+      logger.notice(`I got ${formatEther(amount)} from ${from}.`);
     });
   }
 
   @epic(EpicName)
-  @feature("Query Historic Events")
+  @feature('Query Historic Events')
   @test
   public async testQueryHistoricEvents() {
     const signer = await this.testSigner();
@@ -319,7 +320,7 @@ class EthersJsTests {
   }
 
   @epic(EpicName)
-  @feature("Signing Messages")
+  @feature('Signing Messages')
   @test
   public async testSigningMessages() {
     const signer = await this.testSigner();
@@ -327,7 +328,7 @@ class EthersJsTests {
     // To sign a simple string, which are used for
     // logging into a service, such as CryptoKitties,
     // pass the string in.
-    let signature = await signer.signMessage("Hello World");
+    let signature = await signer.signMessage('Hello World');
     // '0x3077d1b961d146d5a956e67495cbfcc2b6971c787690382ff85ef4403d96fee1625bb24fe54c69b628b6cb34d0a2cb3bdff10a635b66d76585db0dc378363c3c1c'
 
     //
@@ -338,7 +339,7 @@ class EthersJsTests {
 
     // This string is 66 characters long
     const message =
-      "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef";
+      '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef';
 
     // This array representation is 32 bytes long
     const messageBytes = ethers.utils.arrayify(message);
