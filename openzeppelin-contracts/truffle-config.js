@@ -53,7 +53,7 @@ module.exports = {
       networkCheckTimeout: 10000000,
       confirmations: 10,
       // experimental feature
-      disableConfirmations: true,
+      disableConfirmationListener: true,
 
       // gas
       // gasPrice
