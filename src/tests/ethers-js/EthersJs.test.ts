@@ -1,4 +1,4 @@
-import { suite, test } from '@testdeck/mocha';
+import { suite, test, skip } from '@testdeck/mocha';
 import { epic, feature } from 'allure-decorators';
 import { ethers } from 'ethers';
 import { expect } from 'chai';
@@ -180,6 +180,7 @@ class EthersJsTests {
   @epic(EpicName)
   @feature('Listening to Events')
   @test
+  @skip
   public async testListeningToEvents() {
     const daiContract = await this.testContracts();
 
