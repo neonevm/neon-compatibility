@@ -6,7 +6,8 @@ namespace org.neonlabs.compatibility
     {
         public Config()
         {
-            DotEnv.Load();
+            // DotEnv.Load();
+            DotEnv.Load(options: new DotEnvOptions(envFilePaths: new[] {"../../../../../.env"}));
         }
     }
 }
