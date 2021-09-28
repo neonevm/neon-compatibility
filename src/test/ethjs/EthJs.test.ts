@@ -1,8 +1,10 @@
 import { suite, test } from '@testdeck/mocha';
 import { epic, feature } from 'allure-decorators';
 import { expect } from 'chai';
-import { Eth } from 'ethjs';
+// import { Eth, HttpProvider } from 'ethjs';
 import { HttpProvider } from 'ethjs-provider-http';
+import { Eth } from 'ethjs-query';
+import { EthContract } from 'ethjs-contract';
 import { Config } from '../../../config/default';
 import { logger } from '../../utils/logger';
 
@@ -16,10 +18,12 @@ const EtherValueShouldBeGreaterThan0 = 'Ether value should be greater than 0';
 @suite(SuiteName)
 class EthJsTests {
   @epic(EpicName)
-  @feature('Connection test')
+  @feature('Connection test (ts)')
   @test
   public async test01() {
-    const eth = new Eth(new Eth.HttpProvider(Config.url));
+    const provider = new HttpProvider(Config.url);
+    logger.notice(`Provider = ${provider}`);
+    const eth = new Eth(new HttpProvider(Config.url));
     logger.notice(`eth = ${eth}`);
     expect(eth, EthObjectShouldNotBeNull).to.not.be.null;
 
