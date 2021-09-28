@@ -1,4 +1,4 @@
-name: Python 3.8, Node.js 16, allure
+name: Python 3.8, Node.js 16, .NET 5.0, allure
 
 on:
   push:
@@ -120,7 +120,6 @@ jobs:
     - name: Test
       if: always()
       run: dotnet test --no-build --verbosity normal
-
     - name: Look at Allure
       if: always()
       uses: ./.github/actions/allure-show
@@ -138,8 +137,8 @@ jobs:
     if: always()
     needs:
       - build
-      - node
       - python
+      - node
       - dotnet
     steps:
 
