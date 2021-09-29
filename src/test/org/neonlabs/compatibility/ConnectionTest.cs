@@ -1,3 +1,5 @@
+using Nethereum.RPC.Eth;
+
 namespace NeonCompatibility.Tests.org.neonlabs.compatibility
 {
     using Allure.Xunit.Attributes;
@@ -19,7 +21,7 @@ namespace NeonCompatibility.Tests.org.neonlabs.compatibility
         {
             var web3 = Connection.Connect();
             Assert.NotNull(web3);
-            // Assert.All<Web3>(web3,w=>
+            // Assert.All<IEthAccounts>(web3.Eth.Accounts.,w=>
             // {
             //     Assert.NotNull(w);
             //     // Assert.Collection(web3.Eth.Accounts);
@@ -30,8 +32,15 @@ namespace NeonCompatibility.Tests.org.neonlabs.compatibility
             // Assert.All(web3, w=>w);
         }
 
-        [AllureXunit(DisplayName = "Balance")]
+        [AllureXunit(DisplayName = "GetBalance Async")]
         public async void ShouldGetBalanceAsync()
+        {
+            var balance = await Balance.GetBalance();
+            Assert.NotNull(balance);
+        }
+        
+        [AllureXunit(DisplayName = "GetBalance Async")]
+        public async void ShouldGetInitialBalanceAsync()
         {
             var balance = await Balance.GetBalance();
             Assert.NotNull(balance);
