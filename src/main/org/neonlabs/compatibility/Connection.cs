@@ -1,10 +1,8 @@
-namespace org.neonlabs.compatibility
+namespace NeonCompatibility.org.neonlabs.compatibility
 {
     using System;
-    using System.Threading.Tasks;
-    using Nethereum.Web3;
     using dotenv.net.Utilities;
-
+    using Nethereum.Web3;
     public class Connection
     {
         public static Web3 Connect()
