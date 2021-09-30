@@ -8,6 +8,7 @@ ADD_NETWORK = "brownie networks add Development"
 DELETE_NETWORK = "brownie networks delete"
 
 FEATURE = 'brownie'
+STORY = FEATURE
 
 
 @pytest.fixture(autouse=True)
@@ -30,6 +31,7 @@ def setup_and_teardown():
 
 @pytest.mark.skip(reason="now yet done")
 @allure.feature(FEATURE)
+@allure.story(STORY)
 def test_one():
     aaa = f"{Subfolder.CD_BROWNIE} {ADD_NETWORK} {NETWORK_NAME} \
         host={HTTP_URL} {CD_BACK}"

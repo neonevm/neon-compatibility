@@ -9,6 +9,7 @@ from src.helpers.shell.processes import preset_variables, run_command_line
 
 BUILT_CONTRACTS_PATH = "/Metacoin/build/contracts"
 FEATURE = "Truffle"
+STORY = FEATURE
 
 
 @pytest.fixture(autouse=True)
@@ -20,6 +21,7 @@ def prepare_truffle_config():
 
 
 @allure.feature(FEATURE)
+@allure.story(STORY)
 def test_truffle_migration():
     # truffle migrate --network neonlabs
     actual_result = run_command_line(
@@ -38,6 +40,7 @@ def test_truffle_migration():
 
 
 @allure.feature(FEATURE)
+@allure.story(STORY)
 def test_truffle_contract():
     # truffle neonlabs ./test/TestMetaCoin.sol
     actual_result = run_command_line(
@@ -49,6 +52,7 @@ def test_truffle_contract():
 
 
 @allure.feature(FEATURE)
+@allure.story(STORY)
 def test_truffle_test():
     # truffle neonlabs ./test/metacoin.js
     actual_result = run_command_line(

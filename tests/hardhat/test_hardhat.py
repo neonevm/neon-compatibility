@@ -7,6 +7,7 @@ from src.helpers.common.success_message import HardhatSuccess
 from src.helpers.shell.processes import preset_variables, run_command_line
 
 FEATURE = 'hardhat'
+STORY = FEATURE
 
 
 @pytest.fixture(autouse=True)
@@ -17,6 +18,7 @@ def prepare_truffle_config():
 
 # @pytest.mark.skip(reason="now yet done")
 @allure.feature(FEATURE)
+@allure.story(STORY)
 def test_hardhat_simple():
     command = "npx hardhat run --network neonlabs scripts/sample-script.js"
     actual_result = run_command_line(
@@ -31,6 +33,7 @@ def test_hardhat_simple():
 # and comment out the following line
 # defaultNetwork: "neonlabs",
 @allure.feature(FEATURE)
+@allure.story(STORY)
 def test_hardhat_advanced():
     # REPORT_GAS=true npx hardhat test
     command = "REPORT_GAS=true npx hardhat test"

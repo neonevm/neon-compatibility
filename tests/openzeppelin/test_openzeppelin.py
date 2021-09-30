@@ -18,6 +18,7 @@ SOURCE_MIGRATIONS_PATH = "/OpenZeppelin/source/migrations/"
 SOURCE_TEST_PATH = "/OpenZeppelin/source/test/"
 
 FEATURE = 'OpenZeppelin'
+STORY = FEATURE
 
 INPUT_DATA = [
     (InputData("access/Ownable.test.js", ["access/Ownable.test.js"], [
@@ -136,6 +137,7 @@ def prepare_truffle_config():
 
 @pytest.mark.parametrize("input_data", INPUT_DATA)
 @allure.feature(FEATURE)
+@allure.story(STORY)
 def test_contracts(input_data: InputData):
     copy_files(input_data)
 
