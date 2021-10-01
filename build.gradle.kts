@@ -265,6 +265,8 @@ val test by tasks.getting(Test::class) {
 
 checkstyle {
     toolVersion = "9.0"
+    // ignoreFailures = false
+    maxWarnings = 0
 }
 tasks.withType<Checkstyle>().configureEach {
     source("src/special_dir")
