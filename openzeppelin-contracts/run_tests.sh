@@ -1,5 +1,10 @@
 #!/bin/bash
 echo "======================================================================"
+echo "======= ../node_modules/.bin/truffle --network neonlabs compile ======"
+echo "======================================================================"
+../node_modules/.bin/truffle --network neonlabs compile
+
+echo "======================================================================"
 echo "======= ../node_modules/.bin/truffle --network neonlabs migrate ======"
 echo "======================================================================"
 ../node_modules/.bin/truffle --network neonlabs migrate
