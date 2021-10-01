@@ -299,11 +299,11 @@ tasks.named<Wrapper>("wrapper") {
 }
 
 enum class Version(val id: String) {
-    GATLING("3.5.1"),
-    JUNIT_JUPITER("5.7.1"),
-    JUNIT_PLATFORM("1.7.1"),
+    GATLING("3.6.1"),
+    JUNIT_JUPITER("5.8.1"),
+    JUNIT_PLATFORM("1.8.1"),
     JUNIT4("4.13.2"),
-    SCALA("2.13.5"),
+    SCALA("2.13.6"),
     SCALA_TEST("3.2.0"),
     SCALA_TEST_PLUS("3.2.0.0"),
     JACKSON("2.12.2"),
