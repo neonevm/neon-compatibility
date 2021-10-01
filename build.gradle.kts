@@ -44,11 +44,12 @@ plugins {
     id("io.qameta.allure") version "2.8.1"
 
     jacoco
-    // checkstyle
+    checkstyle
     pmd
     id("org.jlleitschuh.gradle.ktlint") version ("10.0.0")
     id("cz.alenkacz.gradle.scalafmt") version ("1.16.2")
-    id("com.github.sherter.google-java-format") version("0.9")
+    // id("com.github.sherter.google-java-format") version("0.9")
+    // id("com.diffplug.spotless") version "5.15.2"
 }
 
 /*
@@ -262,7 +263,14 @@ val test by tasks.getting(Test::class) {
     // systemProperty("allure.results.directory", "../../allure-results")
 }
 
+checkstyle {
+    toolVersion = "9.0"
+}
 tasks.withType<Checkstyle>().configureEach {
+    source("src/special_dir")
+    include("**/*.java")
+    exclude("**/*Template.java")
+    exclude("src/test/template_*")
     reports {
         xml.isEnabled = false
         html.isEnabled = true
@@ -270,14 +278,18 @@ tasks.withType<Checkstyle>().configureEach {
     }
 }
 
-tasks.googleJavaFormat {
-    // source = sourceSets*.allJava
-    // source = sourceSets.get(allJava)
-    source("src/special_dir")
-    include("**/*.java")
-    exclude("**/*Template.java")
-    exclude("src/test/template_*")
-}
+// tasks.googleJavaFormat {
+//     tasks.googleJavaFormat.get().dependsOn(tasks.test.get())
+//     tasks.googleJavaFormat.get().dependsOn(tasks.compileTestJava.get())
+//     tasks.googleJavaFormat.get().dependsOn(tasks.compileTestKotlin.get())
+//     tasks.googleJavaFormat.get().dependsOn(tasks.compileTestScala.get())
+//     // source = sourceSets*.allJava
+//     // source = sourceSets.get(allJava)
+//     source("src/special_dir")*/
+//     include("**/*.java")
+//     exclude("**/*Template.java")
+//     exclude("src/test/template_*")
+// }
 
 tasks.withType<Pmd>() {
     isConsoleOutput = true
