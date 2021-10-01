@@ -168,10 +168,10 @@ dependencies {
     implementation("org.codehaus.groovy:groovy-all:2.5.12")
 
     // Use the Kotlin test library.
-    testImplementation("org.jetbrains.kotlin:kotlin-test:${Version.KOTLIN.id}")
+    // testImplementation("org.jetbrains.kotlin:kotlin-test:${Version.KOTLIN.id}")
 
     // Use the Kotlin JUnit integration.
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:${Version.KOTLIN.id}")
+    // testImplementation("org.jetbrains.kotlin:kotlin-test-junit:${Version.KOTLIN.id}")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${Version.JUNIT_JUPITER.id}")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:${Version.JUNIT_JUPITER.id}")
@@ -305,7 +305,7 @@ enum class Version(val id: String) {
     JUNIT4("4.13.2"),
     SCALA("2.13.6"),
     SCALA_TEST("3.2.10"),
-    SCALA_TEST_PLUS("3.2.10.0"),
+    SCALA_TEST_PLUS("3.2.0.0"),
     JACKSON("2.12.5"),
     SNAKEYAML("1.29"),
     JOOQ("3.15.3"),
