@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ConnectionTest {
+class ConnectionTest {
     @Test
     void probe() {
-        assertEquals(1, 1);
+        assertEquals(1, 1, "sample assertion");
     }
 }
