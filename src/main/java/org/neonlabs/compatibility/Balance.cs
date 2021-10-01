@@ -1,10 +1,9 @@
-﻿namespace org.neonlabs.compatibility
+﻿namespace NeonCompatibility.org.neonlabs.compatibility
 {
     using System;
     using System.Threading.Tasks;
     using Nethereum.Hex.HexTypes;
     using Nethereum.Web3;
-
     public class Balance
     {
         public static async Task<HexBigInteger> GetBalance()
