@@ -2,6 +2,7 @@ using Nethereum.RPC.Eth;
 
 namespace NeonCompatibility.Tests.org.neonlabs.compatibility
 {
+    using System;
     using Allure.Xunit.Attributes;
     using NeonCompatibility.org.neonlabs.compatibility;
     using Xunit;
@@ -39,11 +40,13 @@ namespace NeonCompatibility.Tests.org.neonlabs.compatibility
             Assert.NotNull(balance);
         }
         
-        [AllureXunit(DisplayName = "GetBalance Async")]
+        [AllureXunit(DisplayName = "Initial balance")]
         public async void ShouldGetInitialBalanceAsync()
         {
-            var balance = await Balance.GetBalance();
-            Assert.NotNull(balance);
+            var account = AccountFactory.CreateAccount();
+            Console.WriteLine(account.ChainId);
+            // Console.WriteLine(account.TransactionManager.Client.GetType().Name);
+            // Assert.NotNull(balance);
         }
     }
 }
