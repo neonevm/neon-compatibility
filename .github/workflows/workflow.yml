@@ -1,4 +1,4 @@
-name: Python 3.8, Node.js 16, allure
+name: Python 3.8, Node.js 16, .NET 5.0, allure
 
 on:
   push:
@@ -95,6 +95,69 @@ jobs:
         echo "============================================================================================="
         cd ..
 
+  node:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
+    - name: Use Node.js 16
+      uses: actions/setup-node@v2
+      if: always()
+      with:
+        node-version: 16.x
+    - run: npm ci
+    - run: npm run build --if-present
+    - name: Mocha tests
+      run: |
+        npm run test
+    - name: Look at Allure
+      if: always()
+      uses: ./.github/actions/allure-show
+
+    # TODO: de-duplicate
+    - name: Archive Allure results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-results
+        path: report/allure-results
+
+  dotnet:
+    runs-on: ubuntu-latest
+    needs:
+      - build
+      # - dotnet-format
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      if: always()
+      with:
+        dotnet-version: 5.0.x
+    - name: Print dotnet version
+      if: always()
+      run: dotnet --version
+    - name: Restore dependencies
+      if: always()
+      run: dotnet restore
+    # - name: dotnet - format check
+    #   if: always()
+    #   run: |
+    #     run: dotnet tool update -g dotnet-format
+    #     dotnet-format --check
+    - name: Build
+      if: always()
+      run: dotnet build --no-restore
+    - name: Test
+      if: always()
+      run: dotnet test --no-build --verbosity normal
+    - name: Move report/*.json to report/allure-results/*.json
+      if: always()
+      run: mv ./report/*.json ./report/allure-results/
     - name: Look at Allure
       if: always()
       uses: ./.github/actions/allure-show
@@ -114,6 +177,8 @@ jobs:
       - build
       - node-contracts
       - python
+      - node
+      - dotnet
     steps:
 
     - name: Download all workflow run artifacts
