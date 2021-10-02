@@ -236,6 +236,7 @@ configure<AllureExtension> {
     aspectjweaver = true
     version = Version.ALLURE.id
     allureJavaVersion = Version.JAVA.id
+    configuration = "testImplementation"
 
     clean = true
 
