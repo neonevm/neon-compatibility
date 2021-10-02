@@ -21,7 +21,7 @@ plugins {
 
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     // kotlin("multiplatform") version "1.5.0"
-    kotlin("jvm") version "1.4.32"
+    kotlin("jvm") version "1.5.31"
 
     // Apply the scala Plugin to add support for Scala.
     scala
@@ -82,7 +82,19 @@ tasks.compileTestScala {
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions.suppressWarnings = true
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-    kotlinOptions { jvmTarget = JavaVersion.VERSION_1_8.toString() }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_16.toString()
+        suppressWarnings = true
+    }
+}
+
+val compileTestKotlin: KotlinCompile by tasks
+compileTestKotlin.kotlinOptions.suppressWarnings = true
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_16.toString()
+        suppressWarnings = true
+    }
 }
 
 sourceSets {
@@ -326,7 +338,7 @@ enum class Version(val id: String) {
     ALLURE_GRADLE("2.8.1"),
     JAVA("16"),
     JAVA_FOR_SCALA("11"),
-    KOTLIN("1.4.32"),
+    KOTLIN("1.5.31"),
     GRADLE("7.0"),
     PMD("6.21.0"),
     KTLINT_GRADLE_PLUGIN("10.0.0"),
