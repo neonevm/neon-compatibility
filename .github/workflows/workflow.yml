@@ -95,6 +95,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
     - name: Set up JDK 16
       uses: actions/setup-java@v2
       if: always()
@@ -119,11 +120,6 @@ jobs:
     - name: Build with Gradle
       if: always()
       run: ./gradlew build --warning-mode all
-    
-    - name: Test
-      if: always()
-      run: ./gradlew test
-
     - name: Look at Allure
       if: always()
       uses: ./.github/actions/allure-show
