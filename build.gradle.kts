@@ -44,7 +44,7 @@ plugins {
     id("io.qameta.allure") version "2.8.1"
 
     jacoco
-    // checkstyle
+    checkstyle
     pmd
     id("org.jlleitschuh.gradle.ktlint") version ("10.0.0")
     id("cz.alenkacz.gradle.scalafmt") version ("1.16.2")
@@ -257,8 +257,17 @@ val test by tasks.getting(Test::class) {
     systemProperty("junit.jupiter.extensions.autodetection.enabled", "true")
     // systemProperty("allure.results.directory", "../../allure-results")
 }
-
+checkstyle {
+    toolVersion = "9.0"
+    // ignoreFailures = false
+    maxWarnings = 0
+}
 tasks.withType<Checkstyle>().configureEach {
+    source("src/special_dir")
+    include("**/*.java")
+    exclude("**/*Template.java")
+    exclude("src/test/template_*")
+    exclude("node_modules")
     reports {
         xml.isEnabled = false
         html.isEnabled = true
