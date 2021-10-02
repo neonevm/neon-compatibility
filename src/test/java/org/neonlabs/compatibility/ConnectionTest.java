@@ -15,6 +15,6 @@ class ConnectionTest {
   @Description("allure description")
   @Story("Java Story")
   void probe() {
-    assertEquals(1, 1, "sample assertion");
+    assertEquals(1, new Connection().getId(), "sample assertion");
   }
 }
