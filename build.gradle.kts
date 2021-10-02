@@ -142,9 +142,7 @@ repositories {
     // You can declare any Maven/Ivy/file repository here.
     // jcenter()
     mavenCentral()
-    maven {
-        url("https://jitpack.io")
-    }
+    maven(url = "https://jitpack.io")
     /*maven {
         url = uri("https://mvnrepository.com")
     }*/
