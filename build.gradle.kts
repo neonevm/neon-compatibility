@@ -226,10 +226,12 @@ dependencies {
 }
 
 // TODO: needed for Kotlin and kotlin.test 1.5.0
+/*
 val testCompile: Configuration by configurations.creating
 configurations {
     testCompile.extendsFrom(testImplementation.get())
 }
+*/
 
 configure<AllureExtension> {
     autoconfigure = true
