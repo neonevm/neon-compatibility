@@ -223,6 +223,10 @@ dependencies {
     runtimeOnly("com.pinterest.ktlint:ktlint-reporter-plain:${Version.KTLINT.id}")
 
     // implementation("cz.alenkacz.gradle.scalafmt:cz.alenkacz.gradle.scalafmt.gradle.plugin:${Version.SCALA_FMT.id}")
+
+    runtimeOnly("com.github.komputing.kethereum:crypto_api:${Version.KETHEREUM.id}")
+    runtimeOnly("com.github.komputing.kethereum:model:${Version.KETHEREUM.id}")
+    runtimeOnly("com.github.komputing.kethereum:extensions_kotlin:${Version.KETHEREUM.id}")
 }
 
 // TODO: needed for Kotlin and kotlin.test 1.5.0
@@ -332,6 +336,7 @@ enum class Version(val id: String) {
     HAMCREST("2.2"),
     JAVAFAKER("1.0.2"),
     AWAITILITY("4.0.3"),
+    KETHEREUM("0.83.4"),
     CUCUMBER("6.8.1"),
     CUCUMBER_JUNIT("6.10.2"),
     ALLURE("2.13.9"),
