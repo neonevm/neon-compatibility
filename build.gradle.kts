@@ -21,7 +21,7 @@ plugins {
 
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     // kotlin("multiplatform") version "1.5.0"
-    kotlin("jvm") version "1.5.31"
+    kotlin("jvm") version "1.4.32"
 
     // Apply the scala Plugin to add support for Scala.
     scala
@@ -44,12 +44,11 @@ plugins {
     id("io.qameta.allure") version "2.8.1"
 
     jacoco
-    checkstyle
+    // checkstyle
     pmd
     id("org.jlleitschuh.gradle.ktlint") version ("10.0.0")
     id("cz.alenkacz.gradle.scalafmt") version ("1.16.2")
     // id("com.github.sherter.google-java-format") version("0.9")
-    // id("com.diffplug.spotless") version "5.15.2"
 }
 
 /*
@@ -83,13 +82,7 @@ tasks.compileTestScala {
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions.suppressWarnings = true
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-    kotlinOptions { jvmTarget = JavaVersion.VERSION_16.toString() }
-}
-
-val compileTestKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions.suppressWarnings = true
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-    kotlinOptions { jvmTarget = JavaVersion.VERSION_16.toString() }
+    kotlinOptions { jvmTarget = JavaVersion.VERSION_1_8.toString() }
 }
 
 sourceSets {
@@ -221,10 +214,12 @@ dependencies {
 }
 
 // TODO: needed for Kotlin and kotlin.test 1.5.0
+/*
 val testCompile: Configuration by configurations.creating
 configurations {
     testCompile.extendsFrom(testImplementation.get())
 }
+*/
 
 configure<AllureExtension> {
     autoconfigure = true
@@ -234,8 +229,8 @@ configure<AllureExtension> {
 
     clean = true
 
-    resultsDir = file("../../allure-results")
-    reportDir = file("../../allure-reports")
+    resultsDir = file("../../report/allure-results")
+    reportDir = file("../../report/allure-reports")
 
     useJUnit5 {
         version = Version.ALLURE.id
@@ -263,16 +258,7 @@ val test by tasks.getting(Test::class) {
     // systemProperty("allure.results.directory", "../../allure-results")
 }
 
-checkstyle {
-    toolVersion = "9.0"
-    // ignoreFailures = false
-    maxWarnings = 0
-}
 tasks.withType<Checkstyle>().configureEach {
-    source("src/special_dir")
-    include("**/*.java")
-    exclude("**/*Template.java")
-    exclude("src/test/template_*")
     reports {
         xml.isEnabled = false
         html.isEnabled = true
@@ -281,13 +267,9 @@ tasks.withType<Checkstyle>().configureEach {
 }
 
 // tasks.googleJavaFormat {
-//     tasks.googleJavaFormat.get().dependsOn(tasks.test.get())
-//     tasks.googleJavaFormat.get().dependsOn(tasks.compileTestJava.get())
-//     tasks.googleJavaFormat.get().dependsOn(tasks.compileTestKotlin.get())
-//     tasks.googleJavaFormat.get().dependsOn(tasks.compileTestScala.get())
 //     // source = sourceSets*.allJava
 //     // source = sourceSets.get(allJava)
-//     source("src/special_dir")*/
+//     source("src/special_dir")
 //     include("**/*.java")
 //     exclude("**/*Template.java")
 //     exclude("src/test/template_*")
@@ -313,32 +295,32 @@ tasks.named<Wrapper>("wrapper") {
 }
 
 enum class Version(val id: String) {
-    GATLING("3.6.1"),
-    JUNIT_JUPITER("5.8.1"),
-    JUNIT_PLATFORM("1.8.1"),
+    GATLING("3.5.1"),
+    JUNIT_JUPITER("5.7.1"),
+    JUNIT_PLATFORM("1.7.1"),
     JUNIT4("4.13.2"),
-    SCALA("2.13.6"),
-    SCALA_TEST("3.2.10"),
+    SCALA("2.13.5"),
+    SCALA_TEST("3.2.0"),
     SCALA_TEST_PLUS("3.2.0.0"),
-    JACKSON("2.12.5"),
-    SNAKEYAML("1.29"),
-    JOOQ("3.15.3"),
-    POSTGRESQL("42.2.24"),
-    REST_ASSURED("4.4.0"),
+    JACKSON("2.12.2"),
+    SNAKEYAML("1.28"),
+    JOOQ("3.14.8"),
+    POSTGRESQL("42.2.19"),
+    REST_ASSURED("4.3.3"),
     HAMCREST("2.2"),
     JAVAFAKER("1.0.2"),
-    AWAITILITY("4.1.0"),
-    CUCUMBER("6.11.0"),
-    CUCUMBER_JUNIT("6.11.0"),
+    AWAITILITY("4.0.3"),
+    CUCUMBER("6.8.1"),
+    CUCUMBER_JUNIT("6.10.2"),
     ALLURE("2.13.9"),
     ALLURE_GRADLE("2.8.1"),
     JAVA("16"),
     JAVA_FOR_SCALA("11"),
-    KOTLIN("1.5.31"),
-    GRADLE("7.2"),
-    PMD("6.39.0"),
+    KOTLIN("1.4.32"),
+    GRADLE("7.0"),
+    PMD("6.21.0"),
     KTLINT_GRADLE_PLUGIN("10.0.0"),
-    KTLINT("0.42.1"),
+    KTLINT("0.41.0"),
     SCALA_FMT("1.16.2");
 }
 
