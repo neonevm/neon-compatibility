@@ -1,6 +1,6 @@
 require("dotenv").config({ path: "../.env" });
 const Web3 = require("web3");
-const { axios } = require("axios")
+const axios = require('axios');
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 
 process.env.UV_THREADPOOL_SIZE = 128;
@@ -24,7 +24,13 @@ const account02 = web3.eth.accounts.create();
 process.env.ADDRESS_TO = account02.address;
 
 const faucetUrl = process.env.HTTP_URL.replace("/solana", "/request_erc20_tokens")
-const requestFaucet = (address, amount) => { axios.post(faucetUrl, { wallet: address, amount: amount }) }
+const requestFaucet = (address, amount) => axios.post(faucetUrl, { wallet: address, amount: amount })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 requestFaucet(account01.address, 10)
 requestFaucet(account02.address, 10)
 
