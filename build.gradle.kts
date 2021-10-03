@@ -41,6 +41,9 @@ plugins {
     // Apply the xctest plugin to add support for building and running Swift test executables (Linux) or bundles (macOS)
     // xctest
 
+    // id("org.web3j") version("4.8.7")
+    id("io.freefair.lombok") version ("6.2.0")
+
     id("io.qameta.allure") version "2.8.1"
 
     jacoco
@@ -224,6 +227,12 @@ dependencies {
     runtimeOnly("com.pinterest.ktlint:ktlint-reporter-plain:${Version.KTLINT.id}")
 
     // implementation("cz.alenkacz.gradle.scalafmt:cz.alenkacz.gradle.scalafmt.gradle.plugin:${Version.SCALA_FMT.id}")
+
+    compileOnly("org.projectlombok:lombok:${Version.LOMBOK.id}")
+    annotationProcessor("org.projectlombok:lombok:${Version.LOMBOK.id}")
+
+    testCompileOnly("org.projectlombok:lombok:${Version.LOMBOK.id}")
+    testAnnotationProcessor("org.projectlombok:lombok:${Version.LOMBOK.id}")
 }
 
 // TODO: needed for Kotlin and kotlin.test 1.5.0
@@ -369,6 +378,7 @@ enum class Version(val id: String) {
     JAVA("16"),
     JAVA_FOR_SCALA("11"),
     KOTLIN("1.5.31"),
+    LOMBOK("1.18.20"),
     GRADLE("7.2"),
     PMD("6.39.0"),
     KTLINT_GRADLE_PLUGIN("10.0.0"),
