@@ -25,8 +25,8 @@ brew install allure
 
 ### Globally (Ubuntu 20.04)
 ```
-# assuming that there already is Python 3.8.10, 
-# otherwise install it by issuing brew install python@3.8 
+# assuming that there already is Python 3.8.10,
+# otherwise install it by issuing brew install python@3.8
 # or any alternate package manager
 
 # pip
