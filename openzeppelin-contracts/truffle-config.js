@@ -1,5 +1,6 @@
 require("dotenv").config({ path: "../.env" });
 const Web3 = require("web3");
+const { axios } = require("axios")
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 
 process.env.UV_THREADPOOL_SIZE = 128;
@@ -21,6 +22,25 @@ process.env.ADDRESS_FROM = account01.address;
 process.env.PRIVATE_KEY = account01.privateKey;
 const account02 = web3.eth.accounts.create();
 process.env.ADDRESS_TO = account02.address;
+
+const faucetUrl = process.env.HTTP_URL.replace("/solana", "/request_erc20_tokens")
+const requestFaucet = async (address, amount) => { await axios.post(faucetUrl, { wallet: address, amount: amount }) }
+await requestFaucet(account01.address, 10)
+await requestFaucet(account02.address, 10)
+
+/*
+let initialBalance = 10 * Config.faucetQuotient;
+const provider = new ConnectionManager().connectToJsonRpc(Config.url);
+logger.notice(`Provider: ${provider}`);
+const randomWallet = ethers.Wallet.createRandom();
+logger.notice(`Random wallet = ${randomWallet.address}`);
+const wallet = randomWallet.connect(provider);
+logger.notice(`Random wallet connected = ${wallet.provider}`);
+await requestFaucet(wallet.address, initialBalance);
+
+const balance = await wallet.getBalance();
+logger.notice(`Balance = ${balance.toString()}`);
+*/
 
 module.exports = {
   networks: {
