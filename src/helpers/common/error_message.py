@@ -11,8 +11,8 @@ class TruffleError(object):
 
     ERROR_COULD_NOT_CONNECT = "Could not connect to your Ethereum client."
     ERROR_NOT_AUTHORIZED = "Invalid JSON RPC response:"
-    ERROR_TIMEOUT = "Error: There was a timeout while attempting \
-        to connect to the network."
+    ERROR_TIMEOUT = "Error: There was a timeout \
+        while attempting to connect to the network"
 
     ERROR_NO_CONTRACTS_DEPLOYED = "No contracts deployed."
 
