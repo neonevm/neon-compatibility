@@ -41,6 +41,9 @@ plugins {
     // Apply the xctest plugin to add support for building and running Swift test executables (Linux) or bundles (macOS)
     // xctest
 
+    // id("org.web3j") version("4.8.7")
+    id("io.freefair.lombok") version ("6.2.0")
+
     id("io.qameta.allure") version "2.8.1"
 
     jacoco
@@ -226,6 +229,18 @@ dependencies {
 
     // implementation("cz.alenkacz.gradle.scalafmt:cz.alenkacz.gradle.scalafmt.gradle.plugin:${Version.SCALA_FMT.id}")
 
+    compileOnly("org.projectlombok:lombok:${Version.LOMBOK.id}")
+    annotationProcessor("org.projectlombok:lombok:${Version.LOMBOK.id}")
+
+    testCompileOnly("org.projectlombok:lombok:${Version.LOMBOK.id}")
+    testAnnotationProcessor("org.projectlombok:lombok:${Version.LOMBOK.id}")
+
+    implementation("org.web3j:core:${Version.WEB3J.id}")
+    implementation("org.web3j:crypto:${Version.WEB3J.id}")
+    implementation("org.web3j:utils:${Version.WEB3J.id}")
+    implementation("org.web3j:abi:${Version.WEB3J.id}")
+    implementation("org.web3j:codegen:${Version.WEB3J.id}")
+
     runtimeOnly("com.github.komputing.kethereum:crypto_api:${Version.KETHEREUM.id}")
     runtimeOnly("com.github.komputing.kethereum:model:${Version.KETHEREUM.id}")
     runtimeOnly("com.github.komputing.kethereum:extensions_kotlin:${Version.KETHEREUM.id}")
@@ -334,6 +349,7 @@ configure<com.diffplug.gradle.spotless.SpotlessExtension> {
             endWithNewline()
         }
     )
+
     // java {
     //     // don't need to set target, it is inferred from java
 
@@ -375,6 +391,8 @@ enum class Version(val id: String) {
     JAVA("16"),
     JAVA_FOR_SCALA("11"),
     KOTLIN("1.5.31"),
+    LOMBOK("1.18.20"),
+    WEB3J("5.0.0"),
     GRADLE("7.2"),
     PMD("6.39.0"),
     KTLINT_GRADLE_PLUGIN("10.0.0"),

@@ -45,6 +45,7 @@ namespace NeonCompatibility.Tests.org.neonlabs.compatibility
         {
             var account = AccountFactory.CreateAccount();
             Console.WriteLine(account.ChainId);
+            // TODO: there should be an await call
             // Console.WriteLine(account.TransactionManager.Client.GetType().Name);
             // Assert.NotNull(balance);
         }
