@@ -1,8 +1,10 @@
+import allure
 import os
 from web3 import HTTPProvider, Web3
 from src.helpers.common.config import HTTP_URL
 
 
+@allure.step('Run command: "{0}"')
 def run_command_line(command: str):
     print("============ running command... ============")
     print(command)
@@ -12,6 +14,7 @@ def run_command_line(command: str):
     return output + errors
 
 
+@allure.step('Preset variables')
 def preset_variables():
     url = HTTP_URL
     w3 = Web3(HTTPProvider(url))
