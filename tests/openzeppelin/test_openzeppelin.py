@@ -1,3 +1,4 @@
+import allure
 import os
 import pytest
 from shutil import copy
@@ -15,6 +16,8 @@ TEST_PATH = "/OpenZeppelin/test/"
 SOURCE_CONTRACTS_PATH = "/OpenZeppelin/source/contracts/"
 SOURCE_MIGRATIONS_PATH = "/OpenZeppelin/source/migrations/"
 SOURCE_TEST_PATH = "/OpenZeppelin/source/test/"
+
+FEATURE = 'OpenZeppelin'
 
 INPUT_DATA = [
     (InputData("access/Ownable.test.js", ["access/Ownable.test.js"], [
@@ -99,9 +102,6 @@ def copy_files(input_data: InputData):
 @pytest.fixture(autouse=True)
 def prepare_truffle_config():
     preset_variables()
-    # print(get_contracts_path())
-    # print(get_migrations_path())
-    # print(get_test_path())
     [clean_up_folder(x) for x in os.listdir(get_contracts_path())]
     [clean_up_folder(x) for x in os.listdir(get_migrations_path())]
     [clean_up_folder(x) for x in os.listdir(get_test_path())]
@@ -135,8 +135,8 @@ def prepare_truffle_config():
 
 
 @pytest.mark.parametrize("input_data", INPUT_DATA)
+@allure.feature(FEATURE)
 def test_contracts(input_data: InputData):
-    # print(input_data)
     copy_files(input_data)
 
     # truffle --network neonlabs test ./test/access/[test file name]

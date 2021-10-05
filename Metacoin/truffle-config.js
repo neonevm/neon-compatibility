@@ -10,6 +10,7 @@ module.exports = {
             from: process.env.ADDRESS_FROM,
             to: process.env.ADDRESS_TO,
             disableConfirmationListener: process.env.DISABLE_CONFIRMATION === "true" ? true : false,
+            networkCheckTimeout:1000000,
             */
       provider: () => {
         "use strict";
@@ -23,7 +24,7 @@ module.exports = {
       network_id: process.env.NETWORK_ID,
       gas: 3000000,
       gasPrice: 1000000000,
-      timeoutBlocks: 100,
+      timeoutBlocks: 100000,
 
       // gas
       // gasPrice

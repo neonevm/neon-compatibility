@@ -1,4 +1,4 @@
-name: Python 3.8, Node.js 16, allure
+name: Python 3.8, Node.js 16, .NET 5.0, allure
 
 on:
   push:
@@ -19,26 +19,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Switch to network of choice
-      run: |
-        echo "Tags: ${{ github.event.inputs.tags }}"
-        echo "Network: ${{ github.event.inputs.network }}"
-        if [ -z "${{ github.event.inputs.network }}" ]
-        then
-          NETWORK='devnet'
-        else
-          NETWORK="${{ github.event.inputs.network }}"
-        fi
-        echo "======================================"
-        echo "NETWORK=$NETWORK"
-        echo "INPUT_NETWORK=$INPUT_NETWORK"
-        echo "copying ./.env.$NETWORK to ./.env"
-        cp "./.env.$NETWORK" ./.env
-        cat ./.env
-        echo "copying to the hardhat-advanced folder..."
-        cp "./.env.$NETWORK" ./hardhat-advanced/.env
-        cat ./hardhat-advanced/.env
 
   python:
     runs-on: ubuntu-latest
@@ -46,6 +26,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
     - name: Set up Python 3.8
       uses: actions/setup-python@v1
       with:
@@ -66,8 +47,7 @@ jobs:
       if: always()
       run: |
         pwd
-        pipenv run pytest --alluredir=allure-results
-
+        pipenv run pytest --alluredir=report/allure-results
     - name: Look at Allure
       if: always()
       uses: ./.github/actions/allure-show
@@ -78,7 +58,125 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: allure-results
-        path: allure-results
+        path: report/allure-results
+
+  node:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
+    - name: Use Node.js 16
+      uses: actions/setup-node@v2
+      if: always()
+      with:
+        node-version: 16.x
+    - run: npm ci
+    - run: npm run build --if-present
+    - name: Mocha tests
+      run: |
+        npm run test
+    - name: Look at Allure
+      if: always()
+      uses: ./.github/actions/allure-show
+
+    # TODO: de-duplicate
+    - name: Archive Allure results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-results
+        path: report/allure-results
+
+  jdk:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
+    - name: Set up JDK 16
+      uses: actions/setup-java@v2
+      if: always()
+      with:
+        java-version: '16'
+        distribution: 'adopt'
+    - name: Run check style
+      uses: nikitasavinov/checkstyle-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        reporter: 'github-pr-check'
+        tool_name: 'testtool'
+    - name: Gradle wrapper
+      if: always()
+      run: gradle wrapper --gradle-version 7.2
+    - name: Print Gradle version
+      if: always()
+      run: gradle --version
+    - name: Grant execute permission for gradlew
+      if: always()
+      run: chmod +x gradlew
+    - name: Build with Gradle
+      if: always()
+      run: ./gradlew build --warning-mode all
+    - name: Look at Allure
+      if: always()
+      uses: ./.github/actions/allure-show
+
+    # TODO: de-duplicate
+    - name: Archive Allure results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-results
+        path: report/allure-results
+
+  dotnet:
+    runs-on: ubuntu-latest
+    needs:
+      - build
+      # - dotnet-format
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      if: always()
+      with:
+        dotnet-version: 5.0.x
+    - name: Print dotnet version
+      if: always()
+      run: dotnet --version
+    - name: Restore dependencies
+      if: always()
+      run: dotnet restore
+    # - name: dotnet - format check
+    #   if: always()
+    #   run: |
+    #     run: dotnet tool update -g dotnet-format
+    #     dotnet-format --check
+    - name: Build
+      if: always()
+      run: dotnet build --no-restore
+    - name: Test
+      if: always()
+      run: dotnet test --no-build --verbosity normal
+    - name: Move report/*.json to report/allure-results/*.json
+      if: always()
+      run: mv ./report/*.json ./report/allure-results/
+    - name: Look at Allure
+      if: always()
+      uses: ./.github/actions/allure-show
+
+    # TODO: de-duplicate
+    - name: Archive Allure results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-results
+        path: report/allure-results
 
   allure:
     runs-on: ubuntu-latest
@@ -86,6 +184,9 @@ jobs:
     needs:
       - build
       - python
+      - node
+      - jdk
+      - dotnet
     steps:
 
     - name: Download all workflow run artifacts
