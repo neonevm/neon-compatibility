@@ -21,7 +21,7 @@ plugins {
 
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     // kotlin("multiplatform") version "1.5.0"
-    kotlin("jvm") version "1.4.32"
+    kotlin("jvm") version "1.5.31"
 
     // Apply the scala Plugin to add support for Scala.
     scala
@@ -41,14 +41,18 @@ plugins {
     // Apply the xctest plugin to add support for building and running Swift test executables (Linux) or bundles (macOS)
     // xctest
 
+    // id("org.web3j") version("4.8.7")
+    id("io.freefair.lombok") version ("6.2.0")
+
     id("io.qameta.allure") version "2.8.1"
 
     jacoco
-    // checkstyle
+    checkstyle
     pmd
     id("org.jlleitschuh.gradle.ktlint") version ("10.0.0")
     id("cz.alenkacz.gradle.scalafmt") version ("1.16.2")
-    id("com.github.sherter.google-java-format") version("0.9")
+    // id("com.github.sherter.google-java-format") version("0.9")
+    id("com.diffplug.spotless") version "5.16.0"
 }
 
 /*
@@ -82,7 +86,19 @@ tasks.compileTestScala {
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions.suppressWarnings = true
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-    kotlinOptions { jvmTarget = JavaVersion.VERSION_1_8.toString() }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_16.toString()
+        suppressWarnings = true
+    }
+}
+
+val compileTestKotlin: KotlinCompile by tasks
+compileTestKotlin.kotlinOptions.suppressWarnings = true
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_16.toString()
+        suppressWarnings = true
+    }
 }
 
 sourceSets {
@@ -162,10 +178,10 @@ dependencies {
     implementation("org.codehaus.groovy:groovy-all:2.5.12")
 
     // Use the Kotlin test library.
-    testImplementation("org.jetbrains.kotlin:kotlin-test:${Version.KOTLIN.id}")
+    // testImplementation("org.jetbrains.kotlin:kotlin-test:${Version.KOTLIN.id}")
 
     // Use the Kotlin JUnit integration.
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:${Version.KOTLIN.id}")
+    // testImplementation("org.jetbrains.kotlin:kotlin-test-junit:${Version.KOTLIN.id}")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${Version.JUNIT_JUPITER.id}")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:${Version.JUNIT_JUPITER.id}")
@@ -238,11 +254,12 @@ configure<AllureExtension> {
     aspectjweaver = true
     version = Version.ALLURE.id
     allureJavaVersion = Version.JAVA.id
+    configuration = "testImplementation"
 
     clean = true
 
-    resultsDir = file("../../allure-results")
-    reportDir = file("../../allure-reports")
+    resultsDir = file("../../report/allure-results")
+    reportDir = file("../../report/allure-reports")
 
     useJUnit5 {
         version = Version.ALLURE.id
@@ -269,8 +286,17 @@ val test by tasks.getting(Test::class) {
     systemProperty("junit.jupiter.extensions.autodetection.enabled", "true")
     // systemProperty("allure.results.directory", "../../allure-results")
 }
-
+checkstyle {
+    toolVersion = "9.0"
+    // ignoreFailures = false
+    maxWarnings = 0
+}
 tasks.withType<Checkstyle>().configureEach {
+    source("src/special_dir")
+    include("**/*.java")
+    exclude("**/*Template.java")
+    exclude("src/test/template_*")
+    exclude("node_modules")
     reports {
         xml.isEnabled = false
         html.isEnabled = true
@@ -278,14 +304,15 @@ tasks.withType<Checkstyle>().configureEach {
     }
 }
 
-tasks.googleJavaFormat {
-    // source = sourceSets*.allJava
-    // source = sourceSets.get(allJava)
-    source("src/special_dir")
-    include("**/*.java")
-    exclude("**/*Template.java")
-    exclude("src/test/template_*")
-}
+// tasks.googleJavaFormat {
+//     // source = sourceSets*.allJava
+//     // source = sourceSets.get(allJava)
+//     source("src/special_dir")
+//     include("**/*.java")
+//     exclude("**/*Template.java")
+//     exclude("src/test/template_*")
+//     exclude("node_modules/**/*.java")
+// }
 
 tasks.withType<Pmd>() {
     isConsoleOutput = true
@@ -317,16 +344,17 @@ configure<com.diffplug.gradle.spotless.SpotlessExtension> {
             endWithNewline()
         }
     )
-    java {
+
+    // java {
     //     // don't need to set target, it is inferred from java
 
     //     // apply a specific flavor of google-java-format
-        googleJavaFormat("1.11.0").aosp().reflowLongStrings()
+    //     googleJavaFormat("1.11.0").aosp().reflowLongStrings()
     //     // make sure every file has the following copyright header.
     //     // optionally, Spotless can set copyright years by digging
     //     // through git history (see "license" section below)
     //     // licenseHeader("/* (C)$YEAR */")
-    }
+    // }
 }
 
 tasks.named<Wrapper>("wrapper") {
@@ -335,24 +363,24 @@ tasks.named<Wrapper>("wrapper") {
 }
 
 enum class Version(val id: String) {
-    GATLING("3.5.1"),
-    JUNIT_JUPITER("5.7.1"),
-    JUNIT_PLATFORM("1.7.1"),
+    GATLING("3.6.1"),
+    JUNIT_JUPITER("5.8.1"),
+    JUNIT_PLATFORM("1.8.1"),
     JUNIT4("4.13.2"),
-    SCALA("2.13.5"),
-    SCALA_TEST("3.2.0"),
+    SCALA("2.13.6"),
+    SCALA_TEST("3.2.10"),
     SCALA_TEST_PLUS("3.2.0.0"),
-    JACKSON("2.12.2"),
-    SNAKEYAML("1.28"),
-    JOOQ("3.14.8"),
-    POSTGRESQL("42.2.19"),
-    REST_ASSURED("4.3.3"),
+    JACKSON("2.12.5"),
+    SNAKEYAML("1.29"),
+    JOOQ("3.15.3"),
+    POSTGRESQL("42.2.24"),
+    REST_ASSURED("4.4.0"),
     HAMCREST("2.2"),
     JAVAFAKER("1.0.2"),
-    AWAITILITY("4.0.3"),
-    CUCUMBER("6.8.1"),
-    CUCUMBER_JUNIT("6.10.2"),
-    ALLURE("2.13.9"),
+    AWAITILITY("4.1.0"),
+    CUCUMBER("6.11.0"),
+    CUCUMBER_JUNIT("6.11.0"),
+    ALLURE("2.15.0"),
     ALLURE_GRADLE("2.8.1"),
     JAVA("16"),
     JAVA_FOR_SCALA("11"),
@@ -362,7 +390,7 @@ enum class Version(val id: String) {
     GRADLE("7.2"),
     PMD("6.39.0"),
     KTLINT_GRADLE_PLUGIN("10.0.0"),
-    KTLINT("0.41.0"),
+    KTLINT("0.42.1"),
     SCALA_FMT("1.16.2");
 }
 
