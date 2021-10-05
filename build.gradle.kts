@@ -211,6 +211,18 @@ dependencies {
     runtimeOnly("com.pinterest.ktlint:ktlint-reporter-plain:${Version.KTLINT.id}")
 
     // implementation("cz.alenkacz.gradle.scalafmt:cz.alenkacz.gradle.scalafmt.gradle.plugin:${Version.SCALA_FMT.id}")
+
+    compileOnly("org.projectlombok:lombok:${Version.LOMBOK.id}")
+    annotationProcessor("org.projectlombok:lombok:${Version.LOMBOK.id}")
+
+    testCompileOnly("org.projectlombok:lombok:${Version.LOMBOK.id}")
+    testAnnotationProcessor("org.projectlombok:lombok:${Version.LOMBOK.id}")
+
+    implementation("org.web3j:core:${Version.WEB3J.id}")
+    implementation("org.web3j:crypto:${Version.WEB3J.id}")
+    implementation("org.web3j:utils:${Version.WEB3J.id}")
+    implementation("org.web3j:abi:${Version.WEB3J.id}")
+    implementation("org.web3j:codegen:${Version.WEB3J.id}")
 }
 
 // TODO: needed for Kotlin and kotlin.test 1.5.0
@@ -289,6 +301,34 @@ scalafmt {
     // configFilePath = ".scalafmt.conf"
 }
 
+configure<com.diffplug.gradle.spotless.SpotlessExtension> {
+    // optional: limit format enforcement to just the files changed by this feature branch
+    // ratchetFrom("origin/main")
+
+    format(
+        "misc",
+        {
+            // define the files to apply `misc` to
+            target("*.gradle", "*.md", ".gitignore")
+
+            // define the steps to apply to those files
+            trimTrailingWhitespace()
+            indentWithTabs() // or spaces. Takes an integer argument if you don't like 4
+            endWithNewline()
+        }
+    )
+    java {
+    //     // don't need to set target, it is inferred from java
+
+    //     // apply a specific flavor of google-java-format
+        googleJavaFormat("1.11.0").aosp().reflowLongStrings()
+    //     // make sure every file has the following copyright header.
+    //     // optionally, Spotless can set copyright years by digging
+    //     // through git history (see "license" section below)
+    //     // licenseHeader("/* (C)$YEAR */")
+    }
+}
+
 tasks.named<Wrapper>("wrapper") {
     gradleVersion = Version.GRADLE.id
     distributionType = Wrapper.DistributionType.ALL
@@ -316,9 +356,11 @@ enum class Version(val id: String) {
     ALLURE_GRADLE("2.8.1"),
     JAVA("16"),
     JAVA_FOR_SCALA("11"),
-    KOTLIN("1.4.32"),
-    GRADLE("7.0"),
-    PMD("6.21.0"),
+    KOTLIN("1.5.31"),
+    LOMBOK("1.18.20"),
+    WEB3J("5.0.0"),
+    GRADLE("7.2"),
+    PMD("6.39.0"),
     KTLINT_GRADLE_PLUGIN("10.0.0"),
     KTLINT("0.41.0"),
     SCALA_FMT("1.16.2");
