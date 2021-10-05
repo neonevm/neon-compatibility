@@ -233,6 +233,12 @@ dependencies {
 
     testCompileOnly("org.projectlombok:lombok:${Version.LOMBOK.id}")
     testAnnotationProcessor("org.projectlombok:lombok:${Version.LOMBOK.id}")
+
+    implementation("org.web3j:core:${Version.WEB3J.id}")
+    implementation("org.web3j:crypto:${Version.WEB3J.id}")
+    implementation("org.web3j:utils:${Version.WEB3J.id}")
+    implementation("org.web3j:abi:${Version.WEB3J.id}")
+    implementation("org.web3j:codegen:${Version.WEB3J.id}")
 }
 
 // TODO: needed for Kotlin and kotlin.test 1.5.0
@@ -338,6 +344,7 @@ configure<com.diffplug.gradle.spotless.SpotlessExtension> {
             endWithNewline()
         }
     )
+
     // java {
     //     // don't need to set target, it is inferred from java
 
@@ -379,6 +386,7 @@ enum class Version(val id: String) {
     JAVA_FOR_SCALA("11"),
     KOTLIN("1.5.31"),
     LOMBOK("1.18.20"),
+    WEB3J("5.0.0"),
     GRADLE("7.2"),
     PMD("6.39.0"),
     KTLINT_GRADLE_PLUGIN("10.0.0"),
