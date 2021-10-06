@@ -10,9 +10,9 @@ namespace NeonCompatibility.org.neonlabs.compatibility
             new Config();
 
             Console.WriteLine("===================");
-            Console.WriteLine(EnvReader.GetStringValue("HTTP_URL"));
+            Console.WriteLine(EnvReader.GetStringValue("PROXY_URL"));
 
-            var web3 = new Web3(EnvReader.GetStringValue("HTTP_URL"));
+            var web3 = new Web3(EnvReader.GetStringValue("PROXY_URL"));
             Console.WriteLine(web3);
             return web3;
         }
