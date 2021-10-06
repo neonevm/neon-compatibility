@@ -5,7 +5,7 @@ import { Urls } from '../common/urls';
 import { FaucetRequest } from './faucet-request';
 
 export const requestFaucet = async (wallet: string, amount: number) => {
-  const data: FaucetRequest = { wallet: wallet, amount: amount };
+  const data: FaucetRequest = { amount: amount, wallet: wallet };
   logger.notice(`URL: ${Config.baseUrl + Urls.request_erc20_tokens}`);
   logger.notice(data);
   const result = await axios.post(

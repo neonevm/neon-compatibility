@@ -1,3 +1,4 @@
 export interface FaucetRequest {
-    wallet: string, amount: number
+  amount: number;
+  wallet: string;
 }

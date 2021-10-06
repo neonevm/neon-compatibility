@@ -34,7 +34,7 @@ module.exports = {
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     }, */
     neonlabs: {
-      url: process.env.HTTP_URL,
+      url: process.env.PROXY_URL,
     },
   },
   gasReporter: {
