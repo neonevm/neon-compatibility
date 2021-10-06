@@ -3,7 +3,7 @@ import os
 
 load_dotenv()
 
-HTTP_URL = os.environ.get('HTTP_URL')
+PROXY_URL = os.environ.get('PROXY_URL')
 NETWORK_ID = os.environ.get('NETWORK_ID')
 ADDRESS_FROM = os.environ.get('ADDRESS_FROM')
 ADDRESS_TO = os.environ.get('ADDRESS_TO')
