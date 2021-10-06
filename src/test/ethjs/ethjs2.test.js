@@ -4,7 +4,7 @@ const EthContract = require('ethjs-contract');
 
 describe('ethjs', () => {
     it('Connection test (js)', () => {
-        const eth = new Eth(new HttpProvider(process.env.HTTP_URL));
+        const eth = new Eth(new HttpProvider(process.env.PROXY_URL));
         const contract = new EthContract(eth);
 
         // the abi
