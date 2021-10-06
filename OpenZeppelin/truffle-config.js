@@ -11,13 +11,13 @@ module.exports = {
 
         // console.log("=============================");
         // console.log(process.env.PRIVATE_KEY);
-        // console.log(process.env.HTTP_URL);
+        // console.log(process.env.PROXY_URL);
         // console.log(process.env.ADDRESS_FROM);
         // console.log(process.env.ADDRESS_TO);
 
         return new HDWalletProvider(
           process.env.PRIVATE_KEY,
-          process.env.HTTP_URL
+          process.env.PROXY_URL
         );
       },
       from: process.env.ADDRESS_FROM,

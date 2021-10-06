@@ -1,12 +1,12 @@
-import { task } from "hardhat/config";
-import "@nomiclabs/hardhat-waffle";
-import { HttpNetworkConfig } from "hardhat/types/config";
-import { int } from "hardhat/internal/core/params/argumentTypes";
+import { task } from 'hardhat/config';
+import '@nomiclabs/hardhat-waffle';
+import { HttpNetworkConfig } from 'hardhat/types/config';
+import { int } from 'hardhat/internal/core/params/argumentTypes';
 // import('hardhat/config').HardhatUserConfig
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
-task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
+task('accounts', 'Prints the list of accounts', async (taskArgs, hre) => {
   const accounts = await hre.ethers.getSigners();
 
   for (const account of accounts) {
@@ -29,12 +29,12 @@ const neonlabs: HttpNetworkConfig = {
     httpHeaders: { [name: string]: string };
     accounts: HttpNetworkAccountsConfig;
         */
-  url: process.env.HTTP_URL?.toString() ?? "",
-  chainId: parseInt(process.env.NETWORK_ID?.toString() ?? ""),
+  url: process.env.PROXY_URL?.toString() ?? '',
+  chainId: parseInt(process.env.NETWORK_ID?.toString() ?? ''),
   from: process.env.ADDRESS_FROM,
-  accounts: [process.env.PRIVATE_KEY?.toString() ?? ""],
-  gas: "auto",
-  gasPrice: "auto",
+  accounts: [process.env.PRIVATE_KEY?.toString() ?? ''],
+  gas: 'auto',
+  gasPrice: 'auto',
   gasMultiplier: 1,
   httpHeaders: {},
 
@@ -45,7 +45,7 @@ const neonlabs: HttpNetworkConfig = {
     httpHeaders: { [name: string]: string };
     accounts: HttpNetworkAccountsConfig;
               */
-  timeout: 100000,
+  timeout: 100000
 
   /*
   url: The url of the node. This argument is required for custom networks.
@@ -64,9 +64,9 @@ const neonlabs: HttpNetworkConfig = {
  * @type import('hardhat/config').HardhatUserConfig
  */
 export default {
-  solidity: "0.8.4",
+  solidity: '0.8.4',
   networks: {
     hardhat: {},
-    neonlabs: neonlabs,
-  },
+    neonlabs: neonlabs
+  }
 };
