@@ -146,6 +146,7 @@ repositories {
     // You can declare any Maven/Ivy/file repository here.
     // jcenter()
     mavenCentral()
+    maven(url = "https://jitpack.io")
     /*maven {
         url = uri("https://mvnrepository.com")
     }*/
@@ -239,6 +240,10 @@ dependencies {
     implementation("org.web3j:utils:${Version.WEB3J.id}")
     implementation("org.web3j:abi:${Version.WEB3J.id}")
     implementation("org.web3j:codegen:${Version.WEB3J.id}")
+
+    runtimeOnly("com.github.komputing.kethereum:crypto_api:${Version.KETHEREUM.id}")
+    runtimeOnly("com.github.komputing.kethereum:model:${Version.KETHEREUM.id}")
+    runtimeOnly("com.github.komputing.kethereum:extensions_kotlin:${Version.KETHEREUM.id}")
 }
 
 // TODO: needed for Kotlin and kotlin.test 1.5.0
@@ -378,6 +383,7 @@ enum class Version(val id: String) {
     HAMCREST("2.2"),
     JAVAFAKER("1.0.2"),
     AWAITILITY("4.1.0"),
+    KETHEREUM("0.83.4"),
     CUCUMBER("6.11.0"),
     CUCUMBER_JUNIT("6.11.0"),
     ALLURE("2.15.0"),
