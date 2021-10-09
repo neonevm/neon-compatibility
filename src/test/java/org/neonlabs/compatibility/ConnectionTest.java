@@ -8,12 +8,12 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.Test;
 
-@Epic("Java Epic")
-@Feature("Java Feature")
+@Epic("Java frameworks")
+@Feature("web3j")
 class ConnectionTest {
   @Test
   @Description("allure description")
-  @Story("Java Story")
+  @Story("Connection")
   void probe() {
     assertEquals(1, new Connection().getId(), "sample assertion");
   }
