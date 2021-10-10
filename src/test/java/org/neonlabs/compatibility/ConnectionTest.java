@@ -24,7 +24,6 @@ class ConnectionTest {
   @Story("Connection")
   void shouldConnectToNetwork() {
     var config = new Config();
-    assertNotNull(config.getProxyUrl());
-    assertNotNull(config.getFaucetUrl());
+    assertNotNull(config.getProxyUrl(), "Proxy URL should not be empty");
   }
 }
