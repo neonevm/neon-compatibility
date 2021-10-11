@@ -235,6 +235,8 @@ dependencies {
     testCompileOnly("org.projectlombok:lombok:${Version.LOMBOK.id}")
     testAnnotationProcessor("org.projectlombok:lombok:${Version.LOMBOK.id}")
 
+    implementation("io.github.cdimascio:java-dotenv:5.2.2")
+
     implementation("org.web3j:core:${Version.WEB3J.id}")
     implementation("org.web3j:crypto:${Version.WEB3J.id}")
     implementation("org.web3j:utils:${Version.WEB3J.id}")
