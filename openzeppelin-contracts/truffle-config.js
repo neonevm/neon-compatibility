@@ -16,16 +16,14 @@ EventEmitter.defaultMaxListeners = n_maxLs;
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
-const web3 = new Web3(new Web3.providers.HttpProvider(process.env.HTTP_URL));
+const web3 = new Web3(new Web3.providers.HttpProvider(process.env.PROXY_URL));
 const account01 = web3.eth.accounts.create();
 process.env.ADDRESS_FROM = account01.address;
 process.env.PRIVATE_KEY = account01.privateKey;
 const account02 = web3.eth.accounts.create();
 process.env.ADDRESS_TO = account02.address;
 
-// const faucetUrl = process.env.HTTP_URL.replace("/solana", "/request_erc20_tokens");
-// TODO: temporarily commented out, enable it when the faucet works
-/*
+// const faucetUrl = process.env.PROXY_URL.replace("/solana", "/request_erc20_tokens");
 const faucetUrl = process.env.FAUCET_URL
 console.log(faucetUrl);
 const requestFaucet = (address, amount) => axios.post(faucetUrl, { wallet: address, amount: amount })
@@ -35,6 +33,8 @@ const requestFaucet = (address, amount) => axios.post(faucetUrl, { wallet: addre
   .catch(function (error) {
     console.log(error);
   });
+// TODO: temporarily commented out, enable it when the faucet works
+/*
 requestFaucet(account01.address, 10);
 requestFaucet(account02.address, 10);
 */
@@ -63,7 +63,7 @@ module.exports = {
         /*
         console.log(`private key = ${process.env.PRIVATE_KEY}`);
         */
-        console.log(`URL = ${process.env.HTTP_URL}`);
+        console.log(`URL = ${process.env.PROXY_URL}`);
         /*
         console.log(`address from = ${process.env.ADDRESS_FROM}`);
         console.log(`address to = ${process.env.ADDRESS_TO}`);
@@ -71,7 +71,7 @@ module.exports = {
 
         return new HDWalletProvider(
           process.env.PRIVATE_KEY,
-          process.env.HTTP_URL
+          process.env.PROXY_URL
         );
       },
       from: process.env.ADDRESS_FROM,
