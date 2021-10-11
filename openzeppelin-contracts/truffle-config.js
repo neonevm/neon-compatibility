@@ -97,9 +97,9 @@ module.exports = {
   mocha: {
     timeout: 1000000000,
     reporter: 'mocha-multi-reporters',
-    reporterOption: {
-      configFile: '../.mocharc.json'
-    }
+    // reporterOption: {
+    //   configFile: '../.mocharc.json'
+    // }
   },
 
   // Configure your compilers
