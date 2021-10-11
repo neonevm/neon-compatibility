@@ -24,6 +24,8 @@ const account02 = web3.eth.accounts.create();
 process.env.ADDRESS_TO = account02.address;
 
 // const faucetUrl = process.env.HTTP_URL.replace("/solana", "/request_erc20_tokens");
+// TODO: temporarily commented out, enable it when the faucet works
+/*
 const faucetUrl = process.env.FAUCET_URL
 console.log(faucetUrl);
 const requestFaucet = (address, amount) => axios.post(faucetUrl, { wallet: address, amount: amount })
@@ -35,6 +37,7 @@ const requestFaucet = (address, amount) => axios.post(faucetUrl, { wallet: addre
   });
 requestFaucet(account01.address, 10);
 requestFaucet(account02.address, 10);
+*/
 
 /*
 let initialBalance = 10 * Config.faucetQuotient;
