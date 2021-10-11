@@ -15,17 +15,25 @@ runs:
         echo "======================================"
         echo "NETWORK=$NETWORK"
         echo "INPUT_NETWORK=$INPUT_NETWORK"
-        echo "copying ./.env.$NETWORK to ./.env"
-        cp "./.env.$NETWORK" ./.env
-        cat ./.env
 
-        echo ""
-        echo "copying to the hardhat-advanced folder..."
-        cp "./.env.$NETWORK" ./hardhat-advanced/.env
-        cat ./hardhat-advanced/.env
+        copyEnvFile {
+          echo "======================================"
+          echo "copying ./.env.$NETWORK to ./$1.env"
+          cp "./.env.$NETWORK" "./$1.env"
+          cat "./$1.env"
+        }
 
-        echo ""
-        echo "copying to the openzeppelin-contracts folder..."
-        cp "./.env.$NETWORK" ./openzeppelin-contracts/.env
-        cat ./openzeppelin-contracts/.env
+        copyEnvFile ""
+        copyEnvFile "hardhat-advanced/"
+        copyEnvFile "openzeppelin-contracts/"
+
+        # echo ""
+        # echo "copying to the hardhat-advanced folder..."
+        # cp "./.env.$NETWORK" ./hardhat-advanced/.env
+        # cat ./hardhat-advanced/.env
+
+        # echo ""
+        # echo "copying to the openzeppelin-contracts folder..."
+        # cp "./.env.$NETWORK" ./openzeppelin-contracts/.env
+        # cat ./openzeppelin-contracts/.env
       shell: bash
