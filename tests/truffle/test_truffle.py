@@ -19,6 +19,7 @@ def prepare_truffle_config():
     yield
 
 
+@allure.epic(FEATURE)
 @allure.feature(FEATURE)
 def test_truffle_migration():
     # truffle migrate --network neonlabs
@@ -37,6 +38,7 @@ def test_truffle_migration():
     print(actual_result)
 
 
+@allure.epic(FEATURE)
 @allure.feature(FEATURE)
 def test_truffle_contract():
     # truffle neonlabs ./test/TestMetaCoin.sol
@@ -48,6 +50,7 @@ def test_truffle_contract():
     print(actual_result)
 
 
+@allure.epic(FEATURE)
 @allure.feature(FEATURE)
 def test_truffle_test():
     # truffle neonlabs ./test/metacoin.js
