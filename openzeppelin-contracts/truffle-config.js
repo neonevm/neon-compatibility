@@ -23,7 +23,8 @@ process.env.PRIVATE_KEY = account01.privateKey;
 const account02 = web3.eth.accounts.create();
 process.env.ADDRESS_TO = account02.address;
 
-const faucetUrl = process.env.HTTP_URL.replace("/solana", "/request_erc20_tokens");
+// const faucetUrl = process.env.HTTP_URL.replace("/solana", "/request_erc20_tokens");
+const faucetUrl = process.env.FAUCET_URL
 console.log(faucetUrl);
 const requestFaucet = (address, amount) => axios.post(faucetUrl, { wallet: address, amount: amount })
   .then(function (response) {
