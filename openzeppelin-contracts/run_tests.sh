@@ -2,12 +2,12 @@
 echo "======================================================================"
 echo "======= ../node_modules/.bin/truffle --network neonlabs compile ======"
 echo "======================================================================"
-# ../node_modules/.bin/truffle --network neonlabs compile
+../node_modules/.bin/truffle --network neonlabs compile
 
 echo "======================================================================"
 echo "======= ../node_modules/.bin/truffle --network neonlabs migrate ======"
 echo "======================================================================"
-# ../node_modules/.bin/truffle --network neonlabs migrate
+../node_modules/.bin/truffle --network neonlabs migrate
 # ../node_modules/.bin/truffle --network neonlabs migrate --reset --verbose-rpc
 
 echo "======================================================================"
