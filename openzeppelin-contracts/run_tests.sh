@@ -1,13 +1,5 @@
 #!/bin/bash
 
-# for f in ./test; do
-#     ls basename $f
-# done
-
-find "$(pwd)" | grep test.js | ../node_modules/.bin/truffle --network neonlabs test $_
-exit
-
-
 echo "======================================================================"
 echo "======= ../node_modules/.bin/truffle --network neonlabs compile ======"
 echo "======================================================================"
@@ -19,6 +11,8 @@ echo "======================================================================"
 ../node_modules/.bin/truffle --network neonlabs migrate
 # ../node_modules/.bin/truffle --network neonlabs migrate --reset --verbose-rpc
 
+find "$(pwd)" | grep test.js | ../node_modules/.bin/truffle --network neonlabs test $_
+exit
 # ../node_modules/.bin/truffle --network neonlabs test
 # exit
 
