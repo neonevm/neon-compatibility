@@ -63,6 +63,7 @@ jobs:
 
   node-contracts:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     needs: build
     steps:
     - uses: actions/checkout@v2
@@ -94,6 +95,14 @@ jobs:
         # echo "============================================================================================="
         # echo "============================================================================================="
         cd ..
+
+    # TODO: de-duplicate
+    - name: Archive Allure results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-results
+        path: report/allure-results
 
     # TODO: de-duplicate
     - name: Archive Allure results

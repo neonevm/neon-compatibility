@@ -29,3 +29,5 @@ exit
 # echo "======= ../node_modules/.bin/truffle --network neonlabs test ./test/access/Ownable.test.js ======"
 # echo "======================================================================"
 # ../node_modules/.bin/truffle --network neonlabs test ./test/access/Ownable.test.js
+
+mv ./allure-results/ ../report/
