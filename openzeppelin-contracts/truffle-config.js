@@ -82,7 +82,7 @@ module.exports = {
       timeoutBlocks: 2000,
       skipDryRun: true,
       networkCheckTimeout: 10000000,
-      confirmations: 10,
+      // confirmations: 10,
       // experimental feature
       disableConfirmationListener: true,
 
