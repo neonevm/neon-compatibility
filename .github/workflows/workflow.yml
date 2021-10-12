@@ -61,7 +61,7 @@ jobs:
         name: allure-results
         path: report/allure-results
 
-  node-contracts:
+  node-contracts-1:
     runs-on: macos-11
     timeout-minutes: 35
     needs: build
@@ -88,8 +88,98 @@ jobs:
         echo "============================================================================================="
         echo "====================================== single tests ========================================="
         echo "============================================================================================="
-        chmod 555 run_tests.sh
-        ./run_tests.sh
+        chmod 555 run_tests_1.sh
+        ./run_tests_1.sh
+        # echo "============================================================================================="
+        # echo "======================================== all tests =========================================="
+        # echo "============================================================================================="
+        # ../node_modules/.bin/truffle --network neonlabs test
+        # echo "============================================================================================="
+        # echo "============================================================================================="
+        cd ..
+
+    # TODO: de-duplicate
+    - name: Archive Allure results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-results
+        path: openzeppelin-contracts/allure-results
+
+  node-contracts-2:
+    runs-on: macos-11
+    timeout-minutes: 35
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    # macos-11
+    # - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
+    - name: Use Node.js 16
+      uses: actions/setup-node@v2
+      if: always()
+      with:
+        node-version: 16.x
+    - run: npm ci
+    - run: npm run build --if-present
+    - name: OpenZeppelin contracts
+      timeout-minutes: 30
+      run: |
+        cd openzeppelin-contracts
+        echo "folder:"
+        pwd
+        echo "folder content:"
+        ls -la
+        echo "============================================================================================="
+        echo "====================================== single tests ========================================="
+        echo "============================================================================================="
+        chmod 555 run_tests_2.sh
+        ./run_tests_2.sh
+        # echo "============================================================================================="
+        # echo "======================================== all tests =========================================="
+        # echo "============================================================================================="
+        # ../node_modules/.bin/truffle --network neonlabs test
+        # echo "============================================================================================="
+        # echo "============================================================================================="
+        cd ..
+
+    # TODO: de-duplicate
+    - name: Archive Allure results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-results
+        path: openzeppelin-contracts/allure-results
+
+  node-contracts-3:
+    runs-on: macos-11
+    timeout-minutes: 35
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    # macos-11
+    # - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
+    - name: Use Node.js 16
+      uses: actions/setup-node@v2
+      if: always()
+      with:
+        node-version: 16.x
+    - run: npm ci
+    - run: npm run build --if-present
+    - name: OpenZeppelin contracts
+      timeout-minutes: 30
+      run: |
+        cd openzeppelin-contracts
+        echo "folder:"
+        pwd
+        echo "folder content:"
+        ls -la
+        echo "============================================================================================="
+        echo "====================================== single tests ========================================="
+        echo "============================================================================================="
+        chmod 555 run_tests_3.sh
+        ./run_tests_3.sh
         # echo "============================================================================================="
         # echo "======================================== all tests =========================================="
         # echo "============================================================================================="
