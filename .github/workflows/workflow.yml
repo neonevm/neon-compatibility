@@ -62,11 +62,13 @@ jobs:
         path: report/allure-results
 
   node-contracts:
-    runs-on: ubuntu-latest
+    runs-on: macos-11
+    timeout-minutes: 35
     needs: build
     steps:
     - uses: actions/checkout@v2
-    - uses: ./.github/actions/allure-prep
+    # macos-11
+    # - uses: ./.github/actions/allure-prep
     - uses: ./.github/actions/switch-network
     - name: Use Node.js 16
       uses: actions/setup-node@v2
@@ -76,6 +78,7 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - name: OpenZeppelin contracts
+      timeout-minutes: 30
       run: |
         cd openzeppelin-contracts
         echo "folder:"
