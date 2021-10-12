@@ -135,6 +135,7 @@ def prepare_truffle_config():
 
 
 @pytest.mark.parametrize("input_data", INPUT_DATA)
+@allure.epic(FEATURE)
 @allure.feature(FEATURE)
 def test_contracts(input_data: InputData):
     copy_files(input_data)

@@ -10,6 +10,7 @@ DELETE_NETWORK = "brownie networks delete"
 FEATURE = 'brownie'
 
 
+@allure.epic(FEATURE)
 @pytest.fixture(autouse=True)
 def setup_and_teardown():
     aaa = f"{Subfolder.CD_BROWNIE} {ADD_NETWORK} {NETWORK_NAME} \
@@ -28,6 +29,7 @@ def setup_and_teardown():
     print(run_result)
 
 
+@allure.epic(FEATURE)
 @pytest.mark.skip(reason="now yet done")
 @allure.feature(FEATURE)
 def test_one():

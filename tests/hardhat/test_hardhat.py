@@ -9,6 +9,7 @@ from src.helpers.shell.processes import preset_variables, run_command_line
 FEATURE = 'hardhat'
 
 
+@allure.epic(FEATURE)
 @pytest.fixture(autouse=True)
 def prepare_truffle_config():
     preset_variables()
@@ -16,6 +17,7 @@ def prepare_truffle_config():
 
 
 # @pytest.mark.skip(reason="now yet done")
+@allure.epic(FEATURE)
 @allure.feature(FEATURE)
 def test_hardhat_simple():
     command = "npx hardhat run --network neonlabs scripts/sample-script.js"
@@ -30,6 +32,7 @@ def test_hardhat_simple():
 # go to hardhat-advanced/hardhat.config.js
 # and comment out the following line
 # defaultNetwork: "neonlabs",
+@allure.epic(FEATURE)
 @allure.feature(FEATURE)
 def test_hardhat_advanced():
     # REPORT_GAS=true npx hardhat test
