@@ -15,7 +15,15 @@ runs:
         echo "======================================"
         echo "NETWORK=$NETWORK"
         echo "INPUT_NETWORK=$INPUT_NETWORK"
-        echo "copying ./.env.$NETWORK to ./.env"
-        cp "./.env.$NETWORK" ./.env
-        cat ./.env
+
+        function copyEnvFile {
+          echo "======================================"
+          echo "copying ./.env.$NETWORK to ./$1.env"
+          cp "./.env.$NETWORK" "./$1.env"
+          cat "./$1.env"
+        }
+
+        copyEnvFile ""
+        copyEnvFile "hardhat-advanced/"
+        copyEnvFile "openzeppelin-contracts/"
       shell: bash

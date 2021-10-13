@@ -42,7 +42,7 @@ def test_truffle_contract():
     # truffle neonlabs ./test/TestMetaCoin.sol
     actual_result = run_command_line(
         f"{Subfolder.CD_METACOIN} {RunCommand.TRUFFLE} --network \
-            {NETWORK_NAME} ./test/TestMetaCoin.sol {CD_BACK}")
+            {NETWORK_NAME} test ./test/TestMetaCoin.sol {CD_BACK}")
     assert TruffleError.ERROR_CONTRACTS_NOT_DEPLOYED not in actual_result
     assert TruffleError.ERROR_NO_CONTRACTS_DEPLOYED not in actual_result
     print(actual_result)
@@ -53,7 +53,7 @@ def test_truffle_test():
     # truffle neonlabs ./test/metacoin.js
     actual_result = run_command_line(
         f"{Subfolder.CD_METACOIN} {RunCommand.TRUFFLE} --network " +
-        f"{NETWORK_NAME} ./test/metacoin.js {CD_BACK}")
+        f"{NETWORK_NAME} test ./test/metacoin.js {CD_BACK}")
     assert TruffleError.ERROR_CONTRACTS_NOT_DEPLOYED not in actual_result
     assert TruffleError.ERROR_NO_CONTRACTS_DEPLOYED not in actual_result
     print(actual_result)
