@@ -1,4 +1,5 @@
 import light, { balanceOf$ } from '@parity/light.js';
+import Api from '@parity/api';
 
 /*
 // Wait for web3.currentProvider to be injected
@@ -10,8 +11,10 @@ window.addEventListener('load', () => {
 });
 */
 
-describe.skip('light.js', async () => {
-    it('Connection test', async () => {
-        light.setProvider();
-    })
+describe('light.js', async () => {
+  it('Connection test', async () => {
+    const provider = new Api.Provider.Http(process.env.PROXY_URL);
+    light.setProvider(provider);
+    const api = new Api(provider);
+  })
 })
