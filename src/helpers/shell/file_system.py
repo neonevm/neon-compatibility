@@ -1,7 +1,9 @@
+import allure
 import os
 import shutil
 
 
+@allure.step('Clean up folder "{0}"')
 def clean_up_folder(folder: str):
     if not os.path.exists(folder):
         return

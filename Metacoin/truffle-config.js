@@ -5,17 +5,18 @@ module.exports = {
   networks: {
     neonlabs: {
       /*
-            provider: () => new Web3.providers.HttpProvider(process.env.HTTP_URL),
+            provider: () => new Web3.providers.HttpProvider(process.env.PROXY_URL),
             network_id: process.env.NETWORK_ID,
             from: process.env.ADDRESS_FROM,
             to: process.env.ADDRESS_TO,
             disableConfirmationListener: process.env.DISABLE_CONFIRMATION === "true" ? true : false,
+            networkCheckTimeout:1000000,
             */
       provider: () => {
         "use strict";
         return new HDWalletProvider(
           process.env.PRIVATE_KEY,
-          process.env.HTTP_URL
+          process.env.PROXY_URL
         );
       },
       from: process.env.ADDRESS_FROM,
@@ -23,7 +24,7 @@ module.exports = {
       network_id: process.env.NETWORK_ID,
       gas: 3000000,
       gasPrice: 1000000000,
-      timeoutBlocks: 100,
+      timeoutBlocks: 100000,
 
       // gas
       // gasPrice
