@@ -126,15 +126,15 @@ jobs:
     - name: Mocha tests
       timeout-minutes: 15
       run: |
-        npm run test
+        npm run test:ci
     - name: Hardhat tests
       timeout-minutes: 5
       if: always()
       run: |
         npm run test:hardhat:advanced
-        mv ./allure-results/ ../../report/
+        mv ./frameworks/hardhat-advanced/allure-results/ ./report/
         npm run test:hardhat:simple
-        mv ./allure-results/ ../../report/
+        mv ./frameworks/hardhat-simple/allure-results/ ./report/
     - name: Look at Allure
       if: always()
       uses: ./.github/actions/allure-show
