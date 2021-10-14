@@ -1,5 +1,11 @@
 #!/bin/bash
 echo "======================================================================"
+echo "======== ../node_modules/.bin/truffle --network neonlabs test ========"
+echo "======================================================================"
+../node_modules/.bin/truffle --network neonlabs test
+exit
+
+echo "======================================================================"
 echo "======= ../node_modules/.bin/truffle --network neonlabs compile ======"
 echo "======================================================================"
 # ../node_modules/.bin/truffle --network neonlabs compile
