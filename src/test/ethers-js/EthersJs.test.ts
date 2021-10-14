@@ -129,7 +129,7 @@ class EthersJsTests {
     // Send 1 ether to an ens name.
     const tx = await signer.sendTransaction({
       to: 'ricmoo.firefly.eth',
-      value: ethers.utils.parseEther('1.0'),
+      value: ethers.utils.parseEther('1.0')
     });
     logger.notice(`Transaction = ${tx}`);
     expect(tx, TransactionShouldNotBeNull).to.not.be.null;
@@ -158,7 +158,7 @@ class EthersJsTests {
       'function transfer(address to, uint amount)',
 
       // An event triggered whenever anyone transfers to someone else
-      'event Transfer(address indexed from, address indexed to, uint amount)',
+      'event Transfer(address indexed from, address indexed to, uint amount)'
     ];
 
     // The Contract object
@@ -218,6 +218,7 @@ class EthersJsTests {
     const tx = daiWithSigner.transfer('ricmoo.firefly.eth', dai);
   }
 
+  /*
   @epic(EpicName)
   @feature('Listening to Events')
   @test
@@ -251,6 +252,7 @@ class EthersJsTests {
       logger.notice(`I got ${formatEther(amount)} from ${from}.`);
     });
   }
+  */
 
   @epic(EpicName)
   @feature('Query Historic Events')
