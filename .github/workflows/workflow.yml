@@ -10,7 +10,7 @@ on:
       network:
         description: 'Network (devnet, testnet, internal.testnet, neonswap.live, aws, ropsten, rinkeby)'
         required: true
-        default: 'devnet'
+        default: 'internal.testnet'
 
 jobs:
   build:
@@ -22,6 +22,7 @@ jobs:
 
   python:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     needs: build
     steps:
     - uses: actions/checkout@v2
@@ -109,6 +110,7 @@ jobs:
 
   node:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     needs: build
     steps:
     - uses: actions/checkout@v2
@@ -139,6 +141,7 @@ jobs:
 
   jdk:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     needs: build
     steps:
     - uses: actions/checkout@v2
@@ -183,6 +186,7 @@ jobs:
 
   dotnet:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     needs:
       - build
       # - dotnet-format
@@ -230,6 +234,7 @@ jobs:
 
   allure:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     if: always()
     needs:
       - build
