@@ -1,11 +1,5 @@
 #!/bin/bash
 echo "======================================================================"
-echo "======== ../node_modules/.bin/truffle --network neonlabs test ========"
-echo "======================================================================"
-../node_modules/.bin/truffle --network neonlabs test
-exit
-
-echo "======================================================================"
 echo "======= ../node_modules/.bin/truffle --network neonlabs compile ======"
 echo "======================================================================"
 # ../node_modules/.bin/truffle --network neonlabs compile
@@ -17,7 +11,12 @@ echo "======================================================================"
 ../node_modules/.bin/truffle --network neonlabs migrate
 # ../node_modules/.bin/truffle --network neonlabs migrate --reset --verbose-rpc
 
-find "$(pwd)" | grep test.js | ../node_modules/.bin/truffle --network neonlabs test $_
+echo "======================================================================"
+echo "======== ../node_modules/.bin/truffle --network neonlabs test ========"
+echo "======================================================================"
+../node_modules/.bin/truffle --network neonlabs test
+
+# find "$(pwd)" | grep test.js | ../node_modules/.bin/truffle --network neonlabs test $_
 mv ./allure-results/ ../report/
 exit
 
