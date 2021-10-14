@@ -2,7 +2,17 @@ import { task } from 'hardhat/config';
 import '@nomiclabs/hardhat-waffle';
 import { HttpNetworkConfig } from 'hardhat/types/config';
 import { int } from 'hardhat/internal/core/params/argumentTypes';
+const Web3 = require("web3");
+import * as dotenv from 'dotenv';
+dotenv.config({ path: '../.env' });
 // import('hardhat/config').HardhatUserConfig
+
+const web3 = new Web3(new Web3.providers.HttpProvider(process.env.PROXY_URL));
+const account01 = web3.eth.accounts.create();
+process.env.ADDRESS_FROM = account01.address;
+process.env.PRIVATE_KEY = account01.privateKey;
+const account02 = web3.eth.accounts.create();
+process.env.ADDRESS_TO = account02.address;
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -65,8 +75,18 @@ const neonlabs: HttpNetworkConfig = {
  */
 export default {
   solidity: '0.8.4',
+  defaultNetwork: "neonlabs",
   networks: {
-    hardhat: {},
+    // hardhat: {},
     neonlabs: neonlabs
-  }
+  },
+  mocha: {
+    timeout: 1000000000,
+    reporter: 'mocha-multi-reporters',
+    reporterOption: {
+      configFile: '../../reporterConfig.json',
+      // url: process.env.PROXY_URL,
+    },
+    diff: true,
+  },
 };

@@ -127,6 +127,13 @@ jobs:
       timeout-minutes: 15
       run: |
         npm run test
+    - name: Hardhat tests
+      timeout-minutes: 5
+      run: |
+        npm run test:hardhat:advanced
+        mv ./allure-results/ ../../report/
+        npm run test:hardhat:simple
+        mv ./allure-results/ ../../report/
     - name: Look at Allure
       if: always()
       uses: ./.github/actions/allure-show

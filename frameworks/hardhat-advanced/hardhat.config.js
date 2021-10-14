@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config({ path: '../../.env' });
 
 require("@nomiclabs/hardhat-etherscan");
 require("@nomiclabs/hardhat-waffle");
@@ -43,5 +43,14 @@ module.exports = {
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
+  },
+  mocha: {
+    timeout: 1000000000,
+    reporter: 'mocha-multi-reporters',
+    reporterOption: {
+      configFile: '../../reporterConfig.json',
+      // url: process.env.PROXY_URL,
+    },
+    diff: true,
   },
 };
