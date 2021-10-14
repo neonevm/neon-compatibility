@@ -4,7 +4,7 @@ import { HttpNetworkConfig } from 'hardhat/types/config';
 import { int } from 'hardhat/internal/core/params/argumentTypes';
 const Web3 = require("web3");
 import * as dotenv from 'dotenv';
-dotenv.config({ path: '../.env' });
+dotenv.config({ path: '../../.env' });
 // import('hardhat/config').HardhatUserConfig
 
 const web3 = new Web3(new Web3.providers.HttpProvider(process.env.PROXY_URL));
