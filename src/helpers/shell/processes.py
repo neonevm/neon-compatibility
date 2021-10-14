@@ -7,6 +7,7 @@ from src.helpers.common.config import PROXY_URL
 @allure.step('Run command: "{0}"')
 def run_command_line(command: str):
     print("============ running command... ============")
+    command = "pwd: " + command
     print(command)
     stream = os.popen(command)
     output = stream.read()
