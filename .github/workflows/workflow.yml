@@ -44,6 +44,7 @@ jobs:
         pipenv run flake8 ./src
         pipenv run flake8 ./tests
     - name: Test with pytest
+      timeout-minutes: 15
       if: always()
       run: |
         pwd
@@ -121,6 +122,7 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - name: Mocha tests
+      timeout-minutes: 15
       run: |
         npm run test
     - name: Look at Allure
@@ -164,6 +166,7 @@ jobs:
       if: always()
       run: chmod +x gradlew
     - name: Test
+      timeout-minutes: 15
       if: always()
       run: ./gradlew build --warning-mode all
     - name: Look at Allure
@@ -207,6 +210,7 @@ jobs:
       if: always()
       run: dotnet build --no-restore
     - name: Test
+      timeout-minutes: 15
       if: always()
       run: dotnet test --no-build --verbosity normal
     - name: Move report/*.json to report/allure-results/*.json
