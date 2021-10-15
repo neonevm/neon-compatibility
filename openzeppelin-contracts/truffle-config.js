@@ -79,10 +79,10 @@ module.exports = {
       network_id: process.env.NETWORK_ID,
       gas: 3000000,
       gasPrice: 1000000000,
-      timeoutBlocks: 2000,
+      timeoutBlocks: 4000,
       skipDryRun: true,
-      networkCheckTimeout: 10000000,
-      confirmations: 10,
+      networkCheckTimeout: 100000000,
+      confirmations: 2, // 10,
       // experimental feature
       disableConfirmationListener: true,
 
