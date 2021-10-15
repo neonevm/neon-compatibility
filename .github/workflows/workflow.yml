@@ -268,15 +268,16 @@ jobs:
       if: always()
       run: |
         function moveFiles {
-          cp -R "$1*" "$2"
-          rm -R "$1"
+          echo "cp -R $1* $2"
+          cp -R $1 $2
+          # rm -R "$1"
         }
         # cp -R source/* destination/ 
         # rm -R source/
         npm run test:hardhat:advanced
         # mv ./frameworks/hardhat-advanced/allure-results/ ./report/
         pwd
-        moveFiles frameworks/hardhat-advanced/report/allure-results/ ./report/
+        moveFiles ./frameworks/hardhat-advanced/report/allure-results/ ./report/allure-results/
         # npm run test:hardhat:simple
         # mv ./frameworks/hardhat-simple/allure-results/ ./report/
         # moveFiles frameworks/hardhat-simple/allure-results/ ./report/
