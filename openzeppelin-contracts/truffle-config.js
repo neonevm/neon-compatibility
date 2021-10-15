@@ -77,14 +77,15 @@ module.exports = {
       from: process.env.ADDRESS_FROM,
       to: process.env.ADDRESS_TO,
       network_id: process.env.NETWORK_ID,
-      gas: 3000000,
-      gasPrice: 1000000000,
+      gas: 5000000,
+      gasPrice: 70000000000,
       timeoutBlocks: 4000,
       skipDryRun: true,
       networkCheckTimeout: 100000000,
       confirmations: 2, // 10,
       // experimental feature
       disableConfirmationListener: true,
+      setTimeout: 5000000000,
 
       // gas
       // gasPrice
