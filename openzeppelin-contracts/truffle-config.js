@@ -96,7 +96,7 @@ module.exports = {
   // Set default mocha options here, use special reporters etc.
   mocha: {
     timeout: 1000000000,
-    reporter: 'mocha-allure-reporter',
+    reporter: 'mocha-multi-reporters',
     reporterOption: {
       configFile: '../reporterConfig.json',
     },
