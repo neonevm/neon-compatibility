@@ -78,7 +78,7 @@ module.exports = {
       to: process.env.ADDRESS_TO,
       network_id: process.env.NETWORK_ID,
       gas: 3000000,
-      gasPrice: 10000000000,
+      gasPrice: 1000000000,
       timeoutBlocks: 2000,
       skipDryRun: true,
       networkCheckTimeout: 10000000,
