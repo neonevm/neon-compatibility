@@ -23,6 +23,15 @@ process.env.PRIVATE_KEY = account01.privateKey;
 const account02 = web3.eth.accounts.create();
 process.env.ADDRESS_TO = account02.address;
 
+const privateKeys = [process.env.PRIVATE_KEY,
+                     web3.eth.accounts.create().privateKey,
+                     web3.eth.accounts.create().privateKey,
+                     web3.eth.accounts.create().privateKey,
+                     web3.eth.accounts.create().privateKey,
+                     web3.eth.accounts.create().privateKey,
+                     web3.eth.accounts.create().privateKey,
+                     web3.eth.accounts.create().privateKey];
+
 // const faucetUrl = process.env.PROXY_URL.replace("/solana", "/request_erc20_tokens");
 const faucetUrl = process.env.FAUCET_URL
 console.log(faucetUrl);
@@ -70,7 +79,7 @@ module.exports = {
         */
 
         return new HDWalletProvider(
-          process.env.PRIVATE_KEY,
+          privateKeys,
           process.env.PROXY_URL
         );
       },
