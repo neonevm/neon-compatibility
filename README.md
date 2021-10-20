@@ -1,4 +1,4 @@
-# UAT for 3rd parties' compatibility
+# Test suite for checking 3rd parties' compatibility
 ## Reports
 http://docs.neon-labs.org/neon-compatibility/
 
