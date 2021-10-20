@@ -6,6 +6,34 @@ earlier reports are/were available by the link
 
 http://docs.neon-labs.org/neon-uat/
 
+## OpenZeppelin contracts testing
+1. Install node.js
+2. Go to the neon-compatibility folder
+3. Run
+```
+npm i
+```
+4. Go to the openzeppelin-contracts folder
+```
+cd openzeppelin-contracts
+```
+5. Run all the tests
+```
+../node_modules/.bin/truffle --network neonlabs test
+```
+6. Or run a single test
+```
+../node_modules/.bin/truffle --network neonlabs test ./test/access/AccessControl.test.js
+```
+Alternatively, you can install truffle globally by issuing the command
+```
+npm i -g truffle
+```
+and further use it like
+```
+truffle test --network neonlabs
+```
+
 ## Preparation
 
 This instruction suggest using package managers heavily, you can obtain brew here:
