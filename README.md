@@ -25,11 +25,11 @@ cd openzeppelin-contracts
 ```
 ../node_modules/.bin/truffle --network neonlabs test ./test/access/AccessControl.test.js
 ```
-Alternatively, you can install truffle globally by issuing the command
+Alternatively, you can install truffle globally by issuing the following command
 ```
 npm i -g truffle
 ```
-and further use it like
+and further use it this way
 ```
 truffle test --network neonlabs
 ```
