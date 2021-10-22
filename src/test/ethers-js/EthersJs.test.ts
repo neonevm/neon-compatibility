@@ -218,6 +218,7 @@ class EthersJsTests {
     const tx = daiWithSigner.transfer('ricmoo.firefly.eth', dai);
   }
 
+  /*
   @epic(EpicName)
   @feature('Listening to Events')
   @test
@@ -254,6 +255,7 @@ class EthersJsTests {
       logger.notice(`I got ${formatEther(amount)} from ${from}.`);
     });
   }
+  */
 
   @epic(EpicName)
   @feature('Query Historic Events')

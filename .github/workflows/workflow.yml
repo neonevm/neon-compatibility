@@ -10,7 +10,7 @@ on:
       network:
         description: 'Network (devnet, testnet, internal.testnet, neonswap.live, aws, ropsten, rinkeby)'
         required: true
-        default: 'devnet'
+        default: 'internal.testnet'
 
 jobs:
   build:
@@ -22,6 +22,7 @@ jobs:
 
   python:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     needs: build
     steps:
     - uses: actions/checkout@v2
@@ -44,6 +45,7 @@ jobs:
         pipenv run flake8 ./src
         pipenv run flake8 ./tests
     - name: Test with pytest
+      timeout-minutes: 15
       if: always()
       run: |
         pwd
@@ -60,6 +62,51 @@ jobs:
       with:
         name: allure-results
         path: report/allure-results
+
+  # node-contracts:
+  #   runs-on: macos-11
+  #   timeout-minutes: 35
+  #   needs: build
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   # macos-11
+  #   # - uses: ./.github/actions/allure-prep
+  #   - uses: ./.github/actions/switch-network
+  #   - name: Use Node.js 16
+  #     uses: actions/setup-node@v2
+  #     if: always()
+  #     with:
+  #       node-version: 16.x
+  #   - run: npm ci
+  #   - run: npm run build --if-present
+  #   - name: OpenZeppelin contracts
+  #     timeout-minutes: 30
+  #     run: |
+  #       cd openzeppelin-contracts
+  #       echo "folder:"
+  #       pwd
+  #       echo "folder content:"
+  #       ls -la
+  #       # echo "============================================================================================="
+  #       # echo "====================================== single tests ========================================="
+  #       # echo "============================================================================================="
+  #       chmod 555 run_tests.sh
+  #       ./run_tests.sh
+  #       # echo "============================================================================================="
+  #       # echo "======================================== all tests =========================================="
+  #       # echo "============================================================================================="
+  #       # ../node_modules/.bin/truffle --network neonlabs test
+  #       # echo "============================================================================================="
+  #       # echo "============================================================================================="
+  #       cd ..
+
+  #   # TODO: de-duplicate
+  #   - name: Archive Allure results
+  #     if: always()
+  #     uses: actions/upload-artifact@v2
+  #     with:
+  #       name: allure-results
+  #       path: openzeppelin-contracts/allure-results
 
   node-contracts-1:
     runs-on: macos-11
@@ -85,9 +132,9 @@ jobs:
         pwd
         echo "folder content:"
         ls -la
-        echo "============================================================================================="
-        echo "====================================== single tests ========================================="
-        echo "============================================================================================="
+        # echo "============================================================================================="
+        # echo "====================================== single tests ========================================="
+        # echo "============================================================================================="
         chmod 555 run_tests_1.sh
         ./run_tests_1.sh
         # echo "============================================================================================="
@@ -130,9 +177,9 @@ jobs:
         pwd
         echo "folder content:"
         ls -la
-        echo "============================================================================================="
-        echo "====================================== single tests ========================================="
-        echo "============================================================================================="
+        # echo "============================================================================================="
+        # echo "====================================== single tests ========================================="
+        # echo "============================================================================================="
         chmod 555 run_tests_2.sh
         ./run_tests_2.sh
         # echo "============================================================================================="
@@ -175,9 +222,9 @@ jobs:
         pwd
         echo "folder content:"
         ls -la
-        echo "============================================================================================="
-        echo "====================================== single tests ========================================="
-        echo "============================================================================================="
+        # echo "============================================================================================="
+        # echo "====================================== single tests ========================================="
+        # echo "============================================================================================="
         chmod 555 run_tests_3.sh
         ./run_tests_3.sh
         # echo "============================================================================================="
@@ -198,6 +245,7 @@ jobs:
 
   node:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     needs: build
     steps:
     - uses: actions/checkout@v2
@@ -211,9 +259,28 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - name: Mocha tests
-      timeout-minutes: 10
+      timeout-minutes: 15
       run: |
-        npm run test
+        npm run test:ci
+        mv ./allure-results/ ./report/
+    - name: Hardhat tests
+      timeout-minutes: 5
+      if: always()
+      run: |
+        function moveFiles {
+          echo "cp -R $1* $2"
+          cp -R $1 $2
+          # rm -R "$1"
+        }
+        # cp -R source/* destination/ 
+        # rm -R source/
+        npm run test:hardhat:advanced
+        # mv ./frameworks/hardhat-advanced/allure-results/ ./report/
+        pwd
+        moveFiles ./frameworks/hardhat-advanced/report/allure-results/ ./report/
+        # npm run test:hardhat:simple
+        # mv ./frameworks/hardhat-simple/allure-results/ ./report/
+        # moveFiles frameworks/hardhat-simple/allure-results/ ./report/
     - name: Look at Allure
       if: always()
       uses: ./.github/actions/allure-show
@@ -228,6 +295,7 @@ jobs:
 
   jdk:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     needs: build
     steps:
     - uses: actions/checkout@v2
@@ -255,6 +323,7 @@ jobs:
       if: always()
       run: chmod +x gradlew
     - name: Test
+      timeout-minutes: 15
       if: always()
       run: ./gradlew build --warning-mode all
     - name: Look at Allure
@@ -271,6 +340,7 @@ jobs:
 
   dotnet:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     needs:
       - build
       # - dotnet-format
@@ -298,6 +368,7 @@ jobs:
       if: always()
       run: dotnet build --no-restore
     - name: Test
+      timeout-minutes: 15
       if: always()
       run: dotnet test --no-build --verbosity normal
     - name: Move report/*.json to report/allure-results/*.json
@@ -317,12 +388,14 @@ jobs:
 
   allure:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     if: always()
     needs:
       - build
+      # - node-contracts
       - node-contracts-1
       - node-contracts-2
-      - node-contracts-3  
+      - node-contracts-3
       - python
       - node
       - jdk

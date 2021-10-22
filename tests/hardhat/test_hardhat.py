@@ -15,7 +15,7 @@ def prepare_truffle_config():
     yield
 
 
-# @pytest.mark.skip(reason="now yet done")
+@pytest.mark.skip(reason="moved to the Node.js tests")
 @allure.feature(FEATURE)
 def test_hardhat_simple():
     command = "npx hardhat run --network neonlabs scripts/sample-script.js"
@@ -30,6 +30,7 @@ def test_hardhat_simple():
 # go to hardhat-advanced/hardhat.config.js
 # and comment out the following line
 # defaultNetwork: "neonlabs",
+@pytest.mark.skip(reason="moved to the Node.js tests")
 @allure.feature(FEATURE)
 def test_hardhat_advanced():
     # REPORT_GAS=true npx hardhat test
