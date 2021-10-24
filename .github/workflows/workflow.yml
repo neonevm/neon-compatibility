@@ -129,10 +129,13 @@ jobs:
       run: |
         cd openzeppelin-contracts
         git fetch
+        # cd ..
+        cp ../hardhat.config.js .
+        # ls ./openzeppelin-contracts
+        ls -la
+        # npm run test:openzeppelin
+        npx hardhat test
         cd ..
-        cp ./hardhat.config.js ./openzeppelin-contracts/
-        ls ./openzeppelin-contracts
-        npm run test:openzeppelin
     - name: Look at Allure
       if: always()
       uses: ./.github/actions/allure-show
