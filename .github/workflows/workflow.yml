@@ -127,9 +127,15 @@ jobs:
     - name: OpenZeppelin contracts
       timeout-minutes: 60
       run: |
+        cd openzeppelin-contracts
+        git fetch
+        cd ..
         cp ./hardhat.config.js ./openzeppelin-contracts/
         ls ./openzeppelin-contracts
         npm run test:openzeppelin
+    - name: Look at Allure
+      if: always()
+      uses: ./.github/actions/allure-show
 
     # TODO: de-duplicate
     - name: Archive Allure results
