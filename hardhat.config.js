@@ -98,8 +98,7 @@ module.exports = {
       },
     },
   },
-  // TODO: uncomment it
-  // defaultNetwork: "neonlabs",
+  defaultNetwork: "neonlabs",
   networks: {
     hardhat: {
       blockGasLimit: 10000000,
