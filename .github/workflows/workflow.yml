@@ -127,13 +127,12 @@ jobs:
     - name: OpenZeppelin contracts
       timeout-minutes: 60
       run: |
-        git submodule update --remote --init
+        rm openzeppelin-contracts
+        # git submodule update --remote --init
         # git submodule update --remote --merge
+        git submodule update --init --recursive
         cd openzeppelin-contracts
-        # git fetch
-        # cd ..
         cp ../hardhat.config.js .
-        # ls ./openzeppelin-contracts
         ls -la
         # npm run test:openzeppelin
         npx hardhat test
