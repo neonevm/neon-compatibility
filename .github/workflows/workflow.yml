@@ -127,8 +127,9 @@ jobs:
     - name: OpenZeppelin contracts
       timeout-minutes: 60
       run: |
+        git submodule update --remote
         cd openzeppelin-contracts
-        git fetch
+        # git fetch
         # cd ..
         cp ../hardhat.config.js .
         # ls ./openzeppelin-contracts
@@ -138,7 +139,8 @@ jobs:
         cd ..
     - name: Look at Allure
       if: always()
-      uses: ./.github/actions/allure-show
+      run: |
+        ls ./openzepplin-contracts/allure-results
 
     # TODO: de-duplicate
     - name: Archive Allure results
