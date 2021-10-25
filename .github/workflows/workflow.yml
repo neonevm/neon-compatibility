@@ -63,54 +63,9 @@ jobs:
         name: allure-results
         path: report/allure-results
 
-  # node-contracts:
-  #   runs-on: macos-11
-  #   timeout-minutes: 35
-  #   needs: build
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   # macos-11
-  #   # - uses: ./.github/actions/allure-prep
-  #   - uses: ./.github/actions/switch-network
-  #   - name: Use Node.js 16
-  #     uses: actions/setup-node@v2
-  #     if: always()
-  #     with:
-  #       node-version: 16.x
-  #   - run: npm ci
-  #   - run: npm run build --if-present
-  #   - name: OpenZeppelin contracts
-  #     timeout-minutes: 30
-  #     run: |
-  #       cd openzeppelin-contracts
-  #       echo "folder:"
-  #       pwd
-  #       echo "folder content:"
-  #       ls -la
-  #       # echo "============================================================================================="
-  #       # echo "====================================== single tests ========================================="
-  #       # echo "============================================================================================="
-  #       chmod 555 run_tests.sh
-  #       ./run_tests.sh
-  #       # echo "============================================================================================="
-  #       # echo "======================================== all tests =========================================="
-  #       # echo "============================================================================================="
-  #       # ../node_modules/.bin/truffle --network neonlabs test
-  #       # echo "============================================================================================="
-  #       # echo "============================================================================================="
-  #       cd ..
-
-  #   # TODO: de-duplicate
-  #   - name: Archive Allure results
-  #     if: always()
-  #     uses: actions/upload-artifact@v2
-  #     with:
-  #       name: allure-results
-  #       path: openzeppelin-contracts/allure-results
-
   node-contracts:
     runs-on: macos-11
-    timeout-minutes: 125
+    timeout-minutes: 605
     needs: build
     steps:
     - uses: actions/checkout@v2
@@ -125,7 +80,7 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - name: OpenZeppelin contracts
-      timeout-minutes: 120
+      timeout-minutes: 600
       run: |
         rm -rf openzeppelin-contracts
         git submodule update --init --recursive
