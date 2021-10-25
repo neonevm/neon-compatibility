@@ -72,6 +72,9 @@ const privateKeys = [process.env.PRIVATE_KEY,
                      web3.eth.accounts.create().privateKey,
                      web3.eth.accounts.create().privateKey,
                      web3.eth.accounts.create().privateKey,
+                     web3.eth.accounts.create().privateKey,
+                     web3.eth.accounts.create().privateKey,
+                     web3.eth.accounts.create().privateKey,
                      web3.eth.accounts.create().privateKey];
 
 // const faucetUrl = process.env.PROXY_URL.replace("/solana", "/request_erc20_tokens");
@@ -106,6 +109,13 @@ module.exports = {
     },
     neonlabs: {
       url: process.env.PROXY_URL,
+      accounts: privateKeys,
+      from: process.env.ADDRESS_FROM,
+      network_id: process.env.NETWORK_ID,
+      gas: 3000000,
+      gasPrice: 1000000000,
+      blockGasLimit: 10000000,
+      allowUnlimitedContractSize: !withOptimizations,
     },
   },
   gasReporter: {
