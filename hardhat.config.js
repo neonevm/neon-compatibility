@@ -8,7 +8,6 @@
 
 require("dotenv").config({ path: "../.env" });
 const Web3 = require("web3");
-const axios = require('axios').default;
 
 const fs = require('fs');
 const path = require('path');
@@ -59,34 +58,8 @@ for (const f of fs.readdirSync(path.join(__dirname, 'hardhat'))) {
 const withOptimizations = argv.enableGasReport || argv.compileMode === 'production';
 
 const web3 = new Web3(new Web3.providers.HttpProvider(process.env.PROXY_URL));
-const account01 = web3.eth.accounts.create();
-process.env.ADDRESS_FROM = account01.address;
-process.env.PRIVATE_KEY = account01.privateKey;
-const account02 = web3.eth.accounts.create();
-process.env.ADDRESS_TO = account02.address;
 
-const privateKeys = [process.env.PRIVATE_KEY,
-                     web3.eth.accounts.create().privateKey,
-                     web3.eth.accounts.create().privateKey,
-                     web3.eth.accounts.create().privateKey,
-                     web3.eth.accounts.create().privateKey,
-                     web3.eth.accounts.create().privateKey,
-                     web3.eth.accounts.create().privateKey,
-                     web3.eth.accounts.create().privateKey,
-                     web3.eth.accounts.create().privateKey,
-                     web3.eth.accounts.create().privateKey,
-                     web3.eth.accounts.create().privateKey];
-
-// const faucetUrl = process.env.PROXY_URL.replace("/solana", "/request_erc20_tokens");
-const faucetUrl = process.env.FAUCET_URL
-console.log(faucetUrl);
-const requestFaucet = (address, amount) => axios.post(faucetUrl, { wallet: address, amount: amount })
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+const privateKeys = Array.from(Array(10), (_, x) => web3.eth.accounts.create().privateKey);
 
 /**
  * @type import('hardhat/config').HardhatUserConfig
@@ -111,11 +84,10 @@ module.exports = {
       url: process.env.PROXY_URL,
       accounts: privateKeys,
       from: process.env.ADDRESS_FROM,
-      network_id: process.env.NETWORK_ID,
+      chainId: process.env.NETWORK_ID,
       gas: 3000000,
       gasPrice: 1000000000,
       blockGasLimit: 10000000,
-      allowUnlimitedContractSize: !withOptimizations,
     },
   },
   gasReporter: {
@@ -128,7 +100,6 @@ module.exports = {
     reporter: 'mocha-multi-reporters',
     reporterOption: {
       configFile: '../reporterConfig.json',
-      // url: process.env.PROXY_URL,
     },
     diff: true,
   },

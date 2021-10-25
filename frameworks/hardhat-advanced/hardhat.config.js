@@ -49,7 +49,6 @@ module.exports = {
     reporter: 'mocha-multi-reporters',
     reporterOption: {
       configFile: '../../reporterConfig.json',
-      // url: process.env.PROXY_URL,
     },
     diff: true,
   },
