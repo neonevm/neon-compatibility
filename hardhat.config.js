@@ -65,6 +65,7 @@ const account02 = web3.eth.accounts.create();
 process.env.ADDRESS_TO = account02.address;
 
 const privateKeys = Array.from(Array(10), (_, x) => web3.eth.accounts.create().privateKey);
+privateKeys.unshift(process.env.PRIVATE_KEY);
 
 /**
  * @type import('hardhat/config').HardhatUserConfig
