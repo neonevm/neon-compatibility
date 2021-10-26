@@ -85,7 +85,12 @@ jobs:
         rm -rf openzeppelin-contracts
         git submodule update --init --recursive
         cd openzeppelin-contracts
+        pwd
         cp ../hardhat.config.js .
+        # categories.json
+        mkdir allure-results
+        cp ../categories.json allure-results
+        ls allure-results
         # echo "============================================================================================="
         # echo "==================== the openzeppelin-contracts repo is downloaded =========================="
         # echo "============================= and hardhat.config.js is here ================================="
@@ -98,9 +103,9 @@ jobs:
         pwd
         ls allure-results
         cd ..
-    - name: categories.json
-      run: |
-        cp categories.json openzeppelin-contracts/allure-results
+    # - name: categories.json
+    #   run: |
+    #     cp categories.json openzeppelin-contracts/allure-results
     - name: Look at Allure
       if: always()
       run: |
