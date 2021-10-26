@@ -58,6 +58,11 @@ for (const f of fs.readdirSync(path.join(__dirname, 'hardhat'))) {
 const withOptimizations = argv.enableGasReport || argv.compileMode === 'production';
 
 const web3 = new Web3(new Web3.providers.HttpProvider(process.env.PROXY_URL));
+const account01 = web3.eth.accounts.create();
+process.env.ADDRESS_FROM = account01.address;
+process.env.PRIVATE_KEY = account01.privateKey;
+const account02 = web3.eth.accounts.create();
+process.env.ADDRESS_TO = account02.address;
 
 const privateKeys = Array.from(Array(10), (_, x) => web3.eth.accounts.create().privateKey);
 
@@ -84,10 +89,12 @@ module.exports = {
       url: process.env.PROXY_URL,
       accounts: privateKeys,
       from: process.env.ADDRESS_FROM,
-      chainId: process.env.NETWORK_ID,
+      to: process.env.ADDRESS_TO,
+      network_id: process.env.NETWORK_ID,
       gas: 3000000,
       gasPrice: 1000000000,
       blockGasLimit: 10000000,
+      allowUnlimitedContractSize: !withOptimizations,
     },
   },
   gasReporter: {
