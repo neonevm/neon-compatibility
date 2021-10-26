@@ -63,7 +63,7 @@ jobs:
         name: allure-results
         path: report/allure-results
 
-  node-contracts:
+  node-contracts-access:
     runs-on: macos-11
     timeout-minutes: 605
     needs: build
@@ -100,7 +100,511 @@ jobs:
         echo "$ ls -la"
         ls -la
         # npx hardhat test
-        find "$(pwd)" | grep test.js | npx hardhat test $_
+        find "$(pwd)/test/access" | grep test.js | npx hardhat test $_
+        # echo "============================================================================================="
+        # echo "====================================== test results ========================================="
+        # echo "============================================================================================="
+        echo "$ pwd"
+        pwd
+        echo "$ ls allure-results"
+        ls allure-results
+        cd ..
+    # - name: categories.json
+    #   run: |
+    #     cp categories.json openzeppelin-contracts/allure-results
+    - name: Look at Allure
+      if: always()
+      run: |
+        pwd
+        ls ./openzepplin-contracts/allure-results
+
+    # TODO: de-duplicate
+    - name: Archive Allure results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-results
+        path: openzeppelin-contracts/allure-results
+
+  node-contracts-finance:
+    runs-on: macos-11
+    timeout-minutes: 605
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    # macos-11
+    # - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
+    - name: Use Node.js 16
+      uses: actions/setup-node@v2
+      if: always()
+      with:
+        node-version: 16.x
+    - run: npm ci
+    - run: npm run build --if-present
+    - name: OpenZeppelin contracts
+      timeout-minutes: 600
+      run: |
+        rm -rf openzeppelin-contracts
+        git submodule update --init --recursive
+        cd openzeppelin-contracts
+        echo "$ pwd"
+        pwd
+        cp ../hardhat.config.js .
+        # categories.json
+        mkdir allure-results
+        cp ../categories.json allure-results
+        echo "$ ls allure-results"
+        ls allure-results
+        # echo "============================================================================================="
+        # echo "==================== the openzeppelin-contracts repo is downloaded =========================="
+        # echo "============================= and hardhat.config.js is here ================================="
+        # echo "============================================================================================="
+        echo "$ ls -la"
+        ls -la
+        # npx hardhat test
+        find "$(pwd)/test/finance" | grep test.js | npx hardhat test $_
+        # echo "============================================================================================="
+        # echo "====================================== test results ========================================="
+        # echo "============================================================================================="
+        echo "$ pwd"
+        pwd
+        echo "$ ls allure-results"
+        ls allure-results
+        cd ..
+    # - name: categories.json
+    #   run: |
+    #     cp categories.json openzeppelin-contracts/allure-results
+    - name: Look at Allure
+      if: always()
+      run: |
+        pwd
+        ls ./openzepplin-contracts/allure-results
+
+    # TODO: de-duplicate
+    - name: Archive Allure results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-results
+        path: openzeppelin-contracts/allure-results
+
+  node-contracts-governance:
+    runs-on: macos-11
+    timeout-minutes: 605
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    # macos-11
+    # - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
+    - name: Use Node.js 16
+      uses: actions/setup-node@v2
+      if: always()
+      with:
+        node-version: 16.x
+    - run: npm ci
+    - run: npm run build --if-present
+    - name: OpenZeppelin contracts
+      timeout-minutes: 600
+      run: |
+        rm -rf openzeppelin-contracts
+        git submodule update --init --recursive
+        cd openzeppelin-contracts
+        echo "$ pwd"
+        pwd
+        cp ../hardhat.config.js .
+        # categories.json
+        mkdir allure-results
+        cp ../categories.json allure-results
+        echo "$ ls allure-results"
+        ls allure-results
+        # echo "============================================================================================="
+        # echo "==================== the openzeppelin-contracts repo is downloaded =========================="
+        # echo "============================= and hardhat.config.js is here ================================="
+        # echo "============================================================================================="
+        echo "$ ls -la"
+        ls -la
+        # npx hardhat test
+        find "$(pwd)/test/governance" | grep test.js | npx hardhat test $_
+        # echo "============================================================================================="
+        # echo "====================================== test results ========================================="
+        # echo "============================================================================================="
+        echo "$ pwd"
+        pwd
+        echo "$ ls allure-results"
+        ls allure-results
+        cd ..
+    # - name: categories.json
+    #   run: |
+    #     cp categories.json openzeppelin-contracts/allure-results
+    - name: Look at Allure
+      if: always()
+      run: |
+        pwd
+        ls ./openzepplin-contracts/allure-results
+
+    # TODO: de-duplicate
+    - name: Archive Allure results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-results
+        path: openzeppelin-contracts/allure-results
+
+  node-contracts-helpers:
+    runs-on: macos-11
+    timeout-minutes: 605
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    # macos-11
+    # - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
+    - name: Use Node.js 16
+      uses: actions/setup-node@v2
+      if: always()
+      with:
+        node-version: 16.x
+    - run: npm ci
+    - run: npm run build --if-present
+    - name: OpenZeppelin contracts
+      timeout-minutes: 600
+      run: |
+        rm -rf openzeppelin-contracts
+        git submodule update --init --recursive
+        cd openzeppelin-contracts
+        echo "$ pwd"
+        pwd
+        cp ../hardhat.config.js .
+        # categories.json
+        mkdir allure-results
+        cp ../categories.json allure-results
+        echo "$ ls allure-results"
+        ls allure-results
+        # echo "============================================================================================="
+        # echo "==================== the openzeppelin-contracts repo is downloaded =========================="
+        # echo "============================= and hardhat.config.js is here ================================="
+        # echo "============================================================================================="
+        echo "$ ls -la"
+        ls -la
+        # npx hardhat test
+        find "$(pwd)/test/helpers" | grep test.js | npx hardhat test $_
+        # echo "============================================================================================="
+        # echo "====================================== test results ========================================="
+        # echo "============================================================================================="
+        echo "$ pwd"
+        pwd
+        echo "$ ls allure-results"
+        ls allure-results
+        cd ..
+    # - name: categories.json
+    #   run: |
+    #     cp categories.json openzeppelin-contracts/allure-results
+    - name: Look at Allure
+      if: always()
+      run: |
+        pwd
+        ls ./openzepplin-contracts/allure-results
+
+    # TODO: de-duplicate
+    - name: Archive Allure results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-results
+        path: openzeppelin-contracts/allure-results
+
+  node-contracts-metatx:
+    runs-on: macos-11
+    timeout-minutes: 605
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    # macos-11
+    # - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
+    - name: Use Node.js 16
+      uses: actions/setup-node@v2
+      if: always()
+      with:
+        node-version: 16.x
+    - run: npm ci
+    - run: npm run build --if-present
+    - name: OpenZeppelin contracts
+      timeout-minutes: 600
+      run: |
+        rm -rf openzeppelin-contracts
+        git submodule update --init --recursive
+        cd openzeppelin-contracts
+        echo "$ pwd"
+        pwd
+        cp ../hardhat.config.js .
+        # categories.json
+        mkdir allure-results
+        cp ../categories.json allure-results
+        echo "$ ls allure-results"
+        ls allure-results
+        # echo "============================================================================================="
+        # echo "==================== the openzeppelin-contracts repo is downloaded =========================="
+        # echo "============================= and hardhat.config.js is here ================================="
+        # echo "============================================================================================="
+        echo "$ ls -la"
+        ls -la
+        # npx hardhat test
+        find "$(pwd)/test/metatx" | grep test.js | npx hardhat test $_
+        # echo "============================================================================================="
+        # echo "====================================== test results ========================================="
+        # echo "============================================================================================="
+        echo "$ pwd"
+        pwd
+        echo "$ ls allure-results"
+        ls allure-results
+        cd ..
+    # - name: categories.json
+    #   run: |
+    #     cp categories.json openzeppelin-contracts/allure-results
+    - name: Look at Allure
+      if: always()
+      run: |
+        pwd
+        ls ./openzepplin-contracts/allure-results
+
+    # TODO: de-duplicate
+    - name: Archive Allure results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-results
+        path: openzeppelin-contracts/allure-results
+
+  node-contracts-proxy:
+    runs-on: macos-11
+    timeout-minutes: 605
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    # macos-11
+    # - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
+    - name: Use Node.js 16
+      uses: actions/setup-node@v2
+      if: always()
+      with:
+        node-version: 16.x
+    - run: npm ci
+    - run: npm run build --if-present
+    - name: OpenZeppelin contracts
+      timeout-minutes: 600
+      run: |
+        rm -rf openzeppelin-contracts
+        git submodule update --init --recursive
+        cd openzeppelin-contracts
+        echo "$ pwd"
+        pwd
+        cp ../hardhat.config.js .
+        # categories.json
+        mkdir allure-results
+        cp ../categories.json allure-results
+        echo "$ ls allure-results"
+        ls allure-results
+        # echo "============================================================================================="
+        # echo "==================== the openzeppelin-contracts repo is downloaded =========================="
+        # echo "============================= and hardhat.config.js is here ================================="
+        # echo "============================================================================================="
+        echo "$ ls -la"
+        ls -la
+        # npx hardhat test
+        find "$(pwd)/test/proxy" | grep test.js | npx hardhat test $_
+        # echo "============================================================================================="
+        # echo "====================================== test results ========================================="
+        # echo "============================================================================================="
+        echo "$ pwd"
+        pwd
+        echo "$ ls allure-results"
+        ls allure-results
+        cd ..
+    # - name: categories.json
+    #   run: |
+    #     cp categories.json openzeppelin-contracts/allure-results
+    - name: Look at Allure
+      if: always()
+      run: |
+        pwd
+        ls ./openzepplin-contracts/allure-results
+
+    # TODO: de-duplicate
+    - name: Archive Allure results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-results
+        path: openzeppelin-contracts/allure-results
+
+  node-contracts-security:
+    runs-on: macos-11
+    timeout-minutes: 605
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    # macos-11
+    # - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
+    - name: Use Node.js 16
+      uses: actions/setup-node@v2
+      if: always()
+      with:
+        node-version: 16.x
+    - run: npm ci
+    - run: npm run build --if-present
+    - name: OpenZeppelin contracts
+      timeout-minutes: 600
+      run: |
+        rm -rf openzeppelin-contracts
+        git submodule update --init --recursive
+        cd openzeppelin-contracts
+        echo "$ pwd"
+        pwd
+        cp ../hardhat.config.js .
+        # categories.json
+        mkdir allure-results
+        cp ../categories.json allure-results
+        echo "$ ls allure-results"
+        ls allure-results
+        # echo "============================================================================================="
+        # echo "==================== the openzeppelin-contracts repo is downloaded =========================="
+        # echo "============================= and hardhat.config.js is here ================================="
+        # echo "============================================================================================="
+        echo "$ ls -la"
+        ls -la
+        # npx hardhat test
+        find "$(pwd)/test/security" | grep test.js | npx hardhat test $_
+        # echo "============================================================================================="
+        # echo "====================================== test results ========================================="
+        # echo "============================================================================================="
+        echo "$ pwd"
+        pwd
+        echo "$ ls allure-results"
+        ls allure-results
+        cd ..
+    # - name: categories.json
+    #   run: |
+    #     cp categories.json openzeppelin-contracts/allure-results
+    - name: Look at Allure
+      if: always()
+      run: |
+        pwd
+        ls ./openzepplin-contracts/allure-results
+
+    # TODO: de-duplicate
+    - name: Archive Allure results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-results
+        path: openzeppelin-contracts/allure-results
+
+  node-contracts-token:
+    runs-on: macos-11
+    timeout-minutes: 605
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    # macos-11
+    # - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
+    - name: Use Node.js 16
+      uses: actions/setup-node@v2
+      if: always()
+      with:
+        node-version: 16.x
+    - run: npm ci
+    - run: npm run build --if-present
+    - name: OpenZeppelin contracts
+      timeout-minutes: 600
+      run: |
+        rm -rf openzeppelin-contracts
+        git submodule update --init --recursive
+        cd openzeppelin-contracts
+        echo "$ pwd"
+        pwd
+        cp ../hardhat.config.js .
+        # categories.json
+        mkdir allure-results
+        cp ../categories.json allure-results
+        echo "$ ls allure-results"
+        ls allure-results
+        # echo "============================================================================================="
+        # echo "==================== the openzeppelin-contracts repo is downloaded =========================="
+        # echo "============================= and hardhat.config.js is here ================================="
+        # echo "============================================================================================="
+        echo "$ ls -la"
+        ls -la
+        # npx hardhat test
+        find "$(pwd)/test/token" | grep test.js | npx hardhat test $_
+        # echo "============================================================================================="
+        # echo "====================================== test results ========================================="
+        # echo "============================================================================================="
+        echo "$ pwd"
+        pwd
+        echo "$ ls allure-results"
+        ls allure-results
+        cd ..
+    # - name: categories.json
+    #   run: |
+    #     cp categories.json openzeppelin-contracts/allure-results
+    - name: Look at Allure
+      if: always()
+      run: |
+        pwd
+        ls ./openzepplin-contracts/allure-results
+
+    # TODO: de-duplicate
+    - name: Archive Allure results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-results
+        path: openzeppelin-contracts/allure-results
+
+  node-contracts-utils:
+    runs-on: macos-11
+    timeout-minutes: 605
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    # macos-11
+    # - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
+    - name: Use Node.js 16
+      uses: actions/setup-node@v2
+      if: always()
+      with:
+        node-version: 16.x
+    - run: npm ci
+    - run: npm run build --if-present
+    - name: OpenZeppelin contracts
+      timeout-minutes: 600
+      run: |
+        rm -rf openzeppelin-contracts
+        git submodule update --init --recursive
+        cd openzeppelin-contracts
+        echo "$ pwd"
+        pwd
+        cp ../hardhat.config.js .
+        # categories.json
+        mkdir allure-results
+        cp ../categories.json allure-results
+        echo "$ ls allure-results"
+        ls allure-results
+        # echo "============================================================================================="
+        # echo "==================== the openzeppelin-contracts repo is downloaded =========================="
+        # echo "============================= and hardhat.config.js is here ================================="
+        # echo "============================================================================================="
+        echo "$ ls -la"
+        ls -la
+        # npx hardhat test
+        find "$(pwd)/test/utils" | grep test.js | npx hardhat test $_
         # echo "============================================================================================="
         # echo "====================================== test results ========================================="
         # echo "============================================================================================="
@@ -275,7 +779,15 @@ jobs:
     if: always()
     needs:
       - build
-      - node-contracts
+      - node-contracts-access
+      - node-contracts-finance
+      - node-contracts-governance
+      - node-contracts-helpers
+      - node-contracts-metatx
+      - node-contracts-proxy
+      - node-contracts-security
+      - node-contracts-token
+      - node-contracts-utils
       - python
       - node
       - jdk
