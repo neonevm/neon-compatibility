@@ -1,0 +1,13 @@
+name: Uploads Allure results
+description: Uploads Allure files from the folder specified
+inputs:
+  folder-name:
+    description: name of subfolder
+    required: true
+    default: ''
+runs:
+  using: "composite"
+  uses: actions/upload-artifact@v2
+    with:
+      name: allure-results
+      path: ${{ inputs.folder-name }}
