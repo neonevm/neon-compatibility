@@ -79,8 +79,7 @@ jobs:
         node-version: 16.x
     - run: npm ci
     - run: npm run build --if-present
-    - name: OpenZeppelin contracts
-      timeout-minutes: 600
+    - name: OpenZeppelin contracts preparation
       run: |
         rm -rf openzeppelin-contracts
         git submodule update --init --recursive
@@ -99,8 +98,28 @@ jobs:
         # echo "============================================================================================="
         echo "$ ls -la"
         ls -la
+    - name: OpenZeppelin access
+      timeout-minutes: 300
+      run: |
         # npx hardhat test
         find "$(pwd)/test/access" | grep test.js | echo $_ | npx hardhat test $_
+        # echo "============================================================================================="
+        # echo "====================================== test results ========================================="
+        # echo "============================================================================================="
+        echo "$ pwd"
+        pwd
+        echo "$ ls allure-results"
+        ls allure-results
+    - name: Archive Allure results 1
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-results
+        path: openzeppelin-contracts/allure-results
+    - name: OpenZeppelin finance
+      timeout-minutes: 300
+      run: |
+        # npx hardhat test
         find "$(pwd)/test/finance" | grep test.js | echo $_ | npx hardhat test $_
         # echo "============================================================================================="
         # echo "====================================== test results ========================================="
@@ -109,18 +128,7 @@ jobs:
         pwd
         echo "$ ls allure-results"
         ls allure-results
-        cd ..
-    # - name: categories.json
-    #   run: |
-    #     cp categories.json openzeppelin-contracts/allure-results
-    - name: Look at Allure
-      if: always()
-      run: |
-        pwd
-        ls ./openzepplin-contracts/allure-results
-
-    # TODO: de-duplicate
-    - name: Archive Allure results
+    - name: Archive Allure results 2
       if: always()
       uses: actions/upload-artifact@v2
       with:
@@ -143,8 +151,7 @@ jobs:
         node-version: 16.x
     - run: npm ci
     - run: npm run build --if-present
-    - name: OpenZeppelin contracts
-      timeout-minutes: 600
+    - name: OpenZeppelin contracts preparation
       run: |
         rm -rf openzeppelin-contracts
         git submodule update --init --recursive
@@ -163,8 +170,28 @@ jobs:
         # echo "============================================================================================="
         echo "$ ls -la"
         ls -la
+    - name: OpenZeppelin governance
+      timeout-minutes: 300
+      run: |
         # npx hardhat test
         find "$(pwd)/test/governance" | grep test.js | echo $_ | npx hardhat test $_
+        # echo "============================================================================================="
+        # echo "====================================== test results ========================================="
+        # echo "============================================================================================="
+        echo "$ pwd"
+        pwd
+        echo "$ ls allure-results"
+        ls allure-results
+    - name: Archive Allure results 1
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-results
+        path: openzeppelin-contracts/allure-results
+    - name: OpenZeppelin helpers
+      timeout-minutes: 300
+      run: |
+        # npx hardhat test
         find "$(pwd)/test/helpers" | grep test.js | echo $_ | npx hardhat test $_
         # echo "============================================================================================="
         # echo "====================================== test results ========================================="
@@ -173,18 +200,7 @@ jobs:
         pwd
         echo "$ ls allure-results"
         ls allure-results
-        cd ..
-    # - name: categories.json
-    #   run: |
-    #     cp categories.json openzeppelin-contracts/allure-results
-    - name: Look at Allure
-      if: always()
-      run: |
-        pwd
-        ls ./openzepplin-contracts/allure-results
-
-    # TODO: de-duplicate
-    - name: Archive Allure results
+    - name: Archive Allure results 2
       if: always()
       uses: actions/upload-artifact@v2
       with:
@@ -207,8 +223,7 @@ jobs:
         node-version: 16.x
     - run: npm ci
     - run: npm run build --if-present
-    - name: OpenZeppelin contracts
-      timeout-minutes: 600
+    - name: OpenZeppelin contracts preparation
       run: |
         rm -rf openzeppelin-contracts
         git submodule update --init --recursive
@@ -227,8 +242,28 @@ jobs:
         # echo "============================================================================================="
         echo "$ ls -la"
         ls -la
+    - name: OpenZeppelin metatx
+      timeout-minutes: 300
+      run: |
         # npx hardhat test
         find "$(pwd)/test/metatx" | grep test.js | echo $_ | npx hardhat test $_
+        # echo "============================================================================================="
+        # echo "====================================== test results ========================================="
+        # echo "============================================================================================="
+        echo "$ pwd"
+        pwd
+        echo "$ ls allure-results"
+        ls allure-results
+    - name: Archive Allure results 1
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-results
+        path: openzeppelin-contracts/allure-results
+    - name: OpenZeppelin metatx
+      timeout-minutes: 300
+      run: |
+        # npx hardhat test
         find "$(pwd)/test/proxy" | grep test.js | echo $_ | npx hardhat test $_
         # echo "============================================================================================="
         # echo "====================================== test results ========================================="
@@ -237,18 +272,7 @@ jobs:
         pwd
         echo "$ ls allure-results"
         ls allure-results
-        cd ..
-    # - name: categories.json
-    #   run: |
-    #     cp categories.json openzeppelin-contracts/allure-results
-    - name: Look at Allure
-      if: always()
-      run: |
-        pwd
-        ls ./openzepplin-contracts/allure-results
-
-    # TODO: de-duplicate
-    - name: Archive Allure results
+    - name: Archive Allure results 2
       if: always()
       uses: actions/upload-artifact@v2
       with:
@@ -271,8 +295,7 @@ jobs:
         node-version: 16.x
     - run: npm ci
     - run: npm run build --if-present
-    - name: OpenZeppelin contracts
-      timeout-minutes: 600
+    - name: OpenZeppelin contracts preparation
       run: |
         rm -rf openzeppelin-contracts
         git submodule update --init --recursive
@@ -291,12 +314,49 @@ jobs:
         # echo "============================================================================================="
         echo "$ ls -la"
         ls -la
+    - name: OpenZeppelin security
+      timeout-minutes: 200
+      run: |
         # npx hardhat test
         # find "$(pwd)/test/security" | grep test.js | echo $_ | npx hardhat test $_
-        # find "$(pwd)/test/token" | grep test.js | echo $_ | npx hardhat test $_
-        # find "$(pwd)/test/utils" | grep test.js | echo $_ | npx hardhat test $_
         find "$(pwd)/test/security" | grep test.js | echo $_ | ../node_modules/.bin/hardhat test $_
+        # echo "============================================================================================="
+        # echo "====================================== test results ========================================="
+        # echo "============================================================================================="
+        echo "$ pwd"
+        pwd
+        echo "$ ls allure-results"
+        ls allure-results
+    - name: Archive Allure results 1
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-results
+        path: openzeppelin-contracts/allure-results
+    - name: OpenZeppelin token
+      timeout-minutes: 200
+      run: |
+        # npx hardhat test
+        # find "$(pwd)/test/token" | grep test.js | echo $_ | npx hardhat test $_
         find "$(pwd)/test/token" | grep test.js | echo $_ | ../node_modules/.bin/npx hardhat test $_
+        # echo "============================================================================================="
+        # echo "====================================== test results ========================================="
+        # echo "============================================================================================="
+        echo "$ pwd"
+        pwd
+        echo "$ ls allure-results"
+        ls allure-results
+    - name: Archive Allure results 2
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-results
+        path: openzeppelin-contracts/allure-results
+    - name: OpenZeppelin utils
+      timeout-minutes: 200
+      run: |
+        # npx hardhat test
+        # find "$(pwd)/test/utils" | grep test.js | echo $_ | npx hardhat test $_
         find "$(pwd)/test/utils" | grep test.js | echo $_ | ../node_modules/.bin/npx hardhat test $_
         # echo "============================================================================================="
         # echo "====================================== test results ========================================="
@@ -305,18 +365,7 @@ jobs:
         pwd
         echo "$ ls allure-results"
         ls allure-results
-        cd ..
-    # - name: categories.json
-    #   run: |
-    #     cp categories.json openzeppelin-contracts/allure-results
-    - name: Look at Allure
-      if: always()
-      run: |
-        pwd
-        ls ./openzepplin-contracts/allure-results
-
-    # TODO: de-duplicate
-    - name: Archive Allure results
+    - name: Archive Allure results 3
       if: always()
       uses: actions/upload-artifact@v2
       with:
