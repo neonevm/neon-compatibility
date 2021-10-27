@@ -51,18 +51,6 @@ jobs:
         pwd
         pipenv run pytest --alluredir=report/allure-results
 
-    # - name: Look at Allure
-    #   if: always()
-    #   uses: ./.github/actions/allure-show
-
-    # TODO: de-duplicate
-    # - name: Archive Allure results
-    #   if: always()
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: allure-results
-    #     path: report/allure-results
-
     - uses: ./.github/actions/allure-upload
       if: always()
       with:
@@ -89,12 +77,6 @@ jobs:
       if: always()
       with:
         folder-name: access
-    # - name: Archive Allure results 1
-    #   if: always()
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: allure-results
-    #     path: openzeppelin-contracts/allure-results
     - uses: ./.github/actions/allure-upload
       if: always()
       with:
@@ -103,12 +85,6 @@ jobs:
       if: always()
       with:
         folder-name: finance
-    # - name: Archive Allure results 2
-    #   if: always()
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: allure-results
-    #     path: openzeppelin-contracts/allure-results
     - uses: ./.github/actions/allure-upload
       if: always()
       with:
@@ -135,12 +111,6 @@ jobs:
       if: always()
       with:
         folder-name: governance
-    # - name: Archive Allure results 1
-    #   if: always()
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: allure-results
-    #     path: openzeppelin-contracts/allure-results
     - uses: ./.github/actions/allure-upload
       if: always()
       with:
@@ -149,12 +119,6 @@ jobs:
       if: always()
       with:
         folder-name: helpers
-    # - name: Archive Allure results 2
-    #   if: always()
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: allure-results
-    #     path: openzeppelin-contracts/allure-results
     - uses: ./.github/actions/allure-upload
       if: always()
       with:
@@ -181,12 +145,6 @@ jobs:
       if: always()
       with:
         folder-name: metatx
-    # - name: Archive Allure results 1
-    #   if: always()
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: allure-results
-    #     path: openzeppelin-contracts/allure-results
     - uses: ./.github/actions/allure-upload
       if: always()
       with:
@@ -195,12 +153,6 @@ jobs:
       if: always()
       with:
         folder-name: proxy
-    # - name: Archive Allure results 2
-    #   if: always()
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: allure-results
-    #     path: openzeppelin-contracts/allure-results
     - uses: ./.github/actions/allure-upload
       if: always()
       with:
@@ -227,12 +179,6 @@ jobs:
       if: always()
       with:
         folder-name: security
-    # - name: Archive Allure results 1
-    #   if: always()
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: allure-results
-    #     path: openzeppelin-contracts/allure-results
     - uses: ./.github/actions/allure-upload
       if: always()
       with:
@@ -241,12 +187,6 @@ jobs:
       if: always()
       with:
         folder-name: token
-    # - name: Archive Allure results 2
-    #   if: always()
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: allure-results
-    #     path: openzeppelin-contracts/allure-results
     - uses: ./.github/actions/allure-upload
       if: always()
       with:
@@ -255,12 +195,6 @@ jobs:
       if: always()
       with:
         folder-name: utils
-    # - name: Archive Allure results 3
-    #   if: always()
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: allure-results
-    #     path: openzeppelin-contracts/allure-results
     - uses: ./.github/actions/allure-upload
       if: always()
       with:
@@ -304,17 +238,6 @@ jobs:
         # npm run test:hardhat:simple
         # mv ./frameworks/hardhat-simple/allure-results/ ./report/
         # moveFiles frameworks/hardhat-simple/allure-results/ ./report/
-    # - name: Look at Allure
-    #   if: always()
-    #   uses: ./.github/actions/allure-show
-
-    # # TODO: de-duplicate
-    # - name: Archive Allure results
-    #   if: always()
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: allure-results
-    #     path: report/allure-results
     - uses: ./.github/actions/allure-upload
       if: always()
       with:
@@ -353,17 +276,6 @@ jobs:
       timeout-minutes: 15
       if: always()
       run: ./gradlew build --warning-mode all
-    # - name: Look at Allure
-    #   if: always()
-    #   uses: ./.github/actions/allure-show
-
-    # # TODO: de-duplicate
-    # - name: Archive Allure results
-    #   if: always()
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: allure-results
-    #     path: report/allure-results
     - uses: ./.github/actions/allure-upload
       if: always()
       with:
@@ -405,17 +317,6 @@ jobs:
     - name: Move report/*.json to report/allure-results/*.json
       if: always()
       run: mv ./report/*.json ./report/allure-results/
-    # - name: Look at Allure
-    #   if: always()
-    #   uses: ./.github/actions/allure-show
-
-    # # TODO: de-duplicate
-    # - name: Archive Allure results
-    #   if: always()
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: allure-results
-    #     path: report/allure-results
     - uses: ./.github/actions/allure-upload
       if: always()
       with:
