@@ -50,13 +50,12 @@ jobs:
       run: |
         pwd
         pipenv run pytest --alluredir=report/allure-results
-
     - uses: ./.github/actions/allure-upload
       if: always()
       with:
-        folder-name: openzeppelin-contracts/allure-results
+        folder-name: report/allure-results
 
-  node-contracts-access-finance:
+  node-contracts-access-security:
     runs-on: macos-11
     timeout-minutes: 605
     needs: build
@@ -86,7 +85,7 @@ jobs:
       if: always()
       timeout-minutes: 300
       with:
-        folder-name: finance
+        folder-name: security
     - uses: ./.github/actions/allure-upload
       if: always()
       with:
@@ -164,7 +163,7 @@ jobs:
       with:
         folder-name: openzeppelin-contracts/allure-results
 
-  node-contracts-security-token-utils:
+  node-contracts-finance-token:
     runs-on: macos-11
     timeout-minutes: 605
     needs: build
@@ -185,7 +184,7 @@ jobs:
       if: always()
       timeout-minutes: 200
       with:
-        folder-name: security
+        folder-name: finance
     - uses: ./.github/actions/allure-upload
       if: always()
       with:
@@ -199,6 +198,24 @@ jobs:
       if: always()
       with:
         folder-name: openzeppelin-contracts/allure-results
+
+  node-contracts-utils:
+    runs-on: macos-11
+    timeout-minutes: 605
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    # macos-11
+    # - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
+    - name: Use Node.js 16
+      uses: actions/setup-node@v2
+      if: always()
+      with:
+        node-version: 16.x
+    - run: npm ci
+    - run: npm run build --if-present
+    - uses: ./.github/actions/openzeppelin-preparation
     - uses: ./.github/actions/run-hardhat-tests
       if: always()
       timeout-minutes: 200
@@ -337,10 +354,11 @@ jobs:
     if: always()
     needs:
       - build
-      - node-contracts-access-finance
+      - node-contracts-access-security
       - node-contracts-governance-helpers
       - node-contracts-metatx-proxy
-      - node-contracts-security-token-utils
+      - node-contracts-finance-token
+      - node-contracts-utils
       - python
       - node
       - jdk
