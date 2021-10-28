@@ -1,9 +1,12 @@
+import allure
 import pytest
 from src.helpers.common.config import CD_BACK
 from src.helpers.common.constants import Subfolder
 from src.helpers.common.error_message import HardhatError
 from src.helpers.common.success_message import HardhatSuccess
 from src.helpers.shell.processes import preset_variables, run_command_line
+
+FEATURE = 'hardhat'
 
 
 @pytest.fixture(autouse=True)
@@ -12,7 +15,8 @@ def prepare_truffle_config():
     yield
 
 
-# @pytest.mark.skip(reason="now yet done")
+@pytest.mark.skip(reason="moved to the Node.js tests")
+@allure.feature(FEATURE)
 def test_hardhat_simple():
     command = "npx hardhat run --network neonlabs scripts/sample-script.js"
     actual_result = run_command_line(
@@ -26,6 +30,8 @@ def test_hardhat_simple():
 # go to hardhat-advanced/hardhat.config.js
 # and comment out the following line
 # defaultNetwork: "neonlabs",
+@pytest.mark.skip(reason="moved to the Node.js tests")
+@allure.feature(FEATURE)
 def test_hardhat_advanced():
     # REPORT_GAS=true npx hardhat test
     command = "REPORT_GAS=true npx hardhat test"

@@ -1,0 +1,51 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  // this is to support tsconfig-paths
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+      // this loads <rootdir>/tsconfig.json to eslint
+    }
+  },
+  "plugins": ["simple-import-sort", "cucumber"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:unicorn/recommended",
+    "plugin:chai-expect/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "cucumber/no-arrow-functions": "error",
+    "import/order": "off",
+    "no-console": [
+      "error",
+      {
+        "allow": ["info", "error"]
+      }
+    ],
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "sort-imports": "off",
+    "sort-keys": [
+      "warn",
+      "asc",
+      {
+        "caseSensitive": true,
+        "natural": true
+      }
+    ],
+    "unicorn/filename-case": "off"
+  }
+}

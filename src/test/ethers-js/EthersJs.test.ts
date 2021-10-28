@@ -7,6 +7,7 @@ import { ConnectionManager } from '../../helpers/ethers-js/ConnectionManager';
 import { DataRetrieval } from '../../helpers/ethers-js/DataRetrieval';
 import { formatEther } from '@ethersproject/units';
 import { logger } from '../../utils/logger';
+import { requestFaucet } from '../../helpers/faucet/faucet-requester';
 
 const EpicName = 'Ethers.js';
 const SuiteName = EpicName;
@@ -23,6 +24,46 @@ const FormattedDaiShouldContainDot = 'Formatted Dai should contain dot';
 // https://docs.ethers.io/v5/getting-started/
 @suite(SuiteName)
 class EthersJsTests {
+  @epic(EpicName)
+  @feature('Account test')
+  @test
+  public async shouldCreateAcccountWithEthersJs() {
+    let initialBalance = 10 * Config.faucetQuotient;
+    const provider = new ConnectionManager().connectToJsonRpc(Config.url);
+    logger.notice(`Provider: ${provider}`);
+    const randomWallet = ethers.Wallet.createRandom();
+    logger.notice(`Random wallet = ${randomWallet.address}`);
+    const wallet = randomWallet.connect(provider);
+    logger.notice(`Random wallet connected = ${wallet.provider}`);
+    await requestFaucet(wallet.address, initialBalance);
+
+    const balance = await wallet.getBalance();
+    logger.notice(`Balance = ${balance.toString()}`);
+
+    /*
+    expect(
+      balance.toString(),
+      `Balance should equal ${initialBalance}`
+    ).to.be.equal(initialBalance.toString());
+    */
+  }
+
+  @epic(EpicName)
+  @feature('Transaction count test')
+  @test
+  public async shouldCountTransactions() {
+    // let initialBalance = 10 * Config.faucetQuotient;
+    const provider = new ConnectionManager().connectToJsonRpc(Config.url);
+    logger.notice(`Provider: ${provider}`);
+    const randomWallet = ethers.Wallet.createRandom();
+    logger.notice(`Random wallet = ${randomWallet.address}`);
+    const wallet = randomWallet.connect(provider);
+    logger.notice(`Random wallet connected = ${wallet.provider}`);
+
+    const transactionCount = await wallet.getTransactionCount();
+    logger.notice(`Transaction count: ${transactionCount}`);
+  }
+
   @epic(EpicName)
   @feature('Connection test')
   @test
@@ -88,7 +129,7 @@ class EthersJsTests {
     // Send 1 ether to an ens name.
     const tx = await signer.sendTransaction({
       to: 'ricmoo.firefly.eth',
-      value: ethers.utils.parseEther('1.0'),
+      value: ethers.utils.parseEther('1.0')
     });
     logger.notice(`Transaction = ${tx}`);
     expect(tx, TransactionShouldNotBeNull).to.not.be.null;
@@ -117,7 +158,7 @@ class EthersJsTests {
       'function transfer(address to, uint amount)',
 
       // An event triggered whenever anyone transfers to someone else
-      'event Transfer(address indexed from, address indexed to, uint amount)',
+      'event Transfer(address indexed from, address indexed to, uint amount)'
     ];
 
     // The Contract object
@@ -177,6 +218,7 @@ class EthersJsTests {
     const tx = daiWithSigner.transfer('ricmoo.firefly.eth', dai);
   }
 
+  /*
   @epic(EpicName)
   @feature('Listening to Events')
   @test
@@ -210,6 +252,7 @@ class EthersJsTests {
       logger.notice(`I got ${formatEther(amount)} from ${from}.`);
     });
   }
+  */
 
   @epic(EpicName)
   @feature('Query Historic Events')

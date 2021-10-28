@@ -1,10 +1,38 @@
-# UAT for 3rd parties' compatibility
+# Test suite for checking 3rd parties' compatibility
 ## Reports
 http://docs.neon-labs.org/neon-compatibility/
 
 earlier reports are/were available by the link
 
 http://docs.neon-labs.org/neon-uat/
+
+## OpenZeppelin contracts testing
+1. Install node.js
+2. Go to the neon-compatibility folder
+3. Run
+```
+npm i
+```
+4. Go to the openzeppelin-contracts folder
+```
+cd openzeppelin-contracts
+```
+5. Run all the tests
+```
+../node_modules/.bin/truffle --network neonlabs test
+```
+6. Or run a single test
+```
+../node_modules/.bin/truffle --network neonlabs test ./test/access/AccessControl.test.js
+```
+Alternatively, you can install truffle globally by issuing the following command
+```
+npm i -g truffle
+```
+and further use it this way
+```
+truffle test --network neonlabs
+```
 
 ## Preparation
 
@@ -25,8 +53,8 @@ brew install allure
 
 ### Globally (Ubuntu 20.04)
 ```
-# assuming that there already is Python 3.8.10, 
-# otherwise install it by issuing brew install python@3.8 
+# assuming that there already is Python 3.8.10,
+# otherwise install it by issuing brew install python@3.8
 # or any alternate package manager
 
 # pip

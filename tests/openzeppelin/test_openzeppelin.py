@@ -1,10 +1,10 @@
+import allure
 import os
 import pytest
 from shutil import copy
-from src.helpers.common.success_message import OpenZeppelinSuccess
 from src.helpers.common.config import CD_BACK
 from src.helpers.common.constants import RunCommand, Subfolder
-from src.helpers.common.error_message import OpenZeppelinError, TruffleBasedError
+from src.helpers.common.error_message import OpenZeppelinError
 from src.helpers.shell.file_system import clean_up_folder
 from src.helpers.shell.processes import preset_variables, run_command_line
 from tests.openzeppelin.input_data import InputData
@@ -15,6 +15,8 @@ TEST_PATH = "/OpenZeppelin/test/"
 SOURCE_CONTRACTS_PATH = "/OpenZeppelin/source/contracts/"
 SOURCE_MIGRATIONS_PATH = "/OpenZeppelin/source/migrations/"
 SOURCE_TEST_PATH = "/OpenZeppelin/source/test/"
+
+FEATURE = 'OpenZeppelin'
 
 INPUT_DATA = [
     (InputData("access/Ownable.test.js", ["access/Ownable.test.js"], [
@@ -121,7 +123,8 @@ def prepare_truffle_config():
 #     # truffle --network neonlabs test ./test/access/Ownable.test.js
 #     command = "--network neonlabs test ./test/access/Ownable.test.js"
 #     actual_result = run_command_line(
-#         f"{Subfolder.CD_OPENZEPPELIN} {RunCommand.TRUFFLE} {command} {CD_BACK}"
+#         f"{Subfolder.CD_OPENZEPPELIN} \
+#              {RunCommand.TRUFFLE} {command} {CD_BACK}"
 #     )
 #     # assert OpenZeppelinSuccess.SUCCESS_PASSING in actual_result
 #     # assert OpenZeppelinSuccess.SUCCESS_CONTRACT in actual_result
@@ -132,6 +135,7 @@ def prepare_truffle_config():
 
 
 @pytest.mark.parametrize("input_data", INPUT_DATA)
+@allure.feature(FEATURE)
 def test_contracts(input_data: InputData):
     copy_files(input_data)
 
