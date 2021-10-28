@@ -70,7 +70,7 @@ privateKeys.unshift(process.env.PRIVATE_KEY);
 console.log("========================== Reading Hardhat config =============================");
 console.log(`address from = ${process.env.ADDRESS_FROM}`);
 console.log(`address to = ${process.env.ADDRESS_TO}`);
-console.log(`main private key = ${process.env.process.env.PRIVATE_KEY}`);
+console.log(`main private key = ${process.env.PRIVATE_KEY}`);
 console.log(`account keys = ${privateKeys}`);
 console.log("==============================================================================");
 
