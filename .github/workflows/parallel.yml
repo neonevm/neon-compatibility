@@ -307,47 +307,6 @@ jobs:
       with:
         folder-name: report/allure-results
 
-  dotnet:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    needs:
-      - build
-      # - dotnet-format
-    steps:
-    - uses: actions/checkout@v2
-    - uses: ./.github/actions/allure-prep
-    - uses: ./.github/actions/switch-network
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      if: always()
-      with:
-        dotnet-version: 5.0.x
-    - name: Print dotnet version
-      if: always()
-      run: dotnet --version
-    - name: Restore dependencies
-      if: always()
-      run: dotnet restore
-    # - name: dotnet - format check
-    #   if: always()
-    #   run: |
-    #     run: dotnet tool update -g dotnet-format
-    #     dotnet-format --check
-    - name: Build
-      if: always()
-      run: dotnet build --no-restore
-    - name: Test
-      timeout-minutes: 15
-      if: always()
-      run: dotnet test --no-build --verbosity normal
-    - name: Move report/*.json to report/allure-results/*.json
-      if: always()
-      run: mv ./report/*.json ./report/allure-results/
-    - uses: ./.github/actions/allure-upload
-      if: always()
-      with:
-        folder-name: report/allure-results
-
   allure:
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -362,7 +321,6 @@ jobs:
       - python
       - node
       - jdk
-      - dotnet
     steps:
 
     - name: Download all workflow run artifacts
