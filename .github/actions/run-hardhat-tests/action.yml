@@ -1,0 +1,23 @@
+name: Run Hardhat tests
+description: Run all the tests from a subfolder of the test folder
+inputs:
+  folder-name:
+    description: name of subfolder
+    required: true
+    default: ''
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        cd openzeppelin-contracts
+        # npx hardhat test
+        # find "$(pwd)/test/${{ inputs.folder-name }}" | grep test.js | echo $_ | npx hardhat test $_
+        find "$(pwd)/test/${{ inputs.folder-name }}" | grep test.js | echo $_ | ../node_modules/.bin/hardhat test $_
+        echo "============================================================================================="
+        echo "====================================== test results ========================================="
+        echo "============================================================================================="
+        echo "$ pwd"
+        pwd
+        echo "$ ls allure-results"
+        ls allure-results
+      shell: bash
