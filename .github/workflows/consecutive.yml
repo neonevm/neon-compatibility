@@ -1,0 +1,281 @@
+name: "One-by-one: Python 3.8, Node.js 16, JDK 16, allure"
+
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'Test scenario tags'
+        required: false
+      network:
+        description: 'Network (devnet, testnet, internal.testnet, neonswap.live, aws, ropsten, rinkeby)'
+        required: true
+        default: 'internal.testnet'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+  python:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: |
+        npm i
+        # python -m pip install --upgrade pip
+        pip install pipenv
+        pipenv sync
+        # pip install -r requirements.txt
+    - name: Lint with flake8
+      run: |
+        pipenv run flake8 ./src
+        pipenv run flake8 ./tests
+    - name: Test with pytest
+      timeout-minutes: 15
+      if: always()
+      run: |
+        pwd
+        pipenv run pytest --alluredir=report/allure-results
+    - uses: ./.github/actions/allure-upload
+      if: always()
+      with:
+        folder-name: report/allure-results
+
+  node-contracts:
+    runs-on: macos-11
+    timeout-minutes: 2710
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    # macos-11
+    # - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
+    - name: Use Node.js 16
+      uses: actions/setup-node@v2
+      if: always()
+      with:
+        node-version: 16.x
+    - run: npm ci
+    - run: npm run build --if-present
+    - uses: ./.github/actions/openzeppelin-preparation
+    - uses: ./.github/actions/run-hardhat-tests
+      if: always()
+      timeout-minutes: 300
+      with:
+        folder-name: access
+    - uses: ./.github/actions/allure-upload
+      if: always()
+      with:
+        folder-name: openzeppelin-contracts/allure-results
+    - uses: ./.github/actions/run-hardhat-tests
+      if: always()
+      timeout-minutes: 300
+      with:
+        folder-name: security
+    - uses: ./.github/actions/allure-upload
+      if: always()
+      with:
+        folder-name: openzeppelin-contracts/allure-results
+    - uses: ./.github/actions/run-hardhat-tests
+      if: always()
+      timeout-minutes: 300
+      with:
+        folder-name: governance
+    - uses: ./.github/actions/allure-upload
+      if: always()
+      with:
+        folder-name: openzeppelin-contracts/allure-results
+    - uses: ./.github/actions/run-hardhat-tests
+      if: always()
+      timeout-minutes: 300
+      with:
+        folder-name: helpers
+    - uses: ./.github/actions/allure-upload
+      if: always()
+      with:
+        folder-name: openzeppelin-contracts/allure-results
+    - uses: ./.github/actions/run-hardhat-tests
+      if: always()
+      timeout-minutes: 300
+      with:
+        folder-name: metatx
+    - uses: ./.github/actions/allure-upload
+      if: always()
+      with:
+        folder-name: openzeppelin-contracts/allure-results
+    - uses: ./.github/actions/run-hardhat-tests
+      if: always()
+      timeout-minutes: 300
+      with:
+        folder-name: proxy
+    - uses: ./.github/actions/allure-upload
+      if: always()
+      with:
+        folder-name: openzeppelin-contracts/allure-results
+    - uses: ./.github/actions/run-hardhat-tests
+      if: always()
+      timeout-minutes: 300
+      with:
+        folder-name: finance
+    - uses: ./.github/actions/allure-upload
+      if: always()
+      with:
+        folder-name: openzeppelin-contracts/allure-results
+    - uses: ./.github/actions/run-hardhat-tests
+      if: always()
+      timeout-minutes: 300
+      with:
+        folder-name: token
+    - uses: ./.github/actions/allure-upload
+      if: always()
+      with:
+        folder-name: openzeppelin-contracts/allure-results
+    - uses: ./.github/actions/run-hardhat-tests
+      if: always()
+      timeout-minutes: 300
+      with:
+        folder-name: utils
+    - uses: ./.github/actions/allure-upload
+      if: always()
+      with:
+        folder-name: openzeppelin-contracts/allure-results
+
+  node:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
+    - name: Use Node.js 16
+      uses: actions/setup-node@v2
+      if: always()
+      with:
+        node-version: 16.x
+    - run: npm ci
+    - run: npm run build --if-present
+    - name: Mocha tests
+      timeout-minutes: 15
+      run: |
+        npm run test:ci
+        mv ./allure-results/ ./report/
+    - name: Hardhat tests
+      timeout-minutes: 5
+      if: always()
+      run: |
+        function moveFiles {
+          echo "cp -R $1* $2"
+          cp -R $1 $2
+          # rm -R "$1"
+        }
+        # cp -R source/* destination/ 
+        # rm -R source/
+        npm run test:hardhat:advanced
+        # mv ./frameworks/hardhat-advanced/allure-results/ ./report/
+        pwd
+        moveFiles ./frameworks/hardhat-advanced/report/allure-results/ ./report/
+        # npm run test:hardhat:simple
+        # mv ./frameworks/hardhat-simple/allure-results/ ./report/
+        # moveFiles frameworks/hardhat-simple/allure-results/ ./report/
+    - uses: ./.github/actions/allure-upload
+      if: always()
+      with:
+        folder-name: report/allure-results
+
+  jdk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
+    - name: Set up JDK 16
+      uses: actions/setup-java@v2
+      if: always()
+      with:
+        java-version: '16'
+        distribution: 'adopt'
+    - name: Run check style
+      uses: nikitasavinov/checkstyle-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        reporter: 'github-pr-check'
+        tool_name: 'testtool'
+    - name: Gradle wrapper
+      if: always()
+      run: gradle wrapper --gradle-version 7.2
+    - name: Print Gradle version
+      if: always()
+      run: gradle --version
+    - name: Grant execute permission for gradlew
+      if: always()
+      run: chmod +x gradlew
+    - name: Test
+      timeout-minutes: 15
+      if: always()
+      run: ./gradlew build --warning-mode all
+    - uses: ./.github/actions/allure-upload
+      if: always()
+      with:
+        folder-name: report/allure-results
+
+  allure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    if: always()
+    needs:
+      - build
+      - node-contracts
+      - python
+      - node
+      - jdk
+    steps:
+
+    - name: Download all workflow run artifacts
+      uses: actions/download-artifact@v2
+
+    - name: Get Allure history
+      uses: actions/checkout@v2
+      if: always()
+      continue-on-error: true
+      with:
+        ref: gh-pages
+        path: gh-pages
+
+    - name: Allure Report with history
+      uses: simple-elf/allure-report-action@v1.5
+      if: always()
+
+    - name: Allure Report action from marketplace
+      uses: simple-elf/allure-report-action@master
+      if: always()
+      with:
+        allure_results: allure-results
+        gh_pages: gh-pages
+        allure_report: allure-report
+        allure_history: allure-history
+        keep_reports: 10
+
+    - name: Deploy report to Github Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v2
+      env:
+        PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PUBLISH_BRANCH: gh-pages
+        PUBLISH_DIR: allure-history
