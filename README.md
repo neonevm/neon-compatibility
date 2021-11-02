@@ -28,14 +28,17 @@ Now you have:
 - there is the ./openzeppelin-contracts/allure-results folder and categories.json inside it
 5. Run all the tests
 ```
+# in the neon-compatibility/openzeppelin-contracts folder
 npx hardhat test
 ```
 6. Or run a subfolder with tests, for example
 ```
+# in the neon-compatibility/openzeppelin-contracts folder
 find "$(pwd)/test/finance" | grep test.js | echo $_ | ../node_modules/.bin/hardhat test $_
 ```
 8. Or run a single test
 ```
+# in the neon-compatibility/openzeppelin-contracts folder
 ../node_modules/.bin/hardhat test ./test/access/AccessControl.test.js
 ```
 9. Having finished, tests leave after theirselves folder with test results ./openzeppelin-contracts/allure-results
