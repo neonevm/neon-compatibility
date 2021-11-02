@@ -7,7 +7,7 @@ earlier reports are/were available by the link
 http://docs.neon-labs.org/neon-uat/
 
 ## OpenZeppelin contracts testing
-1. Install node.js
+1. Install node.js, allure (see the instruction below)
 2. Go to the neon-compatibility folder
 3. Run
 ```
@@ -36,19 +36,19 @@ npx hardhat test
 # in the neon-compatibility/openzeppelin-contracts folder
 find "$(pwd)/test/finance" | grep test.js | echo $_ | ../node_modules/.bin/hardhat test $_
 ```
-8. Or run a single test
+7. Or run a single test
 ```
 # in the neon-compatibility/openzeppelin-contracts folder
 ../node_modules/.bin/hardhat test ./test/access/AccessControl.test.js
 ```
-9. Having finished, tests leave after theirselves folder with test results ./openzeppelin-contracts/allure-results
+8. Having finished, tests leave after theirselves folder with test results ./openzeppelin-contracts/allure-results
 Copy its content into the ./report/allure-results folder
 ```
 # in the neon-compatibility folder
 cp ./openzeppelin-contracts/allure-results/* ./report/allure-results
 ```
 Now all your test results are in the ./report/allure-results folder (ls ./report/allure-results)
-and you are ready to run allure and get the report (you need to install allure, see below how to do it)
+and you are ready to run allure and get the report
 ```
 # in the neon-compatibility folder
 allure serve
