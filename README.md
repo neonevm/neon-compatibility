@@ -13,7 +13,16 @@ http://docs.neon-labs.org/neon-uat/
 ```
 npm i
 ```
-4. Run content of the .github/actions/openzeppelin-preparation, namely (assuming you are in the neon-compatibility folder):
+4. To work with the network of your interest copy the approvriate .env.* file into .env in the root of the solution
+
+| File                  | Description         |
+| :-------------------- | :------------------ |
+| .env.devnet           | Devnet              |
+| .env.testnet.         | Testnet             |
+| .env.internal.testnet | test stand          |
+| .env.local.           | Local run in Docker |
+
+5. Run content of the .github/actions/openzeppelin-preparation, namely (assuming you are in the neon-compatibility folder):
 ```
 rm -rf openzeppelin-contracts
 git submodule update --init --recursive
@@ -26,22 +35,22 @@ Now you have:
 - the ./openzeppelin-contracts folder with some files and folders
 - the ./openzeppelin-contracts/hardhat.config.js file has the same content as ./hardhat.config.js
 - there is the ./openzeppelin-contracts/allure-results folder and categories.json inside it
-5. Run all the tests
+6. Run all the tests
 ```
 # in the neon-compatibility/openzeppelin-contracts folder
 npx hardhat test
 ```
-6. Or run a subfolder with tests, for example
+7. Or run a subfolder with tests, for example
 ```
 # in the neon-compatibility/openzeppelin-contracts folder
 find "$(pwd)/test/finance" | grep test.js | echo $_ | ../node_modules/.bin/hardhat test $_
 ```
-7. Or run a single test
+8. Or run a single test
 ```
 # in the neon-compatibility/openzeppelin-contracts folder
 ../node_modules/.bin/hardhat test ./test/access/AccessControl.test.js
 ```
-8. Having finished, tests leave after theirselves folder with test results ./openzeppelin-contracts/allure-results
+9. Having finished, tests leave after theirselves folder with test results ./openzeppelin-contracts/allure-results
 Copy its content into the ./report/allure-results folder
 ```
 # in the neon-compatibility folder
