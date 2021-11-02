@@ -13,25 +13,30 @@ http://docs.neon-labs.org/neon-uat/
 ```
 npm i
 ```
-4. Go to the openzeppelin-contracts folder
+4. Run content of the .github/actions/opzeppelin-preparation, namely (assuming you are in the neon-compatibility folder):
 ```
+rm -rf openzeppelin-contracts
+git submodule update --init --recursive
 cd openzeppelin-contracts
+cp ../hardhat.config.js .
+mkdir allure-results
+cp ../categories.json allure-results
 ```
+Now you have:
+- the ./openzeppelin-contracts folder with some files and folders
+- the ./openzeppelin-contracts/hardhat.config.js file has the same content as ./hardhat.config.js
+- there is the ./openzeppelin-contracts/allure-results folder and categories.json inside it
 5. Run all the tests
 ```
-../node_modules/.bin/truffle --network neonlabs test
+npx hardhat test
 ```
-6. Or run a single test
+6. Or run a subfolder with tests, for example
 ```
-../node_modules/.bin/truffle --network neonlabs test ./test/access/AccessControl.test.js
+find "$(pwd)/test/finance" | grep test.js | echo $_ | ../node_modules/.bin/hardhat test $_
 ```
-Alternatively, you can install truffle globally by issuing the following command
+8. Or run a single test
 ```
-npm i -g truffle
-```
-and further use it this way
-```
-truffle test --network neonlabs
+../node_modules/.bin/hardhat test ./test/access/AccessControl.test.js
 ```
 
 ## Preparation
