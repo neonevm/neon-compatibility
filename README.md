@@ -13,7 +13,7 @@ http://docs.neon-labs.org/neon-uat/
 ```
 npm i
 ```
-4. Run content of the .github/actions/opzeppelin-preparation, namely (assuming you are in the neon-compatibility folder):
+4. Run content of the .github/actions/openzeppelin-preparation, namely (assuming you are in the neon-compatibility folder):
 ```
 rm -rf openzeppelin-contracts
 git submodule update --init --recursive
@@ -37,6 +37,22 @@ find "$(pwd)/test/finance" | grep test.js | echo $_ | ../node_modules/.bin/hardh
 8. Or run a single test
 ```
 ../node_modules/.bin/hardhat test ./test/access/AccessControl.test.js
+```
+9. Having finished, tests leave after theirselves folder with test results ./openzeppelin-contracts/allure-results
+Copy its content into the ./report/allure-results folder
+```
+# in the neon-compatibility folder
+cp ./openzeppelin-contracts/allure-results/* ./report/allure-results
+```
+Now all your test results are in the ./report/allure-results folder (ls ./report/allure-results)
+and you are ready to run allure and get the report (you need to install allure, see below how to do it)
+```
+# in the neon-compatibility folder
+allure serve
+```
+You can if you with install hardhat globally by issuing the following command:
+```
+npm i -g hardhat
 ```
 
 ## Preparation
