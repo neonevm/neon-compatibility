@@ -125,13 +125,13 @@ sudo apt-get install allure
 
 ### Solution-level Node.js
 ```
-cd neon-uat
+cd neon-compatibility
 npm i
 npm audit fix --force
 ```
 ### Solution-level Python
 ```
-cd neon-uat
+cd neon-compatibility
 pipenv --python 3.8
 pipenv sync
 ```
@@ -146,7 +146,7 @@ Copy content of an environment file into .env in the root of the solution
 
 ## Run
 ```
-cd neon-uat
+cd neon-compatibility
 pipenv shell
 pytest -rP --alluredir=allure-results
 allure serve
