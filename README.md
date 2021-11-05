@@ -7,31 +7,72 @@ earlier reports are/were available by the link
 http://docs.neon-labs.org/neon-uat/
 
 ## OpenZeppelin contracts testing
-1. Install node.js
+1. Install node.js, allure (see the instruction below)
 2. Go to the neon-compatibility folder
 3. Run
 ```
+# in the neon-compatibility folder
 npm i
 ```
-4. Go to the openzeppelin-contracts folder
+4. To work with the network of your interest copy the approvriate .env.* file into .env in the root of the solution
+
+| File                  | Description         |
+| :-------------------- | :------------------ |
+| .env.devnet           | Devnet              |
+| .env.testnet.         | Testnet             |
+| .env.internal.testnet | test stand          |
+| .env.local.           | Local run in Docker |
+
 ```
+# in the neon-compatibility folder
+cp ./.env.local ./.env
+```
+
+5. Run content of the .github/actions/openzeppelin-preparation, namely (assuming you are in the neon-compatibility folder):
+```
+# in the neon-compatibility folder
+rm -rf openzeppelin-contracts
+git submodule update --init --recursive
 cd openzeppelin-contracts
+cp ../hardhat.config.js .
+mkdir allure-results
+cp ../categories.json allure-results
 ```
-5. Run all the tests
+Now you have:
+- the ./openzeppelin-contracts folder with some files and folders
+- the ./openzeppelin-contracts/hardhat.config.js file has the same content as ./hardhat.config.js
+- there is the ./openzeppelin-contracts/allure-results folder and categories.json inside it
+6. Run all the tests
 ```
-../node_modules/.bin/truffle --network neonlabs test
+# in the neon-compatibility/openzeppelin-contracts folder
+npx hardhat test
 ```
-6. Or run a single test
+7. Or run a subfolder with tests, for example
 ```
-../node_modules/.bin/truffle --network neonlabs test ./test/access/AccessControl.test.js
+# in the neon-compatibility/openzeppelin-contracts folder
+find "$(pwd)/test/finance" | grep test.js | echo $_ | ../node_modules/.bin/hardhat test $_
 ```
-Alternatively, you can install truffle globally by issuing the following command
+8. Or run a single test
 ```
-npm i -g truffle
+# in the neon-compatibility/openzeppelin-contracts folder
+../node_modules/.bin/hardhat test ./test/access/AccessControl.test.js
 ```
-and further use it this way
+9. Having finished, tests leave after theirselves folder with test results ./openzeppelin-contracts/allure-results
+Copy its content into the ./report/allure-results folder
 ```
-truffle test --network neonlabs
+# in the neon-compatibility folder
+cp ./openzeppelin-contracts/allure-results/* ./report/allure-results
+```
+Now all your test results are in the ./report/allure-results folder (ls ./report/allure-results)
+and you are ready to run allure and get the report
+```
+# in the neon-compatibility folder
+allure serve
+```
+You can if you with install hardhat globally by issuing the following command:
+```
+# in any folder
+npm i -g hardhat
 ```
 
 ## Preparation
@@ -84,13 +125,13 @@ sudo apt-get install allure
 
 ### Solution-level Node.js
 ```
-cd neon-uat
+cd neon-compatibility
 npm i
 npm audit fix --force
 ```
 ### Solution-level Python
 ```
-cd neon-uat
+cd neon-compatibility
 pipenv --python 3.8
 pipenv sync
 ```
@@ -105,7 +146,7 @@ Copy content of an environment file into .env in the root of the solution
 
 ## Run
 ```
-cd neon-uat
+cd neon-compatibility
 pipenv shell
 pytest -rP --alluredir=allure-results
 allure serve

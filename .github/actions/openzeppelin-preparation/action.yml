@@ -1,0 +1,28 @@
+name: OpenZeppelin contracts preparation
+description: Downloads the submodule, creates a folder for reports and put categories.json there
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        rm -rf openzeppelin-contracts
+        git submodule update --init --recursive
+        cd openzeppelin-contracts
+        echo "$ pwd"
+        pwd
+        cp ../hardhat.config.js .
+        # categories.json
+        mkdir allure-results
+        cp ../categories.json allure-results
+        echo "$ ls allure-results"
+        ls allure-results
+        echo "============================================================================================="
+        echo "==================== the openzeppelin-contracts repo is downloaded =========================="
+        echo "============================= and hardhat.config.js is here ================================="
+        echo "============================================================================================="
+        echo "$ ls -la"
+        ls -la
+      shell: bash
+
+
+
+
