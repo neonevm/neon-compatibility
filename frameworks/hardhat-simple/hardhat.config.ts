@@ -2,7 +2,7 @@ import { task } from 'hardhat/config';
 import '@nomiclabs/hardhat-waffle';
 import { HttpNetworkConfig } from 'hardhat/types/config';
 import { int } from 'hardhat/internal/core/params/argumentTypes';
-const Web3 = require("web3");
+const Web3 = require('web3');
 import * as dotenv from 'dotenv';
 dotenv.config({ path: '../../.env' });
 // import('hardhat/config').HardhatUserConfig
@@ -75,7 +75,7 @@ const neonlabs: HttpNetworkConfig = {
  */
 export default {
   solidity: '0.8.4',
-  defaultNetwork: "neonlabs",
+  defaultNetwork: 'neonlabs',
   networks: {
     // hardhat: {},
     neonlabs: neonlabs
@@ -84,9 +84,8 @@ export default {
     timeout: 1000000000,
     reporter: 'mocha-multi-reporters',
     reporterOption: {
-      configFile: '../../reporterConfig.json',
-      // url: process.env.PROXY_URL,
+      configFile: '../../reporterConfig.json'
     },
-    diff: true,
-  },
+    diff: true
+  }
 };
