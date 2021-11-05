@@ -11,6 +11,7 @@ http://docs.neon-labs.org/neon-uat/
 2. Go to the neon-compatibility folder
 3. Run
 ```
+# in the neon-compatibility folder
 npm i
 ```
 4. To work with the network of your interest copy the approvriate .env.* file into .env in the root of the solution
@@ -22,8 +23,14 @@ npm i
 | .env.internal.testnet | test stand          |
 | .env.local.           | Local run in Docker |
 
+```
+# in the neon-compatibility folder
+cp ./.env.local ./.env
+```
+
 5. Run content of the .github/actions/openzeppelin-preparation, namely (assuming you are in the neon-compatibility folder):
 ```
+# in the neon-compatibility folder
 rm -rf openzeppelin-contracts
 git submodule update --init --recursive
 cd openzeppelin-contracts
@@ -64,6 +71,7 @@ allure serve
 ```
 You can if you with install hardhat globally by issuing the following command:
 ```
+# in any folder
 npm i -g hardhat
 ```
 
@@ -117,13 +125,13 @@ sudo apt-get install allure
 
 ### Solution-level Node.js
 ```
-cd neon-uat
+cd neon-compatibility
 npm i
 npm audit fix --force
 ```
 ### Solution-level Python
 ```
-cd neon-uat
+cd neon-compatibility
 pipenv --python 3.8
 pipenv sync
 ```
@@ -138,7 +146,7 @@ Copy content of an environment file into .env in the root of the solution
 
 ## Run
 ```
-cd neon-uat
+cd neon-compatibility
 pipenv shell
 pytest -rP --alluredir=allure-results
 allure serve

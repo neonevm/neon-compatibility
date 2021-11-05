@@ -103,6 +103,7 @@ module.exports = {
       gasPrice: 1000000000,
       blockGasLimit: 10000000,
       allowUnlimitedContractSize: !withOptimizations,
+      timeout: 100000,
     },
   },
   gasReporter: {
