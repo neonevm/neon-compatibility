@@ -58,15 +58,9 @@ find "$(pwd)/test/finance" | grep test.js | echo $_ | ../node_modules/.bin/hardh
 ../node_modules/.bin/hardhat test ./test/access/AccessControl.test.js
 ```
 9. Having finished, tests leave after theirselves folder with test results ./openzeppelin-contracts/allure-results
-Copy its content into the ./report/allure-results folder
-```
-# in the neon-compatibility folder
-cp ./openzeppelin-contracts/allure-results/* ./report/allure-results
-```
-Now all your test results are in the ./report/allure-results folder (ls ./report/allure-results)
 and you are ready to run allure and get the report
 ```
-# in the neon-compatibility folder
+# in the neon-compatibility/openzeppelin-contracts folder
 allure serve
 ```
 You can if you with install hardhat globally by issuing the following command:
