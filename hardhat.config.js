@@ -57,6 +57,8 @@ for (const f of fs.readdirSync(path.join(__dirname, 'hardhat'))) {
 
 const withOptimizations = argv.enableGasReport || argv.compileMode === 'production';
 
+const ACCOUNTS_NUMBER = 20;
+
 const web3 = new Web3(new Web3.providers.HttpProvider(process.env.PROXY_URL));
 const account01 = web3.eth.accounts.create();
 process.env.ADDRESS_FROM = account01.address;
@@ -64,7 +66,7 @@ process.env.PRIVATE_KEY = account01.privateKey;
 const account02 = web3.eth.accounts.create();
 process.env.ADDRESS_TO = account02.address;
 
-const privateKeys = Array.from(Array(10), (_, x) => web3.eth.accounts.create().privateKey);
+const privateKeys = Array.from(Array(ACCOUNTS_NUMBER), (_, x) => web3.eth.accounts.create().privateKey);
 privateKeys.unshift(process.env.PRIVATE_KEY);
 
 console.log("========================== Reading Hardhat config =============================");
