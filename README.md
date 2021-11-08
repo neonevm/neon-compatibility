@@ -151,3 +151,8 @@ pipenv shell
 pytest -rP --alluredir=allure-results
 allure serve
 ```
+## Workflows
+| Workflow | Push | Manual | Schedule |
+| :---         | :---         | :---         | :---         |
+| Consecutive | - | + | 20:00 UTC |
+| Parallel | - | + | - |
