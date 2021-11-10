@@ -5,13 +5,9 @@ runs:
   steps:
     - run: |
         ENV_FILE="environment.properties"
-        #
-        cat .env
 
         export $(grep -v '^#' .env | xargs)
-        echo $PROXY_URL
-        echo $NETWORK_ID
-        echo $ENV_FILE
+        echo "PROXY_URL=$PROXY_URL"
 
         # EVM version
         EVM_VERSION=$(curl -X POST -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":0}' $PROXY_URL)
@@ -29,5 +25,6 @@ runs:
         SOLANA_VERSION=$(curl $PROXY_URL -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getVersion"}')
         echo "Solana.Version=$SOLANA_VERSION" >> $ENV_FILE
 
+        echo "$ENV_FILE content:"
         cat $ENV_FILE
       shell: bash
