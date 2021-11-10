@@ -4,10 +4,6 @@ runs:
   using: "composite"
   steps:
     - run: |
-        # for any occasion
-        sudo apt-get update
-        sudo apt-get install curl
-
         #
         cat .env
         cat ./.env
@@ -16,6 +12,7 @@ runs:
         echo $PROXY_URL
         echo $(PROXY_URL)
         echo "$(PROXY_URL)"
+        echo $NETWORK_ID
 
         # EVM version
         curl -X POST -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":0}' "$(PROXY_URL)"
