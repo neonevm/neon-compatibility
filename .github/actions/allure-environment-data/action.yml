@@ -6,13 +6,16 @@ runs:
     - run: |
         ENV_FILE="environment.json"
         echo "[" > $ENV_FILE
+        ENV_PROP_FILE="environment.properties"
 
         export $(grep -v '^#' .env | xargs)
         echo "PROXY_URL=$PROXY_URL"
+        echo "PROXY_URL=$PROXY_URL" > $ENV_PROP_FILE
         echo "{ \"name\": \"PROXY_URL\", \"values\": [ '$PROXY_URL' ] }," >> $ENV_FILE
 
         # EVM version
         EVM_VERSION=$(curl -X POST -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":0}' $PROXY_URL)
+        echo "EVM.Version=$EVM_VERSION" >> $ENV_PROP_FILE
         echo "{ \"name\": \"EVM.Version\", \"values\": [ '$EVM_VERSION' ] }," >> $ENV_FILE
         
         # openzeppelin-contracts version
