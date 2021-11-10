@@ -1,0 +1,16 @@
+name: Collect Allure environment data
+description: Collects environment data and puts them into allure-results folder
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        export $(grep -v '^#' .env | xargs)
+        # EVM version
+        curl -X POST -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":0}' "$(PROXY_URL)"
+        # openzeppelin-contracts version
+
+        # Solana cluster version
+
+        # ls report/allure-results
+        # allure --version
+      shell: bash
