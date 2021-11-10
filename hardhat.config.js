@@ -100,7 +100,7 @@ module.exports = {
       accounts: privateKeys,
       from: process.env.ADDRESS_FROM,
       to: process.env.ADDRESS_TO,
-      network_id: process.env.NETWORK_ID,
+      chainId: parseInt(process.env.NETWORK_ID),
       gas: 3000000,
       gasPrice: 1000000000,
       blockGasLimit: 10000000,
