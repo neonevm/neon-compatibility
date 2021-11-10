@@ -14,10 +14,16 @@ runs:
     - uses: ./.github/actions/allure-environment-data
     - run: |
         # categories.json
-        mkdir allure-results
-        cp ../categories.json allure-results
-        echo "$ ls allure-results"
-        ls allure-results
+        ALLURE_RESULTS="allure-results"
+        mkdir $ALLURE_RESULTS
+        cp ../categories.json $ALLURE_RESULTS
+
+        echo "environment.properties"
+        echo $ENV_FILE
+
+        cp ../environment.properties $ALLURE_RESULTS
+        echo "$ ls $ALLURE_RESULTS"
+        ls $ALLURE_RESULTS
         echo "============================================================================================="
         echo "==================== the openzeppelin-contracts repo is downloaded =========================="
         echo "============================= and hardhat.config.js is here ================================="

@@ -4,22 +4,31 @@ runs:
   using: "composite"
   steps:
     - run: |
+        ENV_FILE="environment.properties"
         #
         cat .env
         cat ./.env
 
         export $(grep -v '^#' .env | xargs)
         echo $PROXY_URL
-        echo $(PROXY_URL)
-        echo "$(PROXY_URL)"
         echo $NETWORK_ID
+        echo $ENV_FILE
 
         # EVM version
-        curl -X POST -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":0}' "$(PROXY_URL)"
+        EVM_VERSION=$(curl -X POST -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":0}' $PROXY_URL)
+        "EMV.Version=$(EVM_VERSION)" > $ENV_FILE
+        
         # openzeppelin-contracts version
-
+        cd openzeppelin-contracts
+        TEST_VERSION=$(git log -n 1 | grep Date)
+        TEST_AUTHOR=$(git log -n 1 | grep Author)
+        cd ..
+        "Test.Version=$(TEST_VERSION)" >> $ENV_FILE
+        "Test.Commiter=$(TEST_AUTHOR)" >> $ENV_FILE
+        
         # Solana cluster version
+        SOLANA_VERSION=$(curl $PROXY_URL -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getVersion"}')
+        "Solana.Version=$(SOLANA_VERSION)" >> $ENV_FILE
 
-        # ls report/allure-results
-        # allure --version
+        cat $ENV_FILE
       shell: bash
