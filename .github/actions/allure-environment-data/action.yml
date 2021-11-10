@@ -4,7 +4,15 @@ runs:
   using: "composite"
   steps:
     - run: |
+        # for any occasion
+        sudo apt-get update
+        sudo apt-get install curl
+
         export $(grep -v '^#' .env | xargs)
+        echo $PROXY_URL
+        echo $(PROXY_URL)
+        echo "$(PROXY_URL)"
+
         # EVM version
         curl -X POST -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":0}' "$(PROXY_URL)"
         # openzeppelin-contracts version
