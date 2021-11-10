@@ -1,0 +1,46 @@
+name: Collect Allure environment data
+description: Collects environment data and puts them into allure-results folder
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        ENV_FILE="environment.json"
+        echo "[" > $ENV_FILE
+        ENV_PROP_FILE="environment.properties"
+        REPLACE_QUOTE="\""
+
+        export $(grep -v '^#' .env | xargs)
+        echo "PROXY_URL=$PROXY_URL"
+        echo "PROXY_URL=\"$PROXY_URL\"" > $ENV_PROP_FILE
+        echo "{ \"name\": \"PROXY_URL\", \"values\": [ \"$PROXY_URL\" ] }," >> $ENV_FILE
+
+        # EVM version
+        EVM_VERSION=$(curl -X POST -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":0}' $PROXY_URL)
+        # echo "EVM.Version=$EVM_VERSION" >> $ENV_PROP_FILE
+        # echo "{ \"name\": \"EVM.Version\", \"values\": [ \"$EVM_VERSION\" ] }," >> $ENV_FILE
+        
+        # openzeppelin-contracts version
+        cd openzeppelin-contracts
+        TEST_COMMIT=$(git log -n 1 | grep ^commit | cut -d " " -f 2)
+        TEST_DATE=$(git log -n 1 | grep Date)
+        TEST_AUTHOR=$(git log -n 1 | grep Author)
+        cd ..
+        echo "{ \"name\": \"Test.Commit\", \"values\": [ \"$TEST_COMMIT\" ] }," >> $ENV_FILE
+        echo "{ \"name\": \"Test.Version\", \"values\": [ \"$TEST_DATE\" ] }," >> $ENV_FILE
+        echo "{ \"name\": \"Test.Committer\", \"values\": [ \"$TEST_AUTHOR\" ] }," >> $ENV_FILE
+        
+        # Solana cluster version
+        SOLANA_VERSION=$(curl $PROXY_URL -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getVersion"}')
+        # echo "{ \"name\": \"Solana.Version\", \"values\": [ \"$SOLANA_VERSION\" ] }" >> $ENV_FILE
+
+        echo "]" >> $ENV_FILE
+        echo "$ENV_FILE content:"
+        cat $ENV_FILE
+        cat $ENV_PROP_FILE
+
+        ALLURE_RESULTS="allure-results"
+        cp "./$ENV_PROP_FILE" "openzeppelin-contracts/$ALLURE_RESULTS"
+        cp "./$ENV_PROP_FILE" ./report
+        mkdir $ALLURE_RESULTS
+        cp "./$ENV_PROP_FILE" "./$ALLURE_RESULTS"
+      shell: bash

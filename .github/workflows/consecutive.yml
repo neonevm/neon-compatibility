@@ -93,6 +93,8 @@ jobs:
 #       timeout-minutes: 300
 #       with:
 #         folder-name: security
+    - uses: ./.github/actions/allure-environment-data
+      if: always()
     - uses: ./.github/actions/allure-upload
       if: always()
       with:
@@ -226,9 +228,10 @@ jobs:
         ref: gh-pages
         path: gh-pages
 
-    - name: Allure Report with history
-      uses: simple-elf/allure-report-action@v1.5
-      if: always()
+    # - name: Allure Report with history
+    #   # uses: simple-elf/allure-report-action@v1.5
+    #   uses: simple-elf/allure-report-action@master
+    #   if: always()
 
     - name: Allure Report action from marketplace
       uses: simple-elf/allure-report-action@master
@@ -238,7 +241,7 @@ jobs:
         gh_pages: gh-pages
         allure_report: allure-report
         allure_history: allure-history
-        keep_reports: 10
+        keep_reports: 20
 
     - name: Deploy report to Github Pages
       if: always()
