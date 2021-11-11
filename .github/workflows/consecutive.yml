@@ -65,6 +65,8 @@ jobs:
     # macos-11
     # - uses: ./.github/actions/allure-prep
     - uses: ./.github/actions/switch-network
+    - uses: ./.github/actions/openzeppelin-preparation
+    - uses: ./.github/actions/allure-environment-data
     - name: Use Node.js 16
       uses: actions/setup-node@v2
       if: always()
@@ -72,7 +74,7 @@ jobs:
         node-version: 16.x
     - run: npm ci
     - run: npm run build --if-present
-    - uses: ./.github/actions/openzeppelin-preparation
+    # - uses: ./.github/actions/openzeppelin-preparation
     - name: all Hardhat tests
       timeout-minutes: 1200
       if: always()
@@ -93,7 +95,7 @@ jobs:
 #       timeout-minutes: 300
 #       with:
 #         folder-name: security
-    - uses: ./.github/actions/allure-environment-data
+    # - uses: ./.github/actions/allure-environment-data
       if: always()
     - uses: ./.github/actions/allure-upload
       if: always()
