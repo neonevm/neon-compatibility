@@ -14,13 +14,14 @@ runs:
         REPLACE_QUOTE="\""
 
         export $(grep -v '^#' .env | xargs)
-        echo "PROXY_URL=$PROXY_URL"
+        # echo "PROXY_URL=$PROXY_URL"
         echo "PROXY_URL=\"$PROXY_URL\"" > $ENV_PROP_FILE
         echo "{ \"name\": \"PROXY_URL\", \"values\": [ \"$PROXY_URL\" ] }," >> $ENV_FILE
         echo "{ \"name\": \"PROXY_URL\", \"buildName\": \"$PROXY_URL\" }," >> $EXECUTOR_FILE
 
         # EVM version
         EVM_VERSION=$(curl -X POST -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":0}' $PROXY_URL)
+        EVM_VERSION=$(echo $EVM_VERSION | sed 's/\"/\\\"/g')
         # echo "EVM.Version=$EVM_VERSION" >> $ENV_PROP_FILE
         echo "{ \"name\": \"EVM.Version\", \"values\": [ \"$EVM_VERSION\" ] }," >> $ENV_FILE
         # echo "{ \"name\": \"EVM.Version\", \"buildName\": \"$EVM_VERSION\" }," >> $EXECUTOR_FILE
@@ -40,6 +41,7 @@ runs:
         
         # Solana cluster version
         SOLANA_VERSION=$(curl $PROXY_URL -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getVersion"}')
+        SOLANA_VERSION=$(echo $SOLANA_VERSION | sed 's/\"/\\\"/g')
         echo "{ \"name\": \"Solana.Version\", \"values\": [ \"$SOLANA_VERSION\" ] }" >> $ENV_FILE
         # echo "{ \"name\": \"Solana.Version\", \"buildName\": \"$SOLANA_VERSION\" }" >> $EXECUTOR_FILE
 
@@ -54,7 +56,7 @@ runs:
         cp "./$EXECUTOR_FILE" "openzeppelin-contracts/$ALLURE_RESULTS"
         cp "./$ENV_FILE" "openzeppelin-contracts/$ALLURE_RESULTS"
         cp "./$ENV_PROP_FILE" "openzeppelin-contracts/$ALLURE_RESULTS"
-        echo "openzeppelin-contracts/$ALLURE_RESULTS"
+        echo "there are now files in openzeppelin-contracts/$ALLURE_RESULTS"
         ls "openzeppelin-contracts/$ALLURE_RESULTS"
         cp "./$ENV_PROP_FILE" ./report
         mkdir $ALLURE_RESULTS
