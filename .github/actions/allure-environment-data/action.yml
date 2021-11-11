@@ -22,7 +22,7 @@ runs:
         # EVM version
         EVM_VERSION=$(curl -X POST -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":0}' $PROXY_URL)
         # echo "EVM.Version=$EVM_VERSION" >> $ENV_PROP_FILE
-        # echo "{ \"name\": \"EVM.Version\", \"values\": [ \"$EVM_VERSION\" ] }," >> $ENV_FILE
+        echo "{ \"name\": \"EVM.Version\", \"values\": [ \"$EVM_VERSION\" ] }," >> $ENV_FILE
         # echo "{ \"name\": \"EVM.Version\", \"buildName\": \"$EVM_VERSION\" }," >> $EXECUTOR_FILE
         
         # openzeppelin-contracts version
@@ -40,7 +40,7 @@ runs:
         
         # Solana cluster version
         SOLANA_VERSION=$(curl $PROXY_URL -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getVersion"}')
-        # echo "{ \"name\": \"Solana.Version\", \"values\": [ \"$SOLANA_VERSION\" ] }" >> $ENV_FILE
+        echo "{ \"name\": \"Solana.Version\", \"values\": [ \"$SOLANA_VERSION\" ] }" >> $ENV_FILE
         # echo "{ \"name\": \"Solana.Version\", \"buildName\": \"$SOLANA_VERSION\" }" >> $EXECUTOR_FILE
 
         echo "]" >> $ENV_FILE
