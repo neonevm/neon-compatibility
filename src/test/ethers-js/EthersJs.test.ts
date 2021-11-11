@@ -29,6 +29,7 @@ class EthersJsTests {
   @test
   public async shouldCreateAcccountWithEthersJs() {
     let initialBalance = 10 * Config.faucetQuotient;
+    logger.notice(`Connecting to ${Config.url}`)
     const provider = new ConnectionManager().connectToJsonRpc(Config.url);
     logger.notice(`Provider: ${provider}`);
     const randomWallet = ethers.Wallet.createRandom();
