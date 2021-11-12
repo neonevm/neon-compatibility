@@ -40,10 +40,14 @@ runs:
         echo "{ \"name\": \"Test.Committer\", \"buildName\": \"$TEST_AUTHOR\" }," >> $EXECUTOR_FILE
         
         # Solana cluster version
-        SOLANA_VERSION=$(curl $PROXY_URL -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getVersion"}')
+        SOLANA_VERSION=$(curl $SOLANA_URL -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getVersion"}')
         SOLANA_VERSION=$(echo $SOLANA_VERSION | sed 's/\"/\\\"/g')
         echo "{ \"name\": \"Solana.Version\", \"values\": [ \"$SOLANA_VERSION\" ] }" >> $ENV_FILE
         # echo "{ \"name\": \"Solana.Version\", \"buildName\": \"$SOLANA_VERSION\" }" >> $EXECUTOR_FILE
+
+        echo "SOLANA_EXPLORER=\"$SOLANA_EXPLORER\"" > $ENV_PROP_FILE
+        echo "{ \"name\": \"SOLANA_EXPLORER\", \"values\": [ \"$SOLANA_EXPLORER\" ] }," >> $ENV_FILE
+        echo "{ \"name\": \"SOLANA_EXPLORER\", \"buildName\": \"$SOLANA_EXPLORER\" }," >> $EXECUTOR_FILE
 
         echo "]" >> $ENV_FILE
         echo "]" >> $EXECUTOR_FILE
