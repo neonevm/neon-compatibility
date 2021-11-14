@@ -20,7 +20,7 @@ npm i
 | :-------------------- | :------------------ |
 | .env.devnet           | Devnet              |
 | .env.testnet.         | Testnet             |
-| .env.internal.testnet | test stand          |
+| .env.teststand | test stand          |
 | .env.local.           | Local run in Docker |
 
 ```
@@ -135,7 +135,7 @@ Copy content of an environment file into .env in the root of the solution
 | File name     | Goal                                 |
 | ------------- | ------------------------------------ |
 | .env          | Test solution uses this one as input |
-| .env.internal.testnet  | Our internal testnet        |
+| .env.teststand  | Our internal testnet        |
 | .env.local   | Connection to a dockerizedd env       |
 
 ## Run
