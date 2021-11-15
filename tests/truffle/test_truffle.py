@@ -62,7 +62,9 @@ def test_truffle_test():
 @allure.feature(FEATURE)
 def test_issue_364_self_destruct_contract():
     truffle_result = run_command_line(
-        f"cd issues/364; {RunCommand.TRUFFLE} --network {NETWORK_NAME} migrate -f 3 --to 3"
+        f"cd issues/364; {RunCommand.TRUFFLE} "
+        f"--network {NETWORK_NAME} migrate -f 3 --to 3"
     )
-    assert "instruction changed the balance of a read-only account" not in truffle_result
+    assert "instruction changed the balance of a read-only account" \
+           not in truffle_result
     print(truffle_result)
