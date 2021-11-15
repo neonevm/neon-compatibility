@@ -57,3 +57,12 @@ def test_truffle_test():
     assert TruffleError.ERROR_CONTRACTS_NOT_DEPLOYED not in actual_result
     assert TruffleError.ERROR_NO_CONTRACTS_DEPLOYED not in actual_result
     print(actual_result)
+
+
+@allure.feature(FEATURE)
+def test_issue_364_self_destruct_contract():
+    truffle_result = run_command_line(
+        f"cd issues/364; {RunCommand.TRUFFLE} --network {NETWORK_NAME} migrate -f 3 --to 3"
+    )
+    assert "instruction changed the balance of a read-only account" not in truffle_result
+    print(truffle_result)
