@@ -30,6 +30,7 @@ runs:
         SOLANA_VERSION=$(curl $PROXY_URL -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getVersion"}')
         SOLANA_VERSION=$(echo $SOLANA_VERSION | sed 's/\"/\\\"/g')
         echo "Solana.Version=$SOLANA_VERSION" >> $ENV_PROP_FILE
+        echo "Solana.Explorer=\"$SOLANA_EXPLORER\"" >> $ENV_PROP_FILE
 
         cat $ENV_PROP_FILE
 
