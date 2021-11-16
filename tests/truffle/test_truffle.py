@@ -36,8 +36,7 @@ def test_truffle_migration():
     assert TruffleError.ERROR_DEPLOYMENT_FAILED not in actual_result
     assert TruffleError.ERROR_BLOCK_NOT_AVAILABLE not in actual_result
     assert TruffleError.ERROR_SOCKET_TIMEOUT not in actual_result
-    assert "Error: ETIMEDOUT" not in actual_result
-    print(actual_result)
+    assert TruffleError.ERROR_ETIMEOUT not in actual_result, actual_result
 
 
 @allure.feature(FEATURE)
@@ -50,8 +49,7 @@ def test_truffle_contract():
     assert cmd_res.returncode == 0, actual_result
     assert TruffleError.ERROR_CONTRACTS_NOT_DEPLOYED not in actual_result
     assert TruffleError.ERROR_NO_CONTRACTS_DEPLOYED not in actual_result
-    assert "Error: ETIMEDOUT" not in actual_result
-    print(actual_result)
+    assert TruffleError.ERROR_ETIMEOUT not in actual_result, actual_result
 
 
 @allure.feature(FEATURE)
@@ -65,8 +63,7 @@ def test_truffle_test():
     assert TruffleError.ERROR_CONTRACTS_NOT_DEPLOYED not in actual_result
     assert TruffleError.ERROR_NO_CONTRACTS_DEPLOYED not in actual_result
     assert "failing" not in actual_result
-    assert "Error: ETIMEDOUT" not in actual_result
-    print(actual_result)
+    assert TruffleError.ERROR_ETIMEOUT not in actual_result, actual_result
 
 
 @allure.feature(FEATURE)
@@ -79,5 +76,4 @@ def test_issue_364_self_destruct_contract():
     assert cmd_res.returncode == 0, actual_result
     assert "instruction changed the balance of a read-only account" \
            not in actual_result
-    assert "Error: ETIMEDOUT" not in actual_result
-    print(actual_result)
+    assert TruffleError.ERROR_ETIMEOUT not in actual_result, actual_result

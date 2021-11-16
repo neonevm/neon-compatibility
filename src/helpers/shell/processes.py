@@ -10,6 +10,8 @@ def run_command_line(command: str) -> subprocess.CompletedProcess:
     print("============ running command... ============")
     print(command)
     cmd = subprocess.run(command, capture_output=True, shell=True)
+    print(cmd.stdout.decode())
+    print(cmd.stderr.decode())
     return cmd
 
 

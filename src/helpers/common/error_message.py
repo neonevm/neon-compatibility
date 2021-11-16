@@ -24,6 +24,7 @@ class TruffleError(object):
         ({ code: -32000, message: 'Block not available for slot"
 
     ERROR_SOCKET_TIMEOUT = "message: 'ESOCKETTIMEDOUT'"
+    ERROR_ETIMEOUT = "Error: ETIMEDOUT"
 
 
 class HardhatError(object):
