@@ -28,6 +28,7 @@ module.exports = {
       gas: 3000000,
       gasPrice: 1000000000,
       timeoutBlocks: 100000,
+      networkCheckTimeout: 1000000
 
       // gas
       // gasPrice
