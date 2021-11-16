@@ -4,9 +4,9 @@ const Web3 = require("web3");
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 
 const web3 = new Web3(new Web3.providers.HttpProvider(process.env.PROXY_URL));
-const account01 = web3.eth.accounts.create();
-process.env.ADDRESS_FROM = account01.address;
-process.env.PRIVATE_KEY = account01.privateKey;
+// const account01 = web3.eth.accounts.create();
+// process.env.ADDRESS_FROM = account01.address;
+// process.env.PRIVATE_KEY = account01.privateKey;
 
 module.exports = {
   networks: {
