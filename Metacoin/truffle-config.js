@@ -2,6 +2,8 @@ require("dotenv").config({ path: "../.env" });
 const Web3 = require("web3");
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 
+console.log(process.env)
+
 module.exports = {
   networks: {
     neonlabs: {
