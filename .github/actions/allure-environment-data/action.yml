@@ -6,25 +6,15 @@ runs:
     - run: |
         pwd
 
-        EXECUTOR_FILE="executors.json"
-        ENV_FILE="environment.json"
-        echo "[" > $ENV_FILE
-        echo "[" > $EXECUTOR_FILE
         ENV_PROP_FILE="environment.properties"
-        REPLACE_QUOTE="\""
 
         export $(grep -v '^#' .env | xargs)
-        # echo "PROXY_URL=$PROXY_URL"
         echo "PROXY_URL=\"$PROXY_URL\"" > $ENV_PROP_FILE
-        echo "{ \"name\": \"PROXY_URL\", \"values\": [ \"$PROXY_URL\" ] }," >> $ENV_FILE
-        echo "{ \"name\": \"PROXY_URL\", \"buildName\": \"$PROXY_URL\" }," >> $EXECUTOR_FILE
 
         # EVM version
         EVM_VERSION=$(curl -X POST -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":0}' $PROXY_URL)
         EVM_VERSION=$(echo $EVM_VERSION | sed 's/\"/\\\"/g')
         echo "EVM.Version=$EVM_VERSION" >> $ENV_PROP_FILE
-        echo "{ \"name\": \"EVM.Version\", \"values\": [ \"$EVM_VERSION\" ] }," >> $ENV_FILE
-        echo "{ \"name\": \"EVM.Version\", \"buildName\": \"$EVM_VERSION\" }," >> $EXECUTOR_FILE
         
         # openzeppelin-contracts version
         cd openzeppelin-contracts
@@ -32,37 +22,19 @@ runs:
         TEST_DATE=$(git log -n 1 | grep Date)
         TEST_AUTHOR=$(git log -n 1 | grep Author)
         cd ..
-        echo "Test.Commit=$TEST_COMMIT" >> $ENV_PROP_FILE
-        echo "Test.Version=$TEST_DATE" >> $ENV_PROP_FILE
-        echo "Test.Committer=$TEST_AUTHOR" >> $ENV_PROP_FILE
-        echo "{ \"name\": \"Test.Commit\", \"values\": [ \"$TEST_COMMIT\" ] }," >> $ENV_FILE
-        echo "{ \"name\": \"Test.Version\", \"values\": [ \"$TEST_DATE\" ] }," >> $ENV_FILE
-        echo "{ \"name\": \"Test.Committer\", \"values\": [ \"$TEST_AUTHOR\" ] }," >> $ENV_FILE
-        echo "{ \"name\": \"Test.Commit\", \"buildName\": \"$TEST_COMMIT\" }," >> $EXECUTOR_FILE
-        echo "{ \"name\": \"Test.Version\", \"buildName\": \"$TEST_DATE\" }," >> $EXECUTOR_FILE
-        echo "{ \"name\": \"Test.Committer\", \"buildName\": \"$TEST_AUTHOR\" }," >> $EXECUTOR_FILE
+        echo "OpenZeppelin.Commit=$TEST_COMMIT" >> $ENV_PROP_FILE
+        echo "OpenZeppelin.Version=$TEST_DATE" >> $ENV_PROP_FILE
+        echo "OpenZeppelin.Author=$TEST_AUTHOR" >> $ENV_PROP_FILE
         
         # Solana cluster version
         SOLANA_VERSION=$(curl $SOLANA_URL -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getVersion"}')
         SOLANA_VERSION=$(echo $SOLANA_VERSION | sed 's/\"/\\\"/g')
         echo "Solana.Version=$SOLANA_VERSION" >> $ENV_PROP_FILE
-        echo "{ \"name\": \"Solana.Version\", \"values\": [ \"$SOLANA_VERSION\" ] }" >> $ENV_FILE
-        echo "{ \"name\": \"Solana.Version\", \"buildName\": \"$SOLANA_VERSION\" }" >> $EXECUTOR_FILE
+        echo "Solana.Explorer=$SOLANA_EXPLORER" >> $ENV_PROP_FILE
 
-        echo "SOLANA_EXPLORER=\"$SOLANA_EXPLORER\"" >> $ENV_PROP_FILE
-        echo "{ \"name\": \"SOLANA_EXPLORER\", \"values\": [ \"$SOLANA_EXPLORER\" ] }," >> $ENV_FILE
-        echo "{ \"name\": \"SOLANA_EXPLORER\", \"buildName\": \"$SOLANA_EXPLORER\" }," >> $EXECUTOR_FILE
-
-        echo "]" >> $ENV_FILE
-        echo "]" >> $EXECUTOR_FILE
-        echo "$ENV_FILE content:"
-        cat $ENV_FILE
         cat $ENV_PROP_FILE
-        cat $EXECUTOR_FILE
 
         ALLURE_RESULTS="allure-results"
-        cp "./$EXECUTOR_FILE" "openzeppelin-contracts/$ALLURE_RESULTS"
-        cp "./$ENV_FILE" "openzeppelin-contracts/$ALLURE_RESULTS"
         cp "./$ENV_PROP_FILE" "openzeppelin-contracts/$ALLURE_RESULTS"
         echo "there are now files in openzeppelin-contracts/$ALLURE_RESULTS"
         ls "openzeppelin-contracts/$ALLURE_RESULTS"
