@@ -25,6 +25,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     needs: build
+    env:
+      PROXY_URL: https://proxy.teststand.neontest.xyz/solana
+      NETWORK_ID: 111
+      PRIVATE_KEY: 0x842681464b546c87af90b57b2aa6c4ee9355f16151976f7403d40342a2d6c46d
+      ADDRESS_FROM: 0xD34c1496B336dD02bEC2F033ce3b4c6F4F4BEB9A
+      ADDRESS_TO: 0x51F75Cb52fc1be1C53431802415b9a3e5bb89478
     steps:
     - uses: actions/checkout@v2
     - uses: ./.github/actions/allure-prep
@@ -50,7 +56,10 @@ jobs:
       if: always()
       run: |
         pwd
-        pipenv run pytest --alluredir=report/allure-results
+        cd Metacoin
+        truffle test --network neonlabs
+#        pipenv run pytest --alluredir=report/allure-results
+
     - uses: ./.github/actions/allure-upload
       if: always()
       with:
