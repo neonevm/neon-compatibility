@@ -39,17 +39,17 @@ def test_truffle_migration():
     assert TruffleError.ERROR_ETIMEOUT not in actual_result, actual_result
 
 
-@allure.feature(FEATURE)
-def test_truffle_contract():
-    # truffle neonlabs ./test/TestMetaCoin.sol
-    cmd_res = run_command_line(
-        f"{Subfolder.CD_METACOIN} {RunCommand.TRUFFLE} --network \
-            {NETWORK_NAME} test ./test/TestMetaCoin.sol {CD_BACK}")
-    actual_result = cmd_res.stdout.decode() + cmd_res.stderr.decode()
-    assert cmd_res.returncode == 0, actual_result
-    assert TruffleError.ERROR_CONTRACTS_NOT_DEPLOYED not in actual_result
-    assert TruffleError.ERROR_NO_CONTRACTS_DEPLOYED not in actual_result
-    assert TruffleError.ERROR_ETIMEOUT not in actual_result, actual_result
+# @allure.feature(FEATURE)
+# def test_truffle_contract():
+#     # truffle neonlabs ./test/TestMetaCoin.sol
+#     cmd_res = run_command_line(
+#         f"{Subfolder.CD_METACOIN} {RunCommand.TRUFFLE} --network \
+#             {NETWORK_NAME} test ./test/TestMetaCoin.sol {CD_BACK}")
+#     actual_result = cmd_res.stdout.decode() + cmd_res.stderr.decode()
+#     assert cmd_res.returncode == 0, actual_result
+#     assert TruffleError.ERROR_CONTRACTS_NOT_DEPLOYED not in actual_result
+#     assert TruffleError.ERROR_NO_CONTRACTS_DEPLOYED not in actual_result
+#     assert TruffleError.ERROR_ETIMEOUT not in actual_result, actual_result
 
 
 @allure.feature(FEATURE)
@@ -57,7 +57,7 @@ def test_truffle_test():
     # truffle neonlabs ./test/metacoin.js
     cmd_res = run_command_line(
         f"{Subfolder.CD_METACOIN} {RunCommand.TRUFFLE} --network " +
-        f"{NETWORK_NAME} test ./test/metacoin.js {CD_BACK}")
+        f"{NETWORK_NAME} test {CD_BACK}")
     actual_result = cmd_res.stdout.decode() + cmd_res.stderr.decode()
     assert cmd_res.returncode == 0, actual_result
     assert TruffleError.ERROR_CONTRACTS_NOT_DEPLOYED not in actual_result
