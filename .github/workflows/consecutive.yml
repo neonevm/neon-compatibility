@@ -25,12 +25,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     needs: build
-    env:
-      PROXY_URL: "https://proxy.teststand.neontest.xyz/solana"
-      NETWORK_ID: "111"
-      PRIVATE_KEY: "0x842681464b546c87af90b57b2aa6c4ee9355f16151976f7403d40342a2d6c46d"
-      ADDRESS_FROM: "0xD34c1496B336dD02bEC2F033ce3b4c6F4F4BEB9A"
-      ADDRESS_TO: "0x51F75Cb52fc1be1C53431802415b9a3e5bb89478"
     steps:
     - uses: actions/checkout@v2
     - uses: ./.github/actions/allure-prep
@@ -56,42 +50,39 @@ jobs:
       if: always()
       run: |
         pwd
-        cd Metacoin
-        ../node_modules/.bin/truffle test --network neonlabs
-#        pipenv run pytest --alluredir=report/allure-results
-
+        pipenv run pytest --alluredir=report/allure-results
     - uses: ./.github/actions/allure-upload
       if: always()
       with:
         folder-name: report/allure-results
 
-#  node-contracts:
-#    runs-on: macos-11
-#    timeout-minutes: 361
-#    needs: build
-#    steps:
-#    - uses: actions/checkout@v2
-#    # macos-11
-#    # - uses: ./.github/actions/allure-prep
-#    - uses: ./.github/actions/openzeppelin-preparation
-#    - uses: ./.github/actions/switch-network
-#      if: always()
-#    - uses: ./.github/actions/allure-environment-data
-#      if: always()
-#    - name: Use Node.js 16
-#      uses: actions/setup-node@v2
-#      if: always()
-#      with:
-#        node-version: 16.x
-#    - run: npm ci
-#    - run: npm run build --if-present
-#    # - uses: ./.github/actions/openzeppelin-preparation
-#    - name: all Hardhat tests
-#      timeout-minutes: 345
-#      if: always()
-#      run: |
-#        cd openzeppelin-contracts
-#        npx hardhat test
+  node-contracts:
+    runs-on: macos-11
+    timeout-minutes: 361
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    # macos-11
+    # - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/openzeppelin-preparation
+    - uses: ./.github/actions/switch-network
+      if: always()
+    - uses: ./.github/actions/allure-environment-data
+      if: always()
+    - name: Use Node.js 16
+      uses: actions/setup-node@v2
+      if: always()
+      with:
+        node-version: 16.x
+    - run: npm ci
+    - run: npm run build --if-present
+    # - uses: ./.github/actions/openzeppelin-preparation
+    - name: all Hardhat tests
+      timeout-minutes: 345
+      if: always()
+      run: |
+        cd openzeppelin-contracts
+        npx hardhat test
 ##     - uses: ./.github/actions/run-hardhat-tests
 ##       if: always()
 ##       timeout-minutes: 300
@@ -107,10 +98,10 @@ jobs:
 ##       with:
 ##         folder-name: security
 #    # - uses: ./.github/actions/allure-environment-data
-#    - uses: ./.github/actions/allure-upload
-#      if: always()
-#      with:
-#        folder-name: openzeppelin-contracts/allure-results
+    - uses: ./.github/actions/allure-upload
+      if: always()
+      with:
+        folder-name: openzeppelin-contracts/allure-results
 #     - uses: ./.github/actions/run-hardhat-tests
 #       if: always()
 #       timeout-minutes: 300
@@ -175,48 +166,48 @@ jobs:
 #       with:
 #         folder-name: openzeppelin-contracts/allure-results
 
-#  node:
-#    runs-on: ubuntu-latest
-#    timeout-minutes: 30
-#    needs: build
-#    steps:
-#    - uses: actions/checkout@v2
-#    - uses: ./.github/actions/allure-prep
-#    - uses: ./.github/actions/switch-network
-#    - name: Use Node.js 16
-#      uses: actions/setup-node@v2
-#      if: always()
-#      with:
-#        node-version: 16.x
-#    - run: npm ci
-#    - run: npm run build --if-present
-#    - name: Mocha tests
-#      timeout-minutes: 15
-#      run: |
-#        npm run test:ci
-#        mv ./allure-results/ ./report/
-#    - name: Hardhat tests
-#      timeout-minutes: 5
-#      if: always()
-#      run: |
-#        function moveFiles {
-#          echo "cp -R $1* $2"
-#          cp -R $1 $2
-#          # rm -R "$1"
-#        }
-#        # cp -R source/* destination/
-#        # rm -R source/
-#        npm run test:hardhat:advanced
-#        # mv ./frameworks/hardhat-advanced/allure-results/ ./report/
-#        pwd
-#        moveFiles ./frameworks/hardhat-advanced/report/allure-results/ ./report/
-#        # npm run test:hardhat:simple
-#        # mv ./frameworks/hardhat-simple/allure-results/ ./report/
-#        # moveFiles frameworks/hardhat-simple/allure-results/ ./report/
-#    - uses: ./.github/actions/allure-upload
-#      if: always()
-#      with:
-#        folder-name: report/allure-results
+  node:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: build
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/switch-network
+    - name: Use Node.js 16
+      uses: actions/setup-node@v2
+      if: always()
+      with:
+        node-version: 16.x
+    - run: npm ci
+    - run: npm run build --if-present
+    - name: Mocha tests
+      timeout-minutes: 15
+      run: |
+        npm run test:ci
+        mv ./allure-results/ ./report/
+    - name: Hardhat tests
+      timeout-minutes: 5
+      if: always()
+      run: |
+        function moveFiles {
+          echo "cp -R $1* $2"
+          cp -R $1 $2
+          # rm -R "$1"
+        }
+        # cp -R source/* destination/
+        # rm -R source/
+        npm run test:hardhat:advanced
+        # mv ./frameworks/hardhat-advanced/allure-results/ ./report/
+        pwd
+        moveFiles ./frameworks/hardhat-advanced/report/allure-results/ ./report/
+        # npm run test:hardhat:simple
+        # mv ./frameworks/hardhat-simple/allure-results/ ./report/
+        # moveFiles frameworks/hardhat-simple/allure-results/ ./report/
+    - uses: ./.github/actions/allure-upload
+      if: always()
+      with:
+        folder-name: report/allure-results
 
   allure:
     runs-on: ubuntu-latest
@@ -224,9 +215,9 @@ jobs:
     if: always()
     needs:
       - build
-#      - node-contracts
+      - node-contracts
       - python
-#      - node
+      - node
     steps:
 
     - name: Download all workflow run artifacts
