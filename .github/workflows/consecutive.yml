@@ -26,8 +26,10 @@ jobs:
     timeout-minutes: 30
     needs: build
     steps:
-    - name: Install GitHub CLI
-      run: ping -c 10 proxy.teststand.neontest.xyz
+    - name: ping teststand
+      run: ping -c 10 proxy.teststand.neontest.xyz || true
+    - name: ping google
+      run: ping -c 10 8.8.8.8 || true
     - uses: actions/checkout@v2
     - uses: ./.github/actions/allure-prep
     - uses: ./.github/actions/switch-network
