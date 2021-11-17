@@ -1,18 +1,18 @@
-import allure
 import os
+import allure
+import subprocess
 from web3 import HTTPProvider, Web3
 from src.helpers.common.config import PROXY_URL
 
 
 @allure.step('Run command: "{0}"')
-def run_command_line(command: str):
+def run_command_line(command: str) -> subprocess.CompletedProcess:
     print("============ running command... ============")
-    command = "pwd: " + command
     print(command)
-    stream = os.popen(command)
-    output = stream.read()
-    errors = stream.errors
-    return output + errors
+    cmd = subprocess.run(command, capture_output=True, shell=True)
+    print(cmd.stdout.decode())
+    print(cmd.stderr.decode())
+    return cmd
 
 
 @allure.step('Preset variables')

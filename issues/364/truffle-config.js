@@ -1,18 +1,16 @@
-require("dotenv").config({ path: "../.env" });
+require("dotenv").config({ path: "../../.env" });
+
 const Web3 = require("web3");
 const HDWalletProvider = require("@truffle/hdwallet-provider");
+
+const web3 = new Web3(new Web3.providers.HttpProvider(process.env.PROXY_URL));
+// const account01 = web3.eth.accounts.create();
+// process.env.ADDRESS_FROM = account01.address;
+// process.env.PRIVATE_KEY = account01.privateKey;
 
 module.exports = {
   networks: {
     neonlabs: {
-      /*
-            provider: () => new Web3.providers.HttpProvider(process.env.PROXY_URL),
-            network_id: process.env.NETWORK_ID,
-            from: process.env.ADDRESS_FROM,
-            to: process.env.ADDRESS_TO,
-            disableConfirmationListener: process.env.DISABLE_CONFIRMATION === "true" ? true : false,
-            networkCheckTimeout:1000000,
-            */
       provider: () => {
         "use strict";
         return new HDWalletProvider(
@@ -23,11 +21,9 @@ module.exports = {
       from: process.env.ADDRESS_FROM,
       to: process.env.ADDRESS_TO,
       network_id: process.env.NETWORK_ID,
-      timeout: 10000,
       gas: 3000000,
       gasPrice: 1000000000,
       timeoutBlocks: 100000,
-      networkCheckTimeout: 1000000
 
       // gas
       // gasPrice
