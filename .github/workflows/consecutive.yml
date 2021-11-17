@@ -166,48 +166,48 @@ jobs:
 #       with:
 #         folder-name: openzeppelin-contracts/allure-results
 
-  node:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    needs: build
-    steps:
-    - uses: actions/checkout@v2
-    - uses: ./.github/actions/allure-prep
-    - uses: ./.github/actions/switch-network
-    - name: Use Node.js 16
-      uses: actions/setup-node@v2
-      if: always()
-      with:
-        node-version: 16.x
-    - run: npm ci
-    - run: npm run build --if-present
-    - name: Mocha tests
-      timeout-minutes: 15
-      run: |
-        npm run test:ci
-        mv ./allure-results/ ./report/
-    - name: Hardhat tests
-      timeout-minutes: 5
-      if: always()
-      run: |
-        function moveFiles {
-          echo "cp -R $1* $2"
-          cp -R $1 $2
-          # rm -R "$1"
-        }
-        # cp -R source/* destination/ 
-        # rm -R source/
-        npm run test:hardhat:advanced
-        # mv ./frameworks/hardhat-advanced/allure-results/ ./report/
-        pwd
-        moveFiles ./frameworks/hardhat-advanced/report/allure-results/ ./report/
-        # npm run test:hardhat:simple
-        # mv ./frameworks/hardhat-simple/allure-results/ ./report/
-        # moveFiles frameworks/hardhat-simple/allure-results/ ./report/
-    - uses: ./.github/actions/allure-upload
-      if: always()
-      with:
-        folder-name: report/allure-results
+#  node:
+#    runs-on: ubuntu-latest
+#    timeout-minutes: 30
+#    needs: build
+#    steps:
+#    - uses: actions/checkout@v2
+#    - uses: ./.github/actions/allure-prep
+#    - uses: ./.github/actions/switch-network
+#    - name: Use Node.js 16
+#      uses: actions/setup-node@v2
+#      if: always()
+#      with:
+#        node-version: 16.x
+#    - run: npm ci
+#    - run: npm run build --if-present
+#    - name: Mocha tests
+#      timeout-minutes: 15
+#      run: |
+#        npm run test:ci
+#        mv ./allure-results/ ./report/
+#    - name: Hardhat tests
+#      timeout-minutes: 5
+#      if: always()
+#      run: |
+#        function moveFiles {
+#          echo "cp -R $1* $2"
+#          cp -R $1 $2
+#          # rm -R "$1"
+#        }
+#        # cp -R source/* destination/
+#        # rm -R source/
+#        npm run test:hardhat:advanced
+#        # mv ./frameworks/hardhat-advanced/allure-results/ ./report/
+#        pwd
+#        moveFiles ./frameworks/hardhat-advanced/report/allure-results/ ./report/
+#        # npm run test:hardhat:simple
+#        # mv ./frameworks/hardhat-simple/allure-results/ ./report/
+#        # moveFiles frameworks/hardhat-simple/allure-results/ ./report/
+#    - uses: ./.github/actions/allure-upload
+#      if: always()
+#      with:
+#        folder-name: report/allure-results
 
   allure:
     runs-on: ubuntu-latest
@@ -217,7 +217,7 @@ jobs:
       - build
 #      - node-contracts
       - python
-      - node
+#      - node
     steps:
 
     - name: Download all workflow run artifacts
