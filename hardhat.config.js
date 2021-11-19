@@ -57,7 +57,7 @@ for (const f of fs.readdirSync(path.join(__dirname, 'hardhat'))) {
 
 const withOptimizations = argv.enableGasReport || argv.compileMode === 'production';
 
-const ACCOUNTS_NUMBER = 20;
+const ACCOUNTS_NUMBER = parseInt(process.env.USERS_NUMBER);
 
 const web3 = new Web3(new Web3.providers.HttpProvider(process.env.PROXY_URL));
 const account01 = web3.eth.accounts.create();
