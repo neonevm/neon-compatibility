@@ -57,7 +57,7 @@ jobs:
         folder-name: report/allure-results
 
   node-contracts:
-    runs-on: ubuntu-latest
+    runs-on: macos-11
     timeout-minutes: 361
     needs: build
     steps:
@@ -79,8 +79,9 @@ jobs:
     - name: Install parallel
       if: always()
       run: |
-        sudo apt-get update
-        sudo apt install parallel
+        # sudo apt-get update
+        # sudo apt install parallel
+        brew install parallel
     - name: all Hardhat tests
       timeout-minutes: 345
       if: always()
