@@ -5,7 +5,7 @@ class Networks(Enum):
     LOCAL = 'local',
     DEVNET = 'devnet',
     TESTNET = 'testnet',
-    INTERNAL_TESTNET = 'internal.testnet',
+    INTERNAL_TESTNET = 'teststand',
     NEONSWAP_LIVE = 'neonswap.live',
     AWS = 'aws',
     ROPSTEN = 'ropsten',

@@ -1,0 +1,44 @@
+name: Collect Allure environment data
+description: Collects environment data and puts them into allure-results folder
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        pwd
+
+        ENV_PROP_FILE="environment.properties"
+
+        export $(grep -v '^#' .env | xargs)
+        echo "PROXY_URL=$PROXY_URL" > $ENV_PROP_FILE
+
+        # EVM version
+        EVM_VERSION=$(curl -X POST -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":0}' $PROXY_URL)
+        EVM_VERSION=$(echo $EVM_VERSION | sed 's/\"/\\\"/g')
+        echo "EVM.Version=$EVM_VERSION" >> $ENV_PROP_FILE
+        
+        # openzeppelin-contracts version
+        cd openzeppelin-contracts
+        TEST_COMMIT=$(git log -n 1 | grep ^commit | cut -d " " -f 2)
+        TEST_DATE=$(git log -n 1 | grep Date)
+        TEST_AUTHOR=$(git log -n 1 | grep Author)
+        cd ..
+        echo "OpenZeppelin.Commit=$TEST_COMMIT" >> $ENV_PROP_FILE
+        echo "OpenZeppelin.Version=$TEST_DATE" >> $ENV_PROP_FILE
+        echo "OpenZeppelin.Author=$TEST_AUTHOR" >> $ENV_PROP_FILE
+        
+        # Solana cluster version
+        SOLANA_VERSION=$(curl $SOLANA_URL -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getVersion"}')
+        SOLANA_VERSION=$(echo $SOLANA_VERSION | sed 's/\"/\\\"/g')
+        echo "Solana.Version=$SOLANA_VERSION" >> $ENV_PROP_FILE
+        echo "Solana.Explorer=$SOLANA_EXPLORER" >> $ENV_PROP_FILE
+
+        cat $ENV_PROP_FILE
+
+        ALLURE_RESULTS="allure-results"
+        cp "./$ENV_PROP_FILE" "openzeppelin-contracts/$ALLURE_RESULTS"
+        echo "there are now files in openzeppelin-contracts/$ALLURE_RESULTS"
+        ls "openzeppelin-contracts/$ALLURE_RESULTS"
+        cp "./$ENV_PROP_FILE" ./report
+        mkdir $ALLURE_RESULTS
+        cp "./$ENV_PROP_FILE" "./$ALLURE_RESULTS"
+      shell: bash

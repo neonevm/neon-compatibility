@@ -141,7 +141,7 @@ def test_contracts(input_data: InputData):
 
     # truffle --network neonlabs test ./test/access/[test file name]
     command = f"--network neonlabs test ./test/{input_data.test_file}"
-    actual_result = run_command_line(
+    cmd_res = run_command_line(
         f"{Subfolder.CD_OPENZEPPELIN} {RunCommand.TRUFFLE} {command} {CD_BACK}"
     )
     # assert OpenZeppelinSuccess.SUCCESS_PASSING in actual_result
@@ -149,6 +149,8 @@ def test_contracts(input_data: InputData):
     # assert OpenZeppelinSuccess.SUCCESS_1_ETHER in actual_result
     # assert TruffleBasedError.ERROR_NO_ATTRIBUTE_ETH_ACCOUNTS \
     #     not in actual_result
+    actual_result = cmd_res.stdout.decode() + cmd_res.stderr.decode()
+    assert cmd_res.returncode == 0, actual_result
     assert OpenZeppelinError.ERROR_NO_ARTIFACTS not in actual_result
     assert OpenZeppelinError.ERROR_BLOCK_NOT_AVAILABLE not in actual_result
     print(actual_result)
