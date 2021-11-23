@@ -1,0 +1,23 @@
+name: Run Process Upload
+description: Runs all the tests from a subfolder, post-process test results and uploads them to gh-pages
+inputs:
+  folder-name:
+    description: name of subfolder
+    required: true
+    default: ''
+runs:
+  using: "composite"
+  steps:
+    - uses: ./.github/actions/run-hardhat-tests
+      if: always()
+      with:
+        folder-name: ${{ inputs.folder-name }}
+    - uses: ./.github/actions/allure-postprocessing
+      if: always()
+      with:
+        item-type: epic
+        name: OpenZeppelin contracts
+    - uses: ./.github/actions/allure-upload
+      if: always()
+      with:
+        folder-name: openzeppelin-contracts/allure-results
