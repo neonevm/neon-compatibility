@@ -1,4 +1,4 @@
-name: "Parallel: Python 3.8, Node.js 16, allure"
+name: "Multi-job Parallel: Python 3.8, Node.js 16, allure"
 
 on:
   # push:
@@ -57,13 +57,17 @@ jobs:
 
   node-contracts-access-security:
     runs-on: macos-11
-    timeout-minutes: 405
+    timeout-minutes: 130
     needs: build
     steps:
     - uses: actions/checkout@v2
     # macos-11
     # - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/openzeppelin-preparation
     - uses: ./.github/actions/switch-network
+      if: always()
+    - uses: ./.github/actions/allure-environment-data
+      if: always()
     - name: Use Node.js 16
       uses: actions/setup-node@v2
       if: always()
@@ -71,35 +75,32 @@ jobs:
         node-version: 16.x
     - run: npm ci
     - run: npm run build --if-present
-    - uses: ./.github/actions/openzeppelin-preparation
-    - uses: ./.github/actions/run-hardhat-tests
+    - uses: ./.github/actions/install-parallel-solc
       if: always()
-      timeout-minutes: 200
+    - uses: ./.github/actions/run-process-upload
+      if: always()
+      timeout-minutes: 60
       with:
         folder-name: access
-    - uses: ./.github/actions/allure-upload
+    - uses: ./.github/actions/run-process-upload
       if: always()
-      with:
-        folder-name: openzeppelin-contracts/allure-results
-    - uses: ./.github/actions/run-hardhat-tests
-      if: always()
-      timeout-minutes: 200
+      timeout-minutes: 60
       with:
         folder-name: security
-    - uses: ./.github/actions/allure-upload
-      if: always()
-      with:
-        folder-name: openzeppelin-contracts/allure-results
 
   node-contracts-governance-helpers:
     runs-on: macos-11
-    timeout-minutes: 405
+    timeout-minutes: 130
     needs: build
     steps:
     - uses: actions/checkout@v2
     # macos-11
     # - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/openzeppelin-preparation
     - uses: ./.github/actions/switch-network
+      if: always()
+    - uses: ./.github/actions/allure-environment-data
+      if: always()
     - name: Use Node.js 16
       uses: actions/setup-node@v2
       if: always()
@@ -107,35 +108,32 @@ jobs:
         node-version: 16.x
     - run: npm ci
     - run: npm run build --if-present
-    - uses: ./.github/actions/openzeppelin-preparation
-    - uses: ./.github/actions/run-hardhat-tests
+    - uses: ./.github/actions/install-parallel-solc
       if: always()
-      timeout-minutes: 200
+    - uses: ./.github/actions/run-process-upload
+      if: always()
+      timeout-minutes: 60
       with:
         folder-name: governance
-    - uses: ./.github/actions/allure-upload
+    - uses: ./.github/actions/run-process-upload
       if: always()
-      with:
-        folder-name: openzeppelin-contracts/allure-results
-    - uses: ./.github/actions/run-hardhat-tests
-      if: always()
-      timeout-minutes: 200
+      timeout-minutes: 60
       with:
         folder-name: helpers
-    - uses: ./.github/actions/allure-upload
-      if: always()
-      with:
-        folder-name: openzeppelin-contracts/allure-results
 
   node-contracts-metatx-proxy:
     runs-on: macos-11
-    timeout-minutes: 405
+    timeout-minutes: 130
     needs: build
     steps:
     - uses: actions/checkout@v2
     # macos-11
     # - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/openzeppelin-preparation
     - uses: ./.github/actions/switch-network
+      if: always()
+    - uses: ./.github/actions/allure-environment-data
+      if: always()
     - name: Use Node.js 16
       uses: actions/setup-node@v2
       if: always()
@@ -143,35 +141,32 @@ jobs:
         node-version: 16.x
     - run: npm ci
     - run: npm run build --if-present
-    - uses: ./.github/actions/openzeppelin-preparation
-    - uses: ./.github/actions/run-hardhat-tests
+    - uses: ./.github/actions/install-parallel-solc
       if: always()
-      timeout-minutes: 200
+    - uses: ./.github/actions/run-process-upload
+      if: always()
+      timeout-minutes: 60
       with:
         folder-name: metatx
-    - uses: ./.github/actions/allure-upload
+    - uses: ./.github/actions/run-process-upload
       if: always()
-      with:
-        folder-name: openzeppelin-contracts/allure-results
-    - uses: ./.github/actions/run-hardhat-tests
-      if: always()
-      timeout-minutes: 200
+      timeout-minutes: 60
       with:
         folder-name: proxy
-    - uses: ./.github/actions/allure-upload
-      if: always()
-      with:
-        folder-name: openzeppelin-contracts/allure-results
 
   node-contracts-finance-token:
     runs-on: macos-11
-    timeout-minutes: 405
+    timeout-minutes: 130
     needs: build
     steps:
     - uses: actions/checkout@v2
     # macos-11
     # - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/openzeppelin-preparation
     - uses: ./.github/actions/switch-network
+      if: always()
+    - uses: ./.github/actions/allure-environment-data
+      if: always()
     - name: Use Node.js 16
       uses: actions/setup-node@v2
       if: always()
@@ -179,35 +174,32 @@ jobs:
         node-version: 16.x
     - run: npm ci
     - run: npm run build --if-present
-    - uses: ./.github/actions/openzeppelin-preparation
-    - uses: ./.github/actions/run-hardhat-tests
+    - uses: ./.github/actions/install-parallel-solc
       if: always()
-      timeout-minutes: 200
+    - uses: ./.github/actions/run-process-upload
+      if: always()
+      timeout-minutes: 60
       with:
         folder-name: finance
-    - uses: ./.github/actions/allure-upload
+    - uses: ./.github/actions/run-process-upload
       if: always()
-      with:
-        folder-name: openzeppelin-contracts/allure-results
-    - uses: ./.github/actions/run-hardhat-tests
-      if: always()
-      timeout-minutes: 200
+      timeout-minutes: 60
       with:
         folder-name: token
-    - uses: ./.github/actions/allure-upload
-      if: always()
-      with:
-        folder-name: openzeppelin-contracts/allure-results
 
   node-contracts-utils:
     runs-on: macos-11
-    timeout-minutes: 205
+    timeout-minutes: 70
     needs: build
     steps:
     - uses: actions/checkout@v2
     # macos-11
     # - uses: ./.github/actions/allure-prep
+    - uses: ./.github/actions/openzeppelin-preparation
     - uses: ./.github/actions/switch-network
+      if: always()
+    - uses: ./.github/actions/allure-environment-data
+      if: always()
     - name: Use Node.js 16
       uses: actions/setup-node@v2
       if: always()
@@ -215,16 +207,13 @@ jobs:
         node-version: 16.x
     - run: npm ci
     - run: npm run build --if-present
-    - uses: ./.github/actions/openzeppelin-preparation
-    - uses: ./.github/actions/run-hardhat-tests
+    - uses: ./.github/actions/install-parallel-solc
       if: always()
-      timeout-minutes: 200
+    - uses: ./.github/actions/run-process-upload
+      if: always()
+      timeout-minutes: 60
       with:
         folder-name: utils
-    - uses: ./.github/actions/allure-upload
-      if: always()
-      with:
-        folder-name: openzeppelin-contracts/allure-results
 
   node:
     runs-on: ubuntu-latest
@@ -307,7 +296,7 @@ jobs:
         gh_pages: gh-pages
         allure_report: allure-report
         allure_history: allure-history
-        keep_reports: 20
+        keep_reports: 50
 
     - name: Deploy report to Github Pages
       if: always()
