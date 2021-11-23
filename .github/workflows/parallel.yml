@@ -57,7 +57,7 @@ jobs:
 
   node-contracts-access-security:
     runs-on: macos-11
-    timeout-minutes: 405
+    timeout-minutes: 130
     needs: build
     steps:
     - uses: actions/checkout@v2
@@ -74,7 +74,7 @@ jobs:
     - uses: ./.github/actions/openzeppelin-preparation
     - uses: ./.github/actions/run-hardhat-tests
       if: always()
-      timeout-minutes: 200
+      timeout-minutes: 60
       with:
         folder-name: access
     - uses: ./.github/actions/allure-upload
@@ -83,7 +83,7 @@ jobs:
         folder-name: openzeppelin-contracts/allure-results
     - uses: ./.github/actions/run-hardhat-tests
       if: always()
-      timeout-minutes: 200
+      timeout-minutes: 60
       with:
         folder-name: security
     - uses: ./.github/actions/allure-upload
@@ -93,7 +93,7 @@ jobs:
 
   node-contracts-governance-helpers:
     runs-on: macos-11
-    timeout-minutes: 405
+    timeout-minutes: 130
     needs: build
     steps:
     - uses: actions/checkout@v2
@@ -110,7 +110,7 @@ jobs:
     - uses: ./.github/actions/openzeppelin-preparation
     - uses: ./.github/actions/run-hardhat-tests
       if: always()
-      timeout-minutes: 200
+      timeout-minutes: 60
       with:
         folder-name: governance
     - uses: ./.github/actions/allure-upload
@@ -119,7 +119,7 @@ jobs:
         folder-name: openzeppelin-contracts/allure-results
     - uses: ./.github/actions/run-hardhat-tests
       if: always()
-      timeout-minutes: 200
+      timeout-minutes: 60
       with:
         folder-name: helpers
     - uses: ./.github/actions/allure-upload
@@ -129,7 +129,7 @@ jobs:
 
   node-contracts-metatx-proxy:
     runs-on: macos-11
-    timeout-minutes: 405
+    timeout-minutes: 130
     needs: build
     steps:
     - uses: actions/checkout@v2
@@ -146,7 +146,7 @@ jobs:
     - uses: ./.github/actions/openzeppelin-preparation
     - uses: ./.github/actions/run-hardhat-tests
       if: always()
-      timeout-minutes: 200
+      timeout-minutes: 60
       with:
         folder-name: metatx
     - uses: ./.github/actions/allure-upload
@@ -155,7 +155,7 @@ jobs:
         folder-name: openzeppelin-contracts/allure-results
     - uses: ./.github/actions/run-hardhat-tests
       if: always()
-      timeout-minutes: 200
+      timeout-minutes: 60
       with:
         folder-name: proxy
     - uses: ./.github/actions/allure-upload
@@ -165,7 +165,7 @@ jobs:
 
   node-contracts-finance-token:
     runs-on: macos-11
-    timeout-minutes: 405
+    timeout-minutes: 130
     needs: build
     steps:
     - uses: actions/checkout@v2
@@ -182,7 +182,7 @@ jobs:
     - uses: ./.github/actions/openzeppelin-preparation
     - uses: ./.github/actions/run-hardhat-tests
       if: always()
-      timeout-minutes: 200
+      timeout-minutes: 60
       with:
         folder-name: finance
     - uses: ./.github/actions/allure-upload
@@ -191,7 +191,7 @@ jobs:
         folder-name: openzeppelin-contracts/allure-results
     - uses: ./.github/actions/run-hardhat-tests
       if: always()
-      timeout-minutes: 200
+      timeout-minutes: 60
       with:
         folder-name: token
     - uses: ./.github/actions/allure-upload
@@ -201,7 +201,7 @@ jobs:
 
   node-contracts-utils:
     runs-on: macos-11
-    timeout-minutes: 205
+    timeout-minutes: 70
     needs: build
     steps:
     - uses: actions/checkout@v2
@@ -218,7 +218,7 @@ jobs:
     - uses: ./.github/actions/openzeppelin-preparation
     - uses: ./.github/actions/run-hardhat-tests
       if: always()
-      timeout-minutes: 200
+      timeout-minutes: 60
       with:
         folder-name: utils
     - uses: ./.github/actions/allure-upload
@@ -307,7 +307,7 @@ jobs:
         gh_pages: gh-pages
         allure_report: allure-report
         allure_history: allure-history
-        keep_reports: 20
+        keep_reports: 50
 
     - name: Deploy report to Github Pages
       if: always()
