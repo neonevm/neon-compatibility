@@ -13,17 +13,10 @@ on:
         default: 'teststand'
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
 
   python:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    needs: build
     steps:
     - uses: actions/checkout@v2
     - uses: ./.github/actions/allure-prep
@@ -58,7 +51,6 @@ jobs:
   node-contracts-access-security:
     runs-on: macos-11
     timeout-minutes: 130
-    needs: build
     steps:
     - uses: actions/checkout@v2
     # macos-11
@@ -91,7 +83,6 @@ jobs:
   node-contracts-governance-helpers:
     runs-on: macos-11
     timeout-minutes: 130
-    needs: build
     steps:
     - uses: actions/checkout@v2
     # macos-11
@@ -124,7 +115,6 @@ jobs:
   node-contracts-metatx-proxy:
     runs-on: macos-11
     timeout-minutes: 130
-    needs: build
     steps:
     - uses: actions/checkout@v2
     # macos-11
@@ -157,7 +147,6 @@ jobs:
   node-contracts-finance-token:
     runs-on: macos-11
     timeout-minutes: 130
-    needs: build
     steps:
     - uses: actions/checkout@v2
     # macos-11
@@ -190,7 +179,6 @@ jobs:
   node-contracts-utils:
     runs-on: macos-11
     timeout-minutes: 70
-    needs: build
     steps:
     - uses: actions/checkout@v2
     # macos-11
@@ -218,7 +206,6 @@ jobs:
   node:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    needs: build
     steps:
     - uses: actions/checkout@v2
     - uses: ./.github/actions/allure-prep
@@ -263,7 +250,6 @@ jobs:
     timeout-minutes: 15
     if: always()
     needs:
-      - build
       - node-contracts-access-security
       - node-contracts-governance-helpers
       - node-contracts-metatx-proxy
