@@ -1,8 +1,12 @@
+import pathlib
+
 import allure
 import pytest
-from src.helpers.common.config import CD_BACK, PROXY_URL, NETWORK_ID
-from src.helpers.common.constants import NETWORK_NAME, Subfolder
-from src.helpers.shell.processes import run_command_line
+
+from brownie._config import CONFIG
+from brownie import network, accounts, project
+
+from src.helpers.common.config import PROXY_URL, NETWORK_ID
 
 ADD_NETWORK = "brownie networks add Ethereum"
 DELETE_NETWORK = "brownie networks delete"
@@ -10,29 +14,30 @@ DELETE_NETWORK = "brownie networks delete"
 FEATURE = 'brownie'
 
 
-@pytest.fixture(autouse=True)
-def setup_and_teardown():
-    # brownie networks add Ethereum 110 host=https://proxy.devnet.neonlabs.org/solana chainid=110
-    command_add_network = f"{Subfolder.CD_BROWNIE} {ADD_NETWORK} {NETWORK_NAME} \
-        host={PROXY_URL} chainid={NETWORK_ID} {CD_BACK}"
-
-    print(command_add_network)
-    run_result = run_command_line(
-        f"{Subfolder.CD_BROWNIE} {ADD_NETWORK} {NETWORK_NAME} \
-            host={PROXY_URL} {CD_BACK}")
-    print(run_result)
-    yield
-    command_delete_network = f"{Subfolder.CD_BROWNIE} {DELETE_NETWORK} {NETWORK_NAME} {CD_BACK}"
-    print(command_delete_network)
-    run_result = run_command_line(
-        f"{Subfolder.CD_BROWNIE} {DELETE_NETWORK} {NETWORK_NAME} {CD_BACK}")
-    print(run_result)
+@pytest.fixture(scope="module", autouse=True)
+def configure_neon_network():
+    CONFIG.networks['neon'] = {
+        "chainid": NETWORK_ID,
+        "host": PROXY_URL,
+        "id": "neon",
+        "name": "neon"
+    }
 
 
-@pytest.mark.skip(reason="now yet done")
 @allure.feature(FEATURE)
-def test_connect():
-    aaa = f"{Subfolder.CD_BROWNIE} {ADD_NETWORK} {NETWORK_NAME} \
-        host={PROXY_URL} {CD_BACK}"
+@allure.story("Connect brownie")
+def test_brownie_connect():
+    network.connect('neon')
+    assert network.is_connected()
+    assert network.show_active() == 'neon'
+    assert network.gas_limit() == 'auto'
+    assert network.gas_price() == 'auto'
 
-    print(aaa)
+
+@allure.feature(FEATURE)
+@allure.story("Deploy contract")
+def test_brownie_deploy():
+    accounts.add()
+    pr = project.load(str((pathlib.Path() / 'token')))
+    deployed_contract = pr.Token.deploy("Test deploy", "TST", 10, 10000000, {"from": accounts[0]})
+    assert deployed_contract
