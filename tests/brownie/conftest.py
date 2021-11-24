@@ -9,7 +9,8 @@ from src.helpers.common.config import PROXY_URL, NETWORK_ID
 
 def pytest_collection_modifyitems(config, items):
     for item in items:
-        mark = getattr(pytest.mark, 'allure_label').with_args("Brownie", label_type="feature" )
+        mark = getattr(pytest.mark, 'allure_label').with_args(
+            "Brownie", label_type="feature")
         item.add_marker(mark)
 
 
