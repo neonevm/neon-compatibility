@@ -4,23 +4,27 @@ runs:
   using: "composite"
   steps:
     - run: |
-        rm -rf openzeppelin-contracts
         git submodule update --init --recursive
         cd openzeppelin-contracts
+        git pull origin master
         echo "$ pwd"
         pwd
         cp ../hardhat.config.js .
-        # categories.json
-        mkdir allure-results
-        cp ../categories.json allure-results
-        echo "$ ls allure-results"
-        ls allure-results
+      shell: bash
+    - run: |
+        cd openzeppelin-contracts
+        ALLURE_RESULTS="allure-results"
+        mkdir $ALLURE_RESULTS
+        cp ../categories.json "./$ALLURE_RESULTS"
+        echo "$ ls $ALLURE_RESULTS"
+        ls $ALLURE_RESULTS
         echo "============================================================================================="
         echo "==================== the openzeppelin-contracts repo is downloaded =========================="
         echo "============================= and hardhat.config.js is here ================================="
         echo "============================================================================================="
         echo "$ ls -la"
         ls -la
+
       shell: bash
 
 
