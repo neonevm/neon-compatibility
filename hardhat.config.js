@@ -76,8 +76,8 @@ const privateKeys = Array.from(Array(ACCOUNTS_NUMBER), (_, x) => {
 privateKeys.unshift(process.env.PRIVATE_KEY);
 
 console.log("========================== Reading Hardhat config =============================");
-console.log(`address from = ${process.env.ADDRESS_FROM} balance=`, await web3.eth.getBalance(account01.address));
-console.log(`address to = ${process.env.ADDRESS_TO}  balance=`, await web3.eth.getBalance(account02.address));
+console.log(`address from = ${process.env.ADDRESS_FROM} balance=`, (await web3.eth.getBalance(account01.address)));
+console.log(`address to = ${process.env.ADDRESS_TO}  balance=`, (await web3.eth.getBalance(account02.address)));
 console.log(`main private key = ${process.env.PRIVATE_KEY}`);
 console.log(`account keys = ${privateKeys}`);
 console.log("==============================================================================");
