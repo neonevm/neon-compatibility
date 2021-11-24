@@ -48,7 +48,7 @@ jobs:
       with:
         folder-name: report/allure-results
 
-  node-contracts-access-security:
+  node-contracts-access-security-governance:
     runs-on: macos-11
     timeout-minutes: 130
     steps:
@@ -79,40 +79,13 @@ jobs:
       timeout-minutes: 60
       with:
         folder-name: security
-
-  node-contracts-governance-helpers:
-    runs-on: macos-11
-    timeout-minutes: 130
-    steps:
-    - uses: actions/checkout@v2
-    # macos-11
-    # - uses: ./.github/actions/allure-prep
-    - uses: ./.github/actions/openzeppelin-preparation
-    - uses: ./.github/actions/switch-network
-      if: always()
-    - uses: ./.github/actions/allure-environment-data
-      if: always()
-    - name: Use Node.js 16
-      uses: actions/setup-node@v2
-      if: always()
-      with:
-        node-version: 16.x
-    - run: npm ci
-    - run: npm run build --if-present
-    - uses: ./.github/actions/install-parallel-solc
-      if: always()
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 60
       with:
         folder-name: governance
-    - uses: ./.github/actions/run-process-upload
-      if: always()
-      timeout-minutes: 60
-      with:
-        folder-name: helpers
 
-  node-contracts-metatx-proxy:
+  node-contracts-metatx-proxy-helpers:
     runs-on: macos-11
     timeout-minutes: 130
     steps:
@@ -143,8 +116,13 @@ jobs:
       timeout-minutes: 60
       with:
         folder-name: proxy
+    - uses: ./.github/actions/run-process-upload
+      if: always()
+      timeout-minutes: 60
+      with:
+        folder-name: helpers
 
-  node-contracts-finance-token:
+  node-contracts-finance-token-utils:
     runs-on: macos-11
     timeout-minutes: 130
     steps:
@@ -175,28 +153,6 @@ jobs:
       timeout-minutes: 60
       with:
         folder-name: token
-
-  node-contracts-utils:
-    runs-on: macos-11
-    timeout-minutes: 70
-    steps:
-    - uses: actions/checkout@v2
-    # macos-11
-    # - uses: ./.github/actions/allure-prep
-    - uses: ./.github/actions/openzeppelin-preparation
-    - uses: ./.github/actions/switch-network
-      if: always()
-    - uses: ./.github/actions/allure-environment-data
-      if: always()
-    - name: Use Node.js 16
-      uses: actions/setup-node@v2
-      if: always()
-      with:
-        node-version: 16.x
-    - run: npm ci
-    - run: npm run build --if-present
-    - uses: ./.github/actions/install-parallel-solc
-      if: always()
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 60
@@ -250,11 +206,9 @@ jobs:
     timeout-minutes: 15
     if: always()
     needs:
-      - node-contracts-access-security
-      - node-contracts-governance-helpers
-      - node-contracts-metatx-proxy
-      - node-contracts-finance-token
-      - node-contracts-utils
+      - node-contracts-access-security-governance
+      - node-contracts-metatx-proxy-helpers
+      - node-contracts-finance-token-utils
       - python
       - node
     steps:
