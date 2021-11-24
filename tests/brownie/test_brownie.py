@@ -38,6 +38,10 @@ def test_brownie_connect():
 @allure.story("Deploy contract")
 def test_brownie_deploy():
     accounts.add()
-    pr = project.load(str((pathlib.Path(__file__).parent / 'token').absolute()))
-    deployed_contract = pr.Token.deploy("Test deploy", "TST", 10, 10000000, {"from": accounts[0]})
+    pr = project.load(
+        str((pathlib.Path(__file__).parent / 'token').absolute())
+    )
+    deployed_contract = pr.Token.deploy(
+        "Test deploy", "TST", 10, 10000000, {"from": accounts[0]}
+    )
     assert deployed_contract
