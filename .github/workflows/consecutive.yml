@@ -56,110 +56,110 @@ jobs:
       with:
         folder-name: report/allure-results
 
-  node-contracts:
-    runs-on: macos-11
-    timeout-minutes: 1260
-    needs: build
-    steps:
-    - uses: actions/checkout@v2
-    # macos-11
-    # - uses: ./.github/actions/allure-prep
-    - uses: ./.github/actions/switch-network
-    - name: Use Node.js 16
-      uses: actions/setup-node@v2
-      if: always()
-      with:
-        node-version: 16.x
-    - run: npm ci
-    - run: npm run build --if-present
-    - uses: ./.github/actions/openzeppelin-preparation
-    - name: all Hardhat tests
-      timeout-minutes: 1200
-      if: always()
-      run: |
-        cd openzeppelin-contracts
-        npx hardhat test
-#     - uses: ./.github/actions/run-hardhat-tests
-#       if: always()
-#       timeout-minutes: 300
-#       with:
-#         folder-name: access
-#     - uses: ./.github/actions/allure-upload
-#       if: always()
-#       with:
-#         folder-name: openzeppelin-contracts/allure-results
-#     - uses: ./.github/actions/run-hardhat-tests
-#       if: always()
-#       timeout-minutes: 300
-#       with:
-#         folder-name: security
-    - uses: ./.github/actions/allure-upload
-      if: always()
-      with:
-        folder-name: openzeppelin-contracts/allure-results
-#     - uses: ./.github/actions/run-hardhat-tests
-#       if: always()
-#       timeout-minutes: 300
-#       with:
-#         folder-name: governance
-#     - uses: ./.github/actions/allure-upload
-#       if: always()
-#       with:
-#         folder-name: openzeppelin-contracts/allure-results
-#     - uses: ./.github/actions/run-hardhat-tests
-#       if: always()
-#       timeout-minutes: 300
-#       with:
-#         folder-name: helpers
-#     - uses: ./.github/actions/allure-upload
-#       if: always()
-#       with:
-#         folder-name: openzeppelin-contracts/allure-results
-#     - uses: ./.github/actions/run-hardhat-tests
-#       if: always()
-#       timeout-minutes: 300
-#       with:
-#         folder-name: metatx
-#     - uses: ./.github/actions/allure-upload
-#       if: always()
-#       with:
-#         folder-name: openzeppelin-contracts/allure-results
-#     - uses: ./.github/actions/run-hardhat-tests
-#       if: always()
-#       timeout-minutes: 300
-#       with:
-#         folder-name: proxy
-#     - uses: ./.github/actions/allure-upload
-#       if: always()
-#       with:
-#         folder-name: openzeppelin-contracts/allure-results
-#     - uses: ./.github/actions/run-hardhat-tests
-#       if: always()
-#       timeout-minutes: 300
-#       with:
-#         folder-name: finance
-#     - uses: ./.github/actions/allure-upload
-#       if: always()
-#       with:
-#         folder-name: openzeppelin-contracts/allure-results
-#     - uses: ./.github/actions/run-hardhat-tests
-#       if: always()
-#       timeout-minutes: 300
-#       with:
-#         folder-name: token
-#     - uses: ./.github/actions/allure-upload
-#       if: always()
-#       with:
-#         folder-name: openzeppelin-contracts/allure-results
-#     - uses: ./.github/actions/run-hardhat-tests
-#       if: always()
-#       timeout-minutes: 300
-#       with:
-#         folder-name: utils
-#     - uses: ./.github/actions/allure-upload
-#       if: always()
-#       with:
-#         folder-name: openzeppelin-contracts/allure-results
+#  node-contracts:
+#    runs-on: macos-11
+#    timeout-minutes: 1260
+#    needs: build
+#    steps:
+#    - uses: actions/checkout@v2
+#    # macos-11
+#    # - uses: ./.github/actions/allure-prep
+#    - uses: ./.github/actions/switch-network
+#    - name: Use Node.js 16
+#      uses: actions/setup-node@v2
+#      if: always()
+#      with:
+#        node-version: 16.x
+#    - run: npm ci
+#    - run: npm run build --if-present
+#    - uses: ./.github/actions/openzeppelin-preparation
+#    - name: all Hardhat tests
+#      timeout-minutes: 1200
+#      if: always()
+#      run: |
+#        cd openzeppelin-contracts
+#        npx hardhat test
+##     - uses: ./.github/actions/run-hardhat-tests
+##       if: always()
+##       timeout-minutes: 300
+##       with:
+##         folder-name: access
+##     - uses: ./.github/actions/allure-upload
+##       if: always()
+##       with:
+##         folder-name: openzeppelin-contracts/allure-results
+##     - uses: ./.github/actions/run-hardhat-tests
+##       if: always()
+##       timeout-minutes: 300
+##       with:
+##         folder-name: security
+#    - uses: ./.github/actions/allure-upload
+#      if: always()
+#      with:
+#        folder-name: openzeppelin-contracts/allure-results
+##     - uses: ./.github/actions/run-hardhat-tests
+##       if: always()
+##       timeout-minutes: 300
+##       with:
+##         folder-name: governance
+##     - uses: ./.github/actions/allure-upload
+##       if: always()
+##       with:
+##         folder-name: openzeppelin-contracts/allure-results
+##     - uses: ./.github/actions/run-hardhat-tests
+##       if: always()
+##       timeout-minutes: 300
+##       with:
+##         folder-name: helpers
+##     - uses: ./.github/actions/allure-upload
+##       if: always()
+##       with:
+##         folder-name: openzeppelin-contracts/allure-results
+##     - uses: ./.github/actions/run-hardhat-tests
+##       if: always()
+##       timeout-minutes: 300
+##       with:
+##         folder-name: metatx
+##     - uses: ./.github/actions/allure-upload
+##       if: always()
+##       with:
+##         folder-name: openzeppelin-contracts/allure-results
+##     - uses: ./.github/actions/run-hardhat-tests
+##       if: always()
+##       timeout-minutes: 300
+##       with:
+##         folder-name: proxy
+##     - uses: ./.github/actions/allure-upload
+##       if: always()
+##       with:
+##         folder-name: openzeppelin-contracts/allure-results
+##     - uses: ./.github/actions/run-hardhat-tests
+##       if: always()
+##       timeout-minutes: 300
+##       with:
+##         folder-name: finance
+##     - uses: ./.github/actions/allure-upload
+##       if: always()
+##       with:
+##         folder-name: openzeppelin-contracts/allure-results
+##     - uses: ./.github/actions/run-hardhat-tests
+##       if: always()
+##       timeout-minutes: 300
+##       with:
+##         folder-name: token
+##     - uses: ./.github/actions/allure-upload
+##       if: always()
+##       with:
+##         folder-name: openzeppelin-contracts/allure-results
+##     - uses: ./.github/actions/run-hardhat-tests
+##       if: always()
+##       timeout-minutes: 300
+##       with:
+##         folder-name: utils
+##     - uses: ./.github/actions/allure-upload
+##       if: always()
+##       with:
+##         folder-name: openzeppelin-contracts/allure-results
 
   node:
     runs-on: ubuntu-latest
