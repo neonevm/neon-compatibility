@@ -14,7 +14,7 @@ on:
       jobs_number:
         description: 'Number of jobs in GNU Parallel'
         required: false
-        default: '8'
+        default: '4'
 
 jobs:
 
@@ -78,25 +78,25 @@ jobs:
       timeout-minutes: 60
       with:
         folder-name: access
-        jobs-number: '4'
+        jobs-number: ${{ github.event.inputs.jobs_number }}
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 60
       with:
         folder-name: security
-        jobs-number: '4'
+        jobs-number: ${{ github.event.inputs.jobs_number }}
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 60
       with:
         folder-name: governance
-        jobs-number: '4'
+        jobs-number: ${{ github.event.inputs.jobs_number }}
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 60
       with:
         folder-name: utils
-        jobs-number: '4'
+        jobs-number: ${{ github.event.inputs.jobs_number }}
 
   node-contracts-02:
     runs-on: macos-11
@@ -124,31 +124,31 @@ jobs:
       timeout-minutes: 60
       with:
         folder-name: metatx
-        jobs-number: '4'
+        jobs-number: ${{ github.event.inputs.jobs_number }}
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 60
       with:
         folder-name: proxy
-        jobs-number: '4'
+        jobs-number: ${{ github.event.inputs.jobs_number }}
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 60
       with:
         folder-name: helpers
-        jobs-number: '4'
+        jobs-number: ${{ github.event.inputs.jobs_number }}
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 180
       with:
         folder-name: finance
-        jobs-number: '4'
+        jobs-number: ${{ github.event.inputs.jobs_number }}
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 60
       with:
         folder-name: token
-        jobs-number: '4'
+        jobs-number: ${{ github.event.inputs.jobs_number }}
 
   node:
     runs-on: ubuntu-latest
