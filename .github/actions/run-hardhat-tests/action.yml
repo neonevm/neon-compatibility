@@ -5,6 +5,10 @@ inputs:
     description: name of subfolder
     required: true
     default: ''
+  jobs-number:
+    description: number of jobs runnign in parallel
+    required: false
+    default: '8'
 runs:
   using: "composite"
   steps:
@@ -15,7 +19,8 @@ runs:
         # find "$(pwd)/test/${{ inputs.folder-name }}" | grep test.js | echo $_ | ../node_modules/.bin/hardhat test $_
         # the last working version
         # find "$(pwd)/test/${{ inputs.folder-name }}" | grep test.js | ../node_modules/.bin/hardhat test $_
-        find "test/${{ inputs.folder-name }}" -name '*.js' | parallel --jobs 8 npx hardhat test {}
+        JOBS_NUMBER=${{ inputs.jobs-number }}
+        find "test/${{ inputs.folder-name }}" -name '*.js' | parallel --jobs 8$JOBS_NUMBER npx hardhat test {}
         echo "============================================================================================="
         echo "====================================== test results ========================================="
         echo "============================================================================================="
