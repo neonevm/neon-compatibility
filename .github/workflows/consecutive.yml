@@ -9,9 +9,13 @@ on:
         description: 'Test scenario tags'
         required: false
       network:
-        description: 'Network (devnet, testnet, teststand, neonswap.live, aws, ropsten, rinkeby)'
+        description: 'Network (devnet, testnet, teststand, teststand2, neonswap.live, aws, ropsten, rinkeby)'
         required: true
         default: 'teststand'
+      jobs_number:
+        description: 'Number of jobs in GNU Parallel'
+        required: false
+        default: '8'
 
 jobs:
 
@@ -114,7 +118,7 @@ jobs:
 
     - uses: ./.github/actions/run-process-upload
       if: always()
-      timeout-minutes: 60
+      timeout-minutes: 180
       with:
         folder-name: token
 
