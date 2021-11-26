@@ -9,6 +9,8 @@ from src.helpers.common.config import PROXY_URL, NETWORK_ID
 
 def pytest_collection_modifyitems(config, items):
     for item in items:
+        if not item.fspath[0].startswith('tests/brownie'):
+            continue
         mark = getattr(pytest.mark, 'allure_label').with_args(
             "Brownie", label_type="feature")
         item.add_marker(mark)
