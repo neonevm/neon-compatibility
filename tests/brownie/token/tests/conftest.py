@@ -36,7 +36,7 @@ def fn_isolation(module_isolation):
     if not CONFIG.argv["interrupt"]:
         brownie.chain.revert()
 
-#TODO: Our proxy don't support evm_snapshot
+#TODO: Our proxy don't support evm_snapshot: https://github.com/neonlabsorg/proxy-model.py/issues/199
 # @pytest.fixture(scope="function", autouse=True)
 # def isolate(fn_isolation):
 #     # perform a chain rewind after completing each test, to ensure proper isolation
