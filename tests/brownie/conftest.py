@@ -22,6 +22,7 @@ def configure_neon_network():
         "id": "neon",
         "name": "neon"
     }
+    CONFIG.set_active_network('neon')
 
 
 @pytest.fixture(scope="session")
