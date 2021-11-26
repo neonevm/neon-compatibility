@@ -9,9 +9,13 @@ on:
         description: 'Test scenario tags'
         required: false
       network:
-        description: 'Network (devnet, testnet, teststand, neonswap.live, aws, ropsten, rinkeby)'
+        description: 'Network (devnet, testnet, teststand, teststand2, neonswap.live, aws, ropsten, rinkeby)'
         required: true
         default: 'teststand'
+      jobs_number:
+        description: 'Number of jobs in GNU Parallel'
+        required: true
+        default: '8'
 
 jobs:
 
@@ -75,54 +79,63 @@ jobs:
       timeout-minutes: 60
       with:
         folder-name: access
+        jobs-number: ${{ github.event.inputs.jobs_number }}
 
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 60
       with:
         folder-name: finance
+        jobs-number: ${{ github.event.inputs.jobs_number }}
 
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 60
       with:
         folder-name: governance
+        jobs-number: ${{ github.event.inputs.jobs_number }}
 
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 60
       with:
         folder-name: helpers
+        jobs-number: ${{ github.event.inputs.jobs_number }}
 
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 60
       with:
         folder-name: metatx
+        jobs-number: ${{ github.event.inputs.jobs_number }}
 
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 60
       with:
         folder-name: proxy
+        jobs-number: ${{ github.event.inputs.jobs_number }}
 
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 60
       with:
         folder-name: security
+        jobs-number: ${{ github.event.inputs.jobs_number }}
 
     - uses: ./.github/actions/run-process-upload
       if: always()
-      timeout-minutes: 60
+      timeout-minutes: 180
       with:
         folder-name: token
+        jobs-number: ${{ github.event.inputs.jobs_number }}
 
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 60
       with:
         folder-name: utils
+        jobs-number: ${{ github.event.inputs.jobs_number }}
 
   node:
     runs-on: ubuntu-latest

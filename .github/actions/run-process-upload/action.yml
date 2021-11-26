@@ -5,6 +5,10 @@ inputs:
     description: name of subfolder
     required: true
     default: ''
+  jobs-number:
+    description: number of jobs runnign in parallel
+    required: true
+    default: '8'
 runs:
   using: "composite"
   steps:
@@ -12,6 +16,7 @@ runs:
       if: always()
       with:
         folder-name: ${{ inputs.folder-name }}
+        jobs-number: ${{ inputs.jobs-number }}
     - uses: ./.github/actions/allure-postprocessing
       if: always()
       with:
