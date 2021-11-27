@@ -12,6 +12,11 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Display input parameters
+      run: |
+        echo "subfolder name = ${{ inputs.folder-name }}"
+        echo "jobs number = ${{ inputs.jobs-number }}"
+      shell: bash
     - uses: ./.github/actions/run-hardhat-tests
       if: always()
       with:
