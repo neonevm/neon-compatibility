@@ -5,7 +5,7 @@ inputs:
     description: name of subfolder
     required: true
     default: ''
-  jobs-number:
+  jobsNumber:
     description: number of jobs runnign in parallel
     required: true
     default: '8'
@@ -15,13 +15,13 @@ runs:
     - name: Display input parameters
       run: |
         echo "subfolder name = ${{ inputs.folder-name }}"
-        echo "jobs number = ${{ inputs.jobs-number }}"
+        echo "jobs number = ${{ inputs.jobsNumber }}"
       shell: bash
     - uses: ./.github/actions/run-hardhat-tests
       if: always()
       with:
         folder-name: ${{ inputs.folder-name }}
-        jobs-number: ${{ inputs.jobs-number }}
+        jobsNumber: ${{ inputs.jobsNumber }}
     - uses: ./.github/actions/allure-postprocessing
       if: always()
       with:
