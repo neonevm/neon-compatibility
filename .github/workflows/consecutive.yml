@@ -69,8 +69,9 @@ jobs:
         echo "jobs number = ${{ github.event.inputs.jobsNumber }}"
         if ${{ github.event.inputs.network == '' }}
         if [ -n "${{ github.event.inputs.jobsNumber }}" ]; then
-          env.JOBS_NUMBER=${{ github.event.inputs.jobsNumber }}
+          ${{ env.JOBS_NUMBER=github.event.inputs.jobsNumber }}
         fi
+        echo "jobs number = ${{ env.JOBS_NUMBER }}"
       shell: bash
     # macos-11
     # - uses: ./.github/actions/allure-prep
