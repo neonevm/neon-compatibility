@@ -68,8 +68,8 @@ jobs:
         echo "network name = ${{ github.event.inputs.network }}"
         echo "jobs number = ${{ github.event.inputs.jobsNumber }}"
         if ${{ github.event.inputs.network == '' }}
-        if [ "${{ github.event.inputs.jobsNumber }}" ]
-        then
+        if [ -z "${{ github.event.inputs.jobsNumber }}" ]; then
+        else
           env.JOBS_NUMBER=${{ github.event.inputs.jobsNumber }}
         fi
       shell: bash
