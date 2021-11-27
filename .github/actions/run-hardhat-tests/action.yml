@@ -5,7 +5,7 @@ inputs:
     description: name of subfolder
     required: true
     default: ''
-  jobs-number:
+  jobsNumber:
     description: number of jobs runnign in parallel
     required: true
     default: '8'
@@ -15,7 +15,7 @@ runs:
     - name: Display input parameters
       run: |
         echo "subfolder name = ${{ inputs.folder-name }}"
-        echo "jobs number = ${{ inputs.jobs-number }}"
+        echo "jobs number = ${{ inputs.jobsNumber }}"
       shell: bash
     - run: |
         cd openzeppelin-contracts
@@ -24,7 +24,7 @@ runs:
         # find "$(pwd)/test/${{ inputs.folder-name }}" | grep test.js | echo $_ | ../node_modules/.bin/hardhat test $_
         # the last working version
         # find "$(pwd)/test/${{ inputs.folder-name }}" | grep test.js | ../node_modules/.bin/hardhat test $_
-        JOBS_NUMBER=${{ inputs.jobs-number }}
+        JOBS_NUMBER=${{ inputs.jobsNumber }}
         find "test/${{ inputs.folder-name }}" -name '*.js' | parallel --jobs $JOBS_NUMBER npx hardhat test {}
         echo "============================================================================================="
         echo "====================================== test results ========================================="
