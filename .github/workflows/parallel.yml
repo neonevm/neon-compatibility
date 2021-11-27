@@ -66,13 +66,11 @@ jobs:
     # TODO: de-duplicate it https://github.com/neonlabsorg/neon-compatibility/issues/155
     - name: Display input parameters
       run: |
-        echo "network name = ${{ github.event.inputs.network }}"
-        echo "jobs number = ${{ github.event.inputs.jobsNumber }}"
-        if ${{ github.event.inputs.network == '' }}
-        if [ "${{ github.event.inputs.jobsNumber }}" ]
-        then
-          env.JOBS_NUMBER=${{ github.event.inputs.jobsNumber }}
+        if [ -n "${{ github.event.inputs.jobsNumber }}" ]; then
+          echo "JOBS_NUMBER=${{ github.event.inputs.jobsNumber }}" >> $GITHUB_ENV
         fi
+        echo "cat $GITHUB_ENV"
+        cat $GITHUB_ENV
       shell: bash
     # macos-11
     # - uses: ./.github/actions/allure-prep
@@ -95,37 +93,37 @@ jobs:
       timeout-minutes: 60
       with:
         folder-name: access
-        jobsNumber: ${{ github.event.inputs.jobsNumber }}
+        jobsNumber: $JOBS_NUMBER
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 60
       with:
         folder-name: security
-        jobsNumber: ${{ github.event.inputs.jobsNumber }}
+        jobsNumber: $JOBS_NUMBER
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 60
       with:
         folder-name: governance
-        jobsNumber: ${{ github.event.inputs.jobsNumber }}
+        jobsNumber: $JOBS_NUMBER
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 60
       with:
         folder-name: utils
-        jobsNumber: ${{ github.event.inputs.jobsNumber }}
+        jobsNumber: $JOBS_NUMBER
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 60
       with:
         folder-name: metatx
-        jobsNumber: ${{ github.event.inputs.jobsNumber }}
+        jobsNumber: $JOBS_NUMBER
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 60
       with:
         folder-name: proxy
-        jobsNumber: ${{ github.event.inputs.jobsNumber }}
+        jobsNumber: $JOBS_NUMBER
 
   node-contracts-02:
     runs-on: macos-11
@@ -135,13 +133,11 @@ jobs:
     # TODO: de-duplicate it https://github.com/neonlabsorg/neon-compatibility/issues/155
     - name: Display input parameters
       run: |
-        echo "network name = ${{ github.event.inputs.network }}"
-        echo "jobs number = ${{ github.event.inputs.jobsNumber }}"
-        if ${{ github.event.inputs.network == '' }}
-        if [ "${{ github.event.inputs.jobsNumber }}" ]
-        then
-          env.JOBS_NUMBER=${{ github.event.inputs.jobsNumber }}
+        if [ -n "${{ github.event.inputs.jobsNumber }}" ]; then
+          echo "JOBS_NUMBER=${{ github.event.inputs.jobsNumber }}" >> $GITHUB_ENV
         fi
+        echo "cat $GITHUB_ENV"
+        cat $GITHUB_ENV
       shell: bash
     # macos-11
     # - uses: ./.github/actions/allure-prep
@@ -164,19 +160,19 @@ jobs:
       timeout-minutes: 60
       with:
         folder-name: helpers
-        jobsNumber: ${{ github.event.inputs.jobsNumber }}
+        jobsNumber: $JOBS_NUMBER
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 60
       with:
         folder-name: finance
-        jobsNumber: ${{ github.event.inputs.jobsNumber }}
+        jobsNumber: $JOBS_NUMBER
     - uses: ./.github/actions/run-process-upload
       if: always()
       timeout-minutes: 180
       with:
         folder-name: token
-        jobsNumber: ${{ github.event.inputs.jobsNumber }}
+        jobsNumber: $JOBS_NUMBER
 
   node:
     runs-on: ubuntu-latest
