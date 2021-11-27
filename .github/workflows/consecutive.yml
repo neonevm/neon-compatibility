@@ -63,15 +63,23 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     # TODO: de-duplicate it https://github.com/neonlabsorg/neon-compatibility/issues/155
+    # - name: Display input parameters
+    #   run: |
+    #     echo "network name = ${{ github.event.inputs.network }}"
+    #     echo "jobs number = ${{ github.event.inputs.jobsNumber }}"
+    #     if ${{ github.event.inputs.network == '' }}
+    #     if [ -n "${{ github.event.inputs.jobsNumber }}" ]; then
+    #       ${{ env.JOBS_NUMBER }}=${{ github.event.inputs.jobsNumber }}
+    #     fi
+    #     echo "jobs number = ${{ env.JOBS_NUMBER }}"
+    #   shell: bash
     - name: Display input parameters
       run: |
-        echo "network name = ${{ github.event.inputs.network }}"
-        echo "jobs number = ${{ github.event.inputs.jobsNumber }}"
-        if ${{ github.event.inputs.network == '' }}
         if [ -n "${{ github.event.inputs.jobsNumber }}" ]; then
-          ${{ env.JOBS_NUMBER }}=${{ github.event.inputs.jobsNumber }}
+          echo "JOBS_NUMBER=${{ github.event.inputs.jobsNumber }}" >> $GITHUB_ENV
         fi
-        echo "jobs number = ${{ env.JOBS_NUMBER }}"
+        echo "cat $GITHUB_ENV"
+        cat $GITHUB_ENV
       shell: bash
     # macos-11
     # - uses: ./.github/actions/allure-prep
