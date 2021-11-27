@@ -16,6 +16,9 @@ on:
         required: true
         default: '4'
 
+env:
+  JOBS_NUMBER: '4'
+
 jobs:
 
   python:
@@ -56,6 +59,17 @@ jobs:
     runs-on: macos-11
     timeout-minutes: 130
     steps:
+    # TODO: de-duplicate it
+    - name: Display input parameters
+      run: |
+        echo "network name = ${{ github.event.inputs.network }}"
+        echo "jobs number = ${{ github.event.inputs.jobsNumber }}"
+        if ${{ github.event.inputs.network == '' }}
+        if [ "${{ github.event.inputs.jobsNumber }}" ]
+        then
+          env.JOBS_NUMBER=${{ github.event.inputs.jobsNumber }}
+        fi
+      shell: bash
     - uses: actions/checkout@v2
     # macos-11
     # - uses: ./.github/actions/allure-prep
@@ -114,6 +128,17 @@ jobs:
     runs-on: macos-11
     timeout-minutes: 130
     steps:
+    # TODO: de-duplicate it
+    - name: Display input parameters
+      run: |
+        echo "network name = ${{ github.event.inputs.network }}"
+        echo "jobs number = ${{ github.event.inputs.jobsNumber }}"
+        if ${{ github.event.inputs.network == '' }}
+        if [ "${{ github.event.inputs.jobsNumber }}" ]
+        then
+          env.JOBS_NUMBER=${{ github.event.inputs.jobsNumber }}
+        fi
+      shell: bash
     - uses: actions/checkout@v2
     # macos-11
     # - uses: ./.github/actions/allure-prep
