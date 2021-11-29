@@ -28,18 +28,25 @@ jobs:
     - uses: actions/checkout@v2
     - uses: ./.github/actions/allure-prep
     - uses: ./.github/actions/switch-network
+    - name: Install pipenv
+      run: pipx install pipenv
     - name: Set up Python 3.8
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v2
       with:
         python-version: 3.8
-
-    - name: Install dependencies
+        cache: 'pipenv'
+    - run: pipenv install
+    # - name: Install dependencies
+    #   run: |
+    #     npm i
+    #     # python -m pip install --upgrade pip
+    #     pip install pipenv
+    #     pipenv sync
+    #     # pip install -r requirements.txt
+    - name: Lint with pylint
       run: |
-        npm i
-        # python -m pip install --upgrade pip
-        pip install pipenv
-        pipenv sync
-        # pip install -r requirements.txt
+        pipenv run pylint src
+        pipenv run pylint tests
     - name: Lint with flake8
       run: |
         pipenv run flake8 ./src
@@ -81,6 +88,7 @@ jobs:
       if: always()
       with:
         node-version: 16.x
+        cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
     - uses: ./.github/actions/install-parallel-solc
@@ -148,6 +156,7 @@ jobs:
       if: always()
       with:
         node-version: 16.x
+        cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
     - uses: ./.github/actions/install-parallel-solc
@@ -183,6 +192,7 @@ jobs:
       if: always()
       with:
         node-version: 16.x
+        cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
     - name: Mocha tests
