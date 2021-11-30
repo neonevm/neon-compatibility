@@ -419,7 +419,7 @@ class EthersJsTests {
     logger.notice(`Block number = ${blockNumber}`);
     expect(blockNumber, BlockNumberShouldBeNonZero).to.be.greaterThan(0);
     // 13098598
-    console.log('StaticJsonRpcProvider  has finished!');
+    console.log('StaticJsonRpcProvider has finished!');
   }
 
   public before() {}
