@@ -401,9 +401,16 @@ class EthersJsTests {
   @feature('StaticJsonRpcProvider test')
   @test
   public async shouldCheckStaticJsonRpcProvider() {
+    /*
+    // sample
     const provider = new ethers.providers.StaticJsonRpcProvider(
       process.env.PROXY_URL,
       { name: 'Neon', chainId: parseInt(process.env.NETWORK_ID ?? '0') }
+    );
+    */
+    const provider = new ConnectionManager().connectToStaticJsonRpcProvider(
+      Config.url,
+      parseInt(Config.networkId)
     );
     logger.notice(`Provider: ${provider}`);
     const randomWallet = ethers.Wallet.createRandom();
