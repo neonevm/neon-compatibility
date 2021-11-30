@@ -29,7 +29,7 @@ class EthersJsTests {
   @test
   public async shouldCreateAcccountWithEthersJs() {
     let initialBalance = 10 * Config.faucetQuotient;
-    logger.notice(`Connecting to ${Config.url}`)
+    logger.notice(`Connecting to ${Config.url}`);
     const provider = new ConnectionManager().connectToJsonRpc(Config.url);
     logger.notice(`Provider: ${provider}`);
     const randomWallet = ethers.Wallet.createRandom();
@@ -393,6 +393,40 @@ class EthersJsTests {
     // To sign a hash, you most often want to sign the bytes
     signature = await signer.signMessage(messageBytes);
     // '0x0d030809ac2ce701e4303885c4fc3f019e64281dea9352f77f482c5324733c48415040d10ee834fb4f048cd5a4e496a55f81c0a374e52c7016dfa16357a0f97a1b'
+  }
+
+  // https://github.com/ethers-io/ethers.js/issues/2348
+  // const provider = new ethers.providers.StaticJsonRpcProvider('https://proxy.devnet.neonlabs.org/solana', { name: 'Neon', chainId: 245022926 });
+  @epic(EpicName)
+  @feature('StaticJsonRpcProvider test')
+  @test
+  public async shouldCheckStaticJsonRpcProvider() {
+    /*
+    // sample
+    const provider = new ethers.providers.StaticJsonRpcProvider(
+      process.env.PROXY_URL,
+      { name: 'Neon', chainId: parseInt(process.env.NETWORK_ID ?? '0') }
+    );
+    */
+    const provider = new ConnectionManager().connectToStaticJsonRpcProvider(
+      Config.url,
+      parseInt(Config.networkId)
+    );
+    logger.notice(`Provider: ${provider}`);
+    const randomWallet = ethers.Wallet.createRandom();
+    logger.notice(`Random wallet = ${randomWallet.address}`);
+    const wallet = randomWallet.connect(provider);
+    logger.notice(`Random wallet connected = ${wallet.provider}`);
+
+    const transactionCount = await wallet.getTransactionCount();
+    logger.notice(`Transaction count: ${transactionCount}`);
+
+    // Look up the current block number
+    const blockNumber = await provider.getBlockNumber();
+    logger.notice(`Block number = ${blockNumber}`);
+    expect(blockNumber, BlockNumberShouldBeNonZero).to.be.greaterThan(0);
+    // 13098598
+    console.log('StaticJsonRpcProvider has finished!');
   }
 
   public before() {}
