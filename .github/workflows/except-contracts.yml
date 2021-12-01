@@ -1,0 +1,180 @@
+name: "Short workflow: Python 3.8, Node.js 16, allure"
+
+on:
+#   schedule:
+#     - cron: "0 0,3 * * *"
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: "Test scenario tags"
+        required: false
+      network:
+        description: "Network (devnet, testnet, teststand, teststand2, neonswap.live, aws, ropsten, rinkeby)"
+        required: true
+        default: "teststand2"
+      jobsNumber:
+        description: "Number of jobs in GNU Parallel"
+        required: true
+        default: "8"
+
+env:
+  JOBS_NUMBER: "8"
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/allure-prep
+      - uses: ./.github/actions/switch-network
+      - name: Install pipenv
+        run: pipx install pipenv
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+          cache: "pipenv"
+      - run: pipenv install
+      # - name: Install dependencies
+      #   run: |
+      #     npm i
+      #     # python -m pip install --upgrade pip
+      #     pip install pipenv
+      #     pipenv sync
+      #     # pip install -r requirements.txt
+      - name: Lint with pylint
+        run: |
+          pipenv run pylint src
+          pipenv run pylint tests
+      - name: Lint with flake8
+        run: |
+          pipenv run flake8 ./src
+          pipenv run flake8 ./tests
+      - name: Test with pytest
+        timeout-minutes: 15
+        if: always()
+        run: |
+          pwd
+          pipenv run pytest --alluredir=report/allure-results
+      - uses: ./.github/actions/allure-upload
+        if: always()
+        with:
+          folder-name: report/allure-results
+
+  node:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/allure-prep
+      - uses: ./.github/actions/switch-network
+      - name: Use Node.js 16
+        uses: actions/setup-node@v2
+        if: always()
+        with:
+          node-version: 16.x
+          cache: "npm"
+      - run: npm ci
+      - run: npm run build --if-present
+      - name: Mocha tests
+        timeout-minutes: 15
+        run: |
+          npm run test:ci
+          mv ./allure-results/ ./report/
+      - name: Hardhat tests
+        timeout-minutes: 5
+        if: always()
+        run: |
+          function moveFiles {
+            echo "cp -R $1* $2"
+            cp -R $1 $2
+            # rm -R "$1"
+          }
+          # cp -R source/* destination/
+          # rm -R source/
+          npm run test:hardhat:advanced
+          # mv ./frameworks/hardhat-advanced/allure-results/ ./report/
+          pwd
+          moveFiles ./frameworks/hardhat-advanced/report/allure-results/ ./report/
+          # npm run test:hardhat:simple
+          # mv ./frameworks/hardhat-simple/allure-results/ ./report/
+          # moveFiles frameworks/hardhat-simple/allure-results/ ./report/
+      - uses: ./.github/actions/allure-upload
+        if: always()
+        with:
+          folder-name: report/allure-results
+
+  allure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    if: always()
+    needs:
+      - python
+      - node
+    steps:
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v2
+
+      - name: Get Allure history
+        uses: actions/checkout@v2
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      # - name: Allure Report with history
+      #   # uses: simple-elf/allure-report-action@v1.5
+      #   uses: simple-elf/allure-report-action@master
+      #   if: always()
+
+      - name: Allure Report action from marketplace
+        uses: neonlabsorg/allure-report-action@master
+        if: always()
+        with:
+          allure_results: allure-results
+          gh_pages: gh-pages
+          allure_report: allure-report
+          allure_history: allure-history
+          keep_reports: 50
+
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v2
+        env:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
+
+  notification:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: allure
+    env:
+      NETWORK_NAME: "teststand2-111"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setting variables
+        run: |
+          echo "Tags: ${{ github.event.inputs.tags }}"
+          echo "Network: ${{ github.event.inputs.network }}"
+          if [ -z "${{ github.event.inputs.network }}" ]
+          then
+            NETWORK='teststand2'
+          else
+            NETWORK="${{ github.event.inputs.network }}"
+          fi
+          echo "NETWORK_NAME=$NETWORK" >> $GITHUB_ENV
+          cat $GITHUB_ENV
+          echo "NETWORK_NAME=$NETWORK_NAME"
+          echo "{{ env.NETWORK_NAME }}=${{ env.NETWORK_NAME }}"
+        shell: bash
+      - name: Send a notification to Teams channel
+        uses: neonlabsorg/teams-notification-action@0.1.1
+        if: always()
+        with:
+          hookUrl: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+          actionUrl: "https://docs.neon-labs.org/neon-compatibility/${{ github.run_number }}/"
+          title: "OpenZeppelin Contracts Test Suite"
+          networkName: ${{ env.NETWORK_NAME }}
