@@ -1,0 +1,317 @@
+{
+  "uid" : "32f86f76f9e990c3",
+  "name" : "test_sender_balance_decreases",
+  "fullName" : "tests.brownie.token.tests.test_transfer#test_sender_balance_decreases",
+  "historyId" : "39fc04ca56c2456dd536d714e4310f55",
+  "time" : {
+    "start" : 1638414587074,
+    "stop" : 1638414587074,
+    "duration" : 0
+  },
+  "status" : "broken",
+  "statusMessage" : "ValueError: Gas estimation failed: 'HTTPConnectionPool(host='test3-solana', port=8899): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fbe4fe07c70>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution'))'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+  "statusTrace" : "brownie_project = <Project 'TokenProject'>\naccounts = <brownie.network.account.Accounts object at 0x7fe280d0b370>\n\n    @pytest.fixture(scope=\"module\")\n    def token(brownie_project, accounts):\n>       return brownie_project.Token.deploy(\"Test Token\", \"TST\", 18, 1e21, {'from': accounts[0]})\n\ntests/brownie/token/tests/conftest.py:49: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:600: in __call__\n    return tx[\"from\"].deploy(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:508: in deploy\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:725: in _make_transaction\n    raise VirtualMachineError(e) from None\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = VirtualMachineError(ValueError(\"Gas estimation failed: 'HTTPConnectionPool(host='test3-solana', port=8899): Max retrie... resolution'))'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.\"))\nexc = \"Gas estimation failed: 'HTTPConnectionPool(host='test3-solana', port=8899): Max retries exceeded with url: / (Caused ...me resolution'))'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.\"\n\n    def __init__(self, exc: ValueError) -> None:\n        try:\n            exc = exc.args[0]\n        except Exception:\n            pass\n    \n        if isinstance(exc, dict) and \"message\" in exc:\n            if \"data\" not in exc:\n                raise ValueError(exc[\"message\"]) from None\n    \n            self.message: str = exc[\"message\"].rstrip(\".\")\n    \n            if isinstance(exc[\"data\"], str):\n                # handle parity exceptions - this logic probably is not perfect\n                if \"0x08c379a0\" in exc[\"data\"]:\n                    revert_type, err_msg = [i.strip() for i in exc[\"data\"].split(\"0x08c379a0\", 1)]\n                    err_msg = eth_abi.decode_abi([\"string\"], HexBytes(err_msg))\n                    err_msg = f\"{revert_type} '{err_msg}'\"\n                elif exc[\"data\"].endswith(\"0x\"):\n                    err_msg = exc[\"data\"][:-2].strip()\n                else:\n                    err_msg = exc[\"data\"]\n                raise ValueError(f\"{self.message}: {err_msg}\") from None\n    \n            try:\n                txid, data = next((k, v) for k, v in exc[\"data\"].items() if k.startswith(\"0x\"))\n            except StopIteration:\n                raise ValueError(exc[\"message\"]) from None\n    \n            self.txid: str = txid\n            self.source: str = \"\"\n            self.revert_type: str = data[\"error\"]\n            self.pc: Optional[str] = data.get(\"program_counter\")\n            if self.pc and self.revert_type == \"revert\":\n                self.pc -= 1\n    \n            self.revert_msg: Optional[str] = data.get(\"reason\")\n            self.dev_revert_msg = brownie.project.build._get_dev_revert(self.pc)\n            if self.revert_msg is None and self.revert_type in (\"revert\", \"invalid opcode\"):\n                self.revert_msg = self.dev_revert_msg\n            elif self.revert_msg == \"Failed assertion\":\n                self.revert_msg = self.dev_revert_msg or self.revert_msg\n    \n        else:\n>           raise ValueError(str(exc)) from None\nE           ValueError: Gas estimation failed: 'HTTPConnectionPool(host='test3-solana', port=8899): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fbe4fe07c70>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution'))'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py:121: ValueError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : true,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1638414565014,
+      "stop" : 1638414565015,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1638414566601,
+      "stop" : 1638414584930,
+      "duration" : 18329
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "accounts",
+    "time" : {
+      "start" : 1638414585447,
+      "stop" : 1638414585723,
+      "duration" : 276
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "setup_env",
+    "time" : {
+      "start" : 1638414585447,
+      "stop" : 1638414585447,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token",
+    "time" : {
+      "start" : 1638414587075,
+      "stop" : 1638414587414,
+      "duration" : 339
+    },
+    "status" : "broken",
+    "statusMessage" : "ValueError: Gas estimation failed: 'HTTPConnectionPool(host='test3-solana', port=8899): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fbe4fe07c70>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution'))'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.\n",
+    "statusTrace" : "  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/pluggy/_callers.py\", line 39, in _multicall\n    res = hook_impl.function(*args)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/_pytest/fixtures.py\", line 1126, in pytest_fixture_setup\n    result = call_fixture_func(fixturefunc, request, kwargs)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/_pytest/fixtures.py\", line 932, in call_fixture_func\n    fixture_result = fixturefunc(**kwargs)\n  File \"/home/runner/work/neon-compatibility/neon-compatibility/tests/brownie/token/tests/conftest.py\", line 49, in token\n    return brownie_project.Token.deploy(\"Test Token\", \"TST\", 18, 1e21, {'from': accounts[0]})\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py\", line 600, in __call__\n    return tx[\"from\"].deploy(\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py\", line 508, in deploy\n    receipt, exc = self._make_transaction(\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py\", line 725, in _make_transaction\n    raise VirtualMachineError(e) from None\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py\", line 121, in __init__\n    raise ValueError(str(exc)) from None\n",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  } ],
+  "afterStages" : [ {
+    "name" : "accounts::0",
+    "time" : {
+      "start" : 1638414589948,
+      "stop" : 1638414589948,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_transfer"
+  }, {
+    "name" : "host",
+    "value" : "fv-az123-322"
+  }, {
+    "name" : "thread",
+    "value" : "3469-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_transfer"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 5,
+        "skipped" : 0,
+        "passed" : 12,
+        "unknown" : 0,
+        "total" : 17
+      },
+      "items" : [ {
+        "uid" : "9ef130463d70176c",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/147//#testresult/9ef130463d70176c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1638399296875,
+          "stop" : 1638399299076,
+          "duration" : 2201
+        }
+      }, {
+        "uid" : "8810951d60085240",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/2//#testresult/8810951d60085240",
+        "status" : "passed",
+        "time" : {
+          "start" : 1638375942587,
+          "stop" : 1638375944480,
+          "duration" : 1893
+        }
+      }, {
+        "uid" : "55aa03adde25820d",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/146//#testresult/55aa03adde25820d",
+        "status" : "passed",
+        "time" : {
+          "start" : 1638363588475,
+          "stop" : 1638363590687,
+          "duration" : 2212
+        }
+      }, {
+        "uid" : "17d1cce1f30b0889",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/145//#testresult/17d1cce1f30b0889",
+        "status" : "passed",
+        "time" : {
+          "start" : 1638328177329,
+          "stop" : 1638328179178,
+          "duration" : 1849
+        }
+      }, {
+        "uid" : "e38ab42330d097ce",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/143//#testresult/e38ab42330d097ce",
+        "status" : "passed",
+        "time" : {
+          "start" : 1638318625747,
+          "stop" : 1638318628388,
+          "duration" : 2641
+        }
+      }, {
+        "uid" : "f453683cd78b9aca",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/141//#testresult/f453683cd78b9aca",
+        "status" : "passed",
+        "time" : {
+          "start" : 1638285799123,
+          "stop" : 1638285801359,
+          "duration" : 2236
+        }
+      }, {
+        "uid" : "1f30ac6a80365be9",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/137//#testresult/1f30ac6a80365be9",
+        "status" : "passed",
+        "time" : {
+          "start" : 1638265740266,
+          "stop" : 1638265742446,
+          "duration" : 2180
+        }
+      }, {
+        "uid" : "9f3bcf15dbe6e5d7",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/140//#testresult/9f3bcf15dbe6e5d7",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Transaction simulation failed: Error processing Instruction 0: insufficient funds for instruction",
+        "time" : {
+          "start" : 1638269183957,
+          "stop" : 1638269183957,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "7c826e4e327530b4",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/138//#testresult/7c826e4e327530b4",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'HTTPConnectionPool(host='test3-solana', port=8899): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f4107a65ca0>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution'))'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1638265724796,
+          "stop" : 1638265724796,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "81ce979894e13470",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/136//#testresult/81ce979894e13470",
+        "status" : "broken",
+        "statusDetails" : "ValueError: connection already closed",
+        "time" : {
+          "start" : 1638246925182,
+          "stop" : 1638246925182,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "a8b664460a8c4647",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/135//#testresult/a8b664460a8c4647",
+        "status" : "passed",
+        "time" : {
+          "start" : 1638241769249,
+          "stop" : 1638241771467,
+          "duration" : 2218
+        }
+      }, {
+        "uid" : "5bacab5a4539bde6",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/134//#testresult/5bacab5a4539bde6",
+        "status" : "passed",
+        "time" : {
+          "start" : 1638232130534,
+          "stop" : 1638232132690,
+          "duration" : 2156
+        }
+      }, {
+        "uid" : "d7d4339618267141",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/133//#testresult/d7d4339618267141",
+        "status" : "passed",
+        "time" : {
+          "start" : 1638219618276,
+          "stop" : 1638219620559,
+          "duration" : 2283
+        }
+      }, {
+        "uid" : "3dd2c891ff0ef7b1",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/131//#testresult/3dd2c891ff0ef7b1",
+        "status" : "passed",
+        "time" : {
+          "start" : 1638203500436,
+          "stop" : 1638203502303,
+          "duration" : 1867
+        }
+      }, {
+        "uid" : "e554aa3846f6b9b2",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/129//#testresult/e554aa3846f6b9b2",
+        "status" : "passed",
+        "time" : {
+          "start" : 1638199997454,
+          "stop" : 1638199999678,
+          "duration" : 2224
+        }
+      }, {
+        "uid" : "f0a2861537573475",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/128//#testresult/f0a2861537573475",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'Transaction simulation failed: Error processing Instruction 1: invalid account data for instruction'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1638198570781,
+          "stop" : 1638198570781,
+          "duration" : 0
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "32f86f76f9e990c3.json",
+  "parameterValues" : [ ]
+}
