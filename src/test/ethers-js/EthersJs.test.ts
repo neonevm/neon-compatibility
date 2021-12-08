@@ -36,7 +36,8 @@ class EthersJsTests {
     logger.notice(`Random wallet = ${randomWallet.address}`);
     const wallet = randomWallet.connect(provider);
     logger.notice(`Random wallet connected = ${wallet.provider}`);
-    await requestFaucet(wallet.address, initialBalance);
+    // TODO: decide how and when use faucet
+    // await requestFaucet(wallet.address, initialBalance);
 
     const balance = await wallet.getBalance();
     logger.notice(`Balance = ${balance.toString()}`);
