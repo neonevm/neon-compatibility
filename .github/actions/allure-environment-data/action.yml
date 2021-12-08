@@ -16,6 +16,16 @@ runs:
         EVM_VERSION=$(echo $EVM_VERSION | sed 's/\"/\\\"/g')
         echo "EVM.Version=$EVM_VERSION" >> $ENV_PROP_FILE
         
+        # Proxy version
+        PROXY_VERSION=$(curl -X POST -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","method":"neon_proxy_version","params":[],"id":0}' $PROXY_URL)
+        PROXY_VERSION=$(echo $PROXY_VERSION | sed 's/\"/\\\"/g')
+        echo "Proxy.Version=$PROXY_VERSION" >> $ENV_PROP_FILE
+        
+        # NEON Cli version
+        NEON_CLI_VERSION=$(curl -X POST -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","method":"neon_cli_version","params":[],"id":0}' $PROXY_URL)
+        NEON_CLI_VERSION=$(echo $NEON_CLI_VERSION | sed 's/\"/\\\"/g')
+        echo "NEON-CLI.Version=$NEON_CLI_VERSION" >> $ENV_PROP_FILE
+        
         # openzeppelin-contracts version
         cd openzeppelin-contracts
         TEST_COMMIT=$(git log -n 1 | grep ^commit | cut -d " " -f 2)
