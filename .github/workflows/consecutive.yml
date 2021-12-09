@@ -63,132 +63,132 @@ jobs:
         with:
           folder-name: report/allure-results
 
-  node-contracts-01:
-    runs-on: macos-11
-    timeout-minutes: 361
-    steps:
-      - uses: actions/checkout@v2
-      # TODO: de-duplicate it https://github.com/neonlabsorg/neon-compatibility/issues/155
-      - name: Display input parameters
-        run: |
-          if [ -n "${{ github.event.inputs.jobsNumber }}" ]; then
-            echo "JOBS_NUMBER=${{ github.event.inputs.jobsNumber }}" >> $GITHUB_ENV
-          fi
-          echo "cat $GITHUB_ENV"
-          cat $GITHUB_ENV
-        shell: bash
-      # macos-11
-      # - uses: ./.github/actions/allure-prep
-      - uses: ./.github/actions/openzeppelin-preparation
-      - uses: ./.github/actions/switch-network
-        if: always()
-      - uses: ./.github/actions/allure-environment-data
-        if: always()
-      - name: Use Node.js 16
-        uses: actions/setup-node@v2
-        if: always()
-        with:
-          node-version: 16.x
-          cache: "npm"
-      - run: npm ci
-      - run: npm run build --if-present
-      - uses: ./.github/actions/install-parallel-solc
-        if: always()
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: access
-          jobsNumber: $JOBS_NUMBER
-
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: finance
-          jobsNumber: $JOBS_NUMBER
-
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: governance
-          jobsNumber: $JOBS_NUMBER
-
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: helpers
-          jobsNumber: $JOBS_NUMBER
-
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: metatx
-          jobsNumber: $JOBS_NUMBER
-
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: proxy
-          jobsNumber: $JOBS_NUMBER
-
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: security
-          jobsNumber: $JOBS_NUMBER
-
-  node-contracts-02:
-    runs-on: macos-11
-    timeout-minutes: 361
-    if: always()
-    needs: node-contracts-01
-    steps:
-      - uses: actions/checkout@v2
-      # TODO: de-duplicate it https://github.com/neonlabsorg/neon-compatibility/issues/155
-      - name: Display input parameters
-        run: |
-          if [ -n "${{ github.event.inputs.jobsNumber }}" ]; then
-            echo "JOBS_NUMBER=${{ github.event.inputs.jobsNumber }}" >> $GITHUB_ENV
-          fi
-          echo "cat $GITHUB_ENV"
-          cat $GITHUB_ENV
-        shell: bash
-      # macos-11
-      # - uses: ./.github/actions/allure-prep
-      - uses: ./.github/actions/openzeppelin-preparation
-      - uses: ./.github/actions/switch-network
-        if: always()
-      - uses: ./.github/actions/allure-environment-data
-        if: always()
-      - name: Use Node.js 16
-        uses: actions/setup-node@v2
-        if: always()
-        with:
-          node-version: 16.x
-          cache: "npm"
-      - run: npm ci
-      - run: npm run build --if-present
-      - uses: ./.github/actions/install-parallel-solc
-        if: always()
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 180
-        with:
-          folder-name: token
-          jobsNumber: $JOBS_NUMBER
-
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: utils
-          jobsNumber: $JOBS_NUMBER
+#  node-contracts-01:
+#    runs-on: macos-11
+#    timeout-minutes: 361
+#    steps:
+#      - uses: actions/checkout@v2
+#      # TODO: de-duplicate it https://github.com/neonlabsorg/neon-compatibility/issues/155
+#      - name: Display input parameters
+#        run: |
+#          if [ -n "${{ github.event.inputs.jobsNumber }}" ]; then
+#            echo "JOBS_NUMBER=${{ github.event.inputs.jobsNumber }}" >> $GITHUB_ENV
+#          fi
+#          echo "cat $GITHUB_ENV"
+#          cat $GITHUB_ENV
+#        shell: bash
+#      # macos-11
+#      # - uses: ./.github/actions/allure-prep
+#      - uses: ./.github/actions/openzeppelin-preparation
+#      - uses: ./.github/actions/switch-network
+#        if: always()
+#      - uses: ./.github/actions/allure-environment-data
+#        if: always()
+#      - name: Use Node.js 16
+#        uses: actions/setup-node@v2
+#        if: always()
+#        with:
+#          node-version: 16.x
+#          cache: "npm"
+#      - run: npm ci
+#      - run: npm run build --if-present
+#      - uses: ./.github/actions/install-parallel-solc
+#        if: always()
+#      - uses: ./.github/actions/run-process-upload
+#        if: always()
+#        timeout-minutes: 60
+#        with:
+#          folder-name: access
+#          jobsNumber: $JOBS_NUMBER
+#
+#      - uses: ./.github/actions/run-process-upload
+#        if: always()
+#        timeout-minutes: 60
+#        with:
+#          folder-name: finance
+#          jobsNumber: $JOBS_NUMBER
+#
+#      - uses: ./.github/actions/run-process-upload
+#        if: always()
+#        timeout-minutes: 60
+#        with:
+#          folder-name: governance
+#          jobsNumber: $JOBS_NUMBER
+#
+#      - uses: ./.github/actions/run-process-upload
+#        if: always()
+#        timeout-minutes: 60
+#        with:
+#          folder-name: helpers
+#          jobsNumber: $JOBS_NUMBER
+#
+#      - uses: ./.github/actions/run-process-upload
+#        if: always()
+#        timeout-minutes: 60
+#        with:
+#          folder-name: metatx
+#          jobsNumber: $JOBS_NUMBER
+#
+#      - uses: ./.github/actions/run-process-upload
+#        if: always()
+#        timeout-minutes: 60
+#        with:
+#          folder-name: proxy
+#          jobsNumber: $JOBS_NUMBER
+#
+#      - uses: ./.github/actions/run-process-upload
+#        if: always()
+#        timeout-minutes: 60
+#        with:
+#          folder-name: security
+#          jobsNumber: $JOBS_NUMBER
+#
+#  node-contracts-02:
+#    runs-on: macos-11
+#    timeout-minutes: 361
+#    if: always()
+#    needs: node-contracts-01
+#    steps:
+#      - uses: actions/checkout@v2
+#      # TODO: de-duplicate it https://github.com/neonlabsorg/neon-compatibility/issues/155
+#      - name: Display input parameters
+#        run: |
+#          if [ -n "${{ github.event.inputs.jobsNumber }}" ]; then
+#            echo "JOBS_NUMBER=${{ github.event.inputs.jobsNumber }}" >> $GITHUB_ENV
+#          fi
+#          echo "cat $GITHUB_ENV"
+#          cat $GITHUB_ENV
+#        shell: bash
+#      # macos-11
+#      # - uses: ./.github/actions/allure-prep
+#      - uses: ./.github/actions/openzeppelin-preparation
+#      - uses: ./.github/actions/switch-network
+#        if: always()
+#      - uses: ./.github/actions/allure-environment-data
+#        if: always()
+#      - name: Use Node.js 16
+#        uses: actions/setup-node@v2
+#        if: always()
+#        with:
+#          node-version: 16.x
+#          cache: "npm"
+#      - run: npm ci
+#      - run: npm run build --if-present
+#      - uses: ./.github/actions/install-parallel-solc
+#        if: always()
+#      - uses: ./.github/actions/run-process-upload
+#        if: always()
+#        timeout-minutes: 180
+#        with:
+#          folder-name: token
+#          jobsNumber: $JOBS_NUMBER
+#
+#      - uses: ./.github/actions/run-process-upload
+#        if: always()
+#        timeout-minutes: 60
+#        with:
+#          folder-name: utils
+#          jobsNumber: $JOBS_NUMBER
 
   node:
     runs-on: ubuntu-latest
@@ -238,7 +238,7 @@ jobs:
     timeout-minutes: 15
     if: always()
     needs:
-      - node-contracts-02
+#      - node-contracts-02
       - python
       - node
     steps:
@@ -263,7 +263,7 @@ jobs:
         if: always()
         with:
           allure_results: allure-results
-          gh_pages: gh-pages
+          gh_pages: gh-pages/report
           allure_report: allure-report
           allure_history: allure-history
           keep_reports: 50
