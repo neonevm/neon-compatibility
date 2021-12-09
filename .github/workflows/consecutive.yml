@@ -9,9 +9,19 @@ on:
         description: "Test scenario tags"
         required: false
       network:
-        description: "Network (devnet, testnet, teststand, teststand2, neonswap.live, aws, ropsten, rinkeby)"
-        required: true
+        type: choice
         default: "teststand2"
+        required: true
+        description: "Network (devnet, testnet, teststand, teststand2, neonswap.live, aws, ropsten, rinkeby)"
+        choices:
+          - teststand2
+          - teststand
+          - devnet
+          - testnet
+          - neonswap.live
+          - aws
+          - ropsten
+          - rinkeby
       jobsNumber:
         description: "Number of jobs in GNU Parallel"
         required: true
@@ -263,7 +273,8 @@ jobs:
         if: always()
         with:
           allure_results: allure-results
-          gh_pages: gh-pages/report
+          gh_pages: gh-pages
+          subfolder: teststand2
           allure_report: allure-report
           allure_history: allure-history
           keep_reports: 50
