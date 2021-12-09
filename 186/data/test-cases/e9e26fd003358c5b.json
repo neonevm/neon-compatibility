@@ -1,0 +1,369 @@
+{
+  "uid" : "e9e26fd003358c5b",
+  "name" : "test_no_approval",
+  "fullName" : "tests.brownie.token.tests.test_transferFrom#test_no_approval",
+  "historyId" : "7358eb8feac902966a7253222a21510a",
+  "time" : {
+    "start" : 1639045902282,
+    "stop" : 1639045902282,
+    "duration" : 0
+  },
+  "status" : "broken",
+  "statusMessage" : "ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument",
+  "statusTrace" : "brownie_project = <Project 'TokenProject'>\naccounts = <brownie.network.account.Accounts object at 0x7f7337b99700>\n\n    @pytest.fixture(scope=\"module\")\n    def token(brownie_project, accounts):\n>       return brownie_project.Token.deploy(\"Test Token\", \"TST\", 18, 1e21, {'from': accounts[0]})\n\ntests/brownie/token/tests/conftest.py:49: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:600: in __call__\n    return tx[\"from\"].deploy(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:508: in deploy\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:743: in _make_transaction\n    exc = VirtualMachineError(e)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = VirtualMachineError(ValueError({'code': -32002, 'message': 'Verifying nonce before send transaction: Error processing ...valid program argument', 'data': {'logs': ['/src/entrypoint.rs Invalid Ethereum transaction nonce: acc 21, trx 20']}}))\nexc = {'code': -32002, 'data': {'logs': ['/src/entrypoint.rs Invalid Ethereum transaction nonce: acc 21, trx 20']}, 'message': 'Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument'}\n\n    def __init__(self, exc: ValueError) -> None:\n        try:\n            exc = exc.args[0]\n        except Exception:\n            pass\n    \n        if isinstance(exc, dict) and \"message\" in exc:\n            if \"data\" not in exc:\n                raise ValueError(exc[\"message\"]) from None\n    \n            self.message: str = exc[\"message\"].rstrip(\".\")\n    \n            if isinstance(exc[\"data\"], str):\n                # handle parity exceptions - this logic probably is not perfect\n                if \"0x08c379a0\" in exc[\"data\"]:\n                    revert_type, err_msg = [i.strip() for i in exc[\"data\"].split(\"0x08c379a0\", 1)]\n                    err_msg = eth_abi.decode_abi([\"string\"], HexBytes(err_msg))\n                    err_msg = f\"{revert_type} '{err_msg}'\"\n                elif exc[\"data\"].endswith(\"0x\"):\n                    err_msg = exc[\"data\"][:-2].strip()\n                else:\n                    err_msg = exc[\"data\"]\n                raise ValueError(f\"{self.message}: {err_msg}\") from None\n    \n            try:\n                txid, data = next((k, v) for k, v in exc[\"data\"].items() if k.startswith(\"0x\"))\n            except StopIteration:\n>               raise ValueError(exc[\"message\"]) from None\nE               ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py:104: ValueError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1639045768628,
+      "stop" : 1639045768628,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1639045770175,
+      "stop" : 1639045780882,
+      "duration" : 10707
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "setup_env",
+    "time" : {
+      "start" : 1639045784627,
+      "stop" : 1639045784627,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "accounts",
+    "time" : {
+      "start" : 1639045784627,
+      "stop" : 1639045784894,
+      "duration" : 267
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token",
+    "time" : {
+      "start" : 1639045839919,
+      "stop" : 1639045901524,
+      "duration" : 61605
+    },
+    "status" : "broken",
+    "statusMessage" : "ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument\n",
+    "statusTrace" : "  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/pluggy/_callers.py\", line 39, in _multicall\n    res = hook_impl.function(*args)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/_pytest/fixtures.py\", line 1126, in pytest_fixture_setup\n    result = call_fixture_func(fixturefunc, request, kwargs)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/_pytest/fixtures.py\", line 932, in call_fixture_func\n    fixture_result = fixturefunc(**kwargs)\n  File \"/home/runner/work/neon-compatibility/neon-compatibility/tests/brownie/token/tests/conftest.py\", line 49, in token\n    return brownie_project.Token.deploy(\"Test Token\", \"TST\", 18, 1e21, {'from': accounts[0]})\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py\", line 600, in __call__\n    return tx[\"from\"].deploy(\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py\", line 508, in deploy\n    receipt, exc = self._make_transaction(\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py\", line 743, in _make_transaction\n    exc = VirtualMachineError(e)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py\", line 104, in __init__\n    raise ValueError(exc[\"message\"]) from None\n",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  } ],
+  "afterStages" : [ {
+    "name" : "accounts::0",
+    "time" : {
+      "start" : 1639046100651,
+      "stop" : 1639046100651,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_transferFrom"
+  }, {
+    "name" : "host",
+    "value" : "fv-az128-641"
+  }, {
+    "name" : "thread",
+    "value" : "5348-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_transferFrom"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 39,
+        "broken" : 13,
+        "skipped" : 0,
+        "passed" : 0,
+        "unknown" : 0,
+        "total" : 52
+      },
+      "items" : [ {
+        "uid" : "59fc9ae4581ddff",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/184//#testresult/59fc9ae4581ddff",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument",
+        "time" : {
+          "start" : 1639019990729,
+          "stop" : 1639019990729,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "ea01800d50095fb",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/183//#testresult/ea01800d50095fb",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: Transaction did not revert",
+        "time" : {
+          "start" : 1639010638697,
+          "stop" : 1639010640693,
+          "duration" : 1996
+        }
+      }, {
+        "uid" : "76929c410b808243",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/182//#testresult/76929c410b808243",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: Transaction did not revert",
+        "time" : {
+          "start" : 1638990720579,
+          "stop" : 1638990722722,
+          "duration" : 2143
+        }
+      }, {
+        "uid" : "df229f87e28c9ba4",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/177//#testresult/df229f87e28c9ba4",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: Transaction did not revert",
+        "time" : {
+          "start" : 1638970035716,
+          "stop" : 1638970043526,
+          "duration" : 7810
+        }
+      }, {
+        "uid" : "7a334b078155c530",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/181//#testresult/7a334b078155c530",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument",
+        "time" : {
+          "start" : 1638981046679,
+          "stop" : 1638981046679,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "d76e6a7995613784",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/180//#testresult/d76e6a7995613784",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument",
+        "time" : {
+          "start" : 1638975845097,
+          "stop" : 1638975845097,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "ee570a3e1d1bdecf",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/179//#testresult/ee570a3e1d1bdecf",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: Transaction did not revert",
+        "time" : {
+          "start" : 1638974699813,
+          "stop" : 1638974701951,
+          "duration" : 2138
+        }
+      }, {
+        "uid" : "556736842baf4940",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/178//#testresult/556736842baf4940",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: Transaction did not revert",
+        "time" : {
+          "start" : 1638973655564,
+          "stop" : 1638973657674,
+          "duration" : 2110
+        }
+      }, {
+        "uid" : "d43f1409e5cefa59",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/176//#testresult/d43f1409e5cefa59",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: Transaction did not revert",
+        "time" : {
+          "start" : 1638951351176,
+          "stop" : 1638951359348,
+          "duration" : 8172
+        }
+      }, {
+        "uid" : "d219d7c7b592df0a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/174//#testresult/d219d7c7b592df0a",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ConnectionError: HTTPSConnectionPool(host='proxy.teststand2.neontest.xyz', port=443): Max retries exceeded with url: /solana (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fadbd81f0d0>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+        "time" : {
+          "start" : 1638932979429,
+          "stop" : 1638932979429,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "e1e47c90f4aec6cb",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/173//#testresult/e1e47c90f4aec6cb",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ConnectionError: HTTPSConnectionPool(host='proxy.teststand2.neontest.xyz', port=443): Max retries exceeded with url: /solana (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fb865a3b130>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+        "time" : {
+          "start" : 1638923388387,
+          "stop" : 1638923388387,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "504049ef5c849291",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/172//#testresult/504049ef5c849291",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: Transaction did not revert",
+        "time" : {
+          "start" : 1638913394619,
+          "stop" : 1638913401482,
+          "duration" : 6863
+        }
+      }, {
+        "uid" : "fee0fde22e9790e6",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/171//#testresult/fee0fde22e9790e6",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ConnectionError: HTTPSConnectionPool(host='proxy.testnet.neonlabs.org', port=443): Max retries exceeded with url: /solana (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f240840a520>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+        "time" : {
+          "start" : 1638912580979,
+          "stop" : 1638912580979,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "865108c8443443dd",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/170//#testresult/865108c8443443dd",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: Transaction did not revert",
+        "time" : {
+          "start" : 1638908777187,
+          "stop" : 1638908795471,
+          "duration" : 18284
+        }
+      }, {
+        "uid" : "d31a90436a4ced59",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/169//#testresult/d31a90436a4ced59",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: Transaction did not revert",
+        "time" : {
+          "start" : 1638892712105,
+          "stop" : 1638892714024,
+          "duration" : 1919
+        }
+      }, {
+        "uid" : "10ddb9d69f56b15a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/168//#testresult/10ddb9d69f56b15a",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'Transaction simulation failed: Error processing Instruction 1: invalid account data for instruction'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1638891852235,
+          "stop" : 1638891852235,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "6e6d79418561aba4",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/167//#testresult/6e6d79418561aba4",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: Transaction did not revert",
+        "time" : {
+          "start" : 1638863214583,
+          "stop" : 1638863216743,
+          "duration" : 2160
+        }
+      }, {
+        "uid" : "68ea2e20df0f2b3f",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/166//#testresult/68ea2e20df0f2b3f",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: Transaction did not revert",
+        "time" : {
+          "start" : 1638846713630,
+          "stop" : 1638846715149,
+          "duration" : 1519
+        }
+      }, {
+        "uid" : "d394f266b25d4b9c",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/165//#testresult/d394f266b25d4b9c",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: Transaction did not revert",
+        "time" : {
+          "start" : 1638837118366,
+          "stop" : 1638837120358,
+          "duration" : 1992
+        }
+      }, {
+        "uid" : "7749b1036caae640",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/164//#testresult/7749b1036caae640",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: Transaction did not revert",
+        "time" : {
+          "start" : 1638818493436,
+          "stop" : 1638818501417,
+          "duration" : 7981
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "e9e26fd003358c5b.json",
+  "parameterValues" : [ ]
+}
