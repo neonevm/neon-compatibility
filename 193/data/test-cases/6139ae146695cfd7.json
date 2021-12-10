@@ -1,0 +1,355 @@
+{
+  "uid" : "6139ae146695cfd7",
+  "name" : "test_caller_balance_not_affected",
+  "fullName" : "tests.brownie.token.tests.test_transferFrom#test_caller_balance_not_affected",
+  "historyId" : "5da0d00473da0ab1e6482a13be5b4f69",
+  "time" : {
+    "start" : 1639096593957,
+    "stop" : 1639096625555,
+    "duration" : 31598
+  },
+  "status" : "broken",
+  "statusMessage" : "ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument",
+  "statusTrace" : "accounts = <brownie.network.account.Accounts object at 0x7fa7d3ced5e0>\ntoken = <Token Contract '0xC4636063c15a14784a113E8eaBD0cB0e7B303250'>\n\n    def test_caller_balance_not_affected(accounts, token):\n        caller_balance = token.balanceOf(accounts[1])\n        amount = token.balanceOf(accounts[0])\n    \n>       token.approve(accounts[1], amount, {'from': accounts[0]})\n\ntests/brownie/token/tests/test_transferFrom.py:29: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1693: in __call__\n    return self.transact(*args)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1566: in transact\n    return tx[\"from\"].transfer(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:642: in transfer\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:743: in _make_transaction\n    exc = VirtualMachineError(e)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = VirtualMachineError(ValueError({'code': -32002, 'message': 'Verifying nonce before send transaction: Error processing ...valid program argument', 'data': {'logs': ['/src/entrypoint.rs Invalid Ethereum transaction nonce: acc 14, trx 13']}}))\nexc = {'code': -32002, 'data': {'logs': ['/src/entrypoint.rs Invalid Ethereum transaction nonce: acc 14, trx 13']}, 'message': 'Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument'}\n\n    def __init__(self, exc: ValueError) -> None:\n        try:\n            exc = exc.args[0]\n        except Exception:\n            pass\n    \n        if isinstance(exc, dict) and \"message\" in exc:\n            if \"data\" not in exc:\n                raise ValueError(exc[\"message\"]) from None\n    \n            self.message: str = exc[\"message\"].rstrip(\".\")\n    \n            if isinstance(exc[\"data\"], str):\n                # handle parity exceptions - this logic probably is not perfect\n                if \"0x08c379a0\" in exc[\"data\"]:\n                    revert_type, err_msg = [i.strip() for i in exc[\"data\"].split(\"0x08c379a0\", 1)]\n                    err_msg = eth_abi.decode_abi([\"string\"], HexBytes(err_msg))\n                    err_msg = f\"{revert_type} '{err_msg}'\"\n                elif exc[\"data\"].endswith(\"0x\"):\n                    err_msg = exc[\"data\"][:-2].strip()\n                else:\n                    err_msg = exc[\"data\"]\n                raise ValueError(f\"{self.message}: {err_msg}\") from None\n    \n            try:\n                txid, data = next((k, v) for k, v in exc[\"data\"].items() if k.startswith(\"0x\"))\n            except StopIteration:\n>               raise ValueError(exc[\"message\"]) from None\nE               ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py:104: ValueError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : true,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1639096274553,
+      "stop" : 1639096274553,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1639096276044,
+      "stop" : 1639096287286,
+      "duration" : 11242
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "setup_env",
+    "time" : {
+      "start" : 1639096321088,
+      "stop" : 1639096321088,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "accounts",
+    "time" : {
+      "start" : 1639096321088,
+      "stop" : 1639096321354,
+      "duration" : 266
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token",
+    "time" : {
+      "start" : 1639096524891,
+      "stop" : 1639096528109,
+      "duration" : 3218
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "afterStages" : [ {
+    "name" : "accounts::0",
+    "time" : {
+      "start" : 1639097177919,
+      "stop" : 1639097177919,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_transferFrom"
+  }, {
+    "name" : "host",
+    "value" : "fv-az123-316"
+  }, {
+    "name" : "thread",
+    "value" : "4832-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_transferFrom"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 15,
+        "skipped" : 0,
+        "passed" : 43,
+        "unknown" : 0,
+        "total" : 58
+      },
+      "items" : [ {
+        "uid" : "73921fb20707fcc9",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/192//#testresult/73921fb20707fcc9",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639085317178,
+          "stop" : 1639085320942,
+          "duration" : 3764
+        }
+      }, {
+        "uid" : "e56c28788f058fed",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/189//#testresult/e56c28788f058fed",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639070534122,
+          "stop" : 1639070556334,
+          "duration" : 22212
+        }
+      }, {
+        "uid" : "f70a1406781dc9cf",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/190//#testresult/f70a1406781dc9cf",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'Transaction simulation failed: Error processing Instruction 1: invalid account data for instruction'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639074285800,
+          "stop" : 1639074285800,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "17c64f389d3ffdf4",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/187//#testresult/17c64f389d3ffdf4",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639053302459,
+          "stop" : 1639053314524,
+          "duration" : 12065
+        }
+      }, {
+        "uid" : "cb68a76477e40d5c",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/188//#testresult/cb68a76477e40d5c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639056804617,
+          "stop" : 1639056809308,
+          "duration" : 4691
+        }
+      }, {
+        "uid" : "42e2f8bf1ce7d6c5",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/186//#testresult/42e2f8bf1ce7d6c5",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument",
+        "time" : {
+          "start" : 1639045901639,
+          "stop" : 1639045901639,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "ba1e5a4e7faf021a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/184//#testresult/ba1e5a4e7faf021a",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument",
+        "time" : {
+          "start" : 1639019989893,
+          "stop" : 1639019989893,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "6d2cada892378a5e",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/183//#testresult/6d2cada892378a5e",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639010407703,
+          "stop" : 1639010411898,
+          "duration" : 4195
+        }
+      }, {
+        "uid" : "57b6328b2067f8a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/182//#testresult/57b6328b2067f8a",
+        "status" : "passed",
+        "time" : {
+          "start" : 1638990679590,
+          "stop" : 1638990684206,
+          "duration" : 4616
+        }
+      }, {
+        "uid" : "461642eff7c0154b",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/177//#testresult/461642eff7c0154b",
+        "status" : "passed",
+        "time" : {
+          "start" : 1638969889976,
+          "stop" : 1638969908040,
+          "duration" : 18064
+        }
+      }, {
+        "uid" : "429683fa87c35ff0",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/181//#testresult/429683fa87c35ff0",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument",
+        "time" : {
+          "start" : 1638981046049,
+          "stop" : 1638981046049,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "39e221dbcccf59e6",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/180//#testresult/39e221dbcccf59e6",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument",
+        "time" : {
+          "start" : 1638975844344,
+          "stop" : 1638975844344,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "867fa7cf7378cb82",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/179//#testresult/867fa7cf7378cb82",
+        "status" : "passed",
+        "time" : {
+          "start" : 1638974657997,
+          "stop" : 1638974662583,
+          "duration" : 4586
+        }
+      }, {
+        "uid" : "97a9580ce651e61a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/178//#testresult/97a9580ce651e61a",
+        "status" : "passed",
+        "time" : {
+          "start" : 1638973569454,
+          "stop" : 1638973574338,
+          "duration" : 4884
+        }
+      }, {
+        "uid" : "fec102293525c341",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/176//#testresult/fec102293525c341",
+        "status" : "passed",
+        "time" : {
+          "start" : 1638951239240,
+          "stop" : 1638951251753,
+          "duration" : 12513
+        }
+      }, {
+        "uid" : "2a21846da7dd1c98",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/174//#testresult/2a21846da7dd1c98",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ConnectionError: HTTPSConnectionPool(host='proxy.teststand2.neontest.xyz', port=443): Max retries exceeded with url: /solana (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fadbd81f0d0>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+        "time" : {
+          "start" : 1638932977120,
+          "stop" : 1638932977120,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "37cd30df5cd0cbfc",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/173//#testresult/37cd30df5cd0cbfc",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ConnectionError: HTTPSConnectionPool(host='proxy.teststand2.neontest.xyz', port=443): Max retries exceeded with url: /solana (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fb865a3b130>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+        "time" : {
+          "start" : 1638923385998,
+          "stop" : 1638923385998,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "629e419648521e24",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/172//#testresult/629e419648521e24",
+        "status" : "passed",
+        "time" : {
+          "start" : 1638913270771,
+          "stop" : 1638913283175,
+          "duration" : 12404
+        }
+      }, {
+        "uid" : "28cd71a3772b7feb",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/171//#testresult/28cd71a3772b7feb",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ConnectionError: HTTPSConnectionPool(host='proxy.testnet.neonlabs.org', port=443): Max retries exceeded with url: /solana (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f240840a520>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+        "time" : {
+          "start" : 1638912578996,
+          "stop" : 1638912578996,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "d42888a790cf4f65",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/170//#testresult/d42888a790cf4f65",
+        "status" : "passed",
+        "time" : {
+          "start" : 1638908653657,
+          "stop" : 1638908663553,
+          "duration" : 9896
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "6139ae146695cfd7.json",
+  "parameterValues" : [ ]
+}
