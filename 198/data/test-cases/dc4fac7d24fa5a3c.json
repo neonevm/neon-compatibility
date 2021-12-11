@@ -1,0 +1,292 @@
+{
+  "uid" : "dc4fac7d24fa5a3c",
+  "name" : "test_returns_true",
+  "fullName" : "tests.brownie.token.tests.test_approve#test_returns_true",
+  "historyId" : "83e76b6e4e37ba690728d80678312137",
+  "time" : {
+    "start" : 1639192549387,
+    "stop" : 1639192580310,
+    "duration" : 30923
+  },
+  "status" : "broken",
+  "statusMessage" : "ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument",
+  "statusTrace" : "token = <Token Contract '0xdE377dD317ff73f31ff65094458b2c5E126D0126'>\naccounts = <brownie.network.account.Accounts object at 0x7f182fa4e580>\n\n    def test_returns_true(token, accounts):\n>       tx = token.approve(accounts[1], 10**19, {'from': accounts[0]})\n\ntests/brownie/token/tests/test_approve.py:44: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1693: in __call__\n    return self.transact(*args)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1566: in transact\n    return tx[\"from\"].transfer(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:642: in transfer\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:743: in _make_transaction\n    exc = VirtualMachineError(e)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = VirtualMachineError(ValueError({'code': -32002, 'message': 'Verifying nonce before send transaction: Error processing ...invalid program argument', 'data': {'logs': ['/src/entrypoint.rs Invalid Ethereum transaction nonce: acc 8, trx 7']}}))\nexc = {'code': -32002, 'data': {'logs': ['/src/entrypoint.rs Invalid Ethereum transaction nonce: acc 8, trx 7']}, 'message': 'Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument'}\n\n    def __init__(self, exc: ValueError) -> None:\n        try:\n            exc = exc.args[0]\n        except Exception:\n            pass\n    \n        if isinstance(exc, dict) and \"message\" in exc:\n            if \"data\" not in exc:\n                raise ValueError(exc[\"message\"]) from None\n    \n            self.message: str = exc[\"message\"].rstrip(\".\")\n    \n            if isinstance(exc[\"data\"], str):\n                # handle parity exceptions - this logic probably is not perfect\n                if \"0x08c379a0\" in exc[\"data\"]:\n                    revert_type, err_msg = [i.strip() for i in exc[\"data\"].split(\"0x08c379a0\", 1)]\n                    err_msg = eth_abi.decode_abi([\"string\"], HexBytes(err_msg))\n                    err_msg = f\"{revert_type} '{err_msg}'\"\n                elif exc[\"data\"].endswith(\"0x\"):\n                    err_msg = exc[\"data\"][:-2].strip()\n                else:\n                    err_msg = exc[\"data\"]\n                raise ValueError(f\"{self.message}: {err_msg}\") from None\n    \n            try:\n                txid, data = next((k, v) for k, v in exc[\"data\"].items() if k.startswith(\"0x\"))\n            except StopIteration:\n>               raise ValueError(exc[\"message\"]) from None\nE               ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py:104: ValueError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "token",
+    "time" : {
+      "start" : 1639192390957,
+      "stop" : 1639192393479,
+      "duration" : 2522
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_approve"
+  }, {
+    "name" : "host",
+    "value" : "fv-az39-470"
+  }, {
+    "name" : "thread",
+    "value" : "5038-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_approve"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 63,
+        "skipped" : 0,
+        "passed" : 0,
+        "unknown" : 0,
+        "total" : 63
+      },
+      "items" : [ {
+        "uid" : "cf6efebbb25bfe5d",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/197//#testresult/cf6efebbb25bfe5d",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument",
+        "time" : {
+          "start" : 1639182764069,
+          "stop" : 1639182795341,
+          "duration" : 31272
+        }
+      }, {
+        "uid" : "f75032e8c1139c82",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/196//#testresult/f75032e8c1139c82",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1639152876160,
+          "stop" : 1639152886826,
+          "duration" : 10666
+        }
+      }, {
+        "uid" : "7b3779ef8d6faeb0",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/195//#testresult/7b3779ef8d6faeb0",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1639128487714,
+          "stop" : 1639128490363,
+          "duration" : 2649
+        }
+      }, {
+        "uid" : "d586d7957bcaba10",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/194//#testresult/d586d7957bcaba10",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument",
+        "time" : {
+          "start" : 1639106175597,
+          "stop" : 1639106207011,
+          "duration" : 31414
+        }
+      }, {
+        "uid" : "f246cbba3464f6aa",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/193//#testresult/f246cbba3464f6aa",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1639096489141,
+          "stop" : 1639096491217,
+          "duration" : 2076
+        }
+      }, {
+        "uid" : "a9285fa09c18d244",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/192//#testresult/a9285fa09c18d244",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1639085282308,
+          "stop" : 1639085284469,
+          "duration" : 2161
+        }
+      }, {
+        "uid" : "ade0e21b9d83b535",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/189//#testresult/ade0e21b9d83b535",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1639070303048,
+          "stop" : 1639070313756,
+          "duration" : 10708
+        }
+      }, {
+        "uid" : "1a4695338b6f085d",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/190//#testresult/1a4695338b6f085d",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'Transaction simulation failed: Error processing Instruction 1: invalid account data for instruction'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639074283503,
+          "stop" : 1639074283503,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "3931be7434e44399",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/187//#testresult/3931be7434e44399",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1639053180207,
+          "stop" : 1639053185702,
+          "duration" : 5495
+        }
+      }, {
+        "uid" : "9a9222c47740440b",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/188//#testresult/9a9222c47740440b",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1639056728044,
+          "stop" : 1639056730649,
+          "duration" : 2605
+        }
+      }, {
+        "uid" : "10b4248f1d6d8f39",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/186//#testresult/10b4248f1d6d8f39",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1639045803104,
+          "stop" : 1639045805357,
+          "duration" : 2253
+        }
+      }, {
+        "uid" : "a1479ba99dd01c32",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/184//#testresult/a1479ba99dd01c32",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument",
+        "time" : {
+          "start" : 1639019771999,
+          "stop" : 1639019771999,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "de8715857534621a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/183//#testresult/de8715857534621a",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url: https://proxy.teststand2.neontest.xyz/solana",
+        "time" : {
+          "start" : 1639010133461,
+          "stop" : 1639010134166,
+          "duration" : 705
+        }
+      }, {
+        "uid" : "fd8b1d51d78bcbbf",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/182//#testresult/fd8b1d51d78bcbbf",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1638990636490,
+          "stop" : 1638990639112,
+          "duration" : 2622
+        }
+      }, {
+        "uid" : "3d6ad8b1faf4fcf6",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/177//#testresult/3d6ad8b1faf4fcf6",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1638969731195,
+          "stop" : 1638969737760,
+          "duration" : 6565
+        }
+      }, {
+        "uid" : "f1b259a26f060bc0",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/181//#testresult/f1b259a26f060bc0",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1638980863064,
+          "stop" : 1638980865233,
+          "duration" : 2169
+        }
+      }, {
+        "uid" : "f1ce1a460dc8fae5",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/180//#testresult/f1ce1a460dc8fae5",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1638975761319,
+          "stop" : 1638975763080,
+          "duration" : 1761
+        }
+      }, {
+        "uid" : "38ee115a82559ff3",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/179//#testresult/38ee115a82559ff3",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1638974615399,
+          "stop" : 1638974618027,
+          "duration" : 2628
+        }
+      }, {
+        "uid" : "d5e20643d7b9da6",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/178//#testresult/d5e20643d7b9da6",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument",
+        "time" : {
+          "start" : 1638973499060,
+          "stop" : 1638973499060,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "86f83908ac2b6bc5",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/176//#testresult/86f83908ac2b6bc5",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1638951114151,
+          "stop" : 1638951120421,
+          "duration" : 6270
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "dc4fac7d24fa5a3c.json",
+  "parameterValues" : [ ]
+}
