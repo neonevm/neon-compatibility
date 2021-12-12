@@ -1,0 +1,322 @@
+{
+  "uid" : "d8770092f9e94cd0",
+  "name" : "test_brownie_deploy",
+  "fullName" : "tests.brownie.test_brownie#test_brownie_deploy",
+  "historyId" : "6e83a925951bfd8b9c39b6ea82974dc9",
+  "time" : {
+    "start" : 1639278774897,
+    "stop" : 1639278807665,
+    "duration" : 32768
+  },
+  "status" : "broken",
+  "statusMessage" : "requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url: https://proxy.teststand2.neontest.xyz/solana",
+  "statusTrace" : "brownie_project = <Project 'TokenProject'>\n\n    def test_brownie_deploy(brownie_project):\n>       deployed_contract = brownie_project.Token.deploy(\n            \"Test deploy\", \"TST\", 10, 10000000, {\"from\": accounts[0]}\n        )\n\ntests/brownie/test_brownie.py:13: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:600: in __call__\n    return tx[\"from\"].deploy(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:508: in deploy\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:740: in _make_transaction\n    txid = self._transact(tx, allow_revert)  # type: ignore\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:927: in _transact\n    return web3.eth.send_raw_transaction(signed_tx)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/module.py:57: in caller\n    result = w3.manager.request_blocking(method_str,\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/manager.py:186: in request_blocking\n    response = self._make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/manager.py:147: in _make_request\n    return request_func(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:76: in apply_formatters\n    response = make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/gas_price_strategy.py:90: in middleware\n    return make_request(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:74: in apply_formatters\n    response = make_request(method, formatted_params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/attrdict.py:33: in middleware\n    response = make_request(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:76: in apply_formatters\n    response = make_request(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:76: in apply_formatters\n    response = make_request(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:74: in apply_formatters\n    response = make_request(method, formatted_params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/buffered_gas_estimate.py:40: in middleware\n    return make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/middlewares/catch_tx_revert.py:24: in process_request\n    result = make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/exception_retry_request.py:105: in middleware\n    return make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/providers/rpc.py:88: in make_request\n    raw_response = make_post_request(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/_utils/request.py:49: in make_post_request\n    response.raise_for_status()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <Response [502]>\n\n    def raise_for_status(self):\n        \"\"\"Raises :class:`HTTPError`, if one occurred.\"\"\"\n    \n        http_error_msg = ''\n        if isinstance(self.reason, bytes):\n            # We attempt to decode utf-8 first because some servers\n            # choose to localize their reason strings. If the string\n            # isn't utf-8, we fall back to iso-8859-1 for all other\n            # encodings. (See PR #3538)\n            try:\n                reason = self.reason.decode('utf-8')\n            except UnicodeDecodeError:\n                reason = self.reason.decode('iso-8859-1')\n        else:\n            reason = self.reason\n    \n        if 400 <= self.status_code < 500:\n            http_error_msg = u'%s Client Error: %s for url: %s' % (self.status_code, reason, self.url)\n    \n        elif 500 <= self.status_code < 600:\n            http_error_msg = u'%s Server Error: %s for url: %s' % (self.status_code, reason, self.url)\n    \n        if http_error_msg:\n>           raise HTTPError(http_error_msg, response=self)\nE           requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url: https://proxy.teststand2.neontest.xyz/solana\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/requests/models.py:953: HTTPError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : true,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1639278754890,
+      "stop" : 1639278754890,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1639278756664,
+      "stop" : 1639278774896,
+      "duration" : 18232
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "testStage" : {
+    "status" : "broken",
+    "statusMessage" : "requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url: https://proxy.teststand2.neontest.xyz/solana",
+    "statusTrace" : "brownie_project = <Project 'TokenProject'>\n\n    def test_brownie_deploy(brownie_project):\n>       deployed_contract = brownie_project.Token.deploy(\n            \"Test deploy\", \"TST\", 10, 10000000, {\"from\": accounts[0]}\n        )\n\ntests/brownie/test_brownie.py:13: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:600: in __call__\n    return tx[\"from\"].deploy(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:508: in deploy\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:740: in _make_transaction\n    txid = self._transact(tx, allow_revert)  # type: ignore\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:927: in _transact\n    return web3.eth.send_raw_transaction(signed_tx)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/module.py:57: in caller\n    result = w3.manager.request_blocking(method_str,\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/manager.py:186: in request_blocking\n    response = self._make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/manager.py:147: in _make_request\n    return request_func(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:76: in apply_formatters\n    response = make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/gas_price_strategy.py:90: in middleware\n    return make_request(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:74: in apply_formatters\n    response = make_request(method, formatted_params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/attrdict.py:33: in middleware\n    response = make_request(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:76: in apply_formatters\n    response = make_request(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:76: in apply_formatters\n    response = make_request(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:74: in apply_formatters\n    response = make_request(method, formatted_params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/buffered_gas_estimate.py:40: in middleware\n    return make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/middlewares/catch_tx_revert.py:24: in process_request\n    result = make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/exception_retry_request.py:105: in middleware\n    return make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/providers/rpc.py:88: in make_request\n    raw_response = make_post_request(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/_utils/request.py:49: in make_post_request\n    response.raise_for_status()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <Response [502]>\n\n    def raise_for_status(self):\n        \"\"\"Raises :class:`HTTPError`, if one occurred.\"\"\"\n    \n        http_error_msg = ''\n        if isinstance(self.reason, bytes):\n            # We attempt to decode utf-8 first because some servers\n            # choose to localize their reason strings. If the string\n            # isn't utf-8, we fall back to iso-8859-1 for all other\n            # encodings. (See PR #3538)\n            try:\n                reason = self.reason.decode('utf-8')\n            except UnicodeDecodeError:\n                reason = self.reason.decode('iso-8859-1')\n        else:\n            reason = self.reason\n    \n        if 400 <= self.status_code < 500:\n            http_error_msg = u'%s Client Error: %s for url: %s' % (self.status_code, reason, self.url)\n    \n        elif 500 <= self.status_code < 600:\n            http_error_msg = u'%s Server Error: %s for url: %s' % (self.status_code, reason, self.url)\n    \n        if http_error_msg:\n>           raise HTTPError(http_error_msg, response=self)\nE           requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url: https://proxy.teststand2.neontest.xyz/solana\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/requests/models.py:953: HTTPError",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "4180bfae5d082935",
+      "name" : "log",
+      "source" : "4180bfae5d082935.txt",
+      "type" : "text/plain",
+      "size" : 287
+    }, {
+      "uid" : "f223994e78cfea93",
+      "name" : "stdout",
+      "source" : "f223994e78cfea93.txt",
+      "type" : "text/plain",
+      "size" : 246
+    }, {
+      "uid" : "9305a7d13b848065",
+      "name" : "stderr",
+      "source" : "9305a7d13b848065.txt",
+      "type" : "text/plain",
+      "size" : 9690
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 3,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie"
+  }, {
+    "name" : "suite",
+    "value" : "test_brownie"
+  }, {
+    "name" : "host",
+    "value" : "fv-az83-54"
+  }, {
+    "name" : "thread",
+    "value" : "5008-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.test_brownie"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 15,
+        "skipped" : 0,
+        "passed" : 55,
+        "unknown" : 0,
+        "total" : 70
+      },
+      "items" : [ {
+        "uid" : "25d037ce30cb8aa7",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/204//#testresult/25d037ce30cb8aa7",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639269319364,
+          "stop" : 1639269362053,
+          "duration" : 42689
+        }
+      }, {
+        "uid" : "556551fddf765a6d",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/203//#testresult/556551fddf765a6d",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639254045720,
+          "stop" : 1639254064517,
+          "duration" : 18797
+        }
+      }, {
+        "uid" : "71c15fcdf8f8fe09",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/202//#testresult/71c15fcdf8f8fe09",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'Transaction simulation failed: Blockhash not found'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639232338856,
+          "stop" : 1639232339247,
+          "duration" : 391
+        }
+      }, {
+        "uid" : "47612a5ba5712b60",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/201//#testresult/47612a5ba5712b60",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639230976258,
+          "stop" : 1639230997439,
+          "duration" : 21181
+        }
+      }, {
+        "uid" : "b4f9d9cb7ddec41a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/199//#testresult/b4f9d9cb7ddec41a",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639223427990,
+          "stop" : 1639223452740,
+          "duration" : 24750
+        }
+      }, {
+        "uid" : "c780ef9d823042b1",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/199//#testresult/c780ef9d823042b1",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: '429 Client Error: Too Many Requests for url: https://neonevm.testnet.rpcpool.com/e7efde89606821742be8ba4a7ced'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639222185601,
+          "stop" : 1639222185820,
+          "duration" : 219
+        }
+      }, {
+        "uid" : "bcf8a49736c2951",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/198//#testresult/bcf8a49736c2951",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639192356967,
+          "stop" : 1639192390644,
+          "duration" : 33677
+        }
+      }, {
+        "uid" : "df871b517a71678f",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/197//#testresult/df871b517a71678f",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639182595469,
+          "stop" : 1639182599293,
+          "duration" : 3824
+        }
+      }, {
+        "uid" : "f31384803033d94b",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/196//#testresult/f31384803033d94b",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639152734834,
+          "stop" : 1639152766193,
+          "duration" : 31359
+        }
+      }, {
+        "uid" : "17e6355bc1770df0",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/195//#testresult/17e6355bc1770df0",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639128463837,
+          "stop" : 1639128467893,
+          "duration" : 4056
+        }
+      }, {
+        "uid" : "d28f4a2318ad1727",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/194//#testresult/d28f4a2318ad1727",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639105988324,
+          "stop" : 1639106075972,
+          "duration" : 87648
+        }
+      }, {
+        "uid" : "b771b73dc2b80880",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/193//#testresult/b771b73dc2b80880",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639096287287,
+          "stop" : 1639096321086,
+          "duration" : 33799
+        }
+      }, {
+        "uid" : "e806677061da756a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/192//#testresult/e806677061da756a",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639085262462,
+          "stop" : 1639085265882,
+          "duration" : 3420
+        }
+      }, {
+        "uid" : "73893681a59edc89",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/189//#testresult/73893681a59edc89",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639070156996,
+          "stop" : 1639070187735,
+          "duration" : 30739
+        }
+      }, {
+        "uid" : "8d10c334db5ad571",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/190//#testresult/8d10c334db5ad571",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'Transaction simulation failed: Error processing Instruction 1: invalid account data for instruction'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639074280878,
+          "stop" : 1639074281468,
+          "duration" : 590
+        }
+      }, {
+        "uid" : "7f70290f3d5aca0f",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/187//#testresult/7f70290f3d5aca0f",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639053099630,
+          "stop" : 1639053122264,
+          "duration" : 22634
+        }
+      }, {
+        "uid" : "5dd6313b85eafb5f",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/188//#testresult/5dd6313b85eafb5f",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639056704382,
+          "stop" : 1639056708450,
+          "duration" : 4068
+        }
+      }, {
+        "uid" : "ebede2e2e058d9c6",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/186//#testresult/ebede2e2e058d9c6",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639045780883,
+          "stop" : 1639045784625,
+          "duration" : 3742
+        }
+      }, {
+        "uid" : "4c1618559b502e43",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/184//#testresult/4c1618559b502e43",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument",
+        "time" : {
+          "start" : 1639019646682,
+          "stop" : 1639019708791,
+          "duration" : 62109
+        }
+      }, {
+        "uid" : "d97baddefbc84a1d",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/183//#testresult/d97baddefbc84a1d",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x0",
+        "time" : {
+          "start" : 1639009846714,
+          "stop" : 1639009909971,
+          "duration" : 63257
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "d8770092f9e94cd0.json",
+  "parameterValues" : [ ]
+}
