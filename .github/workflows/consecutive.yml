@@ -22,7 +22,7 @@ env:
 
 jobs:
   python:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v2
@@ -38,12 +38,6 @@ jobs:
           python-version: 3.8
           cache: "pipenv"
       - run: pipenv install
-
-      #     npm i
-      #     # python -m pip install --upgrade pip
-      #     pip install pipenv
-      #     pipenv sync
-      #     # pip install -r requirements.txt
       - name: Lint with pylint
         run: |
           pipenv run pylint src
@@ -63,27 +57,22 @@ jobs:
         with:
           folder-name: report/allure-results
 
-  node-contracts-01:
-    runs-on: macos-11
-    timeout-minutes: 361
+  openzeppelin:
+    timeout-minutes: 360
+    strategy:
+      matrix:
+        directory: [
+            "test/access/*.test.js test/finance/*.test.js test/security/*.test.js test/governance/*.test.js test/metatx/*.test.js",
+            "test/proxy/*.test.js",
+            "test/token/*.test.js",
+            "test/utils/*.test.js"
+        ]
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      # TODO: de-duplicate it https://github.com/neonlabsorg/neon-compatibility/issues/155
-      - name: Display input parameters
-        run: |
-          if [ -n "${{ github.event.inputs.jobsNumber }}" ]; then
-            echo "JOBS_NUMBER=${{ github.event.inputs.jobsNumber }}" >> $GITHUB_ENV
-          fi
-          echo "cat $GITHUB_ENV"
-          cat $GITHUB_ENV
-        shell: bash
-      # macos-11
-      # - uses: ./.github/actions/allure-prep
       - uses: ./.github/actions/openzeppelin-preparation
       - uses: ./.github/actions/switch-network
-        if: always()
       - uses: ./.github/actions/allure-environment-data
-        if: always()
       - name: Use Node.js 16
         uses: actions/setup-node@v2
         if: always()
@@ -92,106 +81,20 @@ jobs:
           cache: "npm"
       - run: npm ci
       - run: npm run build --if-present
-      - uses: ./.github/actions/install-parallel-solc
-        if: always()
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
+      - run: |
+          cd openzeppelin-contracts
+          npx hardhat test ${{ matrix.directory }}
+      - uses: ./.github/actions/allure-postprocessing
         with:
-          folder-name: access
-          jobsNumber: $JOBS_NUMBER
-
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: finance
-          jobsNumber: $JOBS_NUMBER
-
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: governance
-          jobsNumber: $JOBS_NUMBER
-
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: helpers
-          jobsNumber: $JOBS_NUMBER
-
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: metatx
-          jobsNumber: $JOBS_NUMBER
-
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: proxy
-          jobsNumber: $JOBS_NUMBER
-
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: security
-          jobsNumber: $JOBS_NUMBER
-
-  node-contracts-02:
-    runs-on: macos-11
-    timeout-minutes: 361
-    if: always()
-    needs: node-contracts-01
-    steps:
-      - uses: actions/checkout@v2
-      # TODO: de-duplicate it https://github.com/neonlabsorg/neon-compatibility/issues/155
-      - name: Display input parameters
-        run: |
-          if [ -n "${{ github.event.inputs.jobsNumber }}" ]; then
-            echo "JOBS_NUMBER=${{ github.event.inputs.jobsNumber }}" >> $GITHUB_ENV
-          fi
-          echo "cat $GITHUB_ENV"
-          cat $GITHUB_ENV
-        shell: bash
-      # macos-11
-      # - uses: ./.github/actions/allure-prep
-      - uses: ./.github/actions/openzeppelin-preparation
-      - uses: ./.github/actions/switch-network
-        if: always()
-      - uses: ./.github/actions/allure-environment-data
-        if: always()
-      - name: Use Node.js 16
-        uses: actions/setup-node@v2
+          item-type: epic
+          name: OpenZeppelin contracts
+      - uses: ./.github/actions/allure-upload
         if: always()
         with:
-          node-version: 16.x
-          cache: "npm"
-      - run: npm ci
-      - run: npm run build --if-present
-      - uses: ./.github/actions/install-parallel-solc
-        if: always()
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 180
-        with:
-          folder-name: token
-          jobsNumber: $JOBS_NUMBER
-
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: utils
-          jobsNumber: $JOBS_NUMBER
+          folder-name: openzeppelin-contracts/allure-results
 
   node:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v2
@@ -234,11 +137,11 @@ jobs:
           folder-name: report/allure-results
 
   allure:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     timeout-minutes: 15
     if: always()
     needs:
-      - node-contracts-02
+      - openzeppelin
       - python
       - node
     steps:
@@ -277,7 +180,7 @@ jobs:
           PUBLISH_DIR: allure-history
 
   notification:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     if: always()
     needs: allure
     env:
