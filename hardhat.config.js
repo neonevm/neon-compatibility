@@ -6,8 +6,8 @@
 // - COMPILE_VERSION:   compiler version (default: 0.8.3)
 // - COINMARKETCAP:     coinmarkercat api key for USD value in gas report
 
-require("dotenv").config({ path: "../.env" });
-const Web3 = require("web3");
+require('dotenv').config({ path: '../.env' });
+const Web3 = require('web3');
 
 const fs = require('fs');
 const path = require('path');
@@ -16,34 +16,33 @@ const argv = require('yargs/yargs')()
   .options({
     ci: {
       type: 'boolean',
-      default: false,
+      default: false
     },
     coverage: {
       type: 'boolean',
-      default: false,
+      default: false
     },
     gas: {
       alias: 'enableGasReport',
       type: 'boolean',
-      default: false,
+      default: false
     },
     mode: {
       alias: 'compileMode',
       type: 'string',
       choices: ['production', 'development'],
-      default: 'development',
+      default: 'development'
     },
     compiler: {
       alias: 'compileVersion',
       type: 'string',
-      default: '0.8.3',
+      default: '0.8.3'
     },
     coinmarketcap: {
       alias: 'coinmarketcapApiKey',
-      type: 'string',
-    },
-  })
-  .argv;
+      type: 'string'
+    }
+  }).argv;
 
 require('@nomiclabs/hardhat-truffle5');
 
@@ -55,7 +54,8 @@ for (const f of fs.readdirSync(path.join(__dirname, 'hardhat'))) {
   require(path.join(__dirname, 'hardhat', f));
 }
 
-const withOptimizations = argv.enableGasReport || argv.compileMode === 'production';
+const withOptimizations =
+  argv.enableGasReport || argv.compileMode === 'production';
 
 const ACCOUNTS_NUMBER = parseInt(process.env.USERS_NUMBER);
 
@@ -75,13 +75,23 @@ const privateKeys = Array.from(Array(ACCOUNTS_NUMBER), (_, x) => {
 });
 privateKeys.unshift(process.env.PRIVATE_KEY);
 
-console.log("========================== Reading Hardhat config =============================");
+console.log(
+  '========================== Reading Hardhat config ============================='
+);
 (async (addressFrom, addressTo) => {
-  console.log(`address from = ${addressFrom} balance=`, await web3.eth.getBalance(addressFrom));
-  console.log(`address to = ${addressTo}  balance=`, await web3.eth.getBalance(addressTo));
+  console.log(
+    `address from = ${addressFrom} balance=`,
+    await web3.eth.getBalance(addressFrom)
+  );
+  console.log(
+    `address to = ${addressTo}  balance=`,
+    await web3.eth.getBalance(addressTo)
+  );
   console.log(`main private key = ${process.env.PRIVATE_KEY}`);
   console.log(`account keys = ${privateKeys}`);
-  console.log("==============================================================================");
+  console.log(
+    '=============================================================================='
+  );
 })(process.env.ADDRESS_FROM, process.env.ADDRESS_TO);
 
 /**
@@ -93,15 +103,15 @@ module.exports = {
     settings: {
       optimizer: {
         enabled: withOptimizations,
-        runs: 200,
-      },
-    },
+        runs: 200
+      }
+    }
   },
-  defaultNetwork: "neonlabs",
+  defaultNetwork: 'neonlabs',
   networks: {
     hardhat: {
       blockGasLimit: 10000000,
-      allowUnlimitedContractSize: !withOptimizations,
+      allowUnlimitedContractSize: !withOptimizations
     },
     neonlabs: {
       url: process.env.PROXY_URL,
@@ -114,22 +124,23 @@ module.exports = {
       gasPrice: 1000000000,
       blockGasLimit: 10000000,
       allowUnlimitedContractSize: !withOptimizations,
-      timeout: 100000,
-    },
+      timeout: 1000000,
+      isFork: true
+    }
   },
   gasReporter: {
     currency: 'USD',
     outputFile: argv.ci ? 'gas-report.txt' : undefined,
-    coinmarketcap: argv.coinmarketcap,
+    coinmarketcap: argv.coinmarketcap
   },
   mocha: {
     timeout: 1000000000,
     reporter: 'mocha-multi-reporters',
     reporterOption: {
-      configFile: '../reporterConfig.json',
+      configFile: '../reporterConfig.json'
     },
-    diff: true,
-  },
+    diff: true
+  }
 };
 
 if (argv.coverage) {
