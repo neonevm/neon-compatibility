@@ -36,7 +36,7 @@ const argv = require('yargs/yargs')()
     compiler: {
       alias: 'compileVersion',
       type: 'string',
-      default: '0.8.3+commit.8d00100c.Emscripten.clang'
+      default: '0.8.10'
     },
     coinmarketcap: {
       alias: 'coinmarketcapApiKey',
