@@ -31,7 +31,11 @@ runs:
         echo "npx hardhat test \$1" >> 1.sh
         chmod 555 1.sh
         cat 1.sh
-        find "test/${{ inputs.folder-name }}" -name '*.js' | parallel --jobs $JOBS_NUMBER 1.sh {}
+
+        echo "Running...."
+        echo "find "test/${{ inputs.folder-name }}" -name '*.js' | parallel --jobs $JOBS_NUMBER ./1.sh {}"
+
+        find "test/${{ inputs.folder-name }}" -name '*.js' | parallel --jobs $JOBS_NUMBER ./1.sh {}
         echo "============================================================================================="
         echo "====================================== test results ========================================="
         echo "============================================================================================="
