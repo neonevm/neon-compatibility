@@ -26,7 +26,7 @@ runs:
         # find "$(pwd)/test/${{ inputs.folder-name }}" | grep test.js | ../node_modules/.bin/hardhat test $_
         JOBS_NUMBER=${{ inputs.jobsNumber }}
         # find "test/${{ inputs.folder-name }}" -name '*.js' | parallel --jobs $JOBS_NUMBER npx hardhat test {}
-        "echo \"$(solcjs --version)\" > 1.sh
+        "echo \"$(solcjs --version)\"" > 1.sh
         "npx hardhat test $1" >> 1.sh
         chmod 555 1.sh
         find "test/${{ inputs.folder-name }}" -name '*.js' | parallel --jobs $JOBS_NUMBER 1.sh {}
