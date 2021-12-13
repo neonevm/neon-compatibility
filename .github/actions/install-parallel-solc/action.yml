@@ -1,11 +1,15 @@
 name: Install Parallel and solc
-description: Installs GNU Parallel and solc 0.8.3
+description: Installs GNU Parallel and solc 0.8.10
 runs:
   using: "composite"
   steps:
     - run: |
-        npm install -g solc@0.8.3
+        # npm install -g solc@0.8.3
+        npm install -g solc@latest
         # sudo apt-get update
         # sudo apt install parallel
         brew install parallel
+
+        cd openzeppelin-contracts
+        npx hardhat compile
       shell: bash

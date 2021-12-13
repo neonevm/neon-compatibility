@@ -25,7 +25,20 @@ runs:
         # the last working version
         # find "$(pwd)/test/${{ inputs.folder-name }}" | grep test.js | ../node_modules/.bin/hardhat test $_
         JOBS_NUMBER=${{ inputs.jobsNumber }}
-        find "test/${{ inputs.folder-name }}" -name '*.js' | parallel --jobs $JOBS_NUMBER npx hardhat test {}
+        # find "test/${{ inputs.folder-name }}" -name '*.js' | parallel --jobs $JOBS_NUMBER npx hardhat test {}
+
+        echo "echo \"\$(solcjs --version)\"" > 1.sh
+        echo "npx hardhat test \$1" >> 1.sh
+        chmod 555 1.sh
+        cat 1.sh
+
+        echo "Running...."
+        echo "find "test/${{ inputs.folder-name }}" -name '*.js' | parallel --jobs $JOBS_NUMBER ./1.sh {}"
+        # ls /Users/runner/Library/Caches/hardhat-nodejs/compilers/macosx-amd64
+        # ls /Users/runner/Library/Caches/hardhat-nodejs/compilers
+        ls -R /Users/runner/Library/Caches/hardhat-nodejs
+
+        find "test/${{ inputs.folder-name }}" -name '*.js' | parallel --jobs $JOBS_NUMBER ./1.sh {}
         echo "============================================================================================="
         echo "====================================== test results ========================================="
         echo "============================================================================================="
