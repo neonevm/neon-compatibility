@@ -1,0 +1,353 @@
+{
+  "uid" : "93be8e6a4e657dc8",
+  "name" : "test_revoke_approve",
+  "fullName" : "tests.brownie.token.tests.test_approve#test_revoke_approve",
+  "historyId" : "493792eebd5a4fea1ce221a16db97b7d",
+  "time" : {
+    "start" : 1639434329244,
+    "stop" : 1639434334293,
+    "duration" : 5049
+  },
+  "status" : "broken",
+  "statusMessage" : "ValueError: Transaction simulation failed: Blockhash not found",
+  "statusTrace" : "token = <Token Contract '0x1C796a90Ebc1619fE3fF1681434A8dC41e12A521'>\naccounts = <brownie.network.account.Accounts object at 0x7f9e8d3aa370>\n\n    def test_revoke_approve(token, accounts):\n>       token.approve(accounts[1], 10**19, {'from': accounts[0]})\n\ntests/brownie/token/tests/test_approve.py:25: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1693: in __call__\n    return self.transact(*args)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1566: in transact\n    return tx[\"from\"].transfer(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:642: in transfer\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:743: in _make_transaction\n    exc = VirtualMachineError(e)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = VirtualMachineError(ValueError({'code': -32002, 'message': 'Transaction simulation failed: Blockhash not found', 'data': {'accounts': None, 'err': 'BlockhashNotFound', 'logs': []}}))\nexc = {'code': -32002, 'data': {'accounts': None, 'err': 'BlockhashNotFound', 'logs': []}, 'message': 'Transaction simulation failed: Blockhash not found'}\n\n    def __init__(self, exc: ValueError) -> None:\n        try:\n            exc = exc.args[0]\n        except Exception:\n            pass\n    \n        if isinstance(exc, dict) and \"message\" in exc:\n            if \"data\" not in exc:\n                raise ValueError(exc[\"message\"]) from None\n    \n            self.message: str = exc[\"message\"].rstrip(\".\")\n    \n            if isinstance(exc[\"data\"], str):\n                # handle parity exceptions - this logic probably is not perfect\n                if \"0x08c379a0\" in exc[\"data\"]:\n                    revert_type, err_msg = [i.strip() for i in exc[\"data\"].split(\"0x08c379a0\", 1)]\n                    err_msg = eth_abi.decode_abi([\"string\"], HexBytes(err_msg))\n                    err_msg = f\"{revert_type} '{err_msg}'\"\n                elif exc[\"data\"].endswith(\"0x\"):\n                    err_msg = exc[\"data\"][:-2].strip()\n                else:\n                    err_msg = exc[\"data\"]\n                raise ValueError(f\"{self.message}: {err_msg}\") from None\n    \n            try:\n                txid, data = next((k, v) for k, v in exc[\"data\"].items() if k.startswith(\"0x\"))\n            except StopIteration:\n>               raise ValueError(exc[\"message\"]) from None\nE               ValueError: Transaction simulation failed: Blockhash not found\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py:104: ValueError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : true,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1639434173641,
+      "stop" : 1639434173641,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1639434176897,
+      "stop" : 1639434192406,
+      "duration" : 15509
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "accounts",
+    "time" : {
+      "start" : 1639434222949,
+      "stop" : 1639434223251,
+      "duration" : 302
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "setup_env",
+    "time" : {
+      "start" : 1639434222949,
+      "stop" : 1639434222949,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token",
+    "time" : {
+      "start" : 1639434223252,
+      "stop" : 1639434249460,
+      "duration" : 26208
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "afterStages" : [ {
+    "name" : "accounts::0",
+    "time" : {
+      "start" : 1639435056364,
+      "stop" : 1639435056364,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_approve"
+  }, {
+    "name" : "host",
+    "value" : "fv-az77-686"
+  }, {
+    "name" : "thread",
+    "value" : "4466-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_approve"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 22,
+        "skipped" : 0,
+        "passed" : 59,
+        "unknown" : 0,
+        "total" : 81
+      },
+      "items" : [ {
+        "uid" : "eb6d7877f3beaeab",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/215//#testresult/eb6d7877f3beaeab",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639434164162,
+          "stop" : 1639434167574,
+          "duration" : 3412
+        }
+      }, {
+        "uid" : "5e3180bb96e41f2c",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/214//#testresult/5e3180bb96e41f2c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639409452146,
+          "stop" : 1639409476106,
+          "duration" : 23960
+        }
+      }, {
+        "uid" : "b7cc91578905de96",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/213//#testresult/b7cc91578905de96",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639394948258,
+          "stop" : 1639394970932,
+          "duration" : 22674
+        }
+      }, {
+        "uid" : "e5c35be9c47d46ca",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/212//#testresult/e5c35be9c47d46ca",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639394899583,
+          "stop" : 1639394904212,
+          "duration" : 4629
+        }
+      }, {
+        "uid" : "c94e2beb1b497f1d",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/211//#testresult/c94e2beb1b497f1d",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639391229923,
+          "stop" : 1639391233599,
+          "duration" : 3676
+        }
+      }, {
+        "uid" : "5ead093d8fadddce",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/210//#testresult/5ead093d8fadddce",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639365200540,
+          "stop" : 1639365204765,
+          "duration" : 4225
+        }
+      }, {
+        "uid" : "3fd27dc30b89d67a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/209//#testresult/3fd27dc30b89d67a",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639355561560,
+          "stop" : 1639355565643,
+          "duration" : 4083
+        }
+      }, {
+        "uid" : "f4c37163dbed030f",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/208//#testresult/f4c37163dbed030f",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639327775918,
+          "stop" : 1639327779376,
+          "duration" : 3458
+        }
+      }, {
+        "uid" : "3409932f4b426abf",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/207//#testresult/3409932f4b426abf",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639326308987,
+          "stop" : 1639326313197,
+          "duration" : 4210
+        }
+      }, {
+        "uid" : "3a9fd82293f193df",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/206//#testresult/3a9fd82293f193df",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639326233602,
+          "stop" : 1639326237299,
+          "duration" : 3697
+        }
+      }, {
+        "uid" : "f9d8959ffcb8bbf0",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/205//#testresult/f9d8959ffcb8bbf0",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url: https://proxy.teststand2.neontest.xyz/solana",
+        "time" : {
+          "start" : 1639278810289,
+          "stop" : 1639278810289,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "7f0c93bb19753c93",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/204//#testresult/7f0c93bb19753c93",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url: https://proxy.teststand2.neontest.xyz/solana",
+        "time" : {
+          "start" : 1639269425844,
+          "stop" : 1639269425844,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "9ffc91a55c78e0f",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/203//#testresult/9ffc91a55c78e0f",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639254100928,
+          "stop" : 1639254114292,
+          "duration" : 13364
+        }
+      }, {
+        "uid" : "af84635da5cb619d",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/202//#testresult/af84635da5cb619d",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'Transaction simulation failed: Blockhash not found'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639232340774,
+          "stop" : 1639232340774,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "1fc223deb77796ab",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/201//#testresult/1fc223deb77796ab",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639231029289,
+          "stop" : 1639231040180,
+          "duration" : 10891
+        }
+      }, {
+        "uid" : "b26d37ab2b357854",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/199//#testresult/b26d37ab2b357854",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639223487446,
+          "stop" : 1639223498680,
+          "duration" : 11234
+        }
+      }, {
+        "uid" : "aadc1fa091220a4e",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/199//#testresult/aadc1fa091220a4e",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: '429 Client Error: Too Many Requests for url: https://neonevm.testnet.rpcpool.com/e7efde89606821742be8ba4a7ced'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639222187200,
+          "stop" : 1639222187200,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "cd0c4335062b7bd",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/198//#testresult/cd0c4335062b7bd",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument",
+        "time" : {
+          "start" : 1639192456399,
+          "stop" : 1639192487314,
+          "duration" : 30915
+        }
+      }, {
+        "uid" : "f60d58c62db83d57",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/197//#testresult/f60d58c62db83d57",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument",
+        "time" : {
+          "start" : 1639182670075,
+          "stop" : 1639182701308,
+          "duration" : 31233
+        }
+      }, {
+        "uid" : "a7f77902ee7b465b",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/196//#testresult/a7f77902ee7b465b",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639152834335,
+          "stop" : 1639152856271,
+          "duration" : 21936
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "93be8e6a4e657dc8.json",
+  "parameterValues" : [ ]
+}
