@@ -60,12 +60,13 @@ jobs:
   openzeppelin:
     timeout-minutes: 360
     strategy:
+      fail-fast: false
       matrix:
         directory: [
-            "test/access/*.test.js test/finance/*.test.js test/security/*.test.js test/governance/*.test.js test/metatx/*.test.js",
-            "test/proxy/*.test.js",
-            "test/token/*.test.js",
-            "test/utils/*.test.js"
+            "test/access test/finance test/security test/governance test/metatx",
+            "test/proxy",
+            "test/token",
+            "test/utils"
         ]
     runs-on: ubuntu-20.04
     steps:
@@ -75,7 +76,6 @@ jobs:
       - uses: ./.github/actions/allure-environment-data
       - name: Use Node.js 16
         uses: actions/setup-node@v2
-        if: always()
         with:
           node-version: 16.x
           cache: "npm"
@@ -83,8 +83,9 @@ jobs:
       - run: npm run build --if-present
       - run: |
           cd openzeppelin-contracts
-          npx hardhat test ${{ matrix.directory }}
+          find ${{ matrix.directory }} -name '*test.js' | npx hardhat test {}
       - uses: ./.github/actions/allure-postprocessing
+        if: always()
         with:
           item-type: epic
           name: OpenZeppelin contracts
