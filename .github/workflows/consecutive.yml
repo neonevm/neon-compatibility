@@ -83,7 +83,7 @@ jobs:
       - run: npm run build --if-present
       - run: |
           cd openzeppelin-contracts
-          find ${{ matrix.directory }} -name '*test.js' | npx hardhat test {}
+          find ${{ matrix.directory }} -name '*test.js' | xargs npx hardhat test
       - uses: ./.github/actions/allure-postprocessing
         if: always()
         with:
