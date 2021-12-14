@@ -59,16 +59,6 @@ jobs:
 
   openzeppelin:
     timeout-minutes: 360
-    strategy:
-      fail-fast: false
-      matrix:
-        directory: [
-#            "test/access test/finance test/security test/governance test/metatx test/proxy",
-                     "test/governance"
-#            "test/proxy",
-#            "test/token test/utils",
-#            "test/utils"
-        ]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -84,7 +74,7 @@ jobs:
       - run: npm run build --if-present
       - run: |
           cd openzeppelin-contracts
-          find ${{ matrix.directory }} -name '*test.js' | xargs npx hardhat test
+          python3 ../
       - uses: ./.github/actions/allure-postprocessing
         if: always()
         with:
