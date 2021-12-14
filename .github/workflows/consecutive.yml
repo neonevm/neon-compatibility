@@ -15,10 +15,10 @@ on:
       jobsNumber:
         description: "Number of jobs in GNU Parallel"
         required: true
-        default: "8"
+        default: "4"
 
 env:
-  JOBS_NUMBER: "8"
+  JOBS_NUMBER: "4"
 
 jobs:
   python:
@@ -74,8 +74,7 @@ jobs:
       - run: npm run build --if-present
       - run: |
           cd openzeppelin-contracts
-          cp ../run_parallel.py ./
-          python3 run_parallel.py
+          find test/ "test" -name '*.js' | parallel --jobs 4 npx hardhat test {}
       - uses: ./.github/actions/allure-postprocessing
         if: always()
         with:
