@@ -16,6 +16,6 @@ out = []
 for r in res:
     out.append(" ".join([str(c) for c in r]))
 
-command = "".join(["\"%s\"" % c for c in out])
+command = " ".join(["\"%s\"" % c for c in out])
 
-subprocess.check_call("parallel --dry-run --jobs %s npx hardhat test {} ::: %s" % (JOBS_NUMBER, command), shell=True)
+subprocess.check_call("parallel --jobs %s ./rrrun.sh {} ::: %s" % (JOBS_NUMBER, command), shell=True)

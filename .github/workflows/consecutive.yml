@@ -74,7 +74,10 @@ jobs:
       - run: npm run build --if-present
       - run: |
           cd openzeppelin-contracts
-          find test/ "test" -name '*.js' | parallel --jobs 4 npx hardhat test {}
+          cp ../run_parallel.py ./
+          cp ../rrrun.sh ./
+          chmod +x rrrun.sh
+          python3 run_parallel.py
       - uses: ./.github/actions/allure-postprocessing
         if: always()
         with:
@@ -84,11 +87,6 @@ jobs:
         if: always()
         with:
           folder-name: openzeppelin-contracts/allure-results
-      - uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: report
-          path: openzeppelin-contracts/mochawesome-report
 
   node:
     runs-on: ubuntu-20.04
