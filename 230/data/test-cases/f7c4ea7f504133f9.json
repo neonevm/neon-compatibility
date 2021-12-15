@@ -1,0 +1,367 @@
+{
+  "uid" : "f7c4ea7f504133f9",
+  "name" : "test_insufficient_balance",
+  "fullName" : "tests.brownie.token.tests.test_transfer#test_insufficient_balance",
+  "historyId" : "02f6dcce7a5f38efb9b84065f779b5a9",
+  "time" : {
+    "start" : 1639590991814,
+    "stop" : 1639590992737,
+    "duration" : 923
+  },
+  "status" : "broken",
+  "statusMessage" : "ValueError: Gas estimation failed: 'execution reverted: Insufficient balance'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+  "statusTrace" : "accounts = <brownie.network.account.Accounts object at 0x7fd3b40fe820>\ntoken = <Token Contract '0x2Bb54Ab81373c00e93405e734a3E5d35Ac1AecC4'>\n\n    def test_insufficient_balance(accounts, token):\n        balance = token.balanceOf(accounts[0])\n    \n        with brownie.reverts():\n>           token.transfer(accounts[1], balance + 1, {'from': accounts[0]})\n\ntests/brownie/token/tests/test_transfer.py:72: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntests/brownie/token/tests/test_transfer.py:72: in test_insufficient_balance\n    token.transfer(accounts[1], balance + 1, {'from': accounts[0]})\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1693: in __call__\n    return self.transact(*args)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1566: in transact\n    return tx[\"from\"].transfer(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:642: in transfer\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:725: in _make_transaction\n    raise VirtualMachineError(e) from None\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = VirtualMachineError(ValueError(\"Gas estimation failed: 'execution reverted: Insufficient balance'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.\"))\nexc = \"Gas estimation failed: 'execution reverted: Insufficient balance'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.\"\n\n    def __init__(self, exc: ValueError) -> None:\n        try:\n            exc = exc.args[0]\n        except Exception:\n            pass\n    \n        if isinstance(exc, dict) and \"message\" in exc:\n            if \"data\" not in exc:\n                raise ValueError(exc[\"message\"]) from None\n    \n            self.message: str = exc[\"message\"].rstrip(\".\")\n    \n            if isinstance(exc[\"data\"], str):\n                # handle parity exceptions - this logic probably is not perfect\n                if \"0x08c379a0\" in exc[\"data\"]:\n                    revert_type, err_msg = [i.strip() for i in exc[\"data\"].split(\"0x08c379a0\", 1)]\n                    err_msg = eth_abi.decode_abi([\"string\"], HexBytes(err_msg))\n                    err_msg = f\"{revert_type} '{err_msg}'\"\n                elif exc[\"data\"].endswith(\"0x\"):\n                    err_msg = exc[\"data\"][:-2].strip()\n                else:\n                    err_msg = exc[\"data\"]\n                raise ValueError(f\"{self.message}: {err_msg}\") from None\n    \n            try:\n                txid, data = next((k, v) for k, v in exc[\"data\"].items() if k.startswith(\"0x\"))\n            except StopIteration:\n                raise ValueError(exc[\"message\"]) from None\n    \n            self.txid: str = txid\n            self.source: str = \"\"\n            self.revert_type: str = data[\"error\"]\n            self.pc: Optional[str] = data.get(\"program_counter\")\n            if self.pc and self.revert_type == \"revert\":\n                self.pc -= 1\n    \n            self.revert_msg: Optional[str] = data.get(\"reason\")\n            self.dev_revert_msg = brownie.project.build._get_dev_revert(self.pc)\n            if self.revert_msg is None and self.revert_type in (\"revert\", \"invalid opcode\"):\n                self.revert_msg = self.dev_revert_msg\n            elif self.revert_msg == \"Failed assertion\":\n                self.revert_msg = self.dev_revert_msg or self.revert_msg\n    \n        else:\n>           raise ValueError(str(exc)) from None\nE           ValueError: Gas estimation failed: 'execution reverted: Insufficient balance'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py:121: ValueError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1639590907951,
+      "stop" : 1639590907952,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1639590910022,
+      "stop" : 1639590924981,
+      "duration" : 14959
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "accounts",
+    "time" : {
+      "start" : 1639590930117,
+      "stop" : 1639590930384,
+      "duration" : 267
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "setup_env",
+    "time" : {
+      "start" : 1639590930117,
+      "stop" : 1639590930117,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token",
+    "time" : {
+      "start" : 1639590965031,
+      "stop" : 1639590969399,
+      "duration" : 4368
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "afterStages" : [ {
+    "name" : "accounts::0",
+    "time" : {
+      "start" : 1639591366709,
+      "stop" : 1639591366709,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_transfer"
+  }, {
+    "name" : "host",
+    "value" : "fv-az135-587"
+  }, {
+    "name" : "thread",
+    "value" : "4454-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_transfer"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 94,
+        "skipped" : 0,
+        "passed" : 0,
+        "unknown" : 0,
+        "total" : 94
+      },
+      "items" : [ {
+        "uid" : "509213d77dbbbd1",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/228//#testresult/509213d77dbbbd1",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'execution reverted: Insufficient balance'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639580764713,
+          "stop" : 1639580765244,
+          "duration" : 531
+        }
+      }, {
+        "uid" : "93c51ca9ca6b8a9a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/227//#testresult/93c51ca9ca6b8a9a",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'execution reverted: Insufficient balance'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639577819268,
+          "stop" : 1639577820078,
+          "duration" : 810
+        }
+      }, {
+        "uid" : "15b187a2b55dd13b",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/226//#testresult/15b187a2b55dd13b",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'execution reverted: Insufficient balance'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639575124604,
+          "stop" : 1639575125040,
+          "duration" : 436
+        }
+      }, {
+        "uid" : "c09ad0f771e85c31",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/225//#testresult/c09ad0f771e85c31",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'execution reverted: Insufficient balance'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639574802552,
+          "stop" : 1639574802945,
+          "duration" : 393
+        }
+      }, {
+        "uid" : "3bc26d3a19ac2462",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/224//#testresult/3bc26d3a19ac2462",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'execution reverted: Insufficient balance'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639574190344,
+          "stop" : 1639574190940,
+          "duration" : 596
+        }
+      }, {
+        "uid" : "1dcdd1ec78d0e618",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/223//#testresult/1dcdd1ec78d0e618",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'execution reverted: Insufficient balance'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639573379165,
+          "stop" : 1639573379762,
+          "duration" : 597
+        }
+      }, {
+        "uid" : "5f274f93542ddd35",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/222//#testresult/5f274f93542ddd35",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'execution reverted: Insufficient balance'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639538041345,
+          "stop" : 1639538041938,
+          "duration" : 593
+        }
+      }, {
+        "uid" : "3e75bdb256e35d48",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/221//#testresult/3e75bdb256e35d48",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'execution reverted: Insufficient balance'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639528359160,
+          "stop" : 1639528359706,
+          "duration" : 546
+        }
+      }, {
+        "uid" : "e8b17e4f61b344f",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/220//#testresult/e8b17e4f61b344f",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'HTTPConnectionPool(host='release-solana', port=8899): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f2d30576fd0>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution'))'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639461403661,
+          "stop" : 1639461403661,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "8ec270f7249887d9",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/219//#testresult/8ec270f7249887d9",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'execution reverted: Insufficient balance'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639451602323,
+          "stop" : 1639451602879,
+          "duration" : 556
+        }
+      }, {
+        "uid" : "72c8d87e480b10a1",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/218//#testresult/72c8d87e480b10a1",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'execution reverted: Insufficient balance'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639442031397,
+          "stop" : 1639442031946,
+          "duration" : 549
+        }
+      }, {
+        "uid" : "fc1b6214e7be10ba",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/217//#testresult/fc1b6214e7be10ba",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'execution reverted: Insufficient balance'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639441503020,
+          "stop" : 1639441503596,
+          "duration" : 576
+        }
+      }, {
+        "uid" : "c1279151030266cc",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/216//#testresult/c1279151030266cc",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'execution reverted: Insufficient balance'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639434488684,
+          "stop" : 1639434491300,
+          "duration" : 2616
+        }
+      }, {
+        "uid" : "4609b80ecce83246",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/215//#testresult/4609b80ecce83246",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'execution reverted: Insufficient balance'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639434192919,
+          "stop" : 1639434193398,
+          "duration" : 479
+        }
+      }, {
+        "uid" : "1d3444c0ea18e22a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/214//#testresult/1d3444c0ea18e22a",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Transaction simulation failed: Blockhash not found",
+        "time" : {
+          "start" : 1639409572622,
+          "stop" : 1639409572622,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "198e8bbd335ef663",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/213//#testresult/198e8bbd335ef663",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'execution reverted: Insufficient balance'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639395136273,
+          "stop" : 1639395139110,
+          "duration" : 2837
+        }
+      }, {
+        "uid" : "35011ad6b5de9d8b",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/212//#testresult/35011ad6b5de9d8b",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'execution reverted: Insufficient balance'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639394937425,
+          "stop" : 1639394938072,
+          "duration" : 647
+        }
+      }, {
+        "uid" : "a8c50c7b4d4e28cd",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/211//#testresult/a8c50c7b4d4e28cd",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'execution reverted: Insufficient balance'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639391262823,
+          "stop" : 1639391263370,
+          "duration" : 547
+        }
+      }, {
+        "uid" : "a52ca79e6f0ba739",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/210//#testresult/a52ca79e6f0ba739",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'execution reverted: Insufficient balance'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639365235399,
+          "stop" : 1639365235975,
+          "duration" : 576
+        }
+      }, {
+        "uid" : "378c16686a8d5518",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/209//#testresult/378c16686a8d5518",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'execution reverted: Insufficient balance'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1639355596873,
+          "stop" : 1639355597483,
+          "duration" : 610
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "f7c4ea7f504133f9.json",
+  "parameterValues" : [ ]
+}
