@@ -1,4 +1,4 @@
-name: "GNU Parallel: Python 3.8, Node.js 16, allure"
+name: "Run compatibility tests (python, node.js, openzeppelin)"
 
 on:
   schedule:
@@ -72,7 +72,8 @@ jobs:
           cache: "npm"
       - run: npm ci
       - run: npm run build --if-present
-      - run: |
+      - name: "Run openzeppelin in parallel"
+        run: |
           cd openzeppelin-contracts
           cp ../run_parallel.py ./
           cp ../rrrun.sh ./
