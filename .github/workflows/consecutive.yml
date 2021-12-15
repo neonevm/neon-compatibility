@@ -145,7 +145,7 @@ jobs:
   #         jobsNumber: $JOBS_NUMBER
 
   node-contracts-02:
-    runs-on: macos-11
+    runs-on: neon-hosted
     timeout-minutes: 361
     if: always()
     # experimental changes
@@ -175,9 +175,12 @@ jobs:
           node-version: 16.x
           cache: "npm"
       - run: npm ci
+        if: always()
       - run: npm run build --if-present
+        if: always()
       - uses: ./.github/actions/install-parallel-solc
         if: always()
+      #  if: always()
       # experimental changes
       # - uses: ./.github/actions/run-process-upload
       #   if: always()
