@@ -1,0 +1,156 @@
+{
+  "uid" : "96602c3e497bb131",
+  "name" : "test_insufficient_approval",
+  "fullName" : "tests.brownie.token.tests.test_transferFrom#test_insufficient_approval",
+  "historyId" : "0ae63a08126a8f0616f222dcfe6ba70d",
+  "time" : {
+    "start" : 1639656952401,
+    "stop" : 1639656952605,
+    "duration" : 204
+  },
+  "status" : "broken",
+  "statusMessage" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+  "statusTrace" : "accounts = <brownie.network.account.Accounts object at 0x7f3862393460>\ntoken = <Token Contract '0x787B9BCFCDc28bc3b553dEDD794Efb385B02e43c'>\n\n    def test_insufficient_approval(accounts, token):\n        balance = token.balanceOf(accounts[0])\n    \n>       token.approve(accounts[1], balance - 1, {'from': accounts[0]})\n\ntests/brownie/token/tests/test_transferFrom.py:117: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1693: in __call__\n    return self.transact(*args)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1576: in transact\n    data=self.encode_input(*args),\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1611: in encode_input\n    data = format_input(self.abi, args)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nabi = {'inputs': [{'internalType': 'address', 'name': '_spender', 'type': 'address'}, {'internalType': 'uint256', 'name': '_...e': 'approve', 'outputs': [{'internalType': 'bool', 'name': '', 'type': 'bool'}], 'stateMutability': 'nonpayable', ...}\ninputs = (<LocalAccount '0xf9a7Fa13F12484635D8d37cd72a2bb73B177C3f5'>, -1)\n\n    def format_input(abi: Dict, inputs: Union[List, Tuple]) -> List:\n        # Format contract inputs based on ABI types\n        if len(inputs) and not len(abi[\"inputs\"]):\n            raise TypeError(f\"{abi['name']} requires no arguments\")\n        abi_types = _get_abi_types(abi[\"inputs\"])\n        try:\n            return _format_tuple(abi_types, inputs)\n        except Exception as e:\n>           raise type(e)(f\"{abi['name']} {e}\") from None\nE           OverflowError: approve '-1' - -1 is outside allowable range for uint256\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/convert/normalize.py:20: OverflowError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1639656823366,
+      "stop" : 1639656823366,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1639656824870,
+      "stop" : 1639656837243,
+      "duration" : 12373
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "setup_env",
+    "time" : {
+      "start" : 1639656842188,
+      "stop" : 1639656842188,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "accounts",
+    "time" : {
+      "start" : 1639656842189,
+      "stop" : 1639656842457,
+      "duration" : 268
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token",
+    "time" : {
+      "start" : 1639656895524,
+      "stop" : 1639656899722,
+      "duration" : 4198
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "afterStages" : [ {
+    "name" : "accounts::0",
+    "time" : {
+      "start" : 1639657195867,
+      "stop" : 1639657195867,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_transferFrom"
+  }, {
+    "name" : "host",
+    "value" : "fv-az135-242"
+  }, {
+    "name" : "thread",
+    "value" : "3524-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_transferFrom"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "96602c3e497bb131.json",
+  "parameterValues" : [ ]
+}
