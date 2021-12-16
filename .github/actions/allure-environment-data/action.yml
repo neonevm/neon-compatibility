@@ -4,8 +4,6 @@ runs:
   using: "composite"
   steps:
     - run: |
-        pwd
-
         ENV_PROP_FILE="environment.properties"
 
         export $(grep -v '^#' .env | xargs)
@@ -43,12 +41,11 @@ runs:
         echo "Solana.Explorer=$SOLANA_EXPLORER" >> $ENV_PROP_FILE
 
         cat $ENV_PROP_FILE
-
-        ALLURE_RESULTS="allure-results"
-        cp "./$ENV_PROP_FILE" "openzeppelin-contracts/$ALLURE_RESULTS"
-        echo "there are now files in openzeppelin-contracts/$ALLURE_RESULTS"
-        ls "openzeppelin-contracts/$ALLURE_RESULTS"
-        cp "./$ENV_PROP_FILE" ./report
-        mkdir $ALLURE_RESULTS
-        cp "./$ENV_PROP_FILE" "./$ALLURE_RESULTS"
+          
+        ALLURE_RESULTS="openzeppelin-contracts/report/allure-results"
+        rm -rf $ALLURE_RESULTS
+        mkdir -p $ALLURE_RESULTS
+        cp categories.json "$ALLURE_RESULTS"
+        mv "./$ENV_PROP_FILE" "$ALLURE_RESULTS"
+        ls "$ALLURE_RESULTS"
       shell: bash

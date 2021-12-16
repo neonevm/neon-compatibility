@@ -6,9 +6,19 @@ on:
   workflow_dispatch:
     inputs:
       network:
-        description: "Network (devnet, testnet, teststand, teststand2, neonswap.live, aws, ropsten, rinkeby)"
+        type: choice
+        default: teststand2
         required: true
-        default: "teststand2"
+        description: "Network (devnet, testnet, teststand, teststand2, neonswap.live, aws, ropsten, rinkeby)"
+        options:
+          - teststand2
+          - teststand
+          - devnet
+          - testnet
+          - neonswap.live
+          - aws
+          - ropsten
+          - rinkeby
       jobsNumber:
         description: "Number of jobs in GNU Parallel"
         required: true
@@ -16,15 +26,49 @@ on:
 
 env:
   JOBS_NUMBER: "4"
+  NETWORK: teststand2
 
 jobs:
+  prepare-env:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Setup env
+        id: setup
+        run: |
+          if [ -z "${{ github.event.inputs.network }}" ]
+            then
+              NETWORK="${{ env.NETWORK }}"
+            else
+              NETWORK="${{ github.event.inputs.network }}"
+          fi
+          if [ -z "${{ github.event.inputs.jobsNetwork }}" ]
+            then
+              JOBS_NUMBER="${{ env.JOBS_NUMBER }}"
+            else
+              JOBS_NUMBER="${{ github.event.inputs.jobsNumber }}"
+          fi 
+          echo "Network: ${NETWORK}"
+          echo "Jobs: ${JOBS_NUMBER}"
+          echo "::set-output name=network::${NETWORK}"
+          echo "::set-output name=jobs::${JOBS_NUMBER}"
+    outputs:
+      network: ${{ steps.setup.outputs.network }}
+      jobs: ${{ steps.setup.outputs.jobs }}
+
+
   python:
     runs-on: ubuntu-20.04
+    needs:
+      - prepare-env
+    env:
+      JOBS_NUMBER: ${{ needs.prepare-env.outputs.jobs }}
+      NETWORK: ${{ needs.prepare-env.outputs.network }}
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/actions/allure-prep
-      - uses: ./.github/actions/switch-network
+      - name: Switch network
+        run: |
+          cp "./.env.$NETWORK" "./.env"
       - name: Install NPM deps
         run: npm i
       - name: Install pipenv
@@ -56,11 +100,18 @@ jobs:
 
   openzeppelin:
     timeout-minutes: 360
-    runs-on: neon-hosted
+    runs-on: ubuntu-20.04
+    needs:
+      - prepare-env
+    env:
+      JOBS_NUMBER: ${{ needs.prepare-env.outputs.jobs }}
+      NETWORK: ${{ needs.prepare-env.outputs.network }}
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/openzeppelin-preparation
-      - uses: ./.github/actions/switch-network
+      - name: Switch network
+        run: |
+          cp "./.env.$NETWORK" "./openzeppelin-contracts/.env"
       - uses: ./.github/actions/allure-environment-data
       - name: Use Node.js 16
         uses: actions/setup-node@v2
@@ -90,10 +141,16 @@ jobs:
   node:
     runs-on: ubuntu-20.04
     timeout-minutes: 30
+    needs:
+      - prepare-env
+    env:
+      JOBS_NUMBER: ${{ needs.prepare-env.outputs.jobs }}
+      NETWORK: ${{ needs.prepare-env.outputs.network }}
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/actions/allure-prep
-      - uses: ./.github/actions/switch-network
+      - name: Switch network
+        run: |
+          cp "./.env.$NETWORK" "./.env"
       - name: Use Node.js 16
         uses: actions/setup-node@v2
         if: always()

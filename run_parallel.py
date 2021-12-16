@@ -5,6 +5,7 @@ import subprocess
 
 JOBS_NUMBER = int(os.environ.get("JOBS_NUMBER", 4))
 
+print(f"Jobs count: {JOBS_NUMBER}")
 tests = subprocess.check_output("find \"test\" -name '*.js'", shell=True).decode().splitlines()
 
 chunk_size = len(tests) / JOBS_NUMBER
