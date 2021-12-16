@@ -3,14 +3,14 @@
 import os
 import subprocess
 
-JOBS_NUMBER = int(os.environ.get("JOBS_NUMBER", 4))
+JOBS_NUMBER = int(os.environ.get("JOBS_NUMBER", 8))
 
 print(f"Jobs count: {JOBS_NUMBER}")
 tests = subprocess.check_output("find \"test\" -name '*.js'", shell=True).decode().splitlines()
 
 chunk_size = len(tests) / JOBS_NUMBER
 
-res = [tests[int(i*chunk_size):int((i+1)*chunk_size)] for i in range(4)]
+res = [tests[int(i*chunk_size):int((i+1)*chunk_size)] for i in range(JOBS_NUMBER)]
 
 out = []
 
