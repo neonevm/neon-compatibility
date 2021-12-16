@@ -1,5 +1,14 @@
 #!/bin/bash
 
+echo PWD=$(pwd)
+
+function cleanup {
+  cd "$PWD"
+}
+trap cleanup
+
+cd ../openzeppelin-contracts || exit
+
 PROXY_URL="$1"
 NN="$2"
 DELAY="$3"
