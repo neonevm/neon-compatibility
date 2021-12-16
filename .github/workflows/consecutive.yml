@@ -261,3 +261,11 @@ jobs:
           actionUrl: "https://docs.neon-labs.org/neon-compatibility/${{ github.run_number }}/"
           title: "OpenZeppelin Contracts Test Suite"
           networkName: ${{ env.NETWORK_NAME }}
+  cleaner:
+    runs-on: self-hosted
+    needs: notification
+    if: always()
+    steps:
+      - name: Cleanup runner
+        run: | 
+          echo "Cleaning up previous run" rm -rf "${{ github.workspace }}"
