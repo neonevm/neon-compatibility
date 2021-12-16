@@ -247,14 +247,24 @@ jobs:
         with:
           folder-name: report/allure-results
 
-  allure:
-    runs-on: ubuntu-latest
+  clean-up:
+    runs-on: neon-hosted
     timeout-minutes: 15
     if: always()
     needs:
       - node-contracts-02
       - python
       - node
+    steps: 
+      - name: Runner workspace path 
+        run: |
+          echo "Cleaning up previous run" rm -rf "${{ github.workspace }}"
+  
+  allure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    if: always()
+    needs: clean-up
     steps:
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v2
