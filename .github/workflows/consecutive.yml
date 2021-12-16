@@ -258,8 +258,13 @@ jobs:
     steps: 
       - name: Runner workspace path 
         run: |
-          echo "Cleaning up previous run" rm -rf "${{ github.workspace }}"
-  
+          echo "Cleaning up previous run"
+          rm -rf "${{ github.workspace }}"
+      - name: Check the cleaned up folder
+        run: |
+          echo "ls \"${{ github.workspace }}\""
+          ls "${{ github.workspace }}"
+
   allure:
     runs-on: ubuntu-latest
     timeout-minutes: 15
