@@ -1,0 +1,49 @@
+/home/runner/work/neon-compatibility/neon-compatibility/Metacoin/build/contracts
+============ running command... ============
+cd issues/364; ../../node_modules/.bin/truffle --network neonlabs migrate -f 3 --to 3
+
+Compiling your contracts...
+===========================
+> Compiling ./contracts/ERC20Test.sol
+> Compiling ./contracts/Migrations.sol
+> Compiling ./contracts/SelfDestructTest.sol
+> Compiling @openzeppelin/contracts/access/Ownable.sol
+> Compiling @openzeppelin/contracts/token/ERC20/ERC20.sol
+> Compiling @openzeppelin/contracts/token/ERC20/IERC20.sol
+> Compiling @openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol
+> Compiling @openzeppelin/contracts/utils/Context.sol
+> Compilation warnings encountered:
+
+    Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> project:/contracts/SelfDestructTest.sol
+
+,Warning: This contract has a payable fallback function, but no receive ether function. Consider adding a receive ether function.
+ --> project:/contracts/SelfDestructTest.sol:5:1:
+  |
+5 | contract SelfDestructTest is Ownable{
+  | ^ (Relevant source part starts here and spans across multiple lines).
+Note: The payable fallback function is defined here.
+  --> project:/contracts/SelfDestructTest.sol:20:5:
+   |
+20 |     fallback() external payable {}
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+,Warning: Function state mutability can be restricted to pure
+  --> project:/contracts/SelfDestructTest.sol:12:5:
+   |
+12 |     function staticData() public view returns(string memory) {
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+
+> Artifacts written to /home/runner/work/neon-compatibility/neon-compatibility/issues/364/build/contracts
+> Compiled successfully using:
+   - solc: 0.8.4+commit.c7e474f2.Emscripten.clang
+
+
+Error: There was a timeout while attempting to connect to the network at undefined.
+       Check to see that your provider is valid.
+       If you have a slow internet connection, try configuring a longer timeout in your Truffle config. Use the networks[networkName].networkCheckTimeout property to do this.
+    at Timeout._onTimeout (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/provider/index.js:57:1)
+    at listOnTimeout (node:internal/timers:557:17)
+    at processTimers (node:internal/timers:500:7)
+
