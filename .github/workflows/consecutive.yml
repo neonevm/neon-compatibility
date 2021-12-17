@@ -254,22 +254,6 @@ jobs:
     env:
       NETWORK: ${{ needs.prepare-env.outputs.network }}
     steps:
-      - uses: actions/checkout@v2
-      - name: Setting variables
-        run: |
-          echo "Tags: ${{ github.event.inputs.tags }}"
-          echo "Network: ${{ github.event.inputs.network }}"
-          if [ -z "${{ github.event.inputs.network }}" ]
-          then
-            NETWORK='teststand2'
-          else
-            NETWORK="${{ github.event.inputs.network }}"
-          fi
-          echo "NETWORK_NAME=$NETWORK" >> $GITHUB_ENV
-          cat $GITHUB_ENV
-          echo "NETWORK_NAME=$NETWORK_NAME"
-          echo "{{ env.NETWORK_NAME }}=${{ env.NETWORK_NAME }}"
-        shell: bash
       - name: Send a notification to Teams channel
         uses: neonlabsorg/teams-notification-action@0.1.1
         if: always()
