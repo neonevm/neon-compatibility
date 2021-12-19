@@ -1,17 +1,24 @@
-name: "GNU Parallel: Python 3.8, Node.js 16, allure"
+name: "Run compatibility tests (python, node.js, openzeppelin)"
 
 on:
   schedule:
     - cron: "0 0,3 * * *"
   workflow_dispatch:
     inputs:
-      tags:
-        description: "Test scenario tags"
-        required: false
       network:
-        description: "Network (devnet, testnet, teststand, teststand2, neonswap.live, aws, ropsten, rinkeby)"
+        type: choice
+        default: teststand2
         required: true
-        default: "teststand2"
+        description: "Network (devnet, testnet, teststand, teststand2, neonswap.live, aws, ropsten, rinkeby)"
+        options:
+          - teststand2
+          - teststand
+          - devnet
+          - testnet
+          - neonswap.live
+          - aws
+          - ropsten
+          - rinkeby
       jobsNumber:
         description: "Number of jobs in GNU Parallel"
         required: true
@@ -19,15 +26,49 @@ on:
 
 env:
   JOBS_NUMBER: "8"
+  NETWORK: teststand2
 
 jobs:
+  prepare-env:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Setup env
+        id: setup
+        run: |
+          if [ -z "${{ github.event.inputs.network }}" ]
+            then
+              NETWORK="${{ env.NETWORK }}"
+            else
+              NETWORK="${{ github.event.inputs.network }}"
+          fi
+          if [ -z "${{ github.event.inputs.jobsNetwork }}" ]
+            then
+              JOBS_NUMBER="${{ env.JOBS_NUMBER }}"
+            else
+              JOBS_NUMBER="${{ github.event.inputs.jobsNumber }}"
+          fi 
+          echo "Network: ${NETWORK}"
+          echo "Jobs: ${JOBS_NUMBER}"
+          echo "::set-output name=network::${NETWORK}"
+          echo "::set-output name=jobs::${JOBS_NUMBER}"
+    outputs:
+      network: ${{ steps.setup.outputs.network }}
+      jobs: ${{ steps.setup.outputs.jobs }}
+
+
   python:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
+    needs:
+      - prepare-env
+    env:
+      JOBS_NUMBER: ${{ needs.prepare-env.outputs.jobs }}
+      NETWORK: ${{ needs.prepare-env.outputs.network }}
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/actions/allure-prep
-      - uses: ./.github/actions/switch-network
+      - name: Switch network
+        run: |
+          cp "./.env.$NETWORK" "./.env"
       - name: Install NPM deps
         run: npm i
       - name: Install pipenv
@@ -38,12 +79,6 @@ jobs:
           python-version: 3.8
           cache: "pipenv"
       - run: pipenv install
-
-      #     npm i
-      #     # python -m pip install --upgrade pip
-      #     pip install pipenv
-      #     pipenv sync
-      #     # pip install -r requirements.txt
       - name: Lint with pylint
         run: |
           pipenv run pylint src
@@ -63,140 +98,55 @@ jobs:
         with:
           folder-name: report/allure-results
 
-  node-contracts-01:
-    runs-on: macos-11
-    timeout-minutes: 361
+  openzeppelin:
+    timeout-minutes: 360
+    runs-on: self-hosted
+    needs:
+      - prepare-env
+    env:
+      JOBS_NUMBER: ${{ needs.prepare-env.outputs.jobs }}
+      NETWORK: ${{ needs.prepare-env.outputs.network }}
     steps:
       - uses: actions/checkout@v2
-      # TODO: de-duplicate it https://github.com/neonlabsorg/neon-compatibility/issues/155
-      - name: Display input parameters
-        run: |
-          if [ -n "${{ github.event.inputs.jobsNumber }}" ]; then
-            echo "JOBS_NUMBER=${{ github.event.inputs.jobsNumber }}" >> $GITHUB_ENV
-          fi
-          echo "cat $GITHUB_ENV"
-          cat $GITHUB_ENV
-        shell: bash
-      # macos-11
-      # - uses: ./.github/actions/allure-prep
       - uses: ./.github/actions/openzeppelin-preparation
-      - uses: ./.github/actions/switch-network
-        if: always()
+      - name: Switch network
+        run: |
+          cp "./.env.$NETWORK" "./.env"
       - uses: ./.github/actions/allure-environment-data
-        if: always()
       - name: Use Node.js 16
         uses: actions/setup-node@v2
-        if: always()
         with:
           node-version: 16.x
           cache: "npm"
       - run: npm ci
+        if: always()
       - run: npm run build --if-present
-      - uses: ./.github/actions/install-parallel-solc
-        if: always()
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: access
-          jobsNumber: $JOBS_NUMBER
-
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: finance
-          jobsNumber: $JOBS_NUMBER
-
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: governance
-          jobsNumber: $JOBS_NUMBER
-
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: helpers
-          jobsNumber: $JOBS_NUMBER
-
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: metatx
-          jobsNumber: $JOBS_NUMBER
-
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: proxy
-          jobsNumber: $JOBS_NUMBER
-
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: security
-          jobsNumber: $JOBS_NUMBER
-
-  node-contracts-02:
-    runs-on: macos-11
-    timeout-minutes: 361
-    if: always()
-    needs: node-contracts-01
-    steps:
-      - uses: actions/checkout@v2
-      # TODO: de-duplicate it https://github.com/neonlabsorg/neon-compatibility/issues/155
-      - name: Display input parameters
+      - name: "Run openzeppelin in parallel"
         run: |
-          if [ -n "${{ github.event.inputs.jobsNumber }}" ]; then
-            echo "JOBS_NUMBER=${{ github.event.inputs.jobsNumber }}" >> $GITHUB_ENV
-          fi
-          echo "cat $GITHUB_ENV"
-          cat $GITHUB_ENV
-        shell: bash
-      # macos-11
-      # - uses: ./.github/actions/allure-prep
-      - uses: ./.github/actions/openzeppelin-preparation
-      - uses: ./.github/actions/switch-network
-        if: always()
-      - uses: ./.github/actions/allure-environment-data
-        if: always()
-      - name: Use Node.js 16
-        uses: actions/setup-node@v2
+          cd openzeppelin-contracts
+          cp ../run_parallel.py ./
+          cp ../rrrun.sh ./
+          chmod +x rrrun.sh
+          npx hardhat compile
+          python3 run_parallel.py
+      - uses: ./.github/actions/allure-upload
         if: always()
         with:
-          node-version: 16.x
-          cache: "npm"
-      - run: npm ci
-      - run: npm run build --if-present
-      - uses: ./.github/actions/install-parallel-solc
-        if: always()
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 180
-        with:
-          folder-name: token
-          jobsNumber: $JOBS_NUMBER
-
-      - uses: ./.github/actions/run-process-upload
-        if: always()
-        timeout-minutes: 60
-        with:
-          folder-name: utils
-          jobsNumber: $JOBS_NUMBER
+          folder-name: openzeppelin-contracts/report/allure-results
 
   node:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     timeout-minutes: 30
+    needs:
+      - prepare-env
+    env:
+      JOBS_NUMBER: ${{ needs.prepare-env.outputs.jobs }}
+      NETWORK: ${{ needs.prepare-env.outputs.network }}
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/actions/allure-prep
-      - uses: ./.github/actions/switch-network
+      - name: Switch network
+        run: |
+          cp "./.env.$NETWORK" "./.env"
       - name: Use Node.js 16
         uses: actions/setup-node@v2
         if: always()
@@ -234,13 +184,17 @@ jobs:
           folder-name: report/allure-results
 
   allure:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     timeout-minutes: 15
     if: always()
     needs:
-      - node-contracts-02
+      - openzeppelin
       - python
       - node
+      - prepare-env
+    env:
+      JOBS_NUMBER: ${{ needs.prepare-env.outputs.jobs }}
+      NETWORK: ${{ needs.prepare-env.outputs.network }}
     steps:
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v2
@@ -253,10 +207,22 @@ jobs:
           ref: gh-pages
           path: gh-pages
 
-      # - name: Allure Report with history
-      #   # uses: simple-elf/allure-report-action@v1.5
-      #   uses: simple-elf/allure-report-action@master
-      #   if: always()
+      - name: Create a path for report
+        run: |
+          path=""
+          network="${{ env.NETWORK }}"
+          ref_name="${{ github.ref_name }}"
+          if [[ "$network" != "teststand2" ]]; then
+            path="$network"
+          fi
+          if [[ "$ref_name" != "develop" ]]; then
+            if [ ${#path} -gt 0 ]; then
+              path="$path/$ref_name"
+            else
+              path="$ref_name"
+            fi
+          fi
+          echo "ALLURE_SUBDIR=$path" >> $GITHUB_ENV
 
       - name: Allure Report action from marketplace
         uses: neonlabsorg/allure-report-action@master
@@ -264,9 +230,10 @@ jobs:
         with:
           allure_results: allure-results
           gh_pages: gh-pages
+          subfolder: ${{ env.ALLURE_SUBDIR }}
           allure_report: allure-report
           allure_history: allure-history
-          keep_reports: 30
+          keep_reports: 50
 
       - name: Deploy report to Github Pages
         if: always()
@@ -275,35 +242,33 @@ jobs:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: allure-history
+    outputs:
+      subdir: ${{ env.ALLURE_SUBDIR }}
 
   notification:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     if: always()
-    needs: allure
+    needs:
+      - allure
+      - prepare-env
     env:
-      NETWORK_NAME: "teststand2-111"
+      NETWORK: ${{ needs.prepare-env.outputs.network }}
     steps:
-      - uses: actions/checkout@v2
-      - name: Setting variables
-        run: |
-          echo "Tags: ${{ github.event.inputs.tags }}"
-          echo "Network: ${{ github.event.inputs.network }}"
-          if [ -z "${{ github.event.inputs.network }}" ]
-          then
-            NETWORK='teststand2'
-          else
-            NETWORK="${{ github.event.inputs.network }}"
-          fi
-          echo "NETWORK_NAME=$NETWORK" >> $GITHUB_ENV
-          cat $GITHUB_ENV
-          echo "NETWORK_NAME=$NETWORK_NAME"
-          echo "{{ env.NETWORK_NAME }}=${{ env.NETWORK_NAME }}"
-        shell: bash
       - name: Send a notification to Teams channel
         uses: neonlabsorg/teams-notification-action@0.1.1
         if: always()
         with:
           hookUrl: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-          actionUrl: "https://docs.neon-labs.org/neon-compatibility/${{ github.run_number }}/"
-          title: "OpenZeppelin Contracts Test Suite"
+          actionUrl: "https://docs.neon-labs.org/neon-compatibility/${{ needs.allure.outputs.subdir }}/${{ github.run_number }}/"
+          title: "OpenZeppelin Contracts Test Suite #${{ github.run_number }}"
           networkName: ${{ env.NETWORK_NAME }}
+
+  cleaner:
+    runs-on: self-hosted
+    needs: notification
+    if: always()
+    steps:
+      - name: Cleanup runner
+        run: | 
+          echo "Cleaning up previous run" 
+          rm -rf "${{ github.workspace }}"
