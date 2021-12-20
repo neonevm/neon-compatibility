@@ -8,6 +8,7 @@
 
 require('dotenv').config({ path: '../.env' });
 const Web3 = require('web3');
+const axios = require('axios');
 
 const fs = require('fs');
 const path = require('path');
