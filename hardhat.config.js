@@ -59,7 +59,7 @@ const withOptimizations =
 
 const requestFaucet = async (wallet, amount) => {
   // TODO: create a wrapper
-  if (process.env.USE_FAUCET === 'true') {
+  if (process.env.USE_FAUCET !== 'true') {
     console.log('Skipping faucet request');
     return;
   }
@@ -72,7 +72,7 @@ const requestFaucet = async (wallet, amount) => {
     return;
   }
   console.log(`Wallet = ${data.wallet}, amount = ${data.amount}`);
-  const result = await axios.post(Config.faucetUrl, data);
+  const result = await axios.post(faucetUrl, data);
   console.log(result);
 };
 
