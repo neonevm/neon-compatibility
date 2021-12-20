@@ -57,9 +57,30 @@ for (const f of fs.readdirSync(path.join(__dirname, 'hardhat'))) {
 const withOptimizations =
   argv.enableGasReport || argv.compileMode === 'production';
 
+const requestFaucet = async (wallet, amount) => {
+  // TODO: create a wrapper
+  if (process.env.USE_FAUCET === 'true') {
+    console.log('Skipping faucet request');
+    return;
+  }
+  console.log('Requesting faucet...');
+  const data = { amount: amount, wallet: wallet };
+  const faucetUrl = process.env.FAUCET_URL;
+  console.log(`URL: ${faucetUrl}`);
+  if (faucetUrl.length === 0) {
+    console.log('Unable to request faucet');
+    return;
+  }
+  console.log(`Wallet = ${data.wallet}, amount = ${data.amount}`);
+  const result = await axios.post(Config.faucetUrl, data);
+  console.log(result);
+};
+
 const ACCOUNTS_NUMBER = parseInt(process.env.USERS_NUMBER);
 
-const web3 = new Web3(new Web3.providers.HttpProvider(process.env.PROXY_URL, 3000000));
+const web3 = new Web3(
+  new Web3.providers.HttpProvider(process.env.PROXY_URL, 3000000)
+);
 const account01 = web3.eth.accounts.create();
 process.env.ADDRESS_FROM = account01.address;
 process.env.PRIVATE_KEY = account01.privateKey;

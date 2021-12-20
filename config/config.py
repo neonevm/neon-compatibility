@@ -10,6 +10,8 @@ NETWORK_NAME = os.environ.get('NETWORK_NAME')
 CURRENCY_SYMBOL = os.environ.get('CURRENCY_SYMBOL')
 FAUCET_QUOTIENT = os.environ.get('FAUCET_QUOTIENT')
 FAUCET_URL = os.environ.get('FAUCET_URL')
+USE_FAUCET: bool = True if os.environ.get(
+    'USE_FAUCET').upper() == 'TRUE' else False
 ADDRESS_FROM = os.environ.get('ADDRESS_FROM')
 ADDRESS_TO = os.environ.get('ADDRESS_TO')
 PRIVATE_KEY = os.environ.get('PRIVATE_KEY')
