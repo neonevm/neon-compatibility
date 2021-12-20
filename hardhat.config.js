@@ -78,6 +78,11 @@ const requestFaucet = async (wallet, amount) => {
 
 const getBalance = async (address) => await web3.eth.getBalance(address);
 
+const requestFaucetAndGetBalance = async (address, amount) => {
+  await requestFaucet(address, amount);
+  await getBalance(address);
+};
+
 const ACCOUNTS_NUMBER = parseInt(process.env.USERS_NUMBER);
 const REQUEST_AMOUNT = 10;
 
@@ -87,23 +92,22 @@ const web3 = new Web3(
 const account01 = web3.eth.accounts.create();
 process.env.ADDRESS_FROM = account01.address;
 process.env.PRIVATE_KEY = account01.privateKey;
-// (async () => await web3.eth.getBalance(account01.address))();
-(async (address) =>
-  await requestFaucet(address, REQUEST_AMOUNT).then(
-    (data) => await getBalance(address)
-  ))(account01.address);
+(async (address, amount) => requestFaucetAndGetBalance(address, amount))(
+  account01.address,
+  REQUEST_AMOUNT
+);
 const account02 = web3.eth.accounts.create();
 process.env.ADDRESS_TO = account02.address;
-// (async () => await web3.eth.getBalance(account02.address))();
-(async (address) =>
-  await requestFaucet(address, REQUEST_AMOUNT).then(
-    (data) => await getBalance(address)
-  ))(account02.address);
+(async (address, amount) => requestFaucetAndGetBalance(address, amount))(
+  account02.address,
+  REQUEST_AMOUNT
+);
 
 const privateKeys = Array.from(Array(ACCOUNTS_NUMBER), (_, x) => {
   const acc = web3.eth.accounts.create();
-  await requestFaucet(acc.address, REQUEST_AMOUNT).then(
-    (data) => await getBalance(acc.address)
+  (async (address, amount) => requestFaucetAndGetBalance(address, amount))(
+    acc.address,
+    REQUEST_AMOUNT
   );
   return acc.privateKey;
 });
