@@ -136,7 +136,7 @@ const privateKeys = Array.from(Array(Config.usersNumber), (_, x) => {
   );
   return acc.privateKey;
 });
-privateKeys.unshift(Config.privateKey);
+privateKeys.unshift(process.env.PRIVATE_KEY);
 
 console.log(
   '========================== Reading Hardhat config ============================='
@@ -179,8 +179,8 @@ module.exports = {
     neonlabs: {
       url: Config.proxyUrl,
       accounts: privateKeys,
-      from: Config.addressFrom,
-      to: Config.addressTo,
+      from: process.env.ADDRESS_FROM,
+      to: process.env.ADDRESS_TO,
       network_id: parseInt(Config.networkId),
       // chainId: null !== Config.networkId ? parseInt(Config.networkId) : 0,
       gas: 3000000,
