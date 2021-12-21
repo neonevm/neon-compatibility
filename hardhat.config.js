@@ -35,7 +35,7 @@ const Config = {
   proxyUrl: getStringValue(process.env.PROXY_URL),
   solanaExplorer: getStringValue(process.env.SOLANA_EXPLORER),
   solanaUrl: getStringValue(process.env.SOLANA_URL),
-  usersNumber: getStringValue(process.env.USERS_NUMBER)
+  usersNumber: Number.parseInt(getStringValue(process.env.USERS_NUMBER))
 };
 
 const fs = require('fs');
