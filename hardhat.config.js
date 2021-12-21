@@ -10,6 +10,34 @@ require('dotenv').config({ path: '../.env' });
 const Web3 = require('web3');
 const axios = require('axios');
 
+const getStringValue = (input) => {
+  return input === undefined ? '' : input;
+};
+
+const getBooleanValue = (input) => {
+  return input === undefined || input === 'false' || input === 'FALSE'
+    ? false
+    : input === 'true' || input === 'TRUE'
+    ? true
+    : false;
+};
+
+const Config = {
+  baseUrl: getStringValue(process.env.PROXY_URL).replace('/solana', ''),
+  addressFrom: getStringValue(process.env.ADDRESS_FROM),
+  addressTo: getStringValue(process.env.ADDRESS_TO),
+  privateKey: getStringValue(process.env.PRIVATE_KEY),
+  faucetQuotient: Number.parseInt(getStringValue(process.env.FAUCET_QUOTIENT)),
+  faucetUrl: getStringValue(process.env.FAUCET_URL),
+  useFaucet: getBooleanValue(process.env.USE_FAUCET),
+  network: getStringValue(process.env.NETWORK_NAME),
+  networkId: getStringValue(process.env.NETWORK_ID),
+  proxyUrl: getStringValue(process.env.PROXY_URL),
+  solanaExplorer: getStringValue(process.env.SOLANA_EXPLORER),
+  solanaUrl: getStringValue(process.env.SOLANA_URL),
+  usersNumber: getStringValue(process.env.USERS_NUMBER)
+};
+
 const fs = require('fs');
 const path = require('path');
 const argv = require('yargs/yargs')()
@@ -60,20 +88,19 @@ const withOptimizations =
 
 const requestFaucet = async (wallet, amount) => {
   // TODO: create a wrapper
-  if (process.env.USE_FAUCET !== 'true') {
-    console.log('Skipping faucet request');
+  if (!Config.useFaucet) {
+    console.log(`Skipping faucet request: USE_FAUCET set to false`);
     return;
   }
   console.log('Requesting faucet...');
   const data = { amount: amount, wallet: wallet };
-  const faucetUrl = process.env.FAUCET_URL;
-  console.log(`URL: ${faucetUrl}`);
-  if (faucetUrl.length === 0) {
-    console.log('Unable to request faucet');
+  console.log(`URL: ${Config.faucetUrl}`);
+  if (Config.faucetUrl.length === 0) {
+    console.log('Unable to request faucet: FAUCET_URL is empty');
     return;
   }
   console.log(`Wallet = ${data.wallet}, amount = ${data.amount}`);
-  const result = await axios.post(faucetUrl, data);
+  const result = await axios.post(Config.faucetUrl, data);
   console.log(result);
 };
 
@@ -84,12 +111,9 @@ const requestFaucetAndGetBalance = async (address, amount) => {
   await getBalance(address);
 };
 
-const ACCOUNTS_NUMBER = parseInt(process.env.USERS_NUMBER);
 const REQUEST_AMOUNT = 10;
 
-const web3 = new Web3(
-  new Web3.providers.HttpProvider(process.env.PROXY_URL, 3000000)
-);
+const web3 = new Web3(new Web3.providers.HttpProvider(Config.proxyUrl, 3000000));
 const account01 = web3.eth.accounts.create();
 process.env.ADDRESS_FROM = account01.address;
 process.env.PRIVATE_KEY = account01.privateKey;
@@ -104,7 +128,7 @@ process.env.ADDRESS_TO = account02.address;
   REQUEST_AMOUNT
 );
 
-const privateKeys = Array.from(Array(ACCOUNTS_NUMBER), (_, x) => {
+const privateKeys = Array.from(Array(Config.usersNumber), (_, x) => {
   const acc = web3.eth.accounts.create();
   (async (address, amount) => requestFaucetAndGetBalance(address, amount))(
     acc.address,
@@ -112,7 +136,7 @@ const privateKeys = Array.from(Array(ACCOUNTS_NUMBER), (_, x) => {
   );
   return acc.privateKey;
 });
-privateKeys.unshift(process.env.PRIVATE_KEY);
+privateKeys.unshift(Config.privateKey);
 
 console.log(
   '========================== Reading Hardhat config ============================='
@@ -126,12 +150,12 @@ console.log(
     `address to = ${addressTo}  balance=`,
     await web3.eth.getBalance(addressTo)
   );
-  console.log(`main private key = ${process.env.PRIVATE_KEY}`);
+  console.log(`main private key = ${Config.privateKey}`);
   console.log(`account keys = ${privateKeys}`);
   console.log(
     '=============================================================================='
   );
-})(process.env.ADDRESS_FROM, process.env.ADDRESS_TO);
+})(Config.addressFrom, Config.addressTo);
 
 /**
  * @type import('hardhat/config').HardhatUserConfig
@@ -153,12 +177,12 @@ module.exports = {
       allowUnlimitedContractSize: !withOptimizations
     },
     neonlabs: {
-      url: process.env.PROXY_URL,
+      url: Config.proxyUrl,
       accounts: privateKeys,
-      from: process.env.ADDRESS_FROM,
-      to: process.env.ADDRESS_TO,
-      network_id: parseInt(process.env.NETWORK_ID),
-      // chainId: null !== process.env.NETWORK_ID ? parseInt(process.env.NETWORK_ID) : 0,
+      from: Config.addressFrom,
+      to: Config.addressTo,
+      network_id: parseInt(Config.networkId),
+      // chainId: null !== Config.networkId ? parseInt(Config.networkId) : 0,
       gas: 3000000,
       gasPrice: 1000000000,
       blockGasLimit: 10000000,
