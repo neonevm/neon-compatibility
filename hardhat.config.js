@@ -150,12 +150,12 @@ console.log(
     `address to = ${addressTo}  balance=`,
     await web3.eth.getBalance(addressTo)
   );
-  console.log(`main private key = ${Config.privateKey}`);
+  console.log(`main private key = ${process.env.PRIVATE_KEY}`);
   console.log(`account keys = ${privateKeys}`);
   console.log(
     '=============================================================================='
   );
-})(Config.addressFrom, Config.addressTo);
+})(process.env.ADDRESS_FROM, process.env.ADDRESS_TO);
 
 /**
  * @type import('hardhat/config').HardhatUserConfig
