@@ -87,7 +87,6 @@ const withOptimizations =
   argv.enableGasReport || argv.compileMode === 'production';
 
 const requestFaucet = async (wallet, amount) => {
-  // TODO: create a wrapper
   if (!Config.useFaucet) {
     console.log(`Skipping faucet request: USE_FAUCET set to false`);
     return;
@@ -100,8 +99,12 @@ const requestFaucet = async (wallet, amount) => {
     return;
   }
   console.log(`Wallet = ${data.wallet}, amount = ${data.amount}`);
-  const result = await axios.post(Config.faucetUrl, data);
-  console.log(result);
+  try {
+    const result = await axios.post(Config.faucetUrl, data);
+    console.log(result);
+  } catch (err) {
+    console.log(`Failed to send request to faucet: ${err}`);
+  }
 };
 
 const getBalance = async (address) => await web3.eth.getBalance(address);
@@ -113,7 +116,9 @@ const requestFaucetAndGetBalance = async (address, amount) => {
 
 const REQUEST_AMOUNT = 10;
 
-const web3 = new Web3(new Web3.providers.HttpProvider(Config.proxyUrl, 3000000));
+const web3 = new Web3(
+  new Web3.providers.HttpProvider(Config.proxyUrl, 3000000)
+);
 const account01 = web3.eth.accounts.create();
 process.env.ADDRESS_FROM = account01.address;
 process.env.PRIVATE_KEY = account01.privateKey;
