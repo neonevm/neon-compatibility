@@ -1,0 +1,23 @@
+#!/bin/bash
+
+RUN_NN="$1"
+LINK=https://docs.neon-labs.org/neon-compatibility/teststand/"$RUN_NN"/data/suites.csv
+curl "$LINK" -o release-"$RUN_NN".source.txt
+
+cat release-"$RUN_NN".source.txt |
+  tr [:punct:] ' ' |
+  sed 's/  / /g' |
+  sed 's/  / /g' |
+  sed 's/  / /g' |
+  sed 's/  / /g' |
+  sed 's/  / /g' |
+  cut -d" " -f2,20-40 |
+  sort -t" " -k2,8 |
+  cat > release-"$RUN_NN".txt
+
+ls -al release-"$RUN_NN".source.txt
+rm release-"$RUN_NN".source.txt
+rm release-"$RUN_NN".source.txt | echo ok
+
+echo "$LINK" > release.txt
+cat release-"$RUN_NN".txt >> release.txt
