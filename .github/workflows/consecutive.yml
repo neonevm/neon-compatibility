@@ -44,24 +44,58 @@ jobs:
       - name: Setup env
         id: setup
         run: |
-          if [ -z "${{ github.event.inputs.network }}" ]
-            then
-              NETWORK="${{ env.NETWORK }}"
-            else
-              NETWORK="${{ github.event.inputs.network }}"
-          fi
-          if [ -z "${{ github.event.inputs.runner }}" ]
-            then
-              RUNNER="${{ env.RUNNER }}"
-            else
-              RUNNER="${{ github.event.inputs.runner }}"
-          fi 
-          if [ -z "${{ github.event.inputs.jobsNetwork }}" ]
-            then
-              JOBS_NUMBER="${{ env.JOBS_NUMBER }}"
-            else
-              JOBS_NUMBER="${{ github.event.inputs.jobsNumber }}"
-          fi 
+          # function moveFiles {
+          #   echo "cp -R $1* $2"
+          #   cp -R $1 $2
+          #   # rm -R "$1"
+          # }
+          # # cp -R source/* destination/
+          # # rm -R source/
+          # npm run test:hardhat:advanced
+          # # mv ./frameworks/hardhat-advanced/allure-results/ ./report/
+          # pwd
+          # moveFiles ./frameworks/hardhat-advanced/report/allure-results/ ./report/
+          # # npm run test:hardhat:simple
+          # # mv ./frameworks/hardhat-simple/allure-results/ ./report/
+          # # moveFiles frameworks/hardhat-simple/allure-results/ ./report/
+
+          # $1 - inputs
+          # $2 - env.VAR
+          # $3 - job-level env.VAR
+          function setVar {
+            if [ -z "$1" ]
+              then
+                $3="$2"
+              else
+                $3="$1"
+            fi
+          }
+          # if [ -z "${{ github.event.inputs.network }}" ]
+          #   then
+          #     NETWORK="${{ env.NETWORK }}"
+          #   else
+          #     NETWORK="${{ github.event.inputs.network }}"
+          # fi
+          # if [ -z "${{ github.event.inputs.runner }}" ]
+          #   then
+          #     RUNNER="${{ env.RUNNER }}"
+          #   else
+          #     RUNNER="${{ github.event.inputs.runner }}"
+          # fi 
+          # if [ -z "${{ github.event.inputs.jobsNetwork }}" ]
+          #   then
+          #     JOBS_NUMBER="${{ env.JOBS_NUMBER }}"
+          #   else
+          #     JOBS_NUMBER="${{ github.event.inputs.jobsNumber }}"
+          # fi 
+
+          NETWORK=''
+          setVar "${{ github.event.inputs.network }}" "${{ env.NETWORK }}" $NETWORK
+          RUNNER=''
+          setVar "${{ github.event.inputs.runner }}" "${{ env.RUNNER }}" $RUNNER
+          JOBS_NUMBER=''
+          setVar "${{ github.event.inputs.jobsNumber }}" "${{ env.JOBS_NUMBER }}" $JOBS_NUMBER
+
           echo "Network: ${NETWORK}"
           echo "Runner: ${RUNNER}"
           echo "Jobs: ${JOBS_NUMBER}"
