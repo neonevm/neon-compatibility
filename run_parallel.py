@@ -8,9 +8,9 @@ JOBS_NUMBER = int(os.environ.get("JOBS_NUMBER", 8))
 print(f"Jobs count: {JOBS_NUMBER}")
 tests = subprocess.check_output("find \"test\" -name '*.js'", shell=True).decode().splitlines()
 
-chunk_size = len(tests) / JOBS_NUMBER
+chunk_size = len(tests) // JOBS_NUMBER
 
-res = [tests[int(i*chunk_size):int((i+1)*chunk_size)] for i in range(JOBS_NUMBER)]
+res = [tests[i*chunk_size:(i+1)*chunk_size] for i in range(JOBS_NUMBER)]
 
 out = []
 
