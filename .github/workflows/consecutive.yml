@@ -125,7 +125,7 @@ jobs:
         run: |
           cd openzeppelin-contracts
           mkdir pout
-          find test -name "*.test.js" | sort | parallel -k --jobs ${{ env.JOBS_NUMBER }} --results pout npx hardhat test {}
+          find test -name "*.test.js" | sort | parallel -k --jobs ${{ env.JOBS_NUMBER }} --results pout 'npx hardhat test {}'
           npx hardhat compile
           echo "Tests by find:" && find test -name "*.test.js" | sort | wc -l
           echo "Test results:" && ls pout/1 | wc -l
