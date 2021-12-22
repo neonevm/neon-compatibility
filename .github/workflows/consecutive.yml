@@ -117,12 +117,13 @@ jobs:
 
   openzeppelin:
     timeout-minutes: 360
-    runs-on: ${{ needs.prepare-env.outputs.runner }}
+    runs-on: [ubuntu-20.04, ${{ needs.prepare-env.outputs.runner }}]
     needs:
       - prepare-env
     env:
       JOBS_NUMBER: ${{ needs.prepare-env.outputs.jobs }}
       NETWORK: ${{ needs.prepare-env.outputs.network }}
+      RUNNER: ${{ needs.prepare-env.outputs.runner }}
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/openzeppelin-preparation
