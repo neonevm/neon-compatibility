@@ -127,6 +127,9 @@ jobs:
           mkdir pout
           npx hardhat compile
           find test -name "*.test.js" | sort | parallel -k --jobs ${{ env.JOBS_NUMBER }} --results pout 'npx hardhat test {}'
+      - name: "Verify count of logs"
+        if: always()
+        run: |
           echo "Tests by find:" && find test -name "*.test.js" | sort | wc -l
           echo "Test results:" && ls pout/1 | wc -l
       - uses: ./.github/actions/allure-upload
