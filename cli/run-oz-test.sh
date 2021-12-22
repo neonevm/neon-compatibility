@@ -7,12 +7,11 @@ function cleanup {
 }
 trap cleanup
 
-cd ../openzeppelin-contracts || exit
-
 PROXY_URL="$1"
-NN="$2"
-DELAY="$3"
-TEST="$4"
+SOLANA_URL="$2"
+NN="$3"
+DELAY="$4"
+TEST="$5"
 echo PROXY_URL="$PROXY_URL"
 echo SOLANA_URL="$SOLANA_URL"
 echo NN="$NN"
