@@ -141,6 +141,11 @@ jobs:
         with:
           name: parallel-outputs
           path: openzeppelin-contracts/pout
+      - name: Cleanup runner
+        if: always()
+        run: |
+          echo "Cleaning up previous run" 
+          rm -rf "${{ github.workspace }}"
 
   node:
     runs-on: ubuntu-20.04
@@ -270,14 +275,3 @@ jobs:
           actionUrl: "https://docs.neon-labs.org/neon-compatibility/${{ needs.allure.outputs.subdir }}/${{ github.run_number }}/"
           title: "OpenZeppelin Contracts Test Suite #${{ github.run_number }}"
           networkName: ${{ env.NETWORK_NAME }}
-
-  cleaner:
-    runs-on: self-hosted
-    timeout-minutes: 15
-    needs: notification
-    if: always()
-    steps:
-      - name: Cleanup runner
-        run: |
-          echo "Cleaning up previous run" 
-          rm -rf "${{ github.workspace }}"
