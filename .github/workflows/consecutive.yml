@@ -120,28 +120,19 @@ jobs:
           cache: "npm"
       - run: npm ci
         if: always()
-        
       - run: npm run build --if-present
       - name: "Run openzeppelin in parallel"
         run: |
           cd openzeppelin-contracts
-          mkdir pout
-          find test -name "*.test.js" | sort | parallel -k --jobs ${{ env.JOBS_NUMBER }} --results pout npx hardhat test {}
-#          cp ../run_parallel.py ./
-#          cp ../rrrun.sh ./
-#          chmod +x rrrun.sh
+          cp ../run_parallel.py ./
+          cp ../rrrun.sh ./
+          chmod +x rrrun.sh
           npx hardhat compile
-#          python3 run_parallel.py
-          echo "Tests by find:" && find test -name "*.test.js" | sort | wc -l
-          echo "Test results:" && ls pout/1 | wc -l
+          python3 run_parallel.py
       - uses: ./.github/actions/allure-upload
         if: always()
         with:
           folder-name: openzeppelin-contracts/report/allure-results
-      - uses: actions/upload-artifact@v2
-        with:
-          name: parallel-outputs
-          path: openzeppelin-contracts/pout
 
   node:
     runs-on: ubuntu-20.04
