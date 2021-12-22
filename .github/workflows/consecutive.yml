@@ -124,15 +124,7 @@ jobs:
       - name: "Run openzeppelin in parallel"
         run: |
           cd openzeppelin-contracts
-          mkdir pout
-          find test -name "*.test.js" | sort | parallel -k --jobs ${{ env.JOBS_NUMBER }} --results pout npx hardhat test {}
-#          cp ../run_parallel.py ./
-#          cp ../rrrun.sh ./
-#          chmod +x rrrun.sh
-          npx hardhat compile
-#          python3 run_parallel.py
-          echo "Tests by find:" && find test -name "*.test.js" | sort | wc -l
-          echo "Test results:" && ls pout/1 | wc -l
+          
       - uses: ./.github/actions/allure-upload
         if: always()
         with:
