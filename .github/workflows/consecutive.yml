@@ -146,14 +146,9 @@ jobs:
           find test -name "*.test.js" | sort | parallel -k --jobs ${{ env.JOBS_NUMBER }} --results pout 'npx hardhat test {}'
       - name: "Verify count of logs"
         if: always()
-        run: |
-          python3 parallel_report.py
-      - uses: ./.github/actions/allure-postprocessing
-        if: always()
-        with:
-          item-type: epic
-          name: OpenZeppelin contracts
+        run: python3 parallel_report.py
       - name: "Insert feature to allure"
+        if: always()
         run: python3 fix_allure.py
       - uses: actions/upload-artifact@v2
         if: always()
@@ -164,7 +159,7 @@ jobs:
         if: always()
         run: |
           echo "Cleaning up previous run" 
-          rm -rf "${{ github.workspace }}"
+          rm -rf "${{ github.workspace }}/openzeppelin-contracts"
 
   node:
     runs-on: ubuntu-20.04
