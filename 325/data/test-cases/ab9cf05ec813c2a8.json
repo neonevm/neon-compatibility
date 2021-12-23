@@ -1,0 +1,259 @@
+{
+  "uid" : "ab9cf05ec813c2a8",
+  "name" : "test_total_supply_not_affected",
+  "fullName" : "tests.brownie.token.tests.test_transferFrom#test_total_supply_not_affected",
+  "historyId" : "82a431454718fbb08ada4eae30b0a4d0",
+  "time" : {
+    "start" : 1640285260722,
+    "stop" : 1640285292433,
+    "duration" : 31711
+  },
+  "status" : "broken",
+  "statusMessage" : "ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument",
+  "statusTrace" : "accounts = <brownie.network.account.Accounts object at 0x7f53b0777820>\ntoken = <Token Contract '0xA4A63fd339f4CC534672844c209Db871b02F9a99'>\n\n    def test_total_supply_not_affected(accounts, token):\n        total_supply = token.totalSupply()\n        amount = token.balanceOf(accounts[0])\n    \n>       token.approve(accounts[1], amount, {'from': accounts[0]})\n\ntests/brownie/token/tests/test_transferFrom.py:60: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1693: in __call__\n    return self.transact(*args)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1566: in transact\n    return tx[\"from\"].transfer(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:642: in transfer\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:743: in _make_transaction\n    exc = VirtualMachineError(e)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = VirtualMachineError(ValueError({'code': -32002, 'message': 'Verifying nonce before send transaction: Error processing ...valid program argument', 'data': {'logs': ['/src/entrypoint.rs Invalid Ethereum transaction nonce: acc 28, trx 27']}}))\nexc = {'code': -32002, 'data': {'logs': ['/src/entrypoint.rs Invalid Ethereum transaction nonce: acc 28, trx 27']}, 'message': 'Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument'}\n\n    def __init__(self, exc: ValueError) -> None:\n        try:\n            exc = exc.args[0]\n        except Exception:\n            pass\n    \n        if isinstance(exc, dict) and \"message\" in exc:\n            if \"data\" not in exc:\n                raise ValueError(exc[\"message\"]) from None\n    \n            self.message: str = exc[\"message\"].rstrip(\".\")\n    \n            if isinstance(exc[\"data\"], str):\n                # handle parity exceptions - this logic probably is not perfect\n                if \"0x08c379a0\" in exc[\"data\"]:\n                    revert_type, err_msg = [i.strip() for i in exc[\"data\"].split(\"0x08c379a0\", 1)]\n                    err_msg = eth_abi.decode_abi([\"string\"], HexBytes(err_msg))\n                    err_msg = f\"{revert_type} '{err_msg}'\"\n                elif exc[\"data\"].endswith(\"0x\"):\n                    err_msg = exc[\"data\"][:-2].strip()\n                else:\n                    err_msg = exc[\"data\"]\n                raise ValueError(f\"{self.message}: {err_msg}\") from None\n    \n            try:\n                txid, data = next((k, v) for k, v in exc[\"data\"].items() if k.startswith(\"0x\"))\n            except StopIteration:\n>               raise ValueError(exc[\"message\"]) from None\nE               ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py:104: ValueError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_transferFrom"
+  }, {
+    "name" : "host",
+    "value" : "fv-az74-735"
+  }, {
+    "name" : "thread",
+    "value" : "4017-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_transferFrom"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 31,
+        "skipped" : 0,
+        "passed" : 96,
+        "unknown" : 0,
+        "total" : 127
+      },
+      "items" : [ {
+        "uid" : "3fa3bdc20415f1f",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/323//#testresult/3fa3bdc20415f1f",
+        "status" : "broken",
+        "statusDetails" : "ValueError: HTTPConnectionPool(host='10.2.0.2', port=8899): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f17afd9cb80>: Failed to establish a new connection: [Errno 99] Cannot assign requested address'))",
+        "time" : {
+          "start" : 1640281194888,
+          "stop" : 1640281194888,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "a3557f91f52d8b15",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/301//#testresult/a3557f91f52d8b15",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640229268907,
+          "stop" : 1640229274420,
+          "duration" : 5513
+        }
+      }, {
+        "uid" : "353aeafe0e1af5e3",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/300//#testresult/353aeafe0e1af5e3",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640219644884,
+          "stop" : 1640219649141,
+          "duration" : 4257
+        }
+      }, {
+        "uid" : "a84bcfc13e98a955",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/285//#testresult/a84bcfc13e98a955",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640153742724,
+          "stop" : 1640153747477,
+          "duration" : 4753
+        }
+      }, {
+        "uid" : "d260ef21140267b4",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/284//#testresult/d260ef21140267b4",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640142904117,
+          "stop" : 1640142908925,
+          "duration" : 4808
+        }
+      }, {
+        "uid" : "c2c25ea87a8ae52b",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/283//#testresult/c2c25ea87a8ae52b",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640133351178,
+          "stop" : 1640133356426,
+          "duration" : 5248
+        }
+      }, {
+        "uid" : "5f2bd52f9bfe8dec",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/279//#testresult/5f2bd52f9bfe8dec",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640056513585,
+          "stop" : 1640056521409,
+          "duration" : 7824
+        }
+      }, {
+        "uid" : "3c0de8d7ea89fbd5",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/278//#testresult/3c0de8d7ea89fbd5",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640046976243,
+          "stop" : 1640046982889,
+          "duration" : 6646
+        }
+      }, {
+        "uid" : "6a808c6d6f049e6d",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/272//#testresult/6a808c6d6f049e6d",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639988709179,
+          "stop" : 1639988715951,
+          "duration" : 6772
+        }
+      }, {
+        "uid" : "72c7043fb50a37ac",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/271//#testresult/72c7043fb50a37ac",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639970081006,
+          "stop" : 1639970085215,
+          "duration" : 4209
+        }
+      }, {
+        "uid" : "64e39d65b81f453e",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/270//#testresult/64e39d65b81f453e",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639960474834,
+          "stop" : 1639960478892,
+          "duration" : 4058
+        }
+      }, {
+        "uid" : "3296b89c9cb5af2a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/267//#testresult/3296b89c9cb5af2a",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639910731176,
+          "stop" : 1639910736436,
+          "duration" : 5260
+        }
+      }, {
+        "uid" : "ebd15d60f776b133",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/263//#testresult/ebd15d60f776b133",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639883698122,
+          "stop" : 1639883705497,
+          "duration" : 7375
+        }
+      }, {
+        "uid" : "f0ee55e30a3dbd05",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/262//#testresult/f0ee55e30a3dbd05",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639874171935,
+          "stop" : 1639874177763,
+          "duration" : 5828
+        }
+      }, {
+        "uid" : "74bf32e0f10fe2bd",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/259//#testresult/74bf32e0f10fe2bd",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639797344718,
+          "stop" : 1639797351370,
+          "duration" : 6652
+        }
+      }, {
+        "uid" : "1c95bd7581728aca",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/258//#testresult/1c95bd7581728aca",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639787710033,
+          "stop" : 1639787716457,
+          "duration" : 6424
+        }
+      }, {
+        "uid" : "abe3f0f214fe0e39",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/255//#testresult/abe3f0f214fe0e39",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639739212585,
+          "stop" : 1639739216784,
+          "duration" : 4199
+        }
+      }, {
+        "uid" : "61e3b90ccb61da30",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/253//#testresult/61e3b90ccb61da30",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.TransactionError: Tx dropped without known replacement: 0xbe88df5a1c9961aeeeb7e242fa0229e7df7d6a03cdc7b57c3f46d01185f3323e",
+        "time" : {
+          "start" : 1639724822495,
+          "stop" : 1639724822495,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "748602d3b704a9ca",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/251//#testresult/748602d3b704a9ca",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639710904218,
+          "stop" : 1639710913895,
+          "duration" : 9677
+        }
+      }, {
+        "uid" : "f8f98f5eee2fb2d6",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/250//#testresult/f8f98f5eee2fb2d6",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639701407147,
+          "stop" : 1639701413146,
+          "duration" : 5999
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "ab9cf05ec813c2a8.json",
+  "parameterValues" : [ ]
+}
