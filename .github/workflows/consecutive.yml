@@ -282,8 +282,6 @@ jobs:
     needs:
       - allure
       - prepare-env
-    env:
-      NETWORK: ${{ needs.prepare-env.outputs.network }}
     steps:
       - name: Send a notification to Teams channel
         uses: neonlabsorg/teams-notification-action@0.1.1
@@ -292,4 +290,4 @@ jobs:
           hookUrl: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
           actionUrl: "https://docs.neon-labs.org/neon-compatibility/${{ needs.allure.outputs.subdir }}/${{ github.run_number }}/"
           title: "OpenZeppelin Contracts Test Suite #${{ github.run_number }}"
-          networkName: ${{ env.NETWORK }}
+          networkName: ${{ needs.prepare-env.outputs.network }}
