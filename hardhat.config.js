@@ -101,7 +101,6 @@ const requestFaucet = async (wallet, amount) => {
   console.log(`Wallet = ${data.wallet}, amount = ${data.amount}`);
   try {
     const result = await axios.post(Config.faucetUrl, data);
-    console.log(result);
   } catch (err) {
     console.log(`Failed to send request to faucet: ${err}`);
   }
