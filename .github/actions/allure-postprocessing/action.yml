@@ -13,12 +13,17 @@ runs:
   using: "composite"
   steps:
     - run: |
-        pwd
-        ls
         echo "============================================================="
         pwd
         ls
         echo "============================================================="
+        
         cd openzeppelin-contracts/report/allure-results
+        
+        echo "============================================================="
+        pwd
+        ls
+        echo "============================================================="
+        
         sed -i 's+<labels/>+<labels><label><name>${{ inputs.item-type }}</name><value>${{ inputs.name }}</value></label></labels>+g' *.xml
       shell: bash
