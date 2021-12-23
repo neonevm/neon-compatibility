@@ -155,11 +155,19 @@ jobs:
         with:
           name: parallel-outputs
           path: openzeppelin-contracts/pout
+
+  cleane-runner:
+    runs-on: self-hosted
+    needs:
+      - prepare-env
+      - openzeppelin
+    if: needs.prepare-env.outputs.runner == "self-hosted"
+    steps:
       - name: Cleanup runner
         if: always()
         run: |
           echo "Cleaning up previous run" 
-          rm -rf "${{ github.workspace }}/openzeppelin-contracts"
+          rm -rf "${{ github.workspace }}"
 
   node:
     runs-on: ubuntu-20.04
