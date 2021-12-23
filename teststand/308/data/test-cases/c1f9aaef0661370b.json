@@ -1,0 +1,264 @@
+{
+  "uid" : "c1f9aaef0661370b",
+  "name" : "test_receiver_balance_increases",
+  "fullName" : "tests.brownie.token.tests.test_transfer#test_receiver_balance_increases",
+  "historyId" : "dffbda724ae04651c982cb7ed5d1e09d",
+  "time" : {
+    "start" : 1640246580405,
+    "stop" : 1640246585660,
+    "duration" : 5255
+  },
+  "status" : "broken",
+  "statusMessage" : "brownie.exceptions.TransactionError: Tx dropped without known replacement: 0x3f689c0c55c2befc52f7310d8522decabbde49d8e63ce0f3ead7e3ff9dd162a6",
+  "statusTrace" : "accounts = <brownie.network.account.Accounts object at 0x7f1c5eb4d220>\ntoken = <Token Contract '0x63Faea926cE1158e25DB534633Df80ce172e8F19'>\n\n    def test_receiver_balance_increases(accounts, token):\n        receiver_balance = token.balanceOf(accounts[1])\n        amount = token.balanceOf(accounts[0]) // 4\n    \n>       token.transfer(accounts[1], amount, {'from': accounts[0]})\n\ntests/brownie/token/tests/test_transfer.py:18: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1693: in __call__\n    return self.transact(*args)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1566: in transact\n    return tx[\"from\"].transfer(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:642: in transfer\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:758: in _make_transaction\n    receipt = self._await_confirmation(receipt, required_confs, gas_strategy, gas_iter)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <LocalAccount '0x3435763AD2b771241Dc0358D3c25E03f264dD5a7'>\nreceipt = <Transaction '\u001B[0;2;37m0x3f689c0c55c2befc52f7310d8522decabbde49d8e63ce0f3ead7e3ff9dd162a6\u001B[0;m'>\nrequired_confs = 1, gas_strategy = None, gas_iter = None\n\n    def _await_confirmation(\n        self,\n        receipt: TransactionReceipt,\n        required_confs: int,\n        gas_strategy: Optional[GasABC],\n        gas_iter: Optional[Iterator],\n    ) -> TransactionReceipt:\n        # add to TxHistory before waiting for confirmation, this way the tx\n        # object is available if the user exits blocking via keyboard interrupt\n        history._add_tx(receipt)\n    \n        if gas_strategy is not None:\n            gas_strategy.run(receipt, gas_iter)  # type: ignore\n    \n        if required_confs == 0:\n            # set 0-conf tx's as silent to hide the confirmation output\n            receipt._silent = True\n            return receipt\n    \n        try:\n            receipt._confirmed.wait()\n        except KeyboardInterrupt as exc:\n            # set related transactions as silent\n            receipt._silent = True\n            for receipt in history.filter(\n                sender=self, nonce=receipt.nonce, key=lambda k: k.status != -2\n            ):\n                receipt._silent = True\n            raise exc.with_traceback(None)\n    \n        if receipt.status != -2:\n            return receipt\n    \n        # if transaction was dropped (status -2), find and return the tx that confirmed\n        replacements = history.filter(\n            sender=self, nonce=receipt.nonce, key=lambda k: k.status != -2\n        )\n        while True:\n            if not replacements:\n>               raise TransactionError(f\"Tx dropped without known replacement: {receipt.txid}\")\nE               brownie.exceptions.TransactionError: Tx dropped without known replacement: 0x3f689c0c55c2befc52f7310d8522decabbde49d8e63ce0f3ead7e3ff9dd162a6\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:800: TransactionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1640246545591,
+      "stop" : 1640246545591,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1640246546635,
+      "stop" : 1640246563214,
+      "duration" : 16579
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "setup_env",
+    "time" : {
+      "start" : 1640246567632,
+      "stop" : 1640246567632,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "accounts",
+    "time" : {
+      "start" : 1640246567633,
+      "stop" : 1640246567935,
+      "duration" : 302
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token",
+    "time" : {
+      "start" : 1640246571607,
+      "stop" : 1640246577126,
+      "duration" : 5519
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "testStage" : {
+    "status" : "broken",
+    "statusMessage" : "brownie.exceptions.TransactionError: Tx dropped without known replacement: 0x3f689c0c55c2befc52f7310d8522decabbde49d8e63ce0f3ead7e3ff9dd162a6",
+    "statusTrace" : "accounts = <brownie.network.account.Accounts object at 0x7f1c5eb4d220>\ntoken = <Token Contract '0x63Faea926cE1158e25DB534633Df80ce172e8F19'>\n\n    def test_receiver_balance_increases(accounts, token):\n        receiver_balance = token.balanceOf(accounts[1])\n        amount = token.balanceOf(accounts[0]) // 4\n    \n>       token.transfer(accounts[1], amount, {'from': accounts[0]})\n\ntests/brownie/token/tests/test_transfer.py:18: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1693: in __call__\n    return self.transact(*args)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1566: in transact\n    return tx[\"from\"].transfer(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:642: in transfer\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:758: in _make_transaction\n    receipt = self._await_confirmation(receipt, required_confs, gas_strategy, gas_iter)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <LocalAccount '0x3435763AD2b771241Dc0358D3c25E03f264dD5a7'>\nreceipt = <Transaction '\u001B[0;2;37m0x3f689c0c55c2befc52f7310d8522decabbde49d8e63ce0f3ead7e3ff9dd162a6\u001B[0;m'>\nrequired_confs = 1, gas_strategy = None, gas_iter = None\n\n    def _await_confirmation(\n        self,\n        receipt: TransactionReceipt,\n        required_confs: int,\n        gas_strategy: Optional[GasABC],\n        gas_iter: Optional[Iterator],\n    ) -> TransactionReceipt:\n        # add to TxHistory before waiting for confirmation, this way the tx\n        # object is available if the user exits blocking via keyboard interrupt\n        history._add_tx(receipt)\n    \n        if gas_strategy is not None:\n            gas_strategy.run(receipt, gas_iter)  # type: ignore\n    \n        if required_confs == 0:\n            # set 0-conf tx's as silent to hide the confirmation output\n            receipt._silent = True\n            return receipt\n    \n        try:\n            receipt._confirmed.wait()\n        except KeyboardInterrupt as exc:\n            # set related transactions as silent\n            receipt._silent = True\n            for receipt in history.filter(\n                sender=self, nonce=receipt.nonce, key=lambda k: k.status != -2\n            ):\n                receipt._silent = True\n            raise exc.with_traceback(None)\n    \n        if receipt.status != -2:\n            return receipt\n    \n        # if transaction was dropped (status -2), find and return the tx that confirmed\n        replacements = history.filter(\n            sender=self, nonce=receipt.nonce, key=lambda k: k.status != -2\n        )\n        while True:\n            if not replacements:\n>               raise TransactionError(f\"Tx dropped without known replacement: {receipt.txid}\")\nE               brownie.exceptions.TransactionError: Tx dropped without known replacement: 0x3f689c0c55c2befc52f7310d8522decabbde49d8e63ce0f3ead7e3ff9dd162a6\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:800: TransactionError",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "2974e8e5639e4d91",
+      "name" : "stdout",
+      "source" : "2974e8e5639e4d91.txt",
+      "type" : "text/plain",
+      "size" : 323
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ {
+    "name" : "accounts::0",
+    "time" : {
+      "start" : 1640246906527,
+      "stop" : 1640246906527,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_transfer"
+  }, {
+    "name" : "host",
+    "value" : "fv-az39-764"
+  }, {
+    "name" : "thread",
+    "value" : "3652-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_transfer"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 8,
+        "skipped" : 0,
+        "passed" : 1,
+        "unknown" : 0,
+        "total" : 9
+      },
+      "items" : [ {
+        "uid" : "1647f7f545394eea",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/teststand/298//#testresult/1647f7f545394eea",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.TransactionError: Tx dropped without known replacement: 0x7e680c0222d6b28c54c453e801fcd66432d603e5b9f2e6ba62bcbb96131d5e0f",
+        "time" : {
+          "start" : 1640204899629,
+          "stop" : 1640204899629,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "b42d6a048f3dcb19",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/teststand/294//#testresult/b42d6a048f3dcb19",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.TransactionError: Tx dropped without known replacement: 0x93ee5cf1a027700f4f7ee54c25f99d28c5d118c2bc73fb74b33bfb07701e406e",
+        "time" : {
+          "start" : 1640183889922,
+          "stop" : 1640183889922,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "bf6ff0c1f162fad5",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/teststand/286//#testresult/bf6ff0c1f162fad5",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.TransactionError: Tx dropped without known replacement: 0x3338368c50249b6240e8d643fbdc5cb4254773fdc524274c6870a951dfe230e2",
+        "time" : {
+          "start" : 1640156360233,
+          "stop" : 1640156360233,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "4a1e1097e53eae3",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/teststand/282//#testresult/4a1e1097e53eae3",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.TransactionError: Tx dropped without known replacement: 0xcc17517ae38e86a20b496bb0d96683556ba2b103430d682335305e36b924b88b",
+        "time" : {
+          "start" : 1640116156934,
+          "stop" : 1640116156934,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "7150eab21e66b2f0",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/teststand/281//#testresult/7150eab21e66b2f0",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640110318731,
+          "stop" : 1640110323677,
+          "duration" : 4946
+        }
+      }, {
+        "uid" : "f373554b4919e9c2",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/teststand/280//#testresult/f373554b4919e9c2",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.TransactionError: Tx dropped without known replacement: 0x48c25b6fcdec94b2cdaea0eb19db67012d043f652bbfeab387f71abe5087141d",
+        "time" : {
+          "start" : 1640105882461,
+          "stop" : 1640105882461,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "351b46c41d1df1f8",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/teststand/266//#testresult/351b46c41d1df1f8",
+        "status" : "broken",
+        "statusDetails" : "ValueError: connection already closed",
+        "time" : {
+          "start" : 1639910649433,
+          "stop" : 1639910649433,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "41c98ea20971ca28",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/teststand/257//#testresult/41c98ea20971ca28",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.TransactionError: Tx dropped without known replacement: 0xdf4cb43a9d09c8c7c63b92b6a48c7a1ad11bbc6a2bbdec9d1c87f6883f47bbcb",
+        "time" : {
+          "start" : 1639751331002,
+          "stop" : 1639751334296,
+          "duration" : 3294
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "c1f9aaef0661370b.json",
+  "parameterValues" : [ ]
+}
