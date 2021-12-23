@@ -150,6 +150,10 @@ jobs:
       - name: "Insert feature to allure"
         if: always()
         run: python3 fix_allure.py
+      - uses: ./.github/actions/allure-upload
+        if: always()
+        with:
+          folder-name: openzeppelin-contracts/report/allure-results
       - uses: actions/upload-artifact@v2
         if: always()
         with:
