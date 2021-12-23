@@ -1,8 +1,4 @@
-https://docs.neon-labs.org/neon-compatibility/285/data/suites.csv
-passed Contract AccessControl Contract interface AccessControlEnumerable ERC165 s supportsInterface bytes4 claims support skip on coverage 
-passed Contract AccessControl Contract interface AccessControlEnumerable ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
-passed Contract AccessControl Contract interface AccessControlEnumerable getRoleMember bytes32 uint256 has to be implemented 
-passed Contract AccessControl Contract interface AccessControlEnumerable getRoleMemberCount bytes32 has to be implemented 
+https://docs.neon-labs.org/neon-compatibility/300/data/suites.csv
 passed Contract AccessControl Contract interface AccessControl ERC165 s supportsInterface bytes4 claims support skip on coverage 
 passed Contract AccessControl Contract interface AccessControl ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
 passed Contract AccessControl Contract interface AccessControl getRoleAdmin bytes32 has to be implemented 
@@ -13,8 +9,6 @@ passed Contract AccessControl Contract interface AccessControl revokeRole bytes3
 passed Contract AccessControl default admin default admin role s admin is itself 
 passed Contract AccessControl default admin deployer has default admin role 
 passed Contract AccessControl default admin other roles s admin is the default admin role 
-passed Contract AccessControl enumerating role bearers can be enumerated 
-passed Contract AccessControl enumerating role enumeration should be in sync after renounceRole call 
 passed Contract AccessControl granting accounts can be granted a role multiple times 
 passed Contract AccessControl granting non admin cannot grant role to other accounts 
 passed Contract AccessControl onlyRole modifier do not revert if sender has role 
@@ -33,25 +27,12 @@ passed Contract AccessControl setting role admin a role s previous admins no lon
 passed Contract AccessControl setting role admin a role s previous admins no longer revoke roles 
 passed Contract AccessControl setting role admin the new admin can grant roles 
 passed Contract AccessControl setting role admin the new admin can revoke roles 
-passed Contract Address functionCall with non contract receiver reverts when address is not a contract 
+broken Contract Address functionCall with valid contract receiver reverts when the called function throws 
 passed Contract Address functionCall with valid contract receiver calls the requested function 
-passed Contract Address functionCall with valid contract receiver reverts when function does not exist 
 passed Contract Address functionCall with valid contract receiver reverts when the called function reverts bubbling up the revert reason 
 passed Contract Address functionCall with valid contract receiver reverts when the called function reverts with no reason 
 passed Contract Address functionCall with valid contract receiver reverts when the called function runs out of gas 
-passed Contract Address functionCall with valid contract receiver reverts when the called function throws 
-failed Contract Address functionCallWithValue with non zero value calls the requested function with transaction funds 
-failed Contract Address functionCallWithValue with non zero value reverts if insufficient sender balance 
-passed Contract Address functionCallWithValue with non zero value calls the requested function with existing value 
-passed Contract Address functionCallWithValue with non zero value reverts when calling non payable functions 
-passed Contract Address functionCallWithValue with zero value calls the requested function 
-passed Contract Address functionDelegateCall bubbles up revert reason 
-passed Contract Address functionDelegateCall delegate calls the requested function 
-passed Contract Address functionDelegateCall reverts when address is not a contract 
-passed Contract Address functionStaticCall bubbles up revert reason 
-passed Contract Address functionStaticCall calls the requested function 
-failed Contract Address functionStaticCall reverts on a non static function 
-passed Contract Address functionStaticCall reverts when address is not a contract 
+broken Contract Address functionCallWithValue with zero value calls the requested function 
 passed Contract Address isContract returns false for account address 
 passed Contract Address isContract returns true for contract address 
 failed Contract Address sendValue when sender contract has funds reverts when sending more than the balance 
@@ -74,7 +55,7 @@ passed Contract Arrays findUpperBound Odd number of elements returns 0 for the f
 passed Contract Arrays findUpperBound Odd number of elements returns correct index for the basic case 
 passed Contract Arrays findUpperBound Odd number of elements returns first index after last element if searched value is over the upper boundary
 passed Contract Arrays findUpperBound Odd number of elements returns index of the last element 
-passed Contract BeaconProxy bad beacon is not accepted non compliant beacon 
+failed Contract BeaconProxy bad beacon is not accepted non compliant beacon 
 passed Contract BeaconProxy bad beacon is not accepted non contract beacon 
 passed Contract BeaconProxy bad beacon is not accepted non contract implementation 
 failed Contract BeaconProxy initialization no initialization 
@@ -137,14 +118,6 @@ passed Contract Counters increment starting from 0 increments the current value 
 passed Contract Counters reset non null counter reset to 0 
 passed Contract Counters reset null counter does not throw 
 passed Contract Counters starts at zero 
-passed Contract Create2 computeAddress computes the correct contract address 
-passed Contract Create2 computeAddress computes the correct contract address with deployer 
-failed Contract Create2 deploy deploys a contract with funds deposited in the factory 
-passed Contract Create2 deploy deploys a ERC1820Implementer from inline assembly code 
-passed Contract Create2 deploy deploys a ERC20Mock with correct balances 
-failed Contract Create2 deploy fails deploying a contract if factory contract does not have sufficient balance 
-passed Contract Create2 deploy fails deploying a contract if the bytecode length is zero 
-passed Contract Create2 deploy fails deploying a contract in an existent address 
 passed Contract ECDSA recover with invalid signature with long signature 
 passed Contract ECDSA recover with invalid signature with short signature 
 passed Contract ECDSA recover with valid signature reverts with high s value signature 
@@ -152,16 +125,13 @@ passed Contract ECDSA recover with valid signature using web3 eth sign returns a
 passed Contract ECDSA recover with valid signature using web3 eth sign returns signer address with correct signature 
 passed Contract ECDSA recover with valid signature using web3 eth sign returns signer address with correct signature for arbitrary length message 
 passed Contract ECDSA recover with valid signature using web3 eth sign reverts with invalid signature 
+broken Contract ECDSA recover with valid signature with v1 signature reverts with wrong version 
 passed Contract ECDSA recover with valid signature with v0 signature reverts with 00 as version value 
 passed Contract ECDSA recover with valid signature with v0 signature reverts with wrong version 
 passed Contract ECDSA recover with valid signature with v0 signature works with 27 as version value 
 passed Contract ECDSA recover with valid signature with v0 signature works with short EIP2098 format 
 passed Contract ECDSA recover with valid signature with v1 signature reverts with 01 as version value 
-passed Contract ECDSA recover with valid signature with v1 signature reverts with wrong version 
 passed Contract ECDSA recover with valid signature with v1 signature works with 28 as version value 
-passed Contract ECDSA recover with valid signature with v1 signature works with short EIP2098 format 
-passed Contract ECDSA toEthSignedMessageHash prefixes bytes32 data correctly 
-passed Contract ECDSA toEthSignedMessageHash prefixes dynamic length data correctly 
 passed Contract EIP712 digest 
 passed Contract EIP712 domain separator 
 passed Contract EnumerableMap read get existing value 
@@ -181,7 +151,7 @@ passed Contract EnumerableMap starts empty
 passed Contract EnumerableSet EnumerableAddressSet add adds a value 
 passed Contract EnumerableSet EnumerableAddressSet add adds several values 
 passed Contract EnumerableSet EnumerableAddressSet add returns false when adding values already in the set 
-passed Contract EnumerableSet EnumerableAddressSet at reverts when retrieving non existent elements 
+failed Contract EnumerableSet EnumerableAddressSet at reverts when retrieving non existent elements 
 passed Contract EnumerableSet EnumerableAddressSet remove adds and removes multiple values 
 passed Contract EnumerableSet EnumerableAddressSet remove removes added values 
 passed Contract EnumerableSet EnumerableAddressSet remove returns false when removing values not in the set 
@@ -189,7 +159,7 @@ passed Contract EnumerableSet EnumerableAddressSet starts empty
 passed Contract EnumerableSet EnumerableBytes32Set add adds a value 
 passed Contract EnumerableSet EnumerableBytes32Set add adds several values 
 passed Contract EnumerableSet EnumerableBytes32Set add returns false when adding values already in the set 
-passed Contract EnumerableSet EnumerableBytes32Set at reverts when retrieving non existent elements 
+failed Contract EnumerableSet EnumerableBytes32Set at reverts when retrieving non existent elements 
 passed Contract EnumerableSet EnumerableBytes32Set remove adds and removes multiple values 
 passed Contract EnumerableSet EnumerableBytes32Set remove removes added values 
 passed Contract EnumerableSet EnumerableBytes32Set remove returns false when removing values not in the set 
@@ -197,45 +167,168 @@ passed Contract EnumerableSet EnumerableBytes32Set starts empty
 passed Contract EnumerableSet EnumerableUintSet add adds a value 
 passed Contract EnumerableSet EnumerableUintSet add adds several values 
 passed Contract EnumerableSet EnumerableUintSet add returns false when adding values already in the set 
-passed Contract EnumerableSet EnumerableUintSet at reverts when retrieving non existent elements 
+failed Contract EnumerableSet EnumerableUintSet at reverts when retrieving non existent elements 
 passed Contract EnumerableSet EnumerableUintSet remove adds and removes multiple values 
 passed Contract EnumerableSet EnumerableUintSet remove removes added values 
 passed Contract EnumerableSet EnumerableUintSet remove returns false when removing values not in the set 
 passed Contract EnumerableSet EnumerableUintSet starts empty 
-passed Contract ERC165Checker account address does not support ERC165 does not support ERC165 
-passed Contract ERC165Checker account address does not support ERC165 does not support mock interface via getSupportedInterfaces 
-passed Contract ERC165Checker account address does not support ERC165 does not support mock interface via supportsAllInterfaces 
-passed Contract ERC165Checker account address does not support ERC165 does not support mock interface via supportsInterface 
-passed Contract ERC165Checker ERC165 and many interfaces supported supports all interfaceIds via getSupportedInterfaces 
-passed Contract ERC165Checker ERC165 and many interfaces supported supports all interfaceIds via supportsAllInterfaces 
-passed Contract ERC165Checker ERC165 and many interfaces supported supports each interfaceId via supportsInterface 
-passed Contract ERC165Checker ERC165 and many interfaces supported supports ERC165 
-passed Contract ERC165Checker ERC165 and many interfaces supported supports none of the interfaces queried via getSupportedInterfaces 
-passed Contract ERC165Checker ERC165 and many interfaces supported supports none of the interfaces queried via supportsAllInterfaces 
-passed Contract ERC165Checker ERC165 and many interfaces supported supports not all of the interfaces queried via getSupportedInterfaces 
-passed Contract ERC165Checker ERC165 and many interfaces supported supports not all of the interfaces queried via supportsAllInterfaces 
-passed Contract ERC165Checker ERC165 and single interface supported supports ERC165 
-passed Contract ERC165Checker ERC165 and single interface supported supports mock interface via getSupportedInterfaces 
-passed Contract ERC165Checker ERC165 and single interface supported supports mock interface via supportsAllInterfaces 
-passed Contract ERC165Checker ERC165 and single interface supported supports mock interface via supportsInterface 
+passed Contract ERC1155Burnable burn approved operators can burn the holder s tokens 
+passed Contract ERC1155Burnable burnBatch approved operators can burn the holder s tokens 
+passed Contract ERC1155Burnable burnBatch holder can burn their tokens 
+passed Contract ERC1155Burnable burnBatch unapproved accounts cannot burn the holder s tokens 
+passed Contract ERC1155Burnable burn holder can burn their tokens 
+passed Contract ERC1155Burnable burn unapproved accounts cannot burn the holder s tokens 
+passed Contract ERC1155Holder Contract interface ERC1155Receiver ERC165 s supportsInterface bytes4 claims support skip on coverage 
+passed Contract ERC1155Holder Contract interface ERC1155Receiver ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
+passed Contract ERC1155Holder Contract interface ERC1155Receiver onERC1155BatchReceived address address uint256 uint256 bytes has to be implemented 
+passed Contract ERC1155Holder Contract interface ERC1155Receiver onERC1155Received address address uint256 uint256 bytes has to be implemented 
+passed Contract ERC1155Holder Contract interface ERC165 ERC165 s supportsInterface bytes4 claims support skip on coverage 
+passed Contract ERC1155Holder Contract interface ERC165 ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
+passed Contract ERC1155Holder Contract interface ERC165 supportsInterface bytes4 has to be implemented 
+passed Contract ERC1155Holder receives ERC1155 tokens from a multiple IDs 
+passed Contract ERC1155Holder receives ERC1155 tokens from a single ID 
+broken Contract ERC1155 internal functions burn reverts when burning a non existent token id 
+passed Contract ERC1155 internal functions burn reverts when burning the zero account s tokens 
+passed Contract ERC1155 internal functions mintBatch reverts if length of inputs do not match 
+passed Contract ERC1155 internal functions mintBatch reverts with a zero destination address 
+passed Contract ERC1155 internal functions mintBatch with minted batch of tokens credits the minted batch of tokens 
+passed Contract ERC1155 internal functions mintBatch with minted batch of tokens emits a TransferBatch event 
+passed Contract ERC1155 internal functions mint reverts with a zero destination address 
+passed Contract ERC1155 internal functions mint with minted tokens credits the minted amount of tokens 
+passed Contract ERC1155 internal functions mint with minted tokens emits a TransferSingle event 
+passed Contract ERC1155 like an ERC1155 balanceOfBatch reverts when input arrays don t match up 
+passed Contract ERC1155 like an ERC1155 balanceOfBatch reverts when one of the addresses is the zero address 
+passed Contract ERC1155 like an ERC1155 balanceOfBatch when accounts don t own tokens returns zeros for each account 
+passed Contract ERC1155 like an ERC1155 balanceOfBatch when accounts own some tokens returns amounts owned by each account in order passed 
+passed Contract ERC1155 like an ERC1155 balanceOfBatch when accounts own some tokens returns multiple times the balance of the same address when
+passed Contract ERC1155 like an ERC1155 balanceOf reverts when queried about the zero address 
+passed Contract ERC1155 like an ERC1155 balanceOf when accounts don t own tokens returns zero for given addresses 
+passed Contract ERC1155 like an ERC1155 balanceOf when accounts own some tokens returns the amount of tokens owned by the given addresses
+passed Contract ERC1155 like an ERC1155 Contract interface ERC1155 balanceOf address uint256 has to be implemented 
+passed Contract ERC1155 like an ERC1155 Contract interface ERC1155 balanceOfBatch address uint256 has to be implemented 
+passed Contract ERC1155 like an ERC1155 Contract interface ERC1155 ERC165 s supportsInterface bytes4 claims support skip on coverage 
+passed Contract ERC1155 like an ERC1155 Contract interface ERC1155 ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
+passed Contract ERC1155 like an ERC1155 Contract interface ERC1155 isApprovedForAll address address has to be implemented 
+passed Contract ERC1155 like an ERC1155 Contract interface ERC1155 safeBatchTransferFrom address address uint256 uint256 bytes has to be implemented 
+passed Contract ERC1155 like an ERC1155 Contract interface ERC1155 safeTransferFrom address address uint256 uint256 bytes has to be implemented 
+passed Contract ERC1155 like an ERC1155 Contract interface ERC1155 setApprovalForAll address bool has to be implemented 
+passed Contract ERC1155 like an ERC1155 Contract interface ERC165 ERC165 s supportsInterface bytes4 claims support skip on coverage 
+passed Contract ERC1155 like an ERC1155 Contract interface ERC165 ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
+passed Contract ERC1155 like an ERC1155 Contract interface ERC165 supportsInterface bytes4 has to be implemented 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom reverts when ids array length doesn t match amounts array length 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom reverts when transferring amount more than any of balances 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom reverts when transferring to zero address 
+broken Contract ERC1155 like an ERC1155 safeBatchTransferFrom to a contract that does not implement the required function reverts 
+broken Contract ERC1155 like an ERC1155 safeBatchTransferFrom to a receiver contract that reverts only on single transfers credits transferred balances to receiver
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom to a receiver contract returning unexpected value reverts 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom to a receiver contract that reverts only on single transfers debits transferred balances from sender
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom to a receiver contract that reverts reverts 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when called by an operator on behalf of the multiTokenHolder when operator is approved by
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when called by an operator on behalf of the multiTokenHolder when operator is approved by
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when called by an operator on behalf of the multiTokenHolder when operator is approved by
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when called by an operator on behalf of the multiTokenHolder when operator is approved by
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when called by an operator on behalf of the multiTokenHolder when operator is not approved
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when called by the multiTokenHolder credits transferred balances to receiver 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when called by the multiTokenHolder debits transferred balances from sender 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when called by the multiTokenHolder emits a TransferBatch log 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when sending to a valid receiver with data calls onERC1155Received 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when sending to a valid receiver with data credits transferred balances to receiver 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when sending to a valid receiver with data debits transferred balances from sender 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when sending to a valid receiver with data emits a TransferBatch log 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when sending to a valid receiver without data calls onERC1155BatchReceived 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when sending to a valid receiver without data credits transferred balances to receiver 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when sending to a valid receiver without data debits transferred balances from sender 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when sending to a valid receiver without data emits a TransferBatch log 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom reverts when transferring more than balance 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom reverts when transferring to zero address 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom to a contract that does not implement the required function reverts 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom to a receiver contract returning unexpected value reverts 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom to a receiver contract that reverts reverts 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when called by an operator on behalf of the multiTokenHolder when operator is approved by
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when called by an operator on behalf of the multiTokenHolder when operator is approved by
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when called by an operator on behalf of the multiTokenHolder when operator is approved by
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when called by an operator on behalf of the multiTokenHolder when operator is approved by
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when called by an operator on behalf of the multiTokenHolder when operator is not approved
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when called by the multiTokenHolder credits transferred balance to receiver 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when called by the multiTokenHolder debits transferred balance from sender 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when called by the multiTokenHolder emits a TransferSingle log 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when called by the multiTokenHolder preserves existing balances which are not transferred by multiTokenHolder 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when sending to a valid receiver with data calls onERC1155Received 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when sending to a valid receiver with data credits transferred balance to receiver 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when sending to a valid receiver with data debits transferred balance from sender 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when sending to a valid receiver with data emits a TransferSingle log 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when sending to a valid receiver without data calls onERC1155Received 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when sending to a valid receiver without data credits transferred balance to receiver 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when sending to a valid receiver without data debits transferred balance from sender 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when sending to a valid receiver without data emits a TransferSingle log 
+passed Contract ERC1155 like an ERC1155 setApprovalForAll can unset approval for an operator 
+passed Contract ERC1155 like an ERC1155 setApprovalForAll emits an ApprovalForAll log 
+passed Contract ERC1155 like an ERC1155 setApprovalForAll reverts if attempting to approve self as an operator 
+passed Contract ERC1155 like an ERC1155 setApprovalForAll sets approval status which can be queried via isApprovedForAll 
+passed Contract ERC1155Pausable when token is paused balanceOf returns the amount of tokens owned by the given address 
+passed Contract ERC1155Pausable when token is paused isApprovedForAll returns the approval of the operator 
+passed Contract ERC1155Pausable when token is paused reverts when trying to burn 
+passed Contract ERC1155Pausable when token is paused reverts when trying to burnBatch 
+passed Contract ERC1155Pausable when token is paused reverts when trying to mint 
+passed Contract ERC1155Pausable when token is paused reverts when trying to mintBatch 
+passed Contract ERC1155Pausable when token is paused reverts when trying to safeBatchTransferFrom from holder 
+passed Contract ERC1155Pausable when token is paused reverts when trying to safeBatchTransferFrom from operator 
+passed Contract ERC1155Pausable when token is paused reverts when trying to safeTransferFrom from holder 
+passed Contract ERC1155Pausable when token is paused reverts when trying to safeTransferFrom from operator 
+passed Contract ERC1155Pausable when token is paused setApprovalForAll approves an operator 
+passed Contract ERC1155PresetMinterPauser batched minting deployer can batch mint tokens 
+passed Contract ERC1155PresetMinterPauser batched minting other accounts cannot batch mint tokens 
+passed Contract ERC1155PresetMinterPauser burning holders can burn their tokens 
+passed Contract ERC1155PresetMinterPauser Contract interface AccessControlEnumerable ERC165 s supportsInterface bytes4 claims support skip on coverage 
+passed Contract ERC1155PresetMinterPauser Contract interface AccessControlEnumerable ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
+passed Contract ERC1155PresetMinterPauser Contract interface AccessControlEnumerable getRoleMember bytes32 uint256 has to be implemented 
+passed Contract ERC1155PresetMinterPauser Contract interface AccessControlEnumerable getRoleMemberCount bytes32 has to be implemented 
+passed Contract ERC1155PresetMinterPauser Contract interface AccessControl ERC165 s supportsInterface bytes4 claims support skip on coverage 
+passed Contract ERC1155PresetMinterPauser Contract interface AccessControl ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
+passed Contract ERC1155PresetMinterPauser Contract interface AccessControl getRoleAdmin bytes32 has to be implemented 
+passed Contract ERC1155PresetMinterPauser Contract interface AccessControl grantRole bytes32 address has to be implemented 
+passed Contract ERC1155PresetMinterPauser Contract interface AccessControl hasRole bytes32 address has to be implemented 
+passed Contract ERC1155PresetMinterPauser Contract interface AccessControl renounceRole bytes32 address has to be implemented 
+passed Contract ERC1155PresetMinterPauser Contract interface AccessControl revokeRole bytes32 address has to be implemented 
+passed Contract ERC1155PresetMinterPauser Contract interface ERC1155 balanceOf address uint256 has to be implemented 
+passed Contract ERC1155PresetMinterPauser Contract interface ERC1155 balanceOfBatch address uint256 has to be implemented 
+passed Contract ERC1155PresetMinterPauser Contract interface ERC1155 ERC165 s supportsInterface bytes4 claims support skip on coverage 
+passed Contract ERC1155PresetMinterPauser Contract interface ERC1155 ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
+passed Contract ERC1155PresetMinterPauser Contract interface ERC1155 isApprovedForAll address address has to be implemented 
+passed Contract ERC1155PresetMinterPauser Contract interface ERC1155 safeBatchTransferFrom address address uint256 uint256 bytes has to be implemented 
+passed Contract ERC1155PresetMinterPauser Contract interface ERC1155 safeTransferFrom address address uint256 uint256 bytes has to be implemented 
+passed Contract ERC1155PresetMinterPauser Contract interface ERC1155 setApprovalForAll address bool has to be implemented 
+passed Contract ERC1155PresetMinterPauser deployer has the default admin role 
+passed Contract ERC1155PresetMinterPauser deployer has the minter role 
+passed Contract ERC1155PresetMinterPauser deployer has the pauser role 
+passed Contract ERC1155PresetMinterPauser minter and pauser role admin is the default admin 
+passed Contract ERC1155PresetMinterPauser minting deployer can mint tokens 
+passed Contract ERC1155PresetMinterPauser minting other accounts cannot mint tokens 
+passed Contract ERC1155PresetMinterPauser pausing cannot mint while paused 
+passed Contract ERC1155PresetMinterPauser pausing deployer can pause 
+passed Contract ERC1155PresetMinterPauser pausing deployer can unpause 
+passed Contract ERC1155PresetMinterPauser pausing other accounts cannot pause 
+passed Contract ERC1155PresetMinterPauser pausing other accounts cannot unpause 
+passed Contract ERC1155Supply after burn batch exist 
+passed Contract ERC1155Supply after burn batch totalSupply 
+passed Contract ERC1155Supply after burn single exist 
+passed Contract ERC1155Supply after burn single totalSupply 
+passed Contract ERC1155Supply after mint batch exist 
+passed Contract ERC1155Supply after mint batch totalSupply 
+passed Contract ERC1155Supply after mint single exist 
+passed Contract ERC1155Supply after mint single totalSupply 
+passed Contract ERC1155Supply before mint exist 
+passed Contract ERC1155Supply before mint totalSupply 
+broken Contract ERC165Checker ERC165 missing return data does not support mock interface via getSupportedInterfaces 
+broken Contract ERC165Checker ERC165 missing return data does not support mock interface via supportsAllInterfaces 
 passed Contract ERC165Checker ERC165 missing return data does not support ERC165 
-passed Contract ERC165Checker ERC165 missing return data does not support mock interface via getSupportedInterfaces 
-passed Contract ERC165Checker ERC165 missing return data does not support mock interface via supportsAllInterfaces 
 passed Contract ERC165Checker ERC165 missing return data does not support mock interface via supportsInterface 
-passed Contract ERC165Checker ERC165 not supported does not support ERC165 
-passed Contract ERC165Checker ERC165 not supported does not support mock interface via getSupportedInterfaces 
-passed Contract ERC165Checker ERC165 not supported does not support mock interface via supportsAllInterfaces 
-passed Contract ERC165Checker ERC165 not supported does not support mock interface via supportsInterface 
-passed Contract ERC165Checker ERC165 supported does not support mock interface via getSupportedInterfaces 
-passed Contract ERC165Checker ERC165 supported does not support mock interface via supportsAllInterfaces 
-passed Contract ERC165Checker ERC165 supported does not support mock interface via supportsInterface 
-passed Contract ERC165Checker ERC165 supported supports ERC165 
+broken Contract ERC165Checker ERC165 not supported does not support ERC165 
 passed Contract ERC165 Contract interface ERC165 ERC165 s supportsInterface bytes4 claims support skip on coverage 
 passed Contract ERC165 Contract interface ERC165 ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
 passed Contract ERC165 Contract interface ERC165 supportsInterface bytes4 has to be implemented 
-passed Contract ERC165Storage Contract interface ERC165 ERC165 s supportsInterface bytes4 claims support skip on coverage 
+broken Contract ERC165Storage Contract interface ERC165 ERC165 s supportsInterface bytes4 claims support skip on coverage 
 passed Contract ERC165Storage Contract interface ERC165 ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
-passed Contract ERC165Storage Contract interface ERC165 supportsInterface bytes4 has to be implemented 
 passed Contract ERC165Storage does not allow 0xffffffff 
 passed Contract ERC165Storage register interface 
 passed Contract ERC1820Implementer with no registered interfaces returns false when interface implementation is queried 
@@ -244,34 +337,7 @@ broken Contract ERC1820Implementer with registered interfaces can be set as an i
 passed Contract ERC1820Implementer with registered interfaces returns false when interface implementation for non supported addresses is queried 
 passed Contract ERC1820Implementer with registered interfaces returns false when interface implementation for non supported interfaces is queried 
 passed Contract ERC1820Implementer with registered interfaces returns true when interface implementation is queried 
-passed Contract ERC1967Proxy cannot be initialized with a non contract address 
-failed Contract ERC1967Proxy initialization without parameters non payable when not sending balance has expected balance 
-failed Contract ERC1967Proxy initialization without parameters non payable when sending some balance reverts 
-passed Contract ERC1967Proxy initialization without parameters non payable when not sending balance initializes the proxy 
-skipped Contract ERC1967Proxy initialization without parameters non payable when not sending balance sets the implementation address 
-failed Contract ERC1967Proxy initialization without parameters payable when not sending balance has expected balance 
-failed Contract ERC1967Proxy initialization without parameters payable when sending some balance has expected balance 
-passed Contract ERC1967Proxy initialization without parameters payable when not sending balance initializes the proxy 
-passed Contract ERC1967Proxy initialization without parameters payable when sending some balance initializes the proxy 
-skipped Contract ERC1967Proxy initialization without parameters payable when not sending balance sets the implementation address 
-skipped Contract ERC1967Proxy initialization without parameters payable when sending some balance sets the implementation address 
-failed Contract ERC1967Proxy initialization with parameters non payable when not sending balance has expected balance 
-failed Contract ERC1967Proxy initialization with parameters non payable when sending some balance reverts 
-passed Contract ERC1967Proxy initialization with parameters non payable when not sending balance initializes the proxy 
-skipped Contract ERC1967Proxy initialization with parameters non payable when not sending balance sets the implementation address 
-failed Contract ERC1967Proxy initialization with parameters payable when not sending balance has expected balance 
-failed Contract ERC1967Proxy initialization with parameters payable when sending some balance has expected balance 
-passed Contract ERC1967Proxy initialization with parameters payable when not sending balance initializes the proxy 
-passed Contract ERC1967Proxy initialization with parameters payable when sending some balance initializes the proxy 
-skipped Contract ERC1967Proxy initialization with parameters payable when not sending balance sets the implementation address 
-skipped Contract ERC1967Proxy initialization with parameters payable when sending some balance sets the implementation address 
-passed Contract ERC1967Proxy initialization with parameters reverting initialization reverts 
-failed Contract ERC1967Proxy without initialization when not sending balance has expected balance 
-passed Contract ERC1967Proxy without initialization when not sending balance initializes the proxy 
-skipped Contract ERC1967Proxy without initialization when not sending balance sets the implementation address 
-failed Contract ERC1967Proxy without initialization when sending some balance has expected balance 
-passed Contract ERC1967Proxy without initialization when sending some balance initializes the proxy 
-skipped Contract ERC1967Proxy without initialization when sending some balance sets the implementation address 
+failed Contract ERC20 after each hook for returns the total amount of tokens 
 passed Contract ERC20 approve when the owner is the zero address reverts 
 passed Contract ERC20 approve when the spender is not the zero address when the sender does not have enough balance emits an
 passed Contract ERC20 approve when the spender is not the zero address when the sender does not have enough balance emits an
@@ -289,6 +355,19 @@ passed Contract ERC20 approve when the spender is the zero address reverts
 passed Contract ERC20 approve when the spender is the zero address reverts 
 passed Contract ERC20 balanceOf when the requested account has no tokens returns zero 
 passed Contract ERC20 balanceOf when the requested account has some tokens returns the total amount of tokens 
+passed Contract ERC20Burnable burnFrom on success for a non zero amount burns the requested amount 
+passed Contract ERC20Burnable burnFrom on success for a non zero amount decrements allowance 
+passed Contract ERC20Burnable burnFrom on success for a non zero amount emits a transfer event 
+passed Contract ERC20Burnable burnFrom on success for a zero amount burns the requested amount 
+passed Contract ERC20Burnable burnFrom on success for a zero amount decrements allowance 
+passed Contract ERC20Burnable burnFrom on success for a zero amount emits a transfer event 
+passed Contract ERC20Burnable burnFrom when the given amount is greater than the allowance reverts 
+passed Contract ERC20Burnable burnFrom when the given amount is greater than the balance of the sender reverts 
+passed Contract ERC20Burnable burn when the given amount is greater than the balance of the sender reverts 
+passed Contract ERC20Burnable burn when the given amount is not greater than balance of the sender for a non zero amount burns
+passed Contract ERC20Burnable burn when the given amount is not greater than balance of the sender for a non zero amount emits
+passed Contract ERC20Burnable burn when the given amount is not greater than balance of the sender for a zero amount burns the
+passed Contract ERC20Burnable burn when the given amount is not greater than balance of the sender for a zero amount emits a
 passed Contract ERC20 burn for a non zero account for entire balance decrements initialHolder balance 
 passed Contract ERC20 burn for a non zero account for entire balance decrements totalSupply 
 passed Contract ERC20 burn for a non zero account for entire balance emits Transfer event 
@@ -297,6 +376,11 @@ passed Contract ERC20 burn for a non zero account for less amount than balance d
 passed Contract ERC20 burn for a non zero account for less amount than balance emits Transfer event 
 passed Contract ERC20 burn for a non zero account rejects burning more than balance 
 passed Contract ERC20 burn rejects a null account 
+passed Contract ERC20Capped once deployed capped token fails to mint after cap is reached 
+passed Contract ERC20Capped once deployed capped token fails to mint if the amount exceeds the cap 
+passed Contract ERC20Capped once deployed capped token mints when amount is less than cap 
+passed Contract ERC20Capped once deployed capped token starts with the correct cap 
+passed Contract ERC20Capped requires a non zero cap 
 passed Contract ERC20 decrease allowance when the spender is not the zero address when the sender does not have enough balance when
 passed Contract ERC20 decrease allowance when the spender is not the zero address when the sender does not have enough balance when
 passed Contract ERC20 decrease allowance when the spender is not the zero address when the sender does not have enough balance when
@@ -312,36 +396,12 @@ passed Contract ERC20 deposit missing approval
 passed Contract ERC20 deposit missing balance 
 passed Contract ERC20 deposit to other account 
 passed Contract ERC20 deposit valid 
-passed Contract ERC20 erc20 behaviour approve when the spender is not the zero address when the sender does not have enough balance
-passed Contract ERC20 erc20 behaviour approve when the spender is not the zero address when the sender does not have enough balance
-passed Contract ERC20 erc20 behaviour approve when the spender is not the zero address when the sender does not have enough balance
-passed Contract ERC20 erc20 behaviour approve when the spender is not the zero address when the sender has enough balance emits an
-passed Contract ERC20 erc20 behaviour approve when the spender is not the zero address when the sender has enough balance when the
-passed Contract ERC20 erc20 behaviour approve when the spender is not the zero address when the sender has enough balance when there
-passed Contract ERC20 erc20 behaviour approve when the spender is the zero address reverts 
-passed Contract ERC20 erc20 behaviour balanceOf when the requested account has no tokens returns zero 
-passed Contract ERC20 erc20 behaviour balanceOf when the requested account has some tokens returns the total amount of tokens 
-passed Contract ERC20 erc20 behaviour total supply returns the total amount of tokens 
-passed Contract ERC20 erc20 behaviour transfer from when the token owner is not the zero address when the recipient is not the
-passed Contract ERC20 erc20 behaviour transfer from when the token owner is not the zero address when the recipient is not the
-passed Contract ERC20 erc20 behaviour transfer from when the token owner is not the zero address when the recipient is not the
-passed Contract ERC20 erc20 behaviour transfer from when the token owner is not the zero address when the recipient is not the
-passed Contract ERC20 erc20 behaviour transfer from when the token owner is not the zero address when the recipient is not the
-passed Contract ERC20 erc20 behaviour transfer from when the token owner is not the zero address when the recipient is not the
-passed Contract ERC20 erc20 behaviour transfer from when the token owner is not the zero address when the recipient is not the
-passed Contract ERC20 erc20 behaviour transfer from when the token owner is not the zero address when the recipient is the zero
-passed Contract ERC20 erc20 behaviour transfer from when the token owner is the zero address reverts 
-passed Contract ERC20 erc20 behaviour transfer when the recipient is not the zero address when the sender does not have enough balance
-passed Contract ERC20 erc20 behaviour transfer when the recipient is not the zero address when the sender transfers all balance emits a
-passed Contract ERC20 erc20 behaviour transfer when the recipient is not the zero address when the sender transfers all balance transfers the
-passed Contract ERC20 erc20 behaviour transfer when the recipient is not the zero address when the sender transfers zero tokens emits a
-passed Contract ERC20 erc20 behaviour transfer when the recipient is not the zero address when the sender transfers zero tokens transfers the
-passed Contract ERC20 erc20 behaviour transfer when the recipient is the zero address reverts 
+broken Contract ERC20 erc20 behaviour total supply returns the total amount of tokens 
 passed Contract ERC20FlashMint flashFee token match 
 passed Contract ERC20FlashMint flashFee token mismatch 
 passed Contract ERC20FlashMint flashLoan missing approval 
 passed Contract ERC20FlashMint flashLoan missing return value 
-passed Contract ERC20FlashMint flashLoan more than maxFlashLoan 
+failed Contract ERC20FlashMint flashLoan more than maxFlashLoan 
 passed Contract ERC20FlashMint flashLoan success 
 passed Contract ERC20FlashMint flashLoan unavailable funds 
 passed Contract ERC20FlashMint maxFlashLoan token match 
@@ -361,22 +421,28 @@ passed Contract ERC20 mint for a non zero account emits Transfer event
 passed Contract ERC20 mint for a non zero account increments recipient balance 
 passed Contract ERC20 mint for a non zero account increments totalSupply 
 passed Contract ERC20 mint rejects a null account 
+passed Contract ERC20Pausable pausable token burn allows to burn when paused and then unpaused 
+passed Contract ERC20Pausable pausable token burn allows to burn when unpaused 
+passed Contract ERC20Pausable pausable token burn reverts when trying to burn when paused 
+passed Contract ERC20Pausable pausable token mint allows to mint when paused and then unpaused 
+passed Contract ERC20Pausable pausable token mint allows to mint when unpaused 
+passed Contract ERC20Pausable pausable token mint reverts when trying to mint when paused 
+passed Contract ERC20Pausable pausable token transfer allows to transfer when paused and then unpaused 
+passed Contract ERC20Pausable pausable token transfer allows to transfer when unpaused 
+passed Contract ERC20Pausable pausable token transfer from allows to transfer from when unpaused 
+passed Contract ERC20Pausable pausable token transfer from allows to transfer when paused and then unpaused 
+passed Contract ERC20Pausable pausable token transfer from reverts when trying to transfer from when paused 
+passed Contract ERC20Pausable pausable token transfer reverts when trying to transfer when paused 
+passed Contract ERC20Permit domain separator 
+passed Contract ERC20Permit initial nonce is 0 
+passed Contract ERC20Permit permit accepts owner signature 
+passed Contract ERC20Permit permit rejects expired permit 
+passed Contract ERC20Permit permit rejects other signature 
+passed Contract ERC20Permit permit rejects reused signature 
 passed Contract ERC20PresetFixedSupply burning decrements totalSupply 
 passed Contract ERC20PresetFixedSupply burning holders can burn their tokens 
 passed Contract ERC20PresetFixedSupply deployer has the balance equal to initial supply 
 passed Contract ERC20PresetFixedSupply total supply is equal to initial supply 
-passed Contract ERC20PresetMinterPauser burning holders can burn their tokens 
-passed Contract ERC20PresetMinterPauser deployer has the default admin role 
-passed Contract ERC20PresetMinterPauser deployer has the minter role 
-passed Contract ERC20PresetMinterPauser deployer has the pauser role 
-passed Contract ERC20PresetMinterPauser minter and pauser role admin is the default admin 
-passed Contract ERC20PresetMinterPauser minting deployer can mint tokens 
-passed Contract ERC20PresetMinterPauser minting other accounts cannot mint tokens 
-passed Contract ERC20PresetMinterPauser pausing cannot mint while paused 
-passed Contract ERC20PresetMinterPauser pausing deployer can pause 
-passed Contract ERC20PresetMinterPauser pausing deployer can unpause 
-passed Contract ERC20PresetMinterPauser pausing other accounts cannot pause 
-passed Contract ERC20PresetMinterPauser pausing other accounts cannot unpause 
 passed Contract ERC20 recover nothing to recover 
 passed Contract ERC20 recover something to recover 
 passed Contract ERC20 set decimals can set decimals during construction 
@@ -417,6 +483,7 @@ passed Contract ERC20 transfer when the recipient is not the zero address when t
 passed Contract ERC20 transfer when the recipient is the zero address reverts 
 passed Contract ERC20 transfer when the recipient is the zero address reverts 
 passed Contract ERC20 transfer when the sender is the zero address reverts 
+skipped Contract ERC20Votes change delegation call 
 skipped Contract ERC20VotesComp change delegation call 
 skipped Contract ERC20VotesComp Compound test suite balanceOf grants to initial account 
 skipped Contract ERC20VotesComp Compound test suite getPriorVotes generally returns the voting balance at the appropriate checkpoint 
@@ -434,6 +501,14 @@ skipped Contract ERC20VotesComp getPastTotalSupply returns zero if first checkpo
 skipped Contract ERC20VotesComp getPastTotalSupply reverts if block number current block 
 skipped Contract ERC20VotesComp initial nonce is 0 
 skipped Contract ERC20VotesComp minting restriction 
+skipped Contract ERC20Votes Compound test suite balanceOf grants to initial account 
+skipped Contract ERC20Votes Compound test suite getPastVotes generally returns the voting balance at the appropriate checkpoint 
+skipped Contract ERC20Votes Compound test suite getPastVotes returns 0 if there are no checkpoints 
+skipped Contract ERC20Votes Compound test suite getPastVotes returns the latest block if last checkpoint block 
+skipped Contract ERC20Votes Compound test suite getPastVotes returns zero if first checkpoint block 
+skipped Contract ERC20Votes Compound test suite getPastVotes reverts if block number current block 
+skipped Contract ERC20Votes Compound test suite numCheckpoints does not add more than one checkpoint in a block 
+skipped Contract ERC20Votes Compound test suite numCheckpoints returns the number of checkpoints for a delegate 
 skipped Contract ERC20VotesComp set delegation call delegation with balance 
 skipped Contract ERC20VotesComp set delegation call delegation without balance 
 skipped Contract ERC20VotesComp set delegation with signature accept signed delegation 
@@ -445,6 +520,25 @@ skipped Contract ERC20VotesComp transfers full delegation
 skipped Contract ERC20VotesComp transfers no delegation 
 skipped Contract ERC20VotesComp transfers receiver delegation 
 skipped Contract ERC20VotesComp transfers sender delegation 
+skipped Contract ERC20Votes domain separator 
+skipped Contract ERC20Votes getPastTotalSupply generally returns the voting balance at the appropriate checkpoint 
+skipped Contract ERC20Votes getPastTotalSupply returns 0 if there are no checkpoints 
+skipped Contract ERC20Votes getPastTotalSupply returns the latest block if last checkpoint block 
+skipped Contract ERC20Votes getPastTotalSupply returns zero if first checkpoint block 
+skipped Contract ERC20Votes getPastTotalSupply reverts if block number current block 
+skipped Contract ERC20Votes initial nonce is 0 
+skipped Contract ERC20Votes minting restriction 
+skipped Contract ERC20Votes set delegation call delegation with balance 
+skipped Contract ERC20Votes set delegation call delegation without balance 
+skipped Contract ERC20Votes set delegation with signature accept signed delegation 
+skipped Contract ERC20Votes set delegation with signature rejects bad delegatee 
+skipped Contract ERC20Votes set delegation with signature rejects bad nonce 
+skipped Contract ERC20Votes set delegation with signature rejects expired permit 
+skipped Contract ERC20Votes set delegation with signature rejects reused signature 
+skipped Contract ERC20Votes transfers full delegation 
+skipped Contract ERC20Votes transfers no delegation 
+skipped Contract ERC20Votes transfers receiver delegation 
+skipped Contract ERC20Votes transfers sender delegation 
 passed Contract ERC20 withdraw entire balance 
 passed Contract ERC20 withdraw missing balance 
 passed Contract ERC20 withdraw to other account 
@@ -456,21 +550,48 @@ passed Contract ERC2771Context when called directly msgSender returns the transa
 passed Contract ERC2771Context when called directly msgSender returns the transaction sender when from another contract 
 passed Contract ERC2771Context when receiving a relayed call msgData returns the relayed transaction original data 
 passed Contract ERC2771Context when receiving a relayed call msgSender returns the relayed transaction original sender 
+passed Contract ERC721Enumerable Contract interface ERC165 ERC165 s supportsInterface bytes4 claims support skip on coverage 
+passed Contract ERC721Enumerable Contract interface ERC165 ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
+passed Contract ERC721Enumerable Contract interface ERC165 supportsInterface bytes4 has to be implemented 
+broken Contract ERC721Enumerable Contract interface ERC721 ERC165 s supportsInterface bytes4 claims support skip on coverage 
+passed Contract ERC721Enumerable Contract interface ERC721 ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
+passed Contract ERC721Pausable when token is paused balanceOf returns the amount of tokens owned by the given address 
+passed Contract ERC721Pausable when token is paused exists returns token existence 
+passed Contract ERC721Pausable when token is paused getApproved returns approved address 
+passed Contract ERC721Pausable when token is paused isApprovedForAll returns the approval of the operator 
+passed Contract ERC721Pausable when token is paused ownerOf returns the amount of tokens owned by the given address 
+passed Contract ERC721Pausable when token is paused reverts when trying to burn 
+passed Contract ERC721Pausable when token is paused reverts when trying to mint 
+passed Contract ERC721Pausable when token is paused reverts when trying to safeTransferFrom 
+passed Contract ERC721Pausable when token is paused reverts when trying to safeTransferFrom with data 
+passed Contract ERC721Pausable when token is paused reverts when trying to transferFrom 
+passed Contract ERC721PresetMinterPauserAutoId Contract interface ERC721 approve address uint256 has to be implemented 
+passed Contract ERC721PresetMinterPauserAutoId Contract interface ERC721 balanceOf address has to be implemented 
+broken Contract ERC721PresetMinterPauserAutoId Contract interface ERC721Enumerable ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
+passed Contract ERC721PresetMinterPauserAutoId Contract interface ERC721 ERC165 s supportsInterface bytes4 claims support skip on coverage 
+passed Contract ERC721PresetMinterPauserAutoId Contract interface ERC721 ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
+passed Contract ERC721PresetMinterPauserAutoId Contract interface ERC721 getApproved uint256 has to be implemented 
+passed Contract ERC721PresetMinterPauserAutoId Contract interface ERC721 isApprovedForAll address address has to be implemented 
+passed Contract ERC721PresetMinterPauserAutoId Contract interface ERC721 ownerOf uint256 has to be implemented 
+passed Contract ERC721PresetMinterPauserAutoId Contract interface ERC721 safeTransferFrom address address uint256 bytes has to be implemented 
+passed Contract ERC721PresetMinterPauserAutoId Contract interface ERC721 safeTransferFrom address address uint256 has to be implemented 
+passed Contract ERC721PresetMinterPauserAutoId Contract interface ERC721 setApprovalForAll address bool has to be implemented 
+passed Contract ERC721PresetMinterPauserAutoId Contract interface ERC721 transferFrom address address uint256 has to be implemented 
+passed Contract ERC721PresetMinterPauserAutoId deployer has the default admin role 
+passed Contract ERC721PresetMinterPauserAutoId deployer has the minter role 
+passed Contract ERC721PresetMinterPauserAutoId minter role admin is the default admin 
+passed Contract ERC721PresetMinterPauserAutoId token has correct name 
+passed Contract ERC721PresetMinterPauserAutoId token has correct symbol 
+broken Contract ERC777PresetFixedSupply returns the name 
+broken Contract ERC777 relative order of hooks send 
+broken Contract ERC777 with default operators does not emit AuthorizedOperator events for default operators 
+broken Contract ERC777 with no default operators default operators list is empty 
+broken Contract Escrow as an escrow deposits can track deposits to multiple accounts 
 failed Contract Escrow as an escrow deposits can accept a single deposit 
 failed Contract Escrow as an escrow deposits can add multiple deposits on a single account 
-failed Contract Escrow as an escrow deposits can track deposits to multiple accounts 
 passed Contract Escrow as an escrow deposits can accept an empty deposit 
 passed Contract Escrow as an escrow deposits emits a deposited event 
 passed Contract Escrow as an escrow deposits only the owner can deposit 
-failed Contract Escrow as an escrow withdrawals can withdraw payments 
-passed Contract Escrow as an escrow withdrawals can do an empty withdrawal 
-passed Contract Escrow as an escrow withdrawals emits a withdrawn event 
-passed Contract Escrow as an escrow withdrawals only the owner can withdraw 
-passed Contract Governor Cancel After deadline run 
-passed Contract Governor Cancel After execution run 
-passed Contract Governor Cancel After proposal run 
-passed Contract Governor Cancel After vote run 
-passed Contract Governor Cancel Before proposal run 
 skipped Contract GovernorCompatibilityBravo deployment check 
 broken Contract GovernorCompatibilityBravo nominal run 
 skipped Contract GovernorComp deployment check 
@@ -498,40 +619,21 @@ passed Contract Governor Contract interface Governor version has to be implement
 passed Contract Governor Contract interface Governor votingDelay has to be implemented 
 passed Contract Governor Contract interface Governor votingPeriod has to be implemented 
 skipped Contract Governor deployment check 
-skipped Contract Governor Proposal length empty 
-skipped Contract Governor Proposal length missmatch 1 
-skipped Contract Governor Proposal length missmatch 2 
-skipped Contract Governor Proposal length missmatch 3 
-passed Contract Governor scenario double cast run 
-passed Contract Governor scenario duplicate executed proposal run 
+broken Contract Governor scenario double cast run 
+broken Contract Governor scenario duplicate executed proposal run 
 passed Contract Governor scenario duplicate pending proposal run 
-passed Contract Governor scenario Invalid vote type run 
+broken Contract Governor scenario Invalid vote type run 
 passed Contract Governor scenario missing proposal run 
 broken Contract Governor scenario nominal after each hook for run 
 failed Contract Governor scenario nominal run 
-passed Contract Governor scenario quorum not reached run 
+broken Contract Governor scenario quorum not reached run 
 passed Contract Governor scenario receiver revert without reason run 
-passed Contract Governor scenario receiver revert with reason run 
-passed Contract Governor scenario score not reached run 
+broken Contract Governor scenario receiver revert with reason run 
+broken Contract Governor scenario score not reached run 
 broken Contract Governor scenario send ethers after each hook for run 
 failed Contract Governor scenario send ethers run 
-passed Contract Governor scenario vote not over run 
 passed Contract Governor scenario vote with signature run 
-passed Contract Governor Settings update setProposalThreshold run 
-passed Contract Governor Settings update setVotingDelay run 
-passed Contract Governor Settings update setVotingPeriod run 
-passed Contract Governor Settings update setVotingPeriod to 0 run 
-skipped Contract Governor Settings update update protected setProposalThreshold 
-skipped Contract Governor Settings update update protected setVotingDelay 
-skipped Contract Governor Settings update update protected setVotingPeriod 
-passed Contract Governor state Defeated run 
-passed Contract Governor state Executed run 
-failed Contract Governor state Pending Active after each hook for run 
-passed Contract Governor state Pending Active run 
-passed Contract Governor state Succeeded run 
-passed Contract Governor state Unset run 
-passed Contract GovernorTimelockCompound cancel after queue prevents executing run 
-passed Contract GovernorTimelockCompound cancel before queue prevents scheduling run 
+broken Contract GovernorTimelockCompound cancel before queue prevents scheduling run 
 passed Contract GovernorTimelockCompound Contract interface ERC165 ERC165 s supportsInterface bytes4 claims support skip on coverage 
 passed Contract GovernorTimelockCompound Contract interface ERC165 ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
 passed Contract GovernorTimelockCompound Contract interface ERC165 supportsInterface bytes4 has to be implemented 
@@ -567,16 +669,10 @@ passed Contract GovernorTimelockCompound not queued run
 skipped Contract GovernorTimelockCompound post deployment check 
 failed Contract GovernorTimelockCompound re queue re execute after each hook for run 
 broken Contract GovernorTimelockCompound re queue re execute run 
-passed Contract GovernorTimelockCompound to early run 
+failed Contract GovernorTimelockCompound to early after each hook for run 
+broken Contract GovernorTimelockCompound to early run 
 failed Contract GovernorTimelockCompound to late after each hook for run 
-failed Contract GovernorTimelockCompound to late run 
-broken Contract GovernorTimelockCompound transfer timelock to new governor using workflow after each hook for run 
-broken Contract GovernorTimelockCompound transfer timelock to new governor using workflow run 
-skipped Contract GovernorTimelockCompound updateTimelock protected 
-broken Contract GovernorTimelockCompound updateTimelock using workflow after each hook for run 
-broken Contract GovernorTimelockCompound updateTimelock using workflow run 
-passed Contract GovernorTimelockControl cancel after queue prevents execution run 
-passed Contract GovernorTimelockControl cancel before queue prevents scheduling run 
+broken Contract GovernorTimelockCompound to late run 
 passed Contract GovernorTimelockControl Contract interface ERC165 ERC165 s supportsInterface bytes4 claims support skip on coverage 
 passed Contract GovernorTimelockControl Contract interface ERC165 ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
 passed Contract GovernorTimelockControl Contract interface ERC165 supportsInterface bytes4 has to be implemented 
@@ -606,21 +702,18 @@ passed Contract GovernorTimelockControl Contract interface Governor votingDelay 
 passed Contract GovernorTimelockControl Contract interface Governor votingPeriod has to be implemented 
 skipped Contract GovernorTimelockControl doesn t accept ether transfers 
 broken Contract GovernorTimelockControl executed by other proposer after each hook for run 
-passed Contract GovernorTimelockControl executed by other proposer run 
+broken Contract GovernorTimelockControl executed by other proposer run 
 broken Contract GovernorTimelockControl nominal after each hook for run 
 broken Contract GovernorTimelockControl nominal run 
 passed Contract GovernorTimelockControl not queued run 
 skipped Contract GovernorTimelockControl post deployment check 
-failed Contract GovernorTimelockControl re queue re execute after each hook for run 
 broken Contract GovernorTimelockControl re queue re execute run 
 passed Contract GovernorTimelockControl to early run 
-skipped Contract GovernorTimelockControl updateTimelock protected 
-broken Contract GovernorTimelockControl updateTimelock using workflow after each hook for run 
-broken Contract GovernorTimelockControl updateTimelock using workflow run 
 skipped Contract GovernorVotesQuorumFraction deployment check 
 passed Contract GovernorVotesQuorumFraction quroum not reached run 
 passed Contract GovernorVotesQuorumFraction update quorum over the maximum run 
-passed Contract GovernorVotesQuorumFraction update quorum ratio through proposal run 
+broken Contract GovernorVotesQuorumFraction update quorum ratio through proposal after each hook for run 
+broken Contract GovernorVotesQuorumFraction update quorum ratio through proposal run 
 passed Contract Initializable basic testing without inheritance after initialize initializer does not run again 
 passed Contract Initializable basic testing without inheritance after initialize initializer has run 
 passed Contract Initializable basic testing without inheritance after nested initialize initializer has run 
@@ -630,18 +723,6 @@ passed Contract Initializable complex testing with inheritance initializes fathe
 passed Contract Initializable complex testing with inheritance initializes gramps 
 passed Contract Initializable complex testing with inheritance initializes human 
 passed Contract Initializable complex testing with inheritance initializes mother 
-passed Contract Math average is correctly calculated with one even and one odd number 
-passed Contract Math average is correctly calculated with two even numbers 
-passed Contract Math average is correctly calculated with two max uint256 numbers 
-passed Contract Math average is correctly calculated with two odd numbers 
-passed Contract Math ceilDiv correctly computes max uint256 divided by 1 
-passed Contract Math ceilDiv does not overflow 
-passed Contract Math ceilDiv does not round up on exact division 
-passed Contract Math ceilDiv rounds up on division with remainders 
-passed Contract Math max is correctly detected in first argument position 
-passed Contract Math max is correctly detected in second argument position 
-passed Contract Math min is correctly detected in first argument position 
-passed Contract Math min is correctly detected in second argument position 
 passed Contract MerkleProof verify returns false for a Merkle proof of invalid length 
 passed Contract MerkleProof verify returns false for an invalid Merkle proof 
 passed Contract MerkleProof verify returns true for a valid Merkle proof 
@@ -659,10 +740,6 @@ passed Contract MinimalForwarder with message verify invalid signature tampered 
 passed Contract MinimalForwarder with message verify invalid signature tampered to 
 passed Contract MinimalForwarder with message verify invalid signature tampered value 
 passed Contract MinimalForwarder with message verify valid signature success 
-passed Contract MulticallToken batches function calls 
-passed Contract MulticallToken bubbles up revert reasons 
-passed Contract MulticallToken returns an array with the result of each call 
-passed Contract MulticallToken reverts previous calls 
 passed Contract Ownable has an owner 
 passed Contract Ownable renounce ownership loses owner after renouncement 
 passed Contract Ownable renounce ownership prevents non owners from renouncement 
@@ -680,29 +757,11 @@ passed Contract Pausable when unpaused when paused unpausing when unpaused emits
 passed Contract Pausable when unpaused when paused unpausing when unpaused reverts when re unpausing 
 passed Contract Pausable when unpaused when paused unpausing when unpaused should prevent drastic measure 
 passed Contract Pausable when unpaused when paused unpausing when unpaused should resume allowing normal process 
-failed Contract PaymentSplitter once deployed accepts payments Ether 
-passed Contract PaymentSplitter once deployed accepts payments Token 
-failed Contract PaymentSplitter once deployed distributes funds to payees Ether 
-passed Contract PaymentSplitter once deployed distributes funds to payees Token 
-passed Contract PaymentSplitter once deployed has payees 
-passed Contract PaymentSplitter once deployed has total shares 
-failed Contract PaymentSplitter once deployed release Ether reverts if no funds to claim 
-passed Contract PaymentSplitter once deployed release Ether reverts if non payee want to claim 
-passed Contract PaymentSplitter once deployed release Token reverts if no funds to claim 
-passed Contract PaymentSplitter once deployed release Token reverts if non payee want to claim 
-passed Contract PaymentSplitter once deployed shares does not store shares if address is not payee 
-passed Contract PaymentSplitter once deployed shares stores shares if address is payee 
-passed Contract PaymentSplitter rejects an empty set of payees 
-passed Contract PaymentSplitter rejects more payees than shares 
-passed Contract PaymentSplitter rejects more shares than payees 
-passed Contract PaymentSplitter rejects null payees 
-passed Contract PaymentSplitter rejects repeated payees 
-passed Contract PaymentSplitter rejects zero valued shares 
 passed Contract ProxyAdmin changeProxyAdmin changes proxy admin 
 passed Contract ProxyAdmin changeProxyAdmin fails to change proxy admin if its not the proxy owner 
-passed Contract ProxyAdmin getProxyAdmin call to invalid proxy 
+failed Contract ProxyAdmin getProxyAdmin call to invalid proxy 
 passed Contract ProxyAdmin getProxyAdmin returns proxyAdmin as admin of the proxy 
-passed Contract ProxyAdmin getProxyImplementation call to invalid proxy 
+failed Contract ProxyAdmin getProxyImplementation call to invalid proxy 
 passed Contract ProxyAdmin getProxyImplementation returns proxy implementation address 
 passed Contract ProxyAdmin has an owner 
 passed Contract ProxyAdmin upgradeAndCall with authorized account with invalid callData fails to upgrade 
@@ -711,112 +770,15 @@ passed Contract ProxyAdmin upgradeAndCall with unauthorized account fails to upg
 passed Contract ProxyAdmin upgrade with authorized account upgrades implementation 
 passed Contract ProxyAdmin upgrade with unauthorized account fails to upgrade 
 broken Contract PullPayment payments can record an async payment correctly 
+broken Contract PullPayment Uncaught error outside test suite 
 passed Contract ReentrancyGuard does not allow indirect local recursion 
 passed Contract ReentrancyGuard does not allow local recursion 
 passed Contract ReentrancyGuard does not allow remote callback 
 passed Contract ReentrancyGuard nonReentrant function can be called 
-passed Contract RefundEscrow once deployed active state accepts deposits 
-passed Contract RefundEscrow once deployed active state does not allow beneficiary withdrawal 
-passed Contract RefundEscrow once deployed active state does not refund refundees 
-passed Contract RefundEscrow once deployed active state has beneficiary and state 
-broken Contract RefundEscrow once deployed closed state rejects deposits 
-passed Contract RefundEscrow once deployed only the owner can enter closed state 
-passed Contract RefundEscrow once deployed only the owner can enter refund state 
-broken Contract RefundEscrow once deployed refund state rejects deposits 
-passed Contract RefundEscrow requires a non null beneficiary 
-passed Contract SafeCast toInt128 downcasts 0 
-passed Contract SafeCast toInt128 downcasts 1 
-passed Contract SafeCast toInt128 downcasts 1 
-passed Contract SafeCast toInt128 downcasts 2 127 1 170141183460469231731687303715884105727 
-passed Contract SafeCast toInt128 downcasts 2 127 170141183460469231731687303715884105728 
-passed Contract SafeCast toInt128 reverts when downcasting 2 127 1 170141183460469231731687303715884105729 
-passed Contract SafeCast toInt128 reverts when downcasting 2 127 1 170141183460469231731687303715884105729 
-passed Contract SafeCast toInt128 reverts when downcasting 2 127 170141183460469231731687303715884105728 
-passed Contract SafeCast toInt128 reverts when downcasting 2 127 2 170141183460469231731687303715884105730 
-passed Contract SafeCast toInt16 downcasts 0 
-passed Contract SafeCast toInt16 downcasts 1 
-passed Contract SafeCast toInt16 downcasts 1 
-passed Contract SafeCast toInt16 downcasts 2 15 1 32767 
-passed Contract SafeCast toInt16 downcasts 2 15 32768 
-passed Contract SafeCast toInt16 reverts when downcasting 2 15 1 32769 
-passed Contract SafeCast toInt16 reverts when downcasting 2 15 1 32769 
-passed Contract SafeCast toInt16 reverts when downcasting 2 15 2 32770 
-passed Contract SafeCast toInt16 reverts when downcasting 2 15 32768 
-passed Contract SafeCast toInt256 casts 0 
-passed Contract SafeCast toInt256 casts 1 
-passed Contract SafeCast toInt256 casts INT256 MAX 57896044618658097711785492504343953926634992332820282019728792003956564819967 
-passed Contract SafeCast toInt256 reverts when casting INT256 MAX 1 57896044618658097711785492504343953926634992332820282019728792003956564819968 
-passed Contract SafeCast toInt256 reverts when casting UINT256 MAX 115792089237316195423570985008687907853269984665640564039457584007913129639935 
-passed Contract SafeCast toInt32 downcasts 0 
-passed Contract SafeCast toInt32 downcasts 1 
-passed Contract SafeCast toInt32 downcasts 1 
-passed Contract SafeCast toInt32 downcasts 2 31 1 2147483647 
-passed Contract SafeCast toInt32 downcasts 2 31 2147483648 
-passed Contract SafeCast toInt32 reverts when downcasting 2 31 1 2147483649 
-passed Contract SafeCast toInt32 reverts when downcasting 2 31 1 2147483649 
-passed Contract SafeCast toInt32 reverts when downcasting 2 31 2147483648 
-passed Contract SafeCast toInt32 reverts when downcasting 2 31 2 2147483650 
-passed Contract SafeCast toInt64 downcasts 0 
-passed Contract SafeCast toInt64 downcasts 1 
-passed Contract SafeCast toInt64 downcasts 1 
-passed Contract SafeCast toInt64 downcasts 2 63 1 9223372036854775807 
-passed Contract SafeCast toInt64 downcasts 2 63 9223372036854775808 
-passed Contract SafeCast toInt64 reverts when downcasting 2 63 1 9223372036854775809 
-passed Contract SafeCast toInt64 reverts when downcasting 2 63 1 9223372036854775809 
-passed Contract SafeCast toInt64 reverts when downcasting 2 63 2 9223372036854775810 
-passed Contract SafeCast toInt64 reverts when downcasting 2 63 9223372036854775808 
-passed Contract SafeCast toInt8 downcasts 0 
-passed Contract SafeCast toInt8 downcasts 1 
-passed Contract SafeCast toInt8 downcasts 1 
-passed Contract SafeCast toInt8 downcasts 2 7 1 127 
-passed Contract SafeCast toInt8 downcasts 2 7 128 
-passed Contract SafeCast toInt8 reverts when downcasting 2 7 1 129 
-passed Contract SafeCast toInt8 reverts when downcasting 2 7 1 129 
-passed Contract SafeCast toInt8 reverts when downcasting 2 7 128 
-passed Contract SafeCast toInt8 reverts when downcasting 2 7 2 130 
-passed Contract SafeCast toUint128 downcasts 0 
-passed Contract SafeCast toUint128 downcasts 1 
-passed Contract SafeCast toUint128 downcasts 2 128 1 340282366920938463463374607431768211455 
-passed Contract SafeCast toUint128 reverts when downcasting 2 128 1 340282366920938463463374607431768211457 
-passed Contract SafeCast toUint128 reverts when downcasting 2 128 340282366920938463463374607431768211456 
-passed Contract SafeCast toUint16 downcasts 0 
-passed Contract SafeCast toUint16 downcasts 1 
-passed Contract SafeCast toUint16 downcasts 2 16 1 65535 
-passed Contract SafeCast toUint16 reverts when downcasting 2 16 1 65537 
-passed Contract SafeCast toUint16 reverts when downcasting 2 16 65536 
-passed Contract SafeCast toUint224 downcasts 0 
-passed Contract SafeCast toUint224 downcasts 1 
-passed Contract SafeCast toUint224 downcasts 2 224 1 26959946667150639794667015087019630673637144422540572481103610249215 
-passed Contract SafeCast toUint224 reverts when downcasting 2 224 1 26959946667150639794667015087019630673637144422540572481103610249217 
-passed Contract SafeCast toUint224 reverts when downcasting 2 224 26959946667150639794667015087019630673637144422540572481103610249216 
-passed Contract SafeCast toUint256 casts 0 
-passed Contract SafeCast toUint256 casts 1 
-passed Contract SafeCast toUint256 casts INT256 MAX 57896044618658097711785492504343953926634992332820282019728792003956564819967 
-passed Contract SafeCast toUint256 reverts when casting 1 
-passed Contract SafeCast toUint256 reverts when casting INT256 MIN 57896044618658097711785492504343953926634992332820282019728792003956564819968 
-passed Contract SafeCast toUint32 downcasts 0 
-passed Contract SafeCast toUint32 downcasts 1 
-passed Contract SafeCast toUint32 downcasts 2 32 1 4294967295 
-passed Contract SafeCast toUint32 reverts when downcasting 2 32 1 4294967297 
-passed Contract SafeCast toUint32 reverts when downcasting 2 32 4294967296 
-passed Contract SafeCast toUint64 downcasts 0 
-passed Contract SafeCast toUint64 downcasts 1 
-passed Contract SafeCast toUint64 downcasts 2 64 1 18446744073709551615 
-passed Contract SafeCast toUint64 reverts when downcasting 2 64 1 18446744073709551617 
-passed Contract SafeCast toUint64 reverts when downcasting 2 64 18446744073709551616 
-passed Contract SafeCast toUint8 downcasts 0 
-passed Contract SafeCast toUint8 downcasts 1 
-passed Contract SafeCast toUint8 downcasts 2 8 1 255 
-passed Contract SafeCast toUint8 reverts when downcasting 2 8 1 257 
-passed Contract SafeCast toUint8 reverts when downcasting 2 8 256 
-passed Contract SafeCast toUint96 downcasts 0 
-passed Contract SafeCast toUint96 downcasts 1 
-passed Contract SafeCast toUint96 downcasts 2 96 1 79228162514264337593543950335 
-passed Contract SafeCast toUint96 reverts when downcasting 2 96 1 79228162514264337593543950337 
-passed Contract SafeCast toUint96 reverts when downcasting 2 96 79228162514264337593543950336 
+broken Contract SafeCast toUint8 downcasts 0 
+failed Contract SafeERC20 with address that has no contract code reverts on decreaseAllowance 
+failed Contract SafeERC20 with address that has no contract code reverts on increaseAllowance 
 passed Contract SafeERC20 with address that has no contract code reverts on approve 
-passed Contract SafeERC20 with address that has no contract code reverts on decreaseAllowance 
-passed Contract SafeERC20 with address that has no contract code reverts on increaseAllowance 
 passed Contract SafeERC20 with address that has no contract code reverts on transfer 
 passed Contract SafeERC20 with address that has no contract code reverts on transferFrom 
 passed Contract SafeERC20 with token that returns false on all calls reverts on approve 
@@ -824,22 +786,10 @@ passed Contract SafeERC20 with token that returns false on all calls reverts on 
 passed Contract SafeERC20 with token that returns false on all calls reverts on increaseAllowance 
 passed Contract SafeERC20 with token that returns false on all calls reverts on transfer 
 passed Contract SafeERC20 with token that returns false on all calls reverts on transferFrom 
-passed Contract SafeERC20 with token that returns no boolean values approvals with non zero allowance doesn t revert when approving a zero
-passed Contract SafeERC20 with token that returns no boolean values approvals with non zero allowance doesn t revert when decreasing the allowance
-passed Contract SafeERC20 with token that returns no boolean values approvals with non zero allowance doesn t revert when increasing the allowance
-passed Contract SafeERC20 with token that returns no boolean values approvals with non zero allowance reverts when approving a non zero allowance
-passed Contract SafeERC20 with token that returns no boolean values approvals with non zero allowance reverts when decreasing the allowance to a
-passed Contract SafeERC20 with token that returns no boolean values approvals with zero allowance doesn t revert when approving a non zero
-passed Contract SafeERC20 with token that returns no boolean values approvals with zero allowance doesn t revert when approving a zero allowance
-passed Contract SafeERC20 with token that returns no boolean values approvals with zero allowance doesn t revert when increasing the allowance 
-passed Contract SafeERC20 with token that returns no boolean values approvals with zero allowance reverts when decreasing the allowance 
-passed Contract SafeERC20 with token that returns no boolean values doesn t revert on transfer 
-passed Contract SafeERC20 with token that returns no boolean values doesn t revert on transferFrom 
-passed Contract SafeERC20 with token that returns true on all calls approvals with non zero allowance doesn t revert when approving a
-passed Contract SafeERC20 with token that returns true on all calls approvals with non zero allowance doesn t revert when decreasing the
-passed Contract SafeERC20 with token that returns true on all calls approvals with non zero allowance doesn t revert when increasing the
+broken Contract SafeERC20 with token that returns no boolean values doesn t revert on transfer 
+broken Contract SafeERC20 with token that returns true on all calls approvals with non zero allowance doesn t revert when approving a
+broken Contract SafeERC20 with token that returns true on all calls approvals with non zero allowance doesn t revert when increasing the
 passed Contract SafeERC20 with token that returns true on all calls approvals with non zero allowance reverts when approving a non zero
-passed Contract SafeERC20 with token that returns true on all calls approvals with non zero allowance reverts when decreasing the allowance to
 passed Contract SafeERC20 with token that returns true on all calls approvals with zero allowance doesn t revert when approving a non
 passed Contract SafeERC20 with token that returns true on all calls approvals with zero allowance doesn t revert when approving a zero
 passed Contract SafeERC20 with token that returns true on all calls approvals with zero allowance doesn t revert when increasing the allowance
@@ -862,21 +812,21 @@ passed Contract SafeMath with custom revert message mod modulos correctly when t
 passed Contract SafeMath with custom revert message mod reverts with a 0 divisor 
 passed Contract SafeMath with custom revert message sub reverts if subtraction result would be negative 
 passed Contract SafeMath with custom revert message sub subtracts correctly 
+failed Contract SafeMath with default revert message add reverts on addition overflow 
 passed Contract SafeMath with default revert message add adds correctly 
-passed Contract SafeMath with default revert message add reverts on addition overflow 
+failed Contract SafeMath with default revert message div reverts on division by zero 
 passed Contract SafeMath with default revert message div divides correctly 
 passed Contract SafeMath with default revert message div divides zero correctly 
 passed Contract SafeMath with default revert message div returns complete number result on non even division 
-passed Contract SafeMath with default revert message div reverts on division by zero 
+failed Contract SafeMath with default revert message mod reverts with a 0 divisor 
 passed Contract SafeMath with default revert message mod modulos correctly when the dividend is a multiple of the divisor 
 passed Contract SafeMath with default revert message mod modulos correctly when the dividend is equal to the divisor 
 passed Contract SafeMath with default revert message mod modulos correctly when the dividend is larger than the divisor 
 passed Contract SafeMath with default revert message mod modulos correctly when the dividend is smaller than the divisor 
-passed Contract SafeMath with default revert message mod reverts with a 0 divisor 
+failed Contract SafeMath with default revert message mul reverts on multiplication overflow 
 passed Contract SafeMath with default revert message mul multiplies by zero correctly 
 passed Contract SafeMath with default revert message mul multiplies correctly 
-passed Contract SafeMath with default revert message mul reverts on multiplication overflow 
-passed Contract SafeMath with default revert message sub reverts if subtraction result would be negative 
+failed Contract SafeMath with default revert message sub reverts if subtraction result would be negative 
 passed Contract SafeMath with default revert message sub subtracts correctly 
 passed Contract SafeMath with flag add adds correctly 
 passed Contract SafeMath with flag add reverts on addition overflow 
@@ -902,19 +852,19 @@ passed Contract SignatureChecker ERC1271 ERC1271 wallet with invalid signer
 passed Contract SignatureChecker ERC1271 ERC1271 wallet with matching signer and signature 
 passed Contract SignedSafeMath add adds correctly if it does not overflow and the result is negative 
 passed Contract SignedSafeMath add adds correctly if it does not overflow and the result is positive 
-passed Contract SignedSafeMath add reverts on negative addition overflow 
-passed Contract SignedSafeMath add reverts on positive addition overflow 
+failed Contract SignedSafeMath add reverts on negative addition overflow 
+failed Contract SignedSafeMath add reverts on positive addition overflow 
 passed Contract SignedSafeMath div divides correctly 
 passed Contract SignedSafeMath div divides zero correctly 
 passed Contract SignedSafeMath div returns complete number result on non even division 
-passed Contract SignedSafeMath div reverts on division by zero 
-passed Contract SignedSafeMath div reverts on overflow negative second 
+failed Contract SignedSafeMath div reverts on division by zero 
+failed Contract SignedSafeMath div reverts on overflow negative second 
 passed Contract SignedSafeMath mul multiplies by zero correctly 
 passed Contract SignedSafeMath mul multiplies correctly 
-passed Contract SignedSafeMath mul reverts on multiplication overflow positive operands 
-passed Contract SignedSafeMath mul reverts when minimum integer is multiplied by 1 
-passed Contract SignedSafeMath sub reverts on negative subtraction overflow 
-passed Contract SignedSafeMath sub reverts on positive subtraction overflow 
+failed Contract SignedSafeMath mul reverts on multiplication overflow positive operands 
+failed Contract SignedSafeMath mul reverts when minimum integer is multiplied by 1 
+failed Contract SignedSafeMath sub reverts on negative subtraction overflow 
+failed Contract SignedSafeMath sub reverts on positive subtraction overflow 
 passed Contract SignedSafeMath sub subtracts correctly if it does not overflow and the result is negative 
 passed Contract SignedSafeMath sub subtracts correctly if it does not overflow and the result is positive 
 passed Contract StorageSlot address storage slot get from other slot 
@@ -996,7 +946,7 @@ passed Contract TokenTimelock with token once deployed cannot be released before
 passed Contract TokenTimelock with token once deployed cannot be released just before time limit 
 passed Contract TokenTimelock with token rejects a release time in the past 
 passed Contract TransparentUpgradeableProxy cannot be initialized with a non contract address 
-passed Contract TransparentUpgradeableProxy changeAdmin when the new proposed admin is not the zero address when the sender is not the admin reverts
+failed Contract TransparentUpgradeableProxy changeAdmin when the new proposed admin is not the zero address when the sender is not the admin reverts
 passed Contract TransparentUpgradeableProxy changeAdmin when the new proposed admin is not the zero address when the sender is the admin assigns new
 passed Contract TransparentUpgradeableProxy changeAdmin when the new proposed admin is not the zero address when the sender is the admin emits an
 passed Contract TransparentUpgradeableProxy changeAdmin when the new proposed admin is the zero address reverts 
@@ -1026,28 +976,28 @@ passed Contract TransparentUpgradeableProxy initialization with parameters rever
 passed Contract TransparentUpgradeableProxy regression should add fallback function 
 passed Contract TransparentUpgradeableProxy regression should add new function 
 passed Contract TransparentUpgradeableProxy regression should change function signature 
-passed Contract TransparentUpgradeableProxy regression should remove fallback function 
-passed Contract TransparentUpgradeableProxy regression should remove function 
+failed Contract TransparentUpgradeableProxy regression should remove fallback function 
+failed Contract TransparentUpgradeableProxy regression should remove function 
 passed Contract TransparentUpgradeableProxy storage should store the admin proxy in specified location 
 passed Contract TransparentUpgradeableProxy storage should store the implementation address in specified location 
 passed Contract TransparentUpgradeableProxy transparent proxy proxy admin cannot call delegated functions 
 passed Contract TransparentUpgradeableProxy transparent proxy when function names clash when sender is other should delegate to implementation 
 passed Contract TransparentUpgradeableProxy transparent proxy when function names clash when sender is proxy admin should run the proxy function 
+failed Contract TransparentUpgradeableProxy upgradeToAndCall with migrations when the sender is not the admin reverts 
 failed Contract TransparentUpgradeableProxy upgradeToAndCall with migrations when the sender is the admin when upgrading to V1 calls the initialize function and sends
 failed Contract TransparentUpgradeableProxy upgradeToAndCall with migrations when the sender is the admin when upgrading to V1 when upgrading to V2 calls the
 failed Contract TransparentUpgradeableProxy upgradeToAndCall with migrations when the sender is the admin when upgrading to V1 when upgrading to V2 when upgrading
-passed Contract TransparentUpgradeableProxy upgradeToAndCall with migrations when the sender is not the admin reverts 
 passed Contract TransparentUpgradeableProxy upgradeToAndCall with migrations when the sender is the admin when upgrading to V1 upgrades to the requested version and
 passed Contract TransparentUpgradeableProxy upgradeToAndCall with migrations when the sender is the admin when upgrading to V1 when upgrading to V2 upgrades to
 passed Contract TransparentUpgradeableProxy upgradeToAndCall with migrations when the sender is the admin when upgrading to V1 when upgrading to V2 when upgrading
+failed Contract TransparentUpgradeableProxy upgradeToAndCall without migrations when the call does not fail when the sender is not the admin reverts 
 failed Contract TransparentUpgradeableProxy upgradeToAndCall without migrations when the call does not fail when the sender is the admin sends given value to
 passed Contract TransparentUpgradeableProxy upgradeToAndCall without migrations when the call does fail reverts 
-passed Contract TransparentUpgradeableProxy upgradeToAndCall without migrations when the call does not fail when the sender is not the admin reverts 
 passed Contract TransparentUpgradeableProxy upgradeToAndCall without migrations when the call does not fail when the sender is the admin calls the initializer function
 passed Contract TransparentUpgradeableProxy upgradeToAndCall without migrations when the call does not fail when the sender is the admin emits an event 
 passed Contract TransparentUpgradeableProxy upgradeToAndCall without migrations when the call does not fail when the sender is the admin upgrades to the requested
 skipped Contract TransparentUpgradeableProxy upgradeToAndCall without migrations when the call does not fail when the sender is the admin uses the storage of
-passed Contract TransparentUpgradeableProxy upgradeTo when the sender is not the admin reverts 
+failed Contract TransparentUpgradeableProxy upgradeTo when the sender is not the admin reverts 
 passed Contract TransparentUpgradeableProxy upgradeTo when the sender is the admin when the given implementation is different from the current one emits an
 passed Contract TransparentUpgradeableProxy upgradeTo when the sender is the admin when the given implementation is different from the current one upgrades to
 passed Contract TransparentUpgradeableProxy upgradeTo when the sender is the admin when the given implementation is the zero address reverts 
@@ -1057,23 +1007,6 @@ skipped Contract TransparentUpgradeableProxy without initialization when not sen
 failed Contract TransparentUpgradeableProxy without initialization when sending some balance has expected balance 
 passed Contract TransparentUpgradeableProxy without initialization when sending some balance initializes the proxy 
 skipped Contract TransparentUpgradeableProxy without initialization when sending some balance sets the implementation address 
-passed Contract UpgradeableBeacon cannot be created with non contract implementation 
-passed Contract UpgradeableBeacon once deployed can be upgraded by the owner 
-passed Contract UpgradeableBeacon once deployed cannot be upgraded by other account 
-passed Contract UpgradeableBeacon once deployed cannot be upgraded to a non contract 
-passed Contract UpgradeableBeacon once deployed returns implementation 
-passed Contract UUPSUpgradeable reject proxy address as implementation 
-passed Contract UUPSUpgradeable reject upgrade to broken upgradeable implementation 
-passed Contract UUPSUpgradeable reject upgrade to non uups implementation 
-passed Contract UUPSUpgradeable upgrade to and unsafe upgradeable implementation 
-passed Contract UUPSUpgradeable upgrade to upgradeable implementation 
-passed Contract UUPSUpgradeable upgrade to upgradeable implementation with call 
-passed Contract VestingWallet check vesting contract 
-passed Contract VestingWallet rejects zero address for beneficiary 
-passed Contract VestingWallet vesting schedule ERC20 vesting check vesting schedule 
-failed Contract VestingWallet vesting schedule ERC20 vesting execute vesting schedule 
-failed Contract VestingWallet vesting schedule Eth vesting check vesting schedule 
-failed Contract VestingWallet vesting schedule Eth vesting execute vesting schedule 
 Status Description 
 passed Ethers js shouldCheckStaticJsonRpcProvider 
 passed Ethers js shouldConnectViaEthersJs 
