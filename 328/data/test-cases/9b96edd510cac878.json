@@ -1,0 +1,349 @@
+{
+  "uid" : "9b96edd510cac878",
+  "name" : "test_transfer_to_self",
+  "fullName" : "tests.brownie.token.tests.test_transferFrom#test_transfer_to_self",
+  "historyId" : "cbe44005f28bf185c2f8b32284f6ab41",
+  "time" : {
+    "start" : 1640306393811,
+    "stop" : 1640306394609,
+    "duration" : 798
+  },
+  "status" : "broken",
+  "statusMessage" : "requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url: https://proxy.teststand2.neontest.xyz/solana",
+  "statusTrace" : "accounts = <brownie.network.account.Accounts object at 0x7f7f5f54c1c0>\ntoken = <Token Contract '0x968701E85bd02305064A304629C98ab9CBf06F49'>\n\n    def test_transfer_to_self(accounts, token):\n>       sender_balance = token.balanceOf(accounts[0])\n\ntests/brownie/token/tests/test_transferFrom.py:140: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1729: in __call__\n    return self.call(*args, block_identifier=block_identifier)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1531: in call\n    data = web3.eth.call({k: v for k, v in tx.items() if v}, block_identifier)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/module.py:57: in caller\n    result = w3.manager.request_blocking(method_str,\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/manager.py:186: in request_blocking\n    response = self._make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/manager.py:147: in _make_request\n    return request_func(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:76: in apply_formatters\n    response = make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/gas_price_strategy.py:90: in middleware\n    return make_request(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:74: in apply_formatters\n    response = make_request(method, formatted_params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/attrdict.py:33: in middleware\n    response = make_request(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:74: in apply_formatters\n    response = make_request(method, formatted_params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:74: in apply_formatters\n    response = make_request(method, formatted_params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:74: in apply_formatters\n    response = make_request(method, formatted_params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/buffered_gas_estimate.py:40: in middleware\n    return make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/middlewares/catch_tx_revert.py:24: in process_request\n    result = make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/exception_retry_request.py:105: in middleware\n    return make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/providers/rpc.py:88: in make_request\n    raw_response = make_post_request(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/_utils/request.py:49: in make_post_request\n    response.raise_for_status()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <Response [502]>\n\n    def raise_for_status(self):\n        \"\"\"Raises :class:`HTTPError`, if one occurred.\"\"\"\n    \n        http_error_msg = ''\n        if isinstance(self.reason, bytes):\n            # We attempt to decode utf-8 first because some servers\n            # choose to localize their reason strings. If the string\n            # isn't utf-8, we fall back to iso-8859-1 for all other\n            # encodings. (See PR #3538)\n            try:\n                reason = self.reason.decode('utf-8')\n            except UnicodeDecodeError:\n                reason = self.reason.decode('iso-8859-1')\n        else:\n            reason = self.reason\n    \n        if 400 <= self.status_code < 500:\n            http_error_msg = u'%s Client Error: %s for url: %s' % (self.status_code, reason, self.url)\n    \n        elif 500 <= self.status_code < 600:\n            http_error_msg = u'%s Server Error: %s for url: %s' % (self.status_code, reason, self.url)\n    \n        if http_error_msg:\n>           raise HTTPError(http_error_msg, response=self)\nE           requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url: https://proxy.teststand2.neontest.xyz/solana\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/requests/models.py:953: HTTPError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : true,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1640305908372,
+      "stop" : 1640305908372,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1640305910129,
+      "stop" : 1640305923264,
+      "duration" : 13135
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "accounts",
+    "time" : {
+      "start" : 1640305957574,
+      "stop" : 1640305957834,
+      "duration" : 260
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "setup_env",
+    "time" : {
+      "start" : 1640305957574,
+      "stop" : 1640305957574,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token",
+    "time" : {
+      "start" : 1640306283641,
+      "stop" : 1640306286826,
+      "duration" : 3185
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "afterStages" : [ {
+    "name" : "accounts::0",
+    "time" : {
+      "start" : 1640306662860,
+      "stop" : 1640306662860,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_transferFrom"
+  }, {
+    "name" : "host",
+    "value" : "fv-az83-57"
+  }, {
+    "name" : "thread",
+    "value" : "3641-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_transferFrom"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 30,
+        "skipped" : 0,
+        "passed" : 97,
+        "unknown" : 0,
+        "total" : 127
+      },
+      "items" : [ {
+        "uid" : "5e3d2909ea6e2263",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/325//#testresult/5e3d2909ea6e2263",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640285353613,
+          "stop" : 1640285358629,
+          "duration" : 5016
+        }
+      }, {
+        "uid" : "e57e4b2d1cf4efe9",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/323//#testresult/e57e4b2d1cf4efe9",
+        "status" : "broken",
+        "statusDetails" : "ValueError: HTTPConnectionPool(host='10.2.0.2', port=8899): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f17afd9cb80>: Failed to establish a new connection: [Errno 99] Cannot assign requested address'))",
+        "time" : {
+          "start" : 1640281195531,
+          "stop" : 1640281195531,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "b657c7d46304f280",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/301//#testresult/b657c7d46304f280",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640229309049,
+          "stop" : 1640229312908,
+          "duration" : 3859
+        }
+      }, {
+        "uid" : "63fbf4cdf78a28e9",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/300//#testresult/63fbf4cdf78a28e9",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640219681421,
+          "stop" : 1640219687081,
+          "duration" : 5660
+        }
+      }, {
+        "uid" : "bb3dc5934c099b1c",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/285//#testresult/bb3dc5934c099b1c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640153781322,
+          "stop" : 1640153786334,
+          "duration" : 5012
+        }
+      }, {
+        "uid" : "a36aedd33e374a8a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/284//#testresult/a36aedd33e374a8a",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640142943543,
+          "stop" : 1640142948618,
+          "duration" : 5075
+        }
+      }, {
+        "uid" : "185a5f9a3bb925a9",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/283//#testresult/185a5f9a3bb925a9",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640133389687,
+          "stop" : 1640133396023,
+          "duration" : 6336
+        }
+      }, {
+        "uid" : "8e6e128b8b9ee9bb",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/279//#testresult/8e6e128b8b9ee9bb",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640056555613,
+          "stop" : 1640056560632,
+          "duration" : 5019
+        }
+      }, {
+        "uid" : "cbee6168fc23f873",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/278//#testresult/cbee6168fc23f873",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640047021751,
+          "stop" : 1640047027620,
+          "duration" : 5869
+        }
+      }, {
+        "uid" : "5c3bb14d239ce163",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/272//#testresult/5c3bb14d239ce163",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639988750976,
+          "stop" : 1639988757777,
+          "duration" : 6801
+        }
+      }, {
+        "uid" : "cf73cf9c0aeaa25a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/271//#testresult/cf73cf9c0aeaa25a",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639970113122,
+          "stop" : 1639970117313,
+          "duration" : 4191
+        }
+      }, {
+        "uid" : "1d707426c21e6927",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/270//#testresult/1d707426c21e6927",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639960499512,
+          "stop" : 1639960502728,
+          "duration" : 3216
+        }
+      }, {
+        "uid" : "f28d686949767bb2",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/267//#testresult/f28d686949767bb2",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639910766807,
+          "stop" : 1639910771679,
+          "duration" : 4872
+        }
+      }, {
+        "uid" : "f37bcc1777f0363c",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/263//#testresult/f37bcc1777f0363c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639883741318,
+          "stop" : 1639883746744,
+          "duration" : 5426
+        }
+      }, {
+        "uid" : "2fcef6baf60e967d",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/262//#testresult/2fcef6baf60e967d",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639874215970,
+          "stop" : 1639874223637,
+          "duration" : 7667
+        }
+      }, {
+        "uid" : "3d3fbd470984276c",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/259//#testresult/3d3fbd470984276c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639797388963,
+          "stop" : 1639797394449,
+          "duration" : 5486
+        }
+      }, {
+        "uid" : "a11ed48b070fd6ef",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/258//#testresult/a11ed48b070fd6ef",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639787758513,
+          "stop" : 1639787764952,
+          "duration" : 6439
+        }
+      }, {
+        "uid" : "3984656d1679098",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/255//#testresult/3984656d1679098",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639739262268,
+          "stop" : 1639739266471,
+          "duration" : 4203
+        }
+      }, {
+        "uid" : "33b332464b6957a5",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/253//#testresult/33b332464b6957a5",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.TransactionError: Tx dropped without known replacement: 0xbe88df5a1c9961aeeeb7e242fa0229e7df7d6a03cdc7b57c3f46d01185f3323e",
+        "time" : {
+          "start" : 1639724823229,
+          "stop" : 1639724823229,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "93281f991e9d6c72",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/251//#testresult/93281f991e9d6c72",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639710965467,
+          "stop" : 1639710973689,
+          "duration" : 8222
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "9b96edd510cac878.json",
+  "parameterValues" : [ ]
+}

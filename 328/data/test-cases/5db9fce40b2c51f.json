@@ -1,0 +1,367 @@
+{
+  "uid" : "5db9fce40b2c51f",
+  "name" : "test_returns_true",
+  "fullName" : "tests.brownie.token.tests.test_transferFrom#test_returns_true",
+  "historyId" : "592db1f5b525cbb8a4e298823c44ebef",
+  "time" : {
+    "start" : 1640306386570,
+    "stop" : 1640306387370,
+    "duration" : 800
+  },
+  "status" : "broken",
+  "statusMessage" : "requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url: https://proxy.teststand2.neontest.xyz/solana",
+  "statusTrace" : "accounts = <brownie.network.account.Accounts object at 0x7f7f5f54c1c0>\ntoken = <Token Contract '0x968701E85bd02305064A304629C98ab9CBf06F49'>\n\n    def test_returns_true(accounts, token):\n>       amount = token.balanceOf(accounts[0])\n\ntests/brownie/token/tests/test_transferFrom.py:67: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1729: in __call__\n    return self.call(*args, block_identifier=block_identifier)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1531: in call\n    data = web3.eth.call({k: v for k, v in tx.items() if v}, block_identifier)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/module.py:57: in caller\n    result = w3.manager.request_blocking(method_str,\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/manager.py:186: in request_blocking\n    response = self._make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/manager.py:147: in _make_request\n    return request_func(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:76: in apply_formatters\n    response = make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/gas_price_strategy.py:90: in middleware\n    return make_request(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:74: in apply_formatters\n    response = make_request(method, formatted_params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/attrdict.py:33: in middleware\n    response = make_request(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:74: in apply_formatters\n    response = make_request(method, formatted_params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:74: in apply_formatters\n    response = make_request(method, formatted_params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:74: in apply_formatters\n    response = make_request(method, formatted_params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/buffered_gas_estimate.py:40: in middleware\n    return make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/middlewares/catch_tx_revert.py:24: in process_request\n    result = make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/exception_retry_request.py:105: in middleware\n    return make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/providers/rpc.py:88: in make_request\n    raw_response = make_post_request(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/_utils/request.py:49: in make_post_request\n    response.raise_for_status()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <Response [502]>\n\n    def raise_for_status(self):\n        \"\"\"Raises :class:`HTTPError`, if one occurred.\"\"\"\n    \n        http_error_msg = ''\n        if isinstance(self.reason, bytes):\n            # We attempt to decode utf-8 first because some servers\n            # choose to localize their reason strings. If the string\n            # isn't utf-8, we fall back to iso-8859-1 for all other\n            # encodings. (See PR #3538)\n            try:\n                reason = self.reason.decode('utf-8')\n            except UnicodeDecodeError:\n                reason = self.reason.decode('iso-8859-1')\n        else:\n            reason = self.reason\n    \n        if 400 <= self.status_code < 500:\n            http_error_msg = u'%s Client Error: %s for url: %s' % (self.status_code, reason, self.url)\n    \n        elif 500 <= self.status_code < 600:\n            http_error_msg = u'%s Server Error: %s for url: %s' % (self.status_code, reason, self.url)\n    \n        if http_error_msg:\n>           raise HTTPError(http_error_msg, response=self)\nE           requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url: https://proxy.teststand2.neontest.xyz/solana\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/requests/models.py:953: HTTPError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1640305908372,
+      "stop" : 1640305908372,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1640305910129,
+      "stop" : 1640305923264,
+      "duration" : 13135
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "accounts",
+    "time" : {
+      "start" : 1640305957574,
+      "stop" : 1640305957834,
+      "duration" : 260
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "setup_env",
+    "time" : {
+      "start" : 1640305957574,
+      "stop" : 1640305957574,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token",
+    "time" : {
+      "start" : 1640306283641,
+      "stop" : 1640306286826,
+      "duration" : 3185
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "afterStages" : [ {
+    "name" : "accounts::0",
+    "time" : {
+      "start" : 1640306662860,
+      "stop" : 1640306662860,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_transferFrom"
+  }, {
+    "name" : "host",
+    "value" : "fv-az83-57"
+  }, {
+    "name" : "thread",
+    "value" : "3641-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_transferFrom"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 128,
+        "skipped" : 0,
+        "passed" : 0,
+        "unknown" : 0,
+        "total" : 128
+      },
+      "items" : [ {
+        "uid" : "f211b8bf5357fb91",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/325//#testresult/f211b8bf5357fb91",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument",
+        "time" : {
+          "start" : 1640285292535,
+          "stop" : 1640285324086,
+          "duration" : 31551
+        }
+      }, {
+        "uid" : "ec0f204c8894ce9e",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/323//#testresult/ec0f204c8894ce9e",
+        "status" : "broken",
+        "statusDetails" : "ValueError: HTTPConnectionPool(host='10.2.0.2', port=8899): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f17afd9cb80>: Failed to establish a new connection: [Errno 99] Cannot assign requested address'))",
+        "time" : {
+          "start" : 1640281194992,
+          "stop" : 1640281194992,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "aede702798637f65",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/301//#testresult/aede702798637f65",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1640229274422,
+          "stop" : 1640229278659,
+          "duration" : 4237
+        }
+      }, {
+        "uid" : "da90d5c248ae7e95",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/300//#testresult/da90d5c248ae7e95",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1640219649143,
+          "stop" : 1640219653678,
+          "duration" : 4535
+        }
+      }, {
+        "uid" : "b086516bada8add0",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/285//#testresult/b086516bada8add0",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1640153747479,
+          "stop" : 1640153751857,
+          "duration" : 4378
+        }
+      }, {
+        "uid" : "f579d8d2e058d440",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/284//#testresult/f579d8d2e058d440",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1640142908927,
+          "stop" : 1640142913759,
+          "duration" : 4832
+        }
+      }, {
+        "uid" : "cd5d52e16286016c",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/283//#testresult/cd5d52e16286016c",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1640133356430,
+          "stop" : 1640133361182,
+          "duration" : 4752
+        }
+      }, {
+        "uid" : "4eebc9a978063673",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/279//#testresult/4eebc9a978063673",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1640056521411,
+          "stop" : 1640056527752,
+          "duration" : 6341
+        }
+      }, {
+        "uid" : "8847fc6450519948",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/278//#testresult/8847fc6450519948",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1640046982892,
+          "stop" : 1640046989094,
+          "duration" : 6202
+        }
+      }, {
+        "uid" : "f797d1b40a5ea37",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/272//#testresult/f797d1b40a5ea37",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1639988715955,
+          "stop" : 1639988723082,
+          "duration" : 7127
+        }
+      }, {
+        "uid" : "27aaac93a92967be",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/271//#testresult/27aaac93a92967be",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1639970085217,
+          "stop" : 1639970088910,
+          "duration" : 3693
+        }
+      }, {
+        "uid" : "bbda21495ad18681",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/270//#testresult/bbda21495ad18681",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1639960478894,
+          "stop" : 1639960482773,
+          "duration" : 3879
+        }
+      }, {
+        "uid" : "a70c99d0ec27897e",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/267//#testresult/a70c99d0ec27897e",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1639910736438,
+          "stop" : 1639910741788,
+          "duration" : 5350
+        }
+      }, {
+        "uid" : "77172936d235a52d",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/263//#testresult/77172936d235a52d",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1639883705499,
+          "stop" : 1639883710994,
+          "duration" : 5495
+        }
+      }, {
+        "uid" : "61570862f0dc6538",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/262//#testresult/61570862f0dc6538",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1639874177765,
+          "stop" : 1639874182867,
+          "duration" : 5102
+        }
+      }, {
+        "uid" : "420b677a0c71cfde",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/259//#testresult/420b677a0c71cfde",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1639797351372,
+          "stop" : 1639797357603,
+          "duration" : 6231
+        }
+      }, {
+        "uid" : "2155814d5775b74b",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/258//#testresult/2155814d5775b74b",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1639787716460,
+          "stop" : 1639787722086,
+          "duration" : 5626
+        }
+      }, {
+        "uid" : "732cfeb5294d2fa2",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/255//#testresult/732cfeb5294d2fa2",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.TransactionError: Tx dropped without known replacement: 0xfc68c86dfaec31566ab7e3ec9e47af8436dec567a23fcdf8d3ff8ed93c912640",
+        "time" : {
+          "start" : 1639739216786,
+          "stop" : 1639739220837,
+          "duration" : 4051
+        }
+      }, {
+        "uid" : "866047592a2a93dc",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/253//#testresult/866047592a2a93dc",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.TransactionError: Tx dropped without known replacement: 0xbe88df5a1c9961aeeeb7e242fa0229e7df7d6a03cdc7b57c3f46d01185f3323e",
+        "time" : {
+          "start" : 1639724822619,
+          "stop" : 1639724822619,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "22bcc6573132d328",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/251//#testresult/22bcc6573132d328",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1639710913897,
+          "stop" : 1639710920273,
+          "duration" : 6376
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "5db9fce40b2c51f.json",
+  "parameterValues" : [ ]
+}
