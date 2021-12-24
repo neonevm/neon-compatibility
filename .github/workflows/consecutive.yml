@@ -290,6 +290,11 @@ jobs:
     env:
       NETWORK: ${{ needs.prepare-env.outputs.network }}
     steps:
+      - name: Check input data
+        run: |
+          echo "Network:"
+          echo "$NETWORK"
+          echo "${{ needs.prepare-env.outputs.network }}"
       - name: Send a notification to Teams channel
         uses: neonlabsorg/teams-notification-action@1.1
         if: always()
