@@ -8,7 +8,7 @@ PROXY_URL = os.environ.get('PROXY_URL')
 NETWORK_ID = os.environ.get('NETWORK_ID')
 NETWORK_NAME = os.environ.get('NETWORK_NAME')
 CURRENCY_SYMBOL = os.environ.get('CURRENCY_SYMBOL')
-FAUCET_QUOTIENT = os.environ.get('FAUCET_QUOTIENT')
+REQUEST_AMOUNT = os.environ.get('REQUEST_AMOUNT')
 FAUCET_URL = os.environ.get('FAUCET_URL')
 USE_FAUCET: bool = True if os.environ.get(
     'USE_FAUCET').upper() == 'TRUE' else False

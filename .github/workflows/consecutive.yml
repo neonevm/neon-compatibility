@@ -23,7 +23,7 @@ on:
         type: choice
         default: self-hosted
         required: true
-        description: "Choose out of (self-hosted, ubuntu-20.04)"
+        description: "Where to run openzeppelin tests (self-hosted, ubuntu-20.04)"
         options:
           - self-hosted
           - ubuntu-20.04
@@ -148,15 +148,10 @@ jobs:
           find test -name "*.test.js" | sort | parallel -k --jobs ${{ env.JOBS_NUMBER }} --results pout 'npx hardhat test {}'
       - name: "Verify count of logs"
         if: always()
-        run: |
-          cd openzeppelin-contracts
-          echo "Tests by find:" && find test -name "*.test.js" | sort | wc -l
-          echo "Test results:" && ls pout/1 | wc -l
-      - uses: ./.github/actions/allure-postprocessing
+        run: python3 parallel_report.py
+      - name: "Insert feature to allure"
         if: always()
-        with:
-          item-type: epic
-          name: OpenZeppelin contracts
+        run: python3 fix_allure.py
       - uses: ./.github/actions/allure-upload
         if: always()
         with:
@@ -289,14 +284,12 @@ jobs:
     needs:
       - allure
       - prepare-env
-    env:
-      NETWORK: ${{ needs.prepare-env.outputs.network }}
     steps:
       - name: Send a notification to Teams channel
-        uses: neonlabsorg/teams-notification-action@0.1.1
+        uses: neonlabsorg/teams-notification-action@1.2
         if: always()
         with:
           hookUrl: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
           actionUrl: "https://docs.neon-labs.org/neon-compatibility/${{ needs.allure.outputs.subdir }}/${{ github.run_number }}/"
           title: "OpenZeppelin Contracts Test Suite #${{ github.run_number }}"
-          networkName: ${{ env.NETWORK }}
+          networkName: ${{ needs.prepare-env.outputs.network }}
