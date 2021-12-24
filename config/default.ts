@@ -19,7 +19,7 @@ export const Config = {
   addressFrom: getStringValue(process.env.ADDRESS_FROM),
   addressTo: getStringValue(process.env.ADDRESS_TO),
   privateKey: getStringValue(process.env.PRIVATE_KEY),
-  faucetQuotient: Number.parseInt(getStringValue(process.env.FAUCET_QUOTIENT)),
+  requestAmount: Number.parseInt(getStringValue(process.env.REQUEST_AMOUNT)),
   faucetUrl: getStringValue(process.env.FAUCET_URL),
   useFaucet: getBooleanValue(process.env.USE_FAUCET),
   network: getStringValue(process.env.NETWORK_NAME),

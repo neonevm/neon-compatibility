@@ -27,7 +27,7 @@ const Config = {
   addressFrom: getStringValue(process.env.ADDRESS_FROM),
   addressTo: getStringValue(process.env.ADDRESS_TO),
   privateKey: getStringValue(process.env.PRIVATE_KEY),
-  faucetQuotient: Number.parseInt(getStringValue(process.env.FAUCET_QUOTIENT)),
+  requestAmount: Number.parseInt(getStringValue(process.env.REQUEST_AMOUNT)),
   faucetUrl: getStringValue(process.env.FAUCET_URL),
   useFaucet: getBooleanValue(process.env.USE_FAUCET),
   network: getStringValue(process.env.NETWORK_NAME),
@@ -101,7 +101,6 @@ const requestFaucet = async (wallet, amount) => {
   console.log(`Wallet = ${data.wallet}, amount = ${data.amount}`);
   try {
     const result = await axios.post(Config.faucetUrl, data);
-    console.log(result);
   } catch (err) {
     console.log(`Failed to send request to faucet: ${err}`);
   }
@@ -114,8 +113,6 @@ const requestFaucetAndGetBalance = async (address, amount) => {
   await getBalance(address);
 };
 
-const REQUEST_AMOUNT = 10;
-
 const web3 = new Web3(
   new Web3.providers.HttpProvider(Config.proxyUrl, 3000000)
 );
@@ -124,20 +121,20 @@ process.env.ADDRESS_FROM = account01.address;
 process.env.PRIVATE_KEY = account01.privateKey;
 (async (address, amount) => requestFaucetAndGetBalance(address, amount))(
   account01.address,
-  REQUEST_AMOUNT
+  Config.requestAmount
 );
 const account02 = web3.eth.accounts.create();
 process.env.ADDRESS_TO = account02.address;
 (async (address, amount) => requestFaucetAndGetBalance(address, amount))(
   account02.address,
-  REQUEST_AMOUNT
+  Config.requestAmount
 );
 
 const privateKeys = Array.from(Array(Config.usersNumber), (_, x) => {
   const acc = web3.eth.accounts.create();
   (async (address, amount) => requestFaucetAndGetBalance(address, amount))(
     acc.address,
-    REQUEST_AMOUNT
+    Config.requestAmount
   );
   return acc.privateKey;
 });
