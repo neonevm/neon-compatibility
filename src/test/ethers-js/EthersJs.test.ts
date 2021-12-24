@@ -28,7 +28,7 @@ class EthersJsTests {
   @feature('Account test')
   @test
   public async shouldCreateAcccountWithEthersJs() {
-    let initialBalance = 10 * Config.faucetQuotient;
+    let initialBalance = 10 * Config.requestAmount;
     logger.notice(`Connecting to ${Config.url}`);
     const provider = new ConnectionManager().connectToJsonRpc(Config.url);
     logger.notice(`Provider: ${provider}`);
@@ -53,7 +53,7 @@ class EthersJsTests {
   @feature('Transaction count test')
   @test
   public async shouldCountTransactions() {
-    // let initialBalance = 10 * Config.faucetQuotient;
+    // let initialBalance = 10 * Config.requestAmount;
     const provider = new ConnectionManager().connectToJsonRpc(Config.url);
     logger.notice(`Provider: ${provider}`);
     const randomWallet = ethers.Wallet.createRandom();
