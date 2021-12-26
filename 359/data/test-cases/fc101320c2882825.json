@@ -1,0 +1,337 @@
+{
+  "uid" : "fc101320c2882825",
+  "name" : "test_insufficient_approval",
+  "fullName" : "tests.brownie.token.tests.test_transferFrom#test_insufficient_approval",
+  "historyId" : "0ae63a08126a8f0616f222dcfe6ba70d",
+  "time" : {
+    "start" : 1640560581402,
+    "stop" : 1640560581549,
+    "duration" : 147
+  },
+  "status" : "broken",
+  "statusMessage" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+  "statusTrace" : "accounts = <brownie.network.account.Accounts object at 0x7ff9391a41f0>\ntoken = <Token Contract '0x2B7C4D16Be931A1EF0EA9eC02E02198c7FA3De3c'>\n\n    def test_insufficient_approval(accounts, token):\n        balance = token.balanceOf(accounts[0])\n    \n>       token.approve(accounts[1], balance - 1, {'from': accounts[0]})\n\ntests/brownie/token/tests/test_transferFrom.py:117: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1693: in __call__\n    return self.transact(*args)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1576: in transact\n    data=self.encode_input(*args),\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1611: in encode_input\n    data = format_input(self.abi, args)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nabi = {'inputs': [{'internalType': 'address', 'name': '_spender', 'type': 'address'}, {'internalType': 'uint256', 'name': '_...e': 'approve', 'outputs': [{'internalType': 'bool', 'name': '', 'type': 'bool'}], 'stateMutability': 'nonpayable', ...}\ninputs = (<LocalAccount '0x35cE37bbA2C1A1BD74302867B50FcEC084dC9593'>, -1)\n\n    def format_input(abi: Dict, inputs: Union[List, Tuple]) -> List:\n        # Format contract inputs based on ABI types\n        if len(inputs) and not len(abi[\"inputs\"]):\n            raise TypeError(f\"{abi['name']} requires no arguments\")\n        abi_types = _get_abi_types(abi[\"inputs\"])\n        try:\n            return _format_tuple(abi_types, inputs)\n        except Exception as e:\n>           raise type(e)(f\"{abi['name']} {e}\") from None\nE           OverflowError: approve '-1' - -1 is outside allowable range for uint256\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/convert/normalize.py:20: OverflowError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1640560489680,
+      "stop" : 1640560489680,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1640560490751,
+      "stop" : 1640560508259,
+      "duration" : 17508
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "accounts",
+    "time" : {
+      "start" : 1640560511515,
+      "stop" : 1640560511846,
+      "duration" : 331
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "setup_env",
+    "time" : {
+      "start" : 1640560511515,
+      "stop" : 1640560511515,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token",
+    "time" : {
+      "start" : 1640560546317,
+      "stop" : 1640560549092,
+      "duration" : 2775
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "afterStages" : [ {
+    "name" : "accounts::0",
+    "time" : {
+      "start" : 1640560771757,
+      "stop" : 1640560771757,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_transferFrom"
+  }, {
+    "name" : "host",
+    "value" : "fv-az39-764"
+  }, {
+    "name" : "thread",
+    "value" : "3793-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_transferFrom"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 18,
+        "skipped" : 0,
+        "passed" : 0,
+        "unknown" : 0,
+        "total" : 18
+      },
+      "items" : [ {
+        "uid" : "efbecfcf56a6e84b",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/358//#testresult/efbecfcf56a6e84b",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640560309693,
+          "stop" : 1640560309930,
+          "duration" : 237
+        }
+      }, {
+        "uid" : "a8015b0c595444af",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/357//#testresult/a8015b0c595444af",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x1",
+        "time" : {
+          "start" : 1640559433067,
+          "stop" : 1640559433067,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "35f2c473c6394253",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/355//#testresult/35f2c473c6394253",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640546327724,
+          "stop" : 1640546327869,
+          "duration" : 145
+        }
+      }, {
+        "uid" : "2830428b062573f6",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/353//#testresult/2830428b062573f6",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url: https://proxy.teststand2.neontest.xyz/solana",
+        "time" : {
+          "start" : 1640537570706,
+          "stop" : 1640537570706,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "4c8d37e518295007",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/352//#testresult/4c8d37e518295007",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640535508273,
+          "stop" : 1640535508480,
+          "duration" : 207
+        }
+      }, {
+        "uid" : "888dcf4df48c5a32",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/351//#testresult/888dcf4df48c5a32",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640534459440,
+          "stop" : 1640534459647,
+          "duration" : 207
+        }
+      }, {
+        "uid" : "cf4a2efda66e0640",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/350//#testresult/cf4a2efda66e0640",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640488568006,
+          "stop" : 1640488568303,
+          "duration" : 297
+        }
+      }, {
+        "uid" : "f92ef31f0019066d",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/349//#testresult/f92ef31f0019066d",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640478969878,
+          "stop" : 1640478970097,
+          "duration" : 219
+        }
+      }, {
+        "uid" : "ed4cda5312795cc6",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/345//#testresult/ed4cda5312795cc6",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640444990955,
+          "stop" : 1640444991154,
+          "duration" : 199
+        }
+      }, {
+        "uid" : "82aafa63bfaf1b45",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/343//#testresult/82aafa63bfaf1b45",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640402150335,
+          "stop" : 1640402150534,
+          "duration" : 199
+        }
+      }, {
+        "uid" : "eeb0bc7db5131596",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/342//#testresult/eeb0bc7db5131596",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640392505775,
+          "stop" : 1640392506088,
+          "duration" : 313
+        }
+      }, {
+        "uid" : "9ff445454ab3a035",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/340//#testresult/9ff445454ab3a035",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640360515679,
+          "stop" : 1640360515937,
+          "duration" : 258
+        }
+      }, {
+        "uid" : "f00bee5e654d0d69",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/339//#testresult/f00bee5e654d0d69",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640360352932,
+          "stop" : 1640360353110,
+          "duration" : 178
+        }
+      }, {
+        "uid" : "98975731a996086a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/338//#testresult/98975731a996086a",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640358916489,
+          "stop" : 1640358916630,
+          "duration" : 141
+        }
+      }, {
+        "uid" : "e4ca7100ed681451",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/337//#testresult/e4ca7100ed681451",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640355864076,
+          "stop" : 1640355864373,
+          "duration" : 297
+        }
+      }, {
+        "uid" : "4826cbd8c41e99a4",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/336//#testresult/4826cbd8c41e99a4",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640350128201,
+          "stop" : 1640350128638,
+          "duration" : 437
+        }
+      }, {
+        "uid" : "a775c9a24a0937fa",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/332//#testresult/a775c9a24a0937fa",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640321524412,
+          "stop" : 1640321524598,
+          "duration" : 186
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "fc101320c2882825.json",
+  "parameterValues" : [ ]
+}
