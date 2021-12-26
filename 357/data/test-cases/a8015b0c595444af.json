@@ -1,0 +1,319 @@
+{
+  "uid" : "a8015b0c595444af",
+  "name" : "test_insufficient_approval",
+  "fullName" : "tests.brownie.token.tests.test_transferFrom#test_insufficient_approval",
+  "historyId" : "0ae63a08126a8f0616f222dcfe6ba70d",
+  "time" : {
+    "start" : 1640559433067,
+    "stop" : 1640559433067,
+    "duration" : 0
+  },
+  "status" : "broken",
+  "statusMessage" : "ValueError: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x1",
+  "statusTrace" : "brownie_project = <Project 'TokenProject'>\naccounts = <brownie.network.account.Accounts object at 0x7f3162abf5e0>\n\n    @pytest.fixture(scope=\"module\")\n    def token(brownie_project, accounts):\n>       return brownie_project.Token.deploy(\"Test Token\", \"TST\", 18, 1e21, {'from': accounts[0]})\n\ntests/brownie/token/tests/conftest.py:49: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:600: in __call__\n    return tx[\"from\"].deploy(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:508: in deploy\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:743: in _make_transaction\n    exc = VirtualMachineError(e)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = VirtualMachineError(ValueError({'code': -32002, 'message': 'Transaction simulation failed: Error processing Instructio...of 500000 compute units', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io failed: custom program error: 0x1']}}))\nexc = {'code': -32002, 'data': {'accounts': None, 'err': {'InstructionError': [0, {'Custom': 1}]}, 'logs': ['Program 53DfF88...m error: 0x1']}, 'message': 'Transaction simulation failed: Error processing Instruction 0: custom program error: 0x1'}\n\n    def __init__(self, exc: ValueError) -> None:\n        try:\n            exc = exc.args[0]\n        except Exception:\n            pass\n    \n        if isinstance(exc, dict) and \"message\" in exc:\n            if \"data\" not in exc:\n                raise ValueError(exc[\"message\"]) from None\n    \n            self.message: str = exc[\"message\"].rstrip(\".\")\n    \n            if isinstance(exc[\"data\"], str):\n                # handle parity exceptions - this logic probably is not perfect\n                if \"0x08c379a0\" in exc[\"data\"]:\n                    revert_type, err_msg = [i.strip() for i in exc[\"data\"].split(\"0x08c379a0\", 1)]\n                    err_msg = eth_abi.decode_abi([\"string\"], HexBytes(err_msg))\n                    err_msg = f\"{revert_type} '{err_msg}'\"\n                elif exc[\"data\"].endswith(\"0x\"):\n                    err_msg = exc[\"data\"][:-2].strip()\n                else:\n                    err_msg = exc[\"data\"]\n                raise ValueError(f\"{self.message}: {err_msg}\") from None\n    \n            try:\n                txid, data = next((k, v) for k, v in exc[\"data\"].items() if k.startswith(\"0x\"))\n            except StopIteration:\n>               raise ValueError(exc[\"message\"]) from None\nE               ValueError: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x1\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py:104: ValueError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1640559408006,
+      "stop" : 1640559408006,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1640559409766,
+      "stop" : 1640559422598,
+      "duration" : 12832
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "setup_env",
+    "time" : {
+      "start" : 1640559425915,
+      "stop" : 1640559425915,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "accounts",
+    "time" : {
+      "start" : 1640559425915,
+      "stop" : 1640559426201,
+      "duration" : 286
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token",
+    "time" : {
+      "start" : 1640559430783,
+      "stop" : 1640559432254,
+      "duration" : 1471
+    },
+    "status" : "broken",
+    "statusMessage" : "ValueError: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x1\n",
+    "statusTrace" : "  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/pluggy/_callers.py\", line 39, in _multicall\n    res = hook_impl.function(*args)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/_pytest/fixtures.py\", line 1126, in pytest_fixture_setup\n    result = call_fixture_func(fixturefunc, request, kwargs)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/_pytest/fixtures.py\", line 932, in call_fixture_func\n    fixture_result = fixturefunc(**kwargs)\n  File \"/home/runner/work/neon-compatibility/neon-compatibility/tests/brownie/token/tests/conftest.py\", line 49, in token\n    return brownie_project.Token.deploy(\"Test Token\", \"TST\", 18, 1e21, {'from': accounts[0]})\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py\", line 600, in __call__\n    return tx[\"from\"].deploy(\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py\", line 508, in deploy\n    receipt, exc = self._make_transaction(\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py\", line 743, in _make_transaction\n    exc = VirtualMachineError(e)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py\", line 104, in __init__\n    raise ValueError(exc[\"message\"]) from None\n",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  } ],
+  "afterStages" : [ {
+    "name" : "accounts::0",
+    "time" : {
+      "start" : 1640559610321,
+      "stop" : 1640559610321,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_transferFrom"
+  }, {
+    "name" : "host",
+    "value" : "fv-az77-501"
+  }, {
+    "name" : "thread",
+    "value" : "3658-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_transferFrom"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 16,
+        "skipped" : 0,
+        "passed" : 0,
+        "unknown" : 0,
+        "total" : 16
+      },
+      "items" : [ {
+        "uid" : "35f2c473c6394253",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/355//#testresult/35f2c473c6394253",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640546327724,
+          "stop" : 1640546327869,
+          "duration" : 145
+        }
+      }, {
+        "uid" : "2830428b062573f6",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/353//#testresult/2830428b062573f6",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url: https://proxy.teststand2.neontest.xyz/solana",
+        "time" : {
+          "start" : 1640537570706,
+          "stop" : 1640537570706,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "4c8d37e518295007",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/352//#testresult/4c8d37e518295007",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640535508273,
+          "stop" : 1640535508480,
+          "duration" : 207
+        }
+      }, {
+        "uid" : "888dcf4df48c5a32",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/351//#testresult/888dcf4df48c5a32",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640534459440,
+          "stop" : 1640534459647,
+          "duration" : 207
+        }
+      }, {
+        "uid" : "cf4a2efda66e0640",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/350//#testresult/cf4a2efda66e0640",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640488568006,
+          "stop" : 1640488568303,
+          "duration" : 297
+        }
+      }, {
+        "uid" : "f92ef31f0019066d",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/349//#testresult/f92ef31f0019066d",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640478969878,
+          "stop" : 1640478970097,
+          "duration" : 219
+        }
+      }, {
+        "uid" : "ed4cda5312795cc6",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/345//#testresult/ed4cda5312795cc6",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640444990955,
+          "stop" : 1640444991154,
+          "duration" : 199
+        }
+      }, {
+        "uid" : "82aafa63bfaf1b45",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/343//#testresult/82aafa63bfaf1b45",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640402150335,
+          "stop" : 1640402150534,
+          "duration" : 199
+        }
+      }, {
+        "uid" : "eeb0bc7db5131596",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/342//#testresult/eeb0bc7db5131596",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640392505775,
+          "stop" : 1640392506088,
+          "duration" : 313
+        }
+      }, {
+        "uid" : "9ff445454ab3a035",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/340//#testresult/9ff445454ab3a035",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640360515679,
+          "stop" : 1640360515937,
+          "duration" : 258
+        }
+      }, {
+        "uid" : "f00bee5e654d0d69",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/339//#testresult/f00bee5e654d0d69",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640360352932,
+          "stop" : 1640360353110,
+          "duration" : 178
+        }
+      }, {
+        "uid" : "98975731a996086a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/338//#testresult/98975731a996086a",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640358916489,
+          "stop" : 1640358916630,
+          "duration" : 141
+        }
+      }, {
+        "uid" : "e4ca7100ed681451",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/337//#testresult/e4ca7100ed681451",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640355864076,
+          "stop" : 1640355864373,
+          "duration" : 297
+        }
+      }, {
+        "uid" : "4826cbd8c41e99a4",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/336//#testresult/4826cbd8c41e99a4",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640350128201,
+          "stop" : 1640350128638,
+          "duration" : 437
+        }
+      }, {
+        "uid" : "a775c9a24a0937fa",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/332//#testresult/a775c9a24a0937fa",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1640321524412,
+          "stop" : 1640321524598,
+          "duration" : 186
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "a8015b0c595444af.json",
+  "parameterValues" : [ ]
+}
