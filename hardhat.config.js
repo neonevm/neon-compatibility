@@ -86,27 +86,54 @@ for (const f of fs.readdirSync(path.join(__dirname, 'hardhat'))) {
 const withOptimizations =
   argv.enableGasReport || argv.compileMode === 'production';
 
+
+if (Config.useFaucet){
+  console.log(`Use faucet: ${Config.faucetUrl}`)
+} else {
+  console.log(`Skipping faucet requests: USE_FAUCET set to false`);
+}
+
 const requestFaucet = async (wallet, amount) => {
   if (!Config.useFaucet) {
-    console.log(`Skipping faucet request: USE_FAUCET set to false`);
     return;
   }
-  console.log('Requesting faucet...');
   const data = { amount: amount, wallet: wallet };
-  console.log(`URL: ${Config.faucetUrl}`);
   if (Config.faucetUrl.length === 0) {
     console.log('Unable to request faucet: FAUCET_URL is empty');
     return;
   }
-  console.log(`Wallet = ${data.wallet}, amount = ${data.amount}`);
-  try {
-    const result = await axios.post(Config.faucetUrl, data);
-  } catch (err) {
-    console.log(`Failed to send request to faucet: ${err}`);
+  console.log(`Request '${data.amount}' tokens for wallet ${data.wallet} from faucet`);
+
+  let success = false;
+  for (let i=0; i < 10; i++){
+    try {
+      await axios.post(Config.faucetUrl, data);
+      success = true;
+      break
+    } catch (err) {
+      console.log(`Failed to send request to faucet: ${err.response.data}`);
+    }
+  }
+  if (success !== true){
+    console.log("Can't get a good response from faucet 10 times, please check faucet")
   }
 };
 
-const getBalance = async (address) => await web3.eth.getBalance(address);
+const getBalance = async (address) => {
+  let success = false;
+  for (let i=0; i < 10; i++){
+    try {
+      await web3.eth.getBalance(address);
+      success = true;
+      break
+    } catch (e) {
+      console.log(`Failed to get balance for wallet ${address}: ${e}`);
+    }
+  }
+  if (success !== true){
+    console.log("Can't get a good getBalance response 10 times, please check faucet settings")
+  }
+}
 
 const requestFaucetAndGetBalance = async (address, amount) => {
   await requestFaucet(address, amount);
@@ -146,11 +173,11 @@ console.log(
 (async (addressFrom, addressTo) => {
   console.log(
     `address from = ${addressFrom} balance=`,
-    await web3.eth.getBalance(addressFrom)
+    await getBalance(addressFrom)
   );
   console.log(
     `address to = ${addressTo}  balance=`,
-    await web3.eth.getBalance(addressTo)
+    await getBalance(addressTo)
   );
   console.log(`main private key = ${process.env.PRIVATE_KEY}`);
   console.log(`account keys = ${privateKeys}`);
@@ -204,7 +231,7 @@ module.exports = {
     reporterOption: {
       configFile: '../reporterConfig.json'
     },
-    diff: true
+    diff: true,
   }
 };
 
