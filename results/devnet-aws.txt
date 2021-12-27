@@ -1,4 +1,4 @@
-https://docs.neon-labs.org/neon-compatibility/devnet-aws/295/data/suites.csv
+https://docs.neon-labs.org/neon-compatibility/devnet-aws/341/data/suites.csv
 passed Contract AccessControl Contract interface AccessControlEnumerable ERC165 s supportsInterface bytes4 claims support skip on coverage 
 passed Contract AccessControl Contract interface AccessControlEnumerable ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
 passed Contract AccessControl Contract interface AccessControlEnumerable getRoleMember bytes32 uint256 has to be implemented 
@@ -33,7 +33,35 @@ passed Contract AccessControl setting role admin a role s previous admins no lon
 passed Contract AccessControl setting role admin a role s previous admins no longer revoke roles 
 passed Contract AccessControl setting role admin the new admin can grant roles 
 passed Contract AccessControl setting role admin the new admin can revoke roles 
-broken Contract Address isContract returns false for account address 
+passed Contract Address functionCall with non contract receiver reverts when address is not a contract 
+failed Contract Address functionCall with valid contract receiver reverts when the called function throws 
+passed Contract Address functionCall with valid contract receiver calls the requested function 
+passed Contract Address functionCall with valid contract receiver reverts when function does not exist 
+passed Contract Address functionCall with valid contract receiver reverts when the called function reverts bubbling up the revert reason 
+passed Contract Address functionCall with valid contract receiver reverts when the called function reverts with no reason 
+passed Contract Address functionCall with valid contract receiver reverts when the called function runs out of gas 
+failed Contract Address functionCallWithValue with non zero value calls the requested function with transaction funds 
+failed Contract Address functionCallWithValue with non zero value reverts if insufficient sender balance 
+passed Contract Address functionCallWithValue with non zero value calls the requested function with existing value 
+passed Contract Address functionCallWithValue with non zero value reverts when calling non payable functions 
+passed Contract Address functionCallWithValue with zero value calls the requested function 
+passed Contract Address functionDelegateCall bubbles up revert reason 
+passed Contract Address functionDelegateCall delegate calls the requested function 
+passed Contract Address functionDelegateCall reverts when address is not a contract 
+passed Contract Address functionStaticCall bubbles up revert reason 
+passed Contract Address functionStaticCall calls the requested function 
+failed Contract Address functionStaticCall reverts on a non static function 
+passed Contract Address functionStaticCall reverts when address is not a contract 
+passed Contract Address isContract returns false for account address 
+passed Contract Address isContract returns true for contract address 
+broken Contract Address sendValue when sender contract has funds sends 0 wei 
+broken Contract Address sendValue when sender contract has funds sends non zero amounts 
+broken Contract Address sendValue when sender contract has funds sends the whole balance 
+broken Contract Address sendValue when sender contract has funds with contract recipient sends funds 
+failed Contract Address sendValue when sender contract has funds reverts when sending more than the balance 
+failed Contract Address sendValue when sender contract has no funds reverts when sending non zero amounts 
+passed Contract Address sendValue when sender contract has funds with contract recipient reverts on recipient revert 
+passed Contract Address sendValue when sender contract has no funds sends 0 wei 
 passed Contract Arrays findUpperBound Array with gap returns index of first element in next filled range 
 passed Contract Arrays findUpperBound Empty array always returns 0 for empty array 
 passed Contract Arrays findUpperBound Even number of elements returns 0 for the element under the lower boundary 
@@ -46,15 +74,15 @@ passed Contract Arrays findUpperBound Odd number of elements returns 0 for the f
 passed Contract Arrays findUpperBound Odd number of elements returns correct index for the basic case 
 passed Contract Arrays findUpperBound Odd number of elements returns first index after last element if searched value is over the upper boundary
 passed Contract Arrays findUpperBound Odd number of elements returns index of the last element 
-passed Contract BeaconProxy bad beacon is not accepted non compliant beacon 
+failed Contract BeaconProxy bad beacon is not accepted non compliant beacon 
 passed Contract BeaconProxy bad beacon is not accepted non contract beacon 
 passed Contract BeaconProxy bad beacon is not accepted non contract implementation 
-broken Contract BeaconProxy initialization no initialization 
-broken Contract BeaconProxy initialization non payable initialization 
-broken Contract BeaconProxy initialization payable initialization 
+failed Contract BeaconProxy initialization no initialization 
+failed Contract BeaconProxy initialization non payable initialization 
+failed Contract BeaconProxy initialization payable initialization 
 passed Contract BeaconProxy initialization reverting initialization 
-broken Contract BeaconProxy upgrade 2 proxies by upgrading shared beacon 
-broken Contract BeaconProxy upgrade a proxy by upgrading its beacon 
+passed Contract BeaconProxy upgrade 2 proxies by upgrading shared beacon 
+passed Contract BeaconProxy upgrade a proxy by upgrading its beacon 
 passed Contract BitMap set adds a key 
 passed Contract BitMap set adds several consecutive keys 
 passed Contract BitMap set adds several keys 
@@ -67,28 +95,40 @@ passed Contract BitMap unset removes added keys
 passed Contract BitMap unset removes consecutive added keys 
 passed Contract Clones cloneDeterministic address already used 
 passed Contract Clones cloneDeterministic address prediction 
-broken Contract Clones cloneDeterministic initialization without parameters non payable when not sending balance initializes the proxy 
-passed Contract Clones cloneDeterministic initialization without parameters non payable when sending some balance reverts 
-broken Contract Clones cloneDeterministic initialization without parameters payable when not sending balance initializes the proxy 
-broken Contract Clones cloneDeterministic initialization without parameters payable when sending some balance initializes the proxy 
-broken Contract Clones cloneDeterministic initialization with parameters non payable when not sending balance initializes the proxy 
-passed Contract Clones cloneDeterministic initialization with parameters non payable when sending some balance reverts 
-broken Contract Clones cloneDeterministic initialization with parameters payable when not sending balance initializes the proxy 
-broken Contract Clones cloneDeterministic initialization with parameters payable when sending some balance initializes the proxy 
-broken Contract Clones clone initialization without parameters non payable when not sending balance initializes the proxy 
-passed Contract Clones clone initialization without parameters non payable when sending some balance reverts 
-broken Contract Clones clone initialization without parameters payable when not sending balance initializes the proxy 
-broken Contract Clones clone initialization without parameters payable when sending some balance initializes the proxy 
-broken Contract Clones clone initialization with parameters non payable when not sending balance initializes the proxy 
-passed Contract Clones clone initialization with parameters non payable when sending some balance reverts 
-broken Contract Clones clone initialization with parameters payable when not sending balance initializes the proxy 
-broken Contract Clones clone initialization with parameters payable when sending some balance initializes the proxy 
+failed Contract Clones cloneDeterministic initialization without parameters non payable when not sending balance has expected balance 
+failed Contract Clones cloneDeterministic initialization without parameters non payable when sending some balance reverts 
+passed Contract Clones cloneDeterministic initialization without parameters non payable when not sending balance initializes the proxy 
+failed Contract Clones cloneDeterministic initialization without parameters payable when not sending balance has expected balance 
+failed Contract Clones cloneDeterministic initialization without parameters payable when sending some balance has expected balance 
+passed Contract Clones cloneDeterministic initialization without parameters payable when not sending balance initializes the proxy 
+passed Contract Clones cloneDeterministic initialization without parameters payable when sending some balance initializes the proxy 
+failed Contract Clones cloneDeterministic initialization with parameters non payable when not sending balance has expected balance 
+failed Contract Clones cloneDeterministic initialization with parameters non payable when sending some balance reverts 
+passed Contract Clones cloneDeterministic initialization with parameters non payable when not sending balance initializes the proxy 
+failed Contract Clones cloneDeterministic initialization with parameters payable when not sending balance has expected balance 
+failed Contract Clones cloneDeterministic initialization with parameters payable when sending some balance has expected balance 
+passed Contract Clones cloneDeterministic initialization with parameters payable when not sending balance initializes the proxy 
+passed Contract Clones cloneDeterministic initialization with parameters payable when sending some balance initializes the proxy 
+failed Contract Clones clone initialization without parameters non payable when not sending balance has expected balance 
+failed Contract Clones clone initialization without parameters non payable when sending some balance reverts 
+passed Contract Clones clone initialization without parameters non payable when not sending balance initializes the proxy 
+failed Contract Clones clone initialization without parameters payable when not sending balance has expected balance 
+failed Contract Clones clone initialization without parameters payable when sending some balance has expected balance 
+passed Contract Clones clone initialization without parameters payable when not sending balance initializes the proxy 
+passed Contract Clones clone initialization without parameters payable when sending some balance initializes the proxy 
+failed Contract Clones clone initialization with parameters non payable when not sending balance has expected balance 
+failed Contract Clones clone initialization with parameters non payable when sending some balance reverts 
+passed Contract Clones clone initialization with parameters non payable when not sending balance initializes the proxy 
+failed Contract Clones clone initialization with parameters payable when not sending balance has expected balance 
+failed Contract Clones clone initialization with parameters payable when sending some balance has expected balance 
+passed Contract Clones clone initialization with parameters payable when not sending balance initializes the proxy 
+passed Contract Clones clone initialization with parameters payable when sending some balance initializes the proxy 
 broken Contract ConditionalEscrow when withdrawal is allowed as an escrow deposits can accept a single deposit 
-broken Contract ConditionalEscrow when withdrawal is disallowed reverts on withdrawals 
+passed Contract ConditionalEscrow when withdrawal is disallowed reverts on withdrawals 
 passed Contract Context msgData returns the transaction data when called from an EOA 
-broken Contract Context msgData returns the transaction sender when from another contract 
-broken Contract Context msgSender returns the transaction sender when from another contract 
+passed Contract Context msgData returns the transaction sender when from another contract 
 passed Contract Context msgSender returns the transaction sender when called from an EOA 
+passed Contract Context msgSender returns the transaction sender when from another contract 
 passed Contract Counters decrement after incremented to 3 can be called multiple times 
 passed Contract Counters decrement starting from 1 decrements the current value by one 
 passed Contract Counters decrement starting from 1 reverts if the current value is 0 
@@ -99,12 +139,12 @@ passed Contract Counters reset null counter does not throw
 passed Contract Counters starts at zero 
 passed Contract Create2 computeAddress computes the correct contract address 
 passed Contract Create2 computeAddress computes the correct contract address with deployer 
-broken Contract Create2 deploy deploys a contract with funds deposited in the factory 
-broken Contract Create2 deploy deploys a ERC1820Implementer from inline assembly code 
-broken Contract Create2 deploy deploys a ERC20Mock with correct balances 
-broken Contract Create2 deploy fails deploying a contract in an existent address 
+failed Contract Create2 deploy deploys a contract with funds deposited in the factory 
+passed Contract Create2 deploy deploys a ERC1820Implementer from inline assembly code 
+passed Contract Create2 deploy deploys a ERC20Mock with correct balances 
 failed Contract Create2 deploy fails deploying a contract if factory contract does not have sufficient balance 
 passed Contract Create2 deploy fails deploying a contract if the bytecode length is zero 
+passed Contract Create2 deploy fails deploying a contract in an existent address 
 passed Contract ECDSA recover with invalid signature with long signature 
 passed Contract ECDSA recover with invalid signature with short signature 
 passed Contract ECDSA recover with valid signature reverts with high s value signature 
@@ -141,7 +181,7 @@ passed Contract EnumerableMap starts empty
 passed Contract EnumerableSet EnumerableAddressSet add adds a value 
 passed Contract EnumerableSet EnumerableAddressSet add adds several values 
 passed Contract EnumerableSet EnumerableAddressSet add returns false when adding values already in the set 
-passed Contract EnumerableSet EnumerableAddressSet at reverts when retrieving non existent elements 
+failed Contract EnumerableSet EnumerableAddressSet at reverts when retrieving non existent elements 
 passed Contract EnumerableSet EnumerableAddressSet remove adds and removes multiple values 
 passed Contract EnumerableSet EnumerableAddressSet remove removes added values 
 passed Contract EnumerableSet EnumerableAddressSet remove returns false when removing values not in the set 
@@ -149,7 +189,7 @@ passed Contract EnumerableSet EnumerableAddressSet starts empty
 passed Contract EnumerableSet EnumerableBytes32Set add adds a value 
 passed Contract EnumerableSet EnumerableBytes32Set add adds several values 
 passed Contract EnumerableSet EnumerableBytes32Set add returns false when adding values already in the set 
-passed Contract EnumerableSet EnumerableBytes32Set at reverts when retrieving non existent elements 
+failed Contract EnumerableSet EnumerableBytes32Set at reverts when retrieving non existent elements 
 passed Contract EnumerableSet EnumerableBytes32Set remove adds and removes multiple values 
 passed Contract EnumerableSet EnumerableBytes32Set remove removes added values 
 passed Contract EnumerableSet EnumerableBytes32Set remove returns false when removing values not in the set 
@@ -157,7 +197,7 @@ passed Contract EnumerableSet EnumerableBytes32Set starts empty
 passed Contract EnumerableSet EnumerableUintSet add adds a value 
 passed Contract EnumerableSet EnumerableUintSet add adds several values 
 passed Contract EnumerableSet EnumerableUintSet add returns false when adding values already in the set 
-passed Contract EnumerableSet EnumerableUintSet at reverts when retrieving non existent elements 
+failed Contract EnumerableSet EnumerableUintSet at reverts when retrieving non existent elements 
 passed Contract EnumerableSet EnumerableUintSet remove adds and removes multiple values 
 passed Contract EnumerableSet EnumerableUintSet remove removes added values 
 passed Contract EnumerableSet EnumerableUintSet remove returns false when removing values not in the set 
@@ -179,8 +219,8 @@ passed Contract ERC1155Holder Contract interface ERC1155Receiver onERC1155Receiv
 passed Contract ERC1155Holder Contract interface ERC165 ERC165 s supportsInterface bytes4 claims support skip on coverage 
 passed Contract ERC1155Holder Contract interface ERC165 ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
 passed Contract ERC1155Holder Contract interface ERC165 supportsInterface bytes4 has to be implemented 
-broken Contract ERC1155Holder receives ERC1155 tokens from a multiple IDs 
-broken Contract ERC1155Holder receives ERC1155 tokens from a single ID 
+passed Contract ERC1155Holder receives ERC1155 tokens from a multiple IDs 
+passed Contract ERC1155Holder receives ERC1155 tokens from a single ID 
 passed Contract ERC1155 internal functions burnBatch reverts if length of inputs do not match 
 passed Contract ERC1155 internal functions burnBatch reverts when burning a non existent token id 
 passed Contract ERC1155 internal functions burnBatch reverts when burning the zero account s tokens 
@@ -220,12 +260,13 @@ passed Contract ERC1155 like an ERC1155 Contract interface ERC165 supportsInterf
 passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom reverts when ids array length doesn t match amounts array length 
 passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom reverts when transferring amount more than any of balances 
 passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom reverts when transferring to zero address 
-broken Contract ERC1155 like an ERC1155 safeBatchTransferFrom to a receiver contract that reverts only on single transfers debits transferred balances from sender
 passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom to a contract that does not implement the required function reverts 
 passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom to a receiver contract returning unexpected value reverts 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom to a receiver contract that reverts only on single transfers calls onERC1155BatchReceived 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom to a receiver contract that reverts only on single transfers credits transferred balances to receiver
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom to a receiver contract that reverts only on single transfers debits transferred balances from sender
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom to a receiver contract that reverts only on single transfers emits a TransferBatch log 
 passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom to a receiver contract that reverts reverts 
-broken Contract ERC1155 like an ERC1155 safeBatchTransferFrom when sending to a valid receiver with data debits transferred balances from sender 
-broken Contract ERC1155 like an ERC1155 safeBatchTransferFrom when sending to a valid receiver without data debits transferred balances from sender 
 passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when called by an operator on behalf of the multiTokenHolder when operator is approved by
 passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when called by an operator on behalf of the multiTokenHolder when operator is approved by
 passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when called by an operator on behalf of the multiTokenHolder when operator is approved by
@@ -234,13 +275,19 @@ passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when called by an 
 passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when called by the multiTokenHolder credits transferred balances to receiver 
 passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when called by the multiTokenHolder debits transferred balances from sender 
 passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when called by the multiTokenHolder emits a TransferBatch log 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when sending to a valid receiver with data calls onERC1155Received 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when sending to a valid receiver with data credits transferred balances to receiver 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when sending to a valid receiver with data debits transferred balances from sender 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when sending to a valid receiver with data emits a TransferBatch log 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when sending to a valid receiver without data calls onERC1155BatchReceived 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when sending to a valid receiver without data credits transferred balances to receiver 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when sending to a valid receiver without data debits transferred balances from sender 
+passed Contract ERC1155 like an ERC1155 safeBatchTransferFrom when sending to a valid receiver without data emits a TransferBatch log 
 passed Contract ERC1155 like an ERC1155 safeTransferFrom reverts when transferring more than balance 
 passed Contract ERC1155 like an ERC1155 safeTransferFrom reverts when transferring to zero address 
 passed Contract ERC1155 like an ERC1155 safeTransferFrom to a contract that does not implement the required function reverts 
 passed Contract ERC1155 like an ERC1155 safeTransferFrom to a receiver contract returning unexpected value reverts 
 passed Contract ERC1155 like an ERC1155 safeTransferFrom to a receiver contract that reverts reverts 
-broken Contract ERC1155 like an ERC1155 safeTransferFrom when sending to a valid receiver with data debits transferred balance from sender 
-broken Contract ERC1155 like an ERC1155 safeTransferFrom when sending to a valid receiver without data debits transferred balance from sender 
 passed Contract ERC1155 like an ERC1155 safeTransferFrom when called by an operator on behalf of the multiTokenHolder when operator is approved by
 passed Contract ERC1155 like an ERC1155 safeTransferFrom when called by an operator on behalf of the multiTokenHolder when operator is approved by
 passed Contract ERC1155 like an ERC1155 safeTransferFrom when called by an operator on behalf of the multiTokenHolder when operator is approved by
@@ -250,6 +297,14 @@ passed Contract ERC1155 like an ERC1155 safeTransferFrom when called by the mult
 passed Contract ERC1155 like an ERC1155 safeTransferFrom when called by the multiTokenHolder debits transferred balance from sender 
 passed Contract ERC1155 like an ERC1155 safeTransferFrom when called by the multiTokenHolder emits a TransferSingle log 
 passed Contract ERC1155 like an ERC1155 safeTransferFrom when called by the multiTokenHolder preserves existing balances which are not transferred by multiTokenHolder 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when sending to a valid receiver with data calls onERC1155Received 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when sending to a valid receiver with data credits transferred balance to receiver 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when sending to a valid receiver with data debits transferred balance from sender 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when sending to a valid receiver with data emits a TransferSingle log 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when sending to a valid receiver without data calls onERC1155Received 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when sending to a valid receiver without data credits transferred balance to receiver 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when sending to a valid receiver without data debits transferred balance from sender 
+passed Contract ERC1155 like an ERC1155 safeTransferFrom when sending to a valid receiver without data emits a TransferSingle log 
 passed Contract ERC1155 like an ERC1155 setApprovalForAll can unset approval for an operator 
 passed Contract ERC1155 like an ERC1155 setApprovalForAll emits an ApprovalForAll log 
 passed Contract ERC1155 like an ERC1155 setApprovalForAll reverts if attempting to approve self as an operator 
@@ -351,18 +406,24 @@ passed Contract ERC1820Implementer with registered interfaces returns false when
 passed Contract ERC1820Implementer with registered interfaces returns false when interface implementation for non supported interfaces is queried 
 passed Contract ERC1820Implementer with registered interfaces returns true when interface implementation is queried 
 passed Contract ERC1967Proxy cannot be initialized with a non contract address 
-broken Contract ERC1967Proxy initialization without parameters non payable when not sending balance initializes the proxy 
-passed Contract ERC1967Proxy initialization without parameters non payable when sending some balance reverts 
+failed Contract ERC1967Proxy initialization without parameters non payable when not sending balance has expected balance 
+failed Contract ERC1967Proxy initialization without parameters non payable when sending some balance reverts 
+passed Contract ERC1967Proxy initialization without parameters non payable when not sending balance initializes the proxy 
 skipped Contract ERC1967Proxy initialization without parameters non payable when not sending balance sets the implementation address 
-broken Contract ERC1967Proxy initialization without parameters payable when not sending balance initializes the proxy 
-broken Contract ERC1967Proxy initialization without parameters payable when sending some balance initializes the proxy 
+failed Contract ERC1967Proxy initialization without parameters payable when not sending balance has expected balance 
+failed Contract ERC1967Proxy initialization without parameters payable when sending some balance has expected balance 
+passed Contract ERC1967Proxy initialization without parameters payable when not sending balance initializes the proxy 
+passed Contract ERC1967Proxy initialization without parameters payable when sending some balance initializes the proxy 
 skipped Contract ERC1967Proxy initialization without parameters payable when not sending balance sets the implementation address 
 skipped Contract ERC1967Proxy initialization without parameters payable when sending some balance sets the implementation address 
-broken Contract ERC1967Proxy initialization with parameters non payable when not sending balance initializes the proxy 
-passed Contract ERC1967Proxy initialization with parameters non payable when sending some balance reverts 
+failed Contract ERC1967Proxy initialization with parameters non payable when not sending balance has expected balance 
+failed Contract ERC1967Proxy initialization with parameters non payable when sending some balance reverts 
+passed Contract ERC1967Proxy initialization with parameters non payable when not sending balance initializes the proxy 
 skipped Contract ERC1967Proxy initialization with parameters non payable when not sending balance sets the implementation address 
-broken Contract ERC1967Proxy initialization with parameters payable when not sending balance initializes the proxy 
-broken Contract ERC1967Proxy initialization with parameters payable when sending some balance initializes the proxy 
+failed Contract ERC1967Proxy initialization with parameters payable when not sending balance has expected balance 
+failed Contract ERC1967Proxy initialization with parameters payable when sending some balance has expected balance 
+passed Contract ERC1967Proxy initialization with parameters payable when not sending balance initializes the proxy 
+passed Contract ERC1967Proxy initialization with parameters payable when sending some balance initializes the proxy 
 skipped Contract ERC1967Proxy initialization with parameters payable when not sending balance sets the implementation address 
 skipped Contract ERC1967Proxy initialization with parameters payable when sending some balance sets the implementation address 
 passed Contract ERC1967Proxy initialization with parameters reverting initialization reverts 
@@ -372,7 +433,6 @@ skipped Contract ERC1967Proxy without initialization when not sending balance se
 failed Contract ERC1967Proxy without initialization when sending some balance has expected balance 
 passed Contract ERC1967Proxy without initialization when sending some balance initializes the proxy 
 skipped Contract ERC1967Proxy without initialization when sending some balance sets the implementation address 
-failed Contract ERC20 after each hook for something to recover 
 passed Contract ERC20 approve when the owner is the zero address reverts 
 passed Contract ERC20 approve when the spender is not the zero address when the sender does not have enough balance emits an
 passed Contract ERC20 approve when the spender is not the zero address when the sender does not have enough balance emits an
@@ -429,14 +489,39 @@ passed Contract ERC20 decrease allowance when the spender is not the zero addres
 passed Contract ERC20 decrease allowance when the spender is the zero address reverts 
 passed Contract ERC20 deposit missing approval 
 passed Contract ERC20 deposit missing balance 
-broken Contract ERC20 deposit to other account 
-broken Contract ERC20 deposit valid 
+passed Contract ERC20 deposit to other account 
+passed Contract ERC20 deposit valid 
+passed Contract ERC20 erc20 behaviour approve when the spender is not the zero address when the sender does not have enough balance
+passed Contract ERC20 erc20 behaviour approve when the spender is not the zero address when the sender does not have enough balance
+passed Contract ERC20 erc20 behaviour approve when the spender is not the zero address when the sender does not have enough balance
+passed Contract ERC20 erc20 behaviour approve when the spender is not the zero address when the sender has enough balance emits an
+passed Contract ERC20 erc20 behaviour approve when the spender is not the zero address when the sender has enough balance when the
+passed Contract ERC20 erc20 behaviour approve when the spender is not the zero address when the sender has enough balance when there
+passed Contract ERC20 erc20 behaviour approve when the spender is the zero address reverts 
+passed Contract ERC20 erc20 behaviour balanceOf when the requested account has no tokens returns zero 
+passed Contract ERC20 erc20 behaviour balanceOf when the requested account has some tokens returns the total amount of tokens 
+passed Contract ERC20 erc20 behaviour total supply returns the total amount of tokens 
+passed Contract ERC20 erc20 behaviour transfer from when the token owner is not the zero address when the recipient is not the
+passed Contract ERC20 erc20 behaviour transfer from when the token owner is not the zero address when the recipient is not the
+passed Contract ERC20 erc20 behaviour transfer from when the token owner is not the zero address when the recipient is not the
+passed Contract ERC20 erc20 behaviour transfer from when the token owner is not the zero address when the recipient is not the
+passed Contract ERC20 erc20 behaviour transfer from when the token owner is not the zero address when the recipient is not the
+passed Contract ERC20 erc20 behaviour transfer from when the token owner is not the zero address when the recipient is not the
+passed Contract ERC20 erc20 behaviour transfer from when the token owner is not the zero address when the recipient is not the
+passed Contract ERC20 erc20 behaviour transfer from when the token owner is not the zero address when the recipient is the zero
+passed Contract ERC20 erc20 behaviour transfer from when the token owner is the zero address reverts 
+passed Contract ERC20 erc20 behaviour transfer when the recipient is not the zero address when the sender does not have enough balance
+passed Contract ERC20 erc20 behaviour transfer when the recipient is not the zero address when the sender transfers all balance emits a
+passed Contract ERC20 erc20 behaviour transfer when the recipient is not the zero address when the sender transfers all balance transfers the
+passed Contract ERC20 erc20 behaviour transfer when the recipient is not the zero address when the sender transfers zero tokens emits a
+passed Contract ERC20 erc20 behaviour transfer when the recipient is not the zero address when the sender transfers zero tokens transfers the
+passed Contract ERC20 erc20 behaviour transfer when the recipient is the zero address reverts 
 passed Contract ERC20FlashMint flashFee token match 
 passed Contract ERC20FlashMint flashFee token mismatch 
 passed Contract ERC20FlashMint flashLoan missing approval 
 passed Contract ERC20FlashMint flashLoan missing return value 
-passed Contract ERC20FlashMint flashLoan more than maxFlashLoan 
-broken Contract ERC20FlashMint flashLoan success 
+failed Contract ERC20FlashMint flashLoan more than maxFlashLoan 
+passed Contract ERC20FlashMint flashLoan success 
 passed Contract ERC20FlashMint flashLoan unavailable funds 
 passed Contract ERC20FlashMint maxFlashLoan token match 
 passed Contract ERC20FlashMint maxFlashLoan token mismatch 
@@ -489,8 +574,8 @@ passed Contract ERC20PresetMinterPauser pausing deployer can pause
 passed Contract ERC20PresetMinterPauser pausing deployer can unpause 
 passed Contract ERC20PresetMinterPauser pausing other accounts cannot pause 
 passed Contract ERC20PresetMinterPauser pausing other accounts cannot unpause 
-broken Contract ERC20 recover nothing to recover 
-broken Contract ERC20 recover something to recover 
+passed Contract ERC20 recover nothing to recover 
+passed Contract ERC20 recover something to recover 
 passed Contract ERC20 set decimals can set decimals during construction 
 passed Contract ERC20Snapshot balanceOfAt reverts with a not yet created snapshot id 
 passed Contract ERC20Snapshot balanceOfAt reverts with a snapshot id of 0 
@@ -585,12 +670,15 @@ skipped Contract ERC20Votes transfers full delegation
 skipped Contract ERC20Votes transfers no delegation 
 skipped Contract ERC20Votes transfers receiver delegation 
 skipped Contract ERC20Votes transfers sender delegation 
-broken Contract ERC20 withdraw missing balance 
+passed Contract ERC20 withdraw entire balance 
+passed Contract ERC20 withdraw missing balance 
+passed Contract ERC20 withdraw to other account 
+passed Contract ERC20 withdraw valid 
 passed Contract ERC2771Context recognize trusted forwarder 
-broken Contract ERC2771Context when called directly msgData returns the transaction sender when from another contract 
 passed Contract ERC2771Context when called directly msgData returns the transaction data when called from an EOA 
-broken Contract ERC2771Context when called directly msgSender returns the transaction sender when from another contract 
+passed Contract ERC2771Context when called directly msgData returns the transaction sender when from another contract 
 passed Contract ERC2771Context when called directly msgSender returns the transaction sender when called from an EOA 
+passed Contract ERC2771Context when called directly msgSender returns the transaction sender when from another contract 
 failed Contract ERC2771Context when receiving a relayed call msgData returns the relayed transaction original data 
 failed Contract ERC2771Context when receiving a relayed call msgSender returns the relayed transaction original sender 
 passed Contract ERC721Burnable like a burnable ERC721 burn when successful burns the given token ID and adjusts the balance of the owner
@@ -621,34 +709,105 @@ passed Contract ERC721 Contract interface ERC721 safeTransferFrom address addres
 passed Contract ERC721 Contract interface ERC721 safeTransferFrom address address uint256 has to be implemented 
 passed Contract ERC721 Contract interface ERC721 setApprovalForAll address bool has to be implemented 
 passed Contract ERC721 Contract interface ERC721 transferFrom address address uint256 has to be implemented 
+passed Contract ERC721Enumerable burn reverts when burning a non existent token id 
+passed Contract ERC721Enumerable burn with minted tokens with burnt token adjusts all tokens list 
+passed Contract ERC721Enumerable burn with minted tokens with burnt token burns all tokens 
+passed Contract ERC721Enumerable burn with minted tokens with burnt token deletes the token 
+passed Contract ERC721Enumerable burn with minted tokens with burnt token emits an Approval event 
+passed Contract ERC721Enumerable burn with minted tokens with burnt token emits a Transfer event 
+passed Contract ERC721Enumerable burn with minted tokens with burnt token removes that token from the token list of the owner 
+passed Contract ERC721Enumerable burn with minted tokens with burnt token reverts when burning a token id that has been deleted 
 failed Contract ERC721Enumerable Contract interface ERC165 ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
 passed Contract ERC721Enumerable Contract interface ERC165 ERC165 s supportsInterface bytes4 claims support skip on coverage 
 passed Contract ERC721Enumerable Contract interface ERC165 supportsInterface bytes4 has to be implemented 
 passed Contract ERC721Enumerable Contract interface ERC721 approve address uint256 has to be implemented 
 passed Contract ERC721Enumerable Contract interface ERC721 balanceOf address has to be implemented 
+passed Contract ERC721Enumerable Contract interface ERC721Enumerable ERC165 s supportsInterface bytes4 claims support skip on coverage 
+passed Contract ERC721Enumerable Contract interface ERC721Enumerable ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
+passed Contract ERC721Enumerable Contract interface ERC721Enumerable tokenByIndex uint256 has to be implemented 
+passed Contract ERC721Enumerable Contract interface ERC721Enumerable tokenOfOwnerByIndex address uint256 has to be implemented 
+passed Contract ERC721Enumerable Contract interface ERC721Enumerable totalSupply has to be implemented 
 failed Contract ERC721Enumerable Contract interface ERC721 ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
 passed Contract ERC721Enumerable Contract interface ERC721 ERC165 s supportsInterface bytes4 claims support skip on coverage 
 passed Contract ERC721Enumerable Contract interface ERC721 getApproved uint256 has to be implemented 
 passed Contract ERC721Enumerable Contract interface ERC721 isApprovedForAll address address has to be implemented 
+failed Contract ERC721Enumerable Contract interface ERC721Metadata ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
+passed Contract ERC721Enumerable Contract interface ERC721Metadata ERC165 s supportsInterface bytes4 claims support skip on coverage 
+passed Contract ERC721Enumerable Contract interface ERC721Metadata name has to be implemented 
+passed Contract ERC721Enumerable Contract interface ERC721Metadata symbol has to be implemented 
+passed Contract ERC721Enumerable Contract interface ERC721Metadata tokenURI uint256 has to be implemented 
 passed Contract ERC721Enumerable Contract interface ERC721 ownerOf uint256 has to be implemented 
 passed Contract ERC721Enumerable Contract interface ERC721 safeTransferFrom address address uint256 bytes has to be implemented 
 passed Contract ERC721Enumerable Contract interface ERC721 safeTransferFrom address address uint256 has to be implemented 
 passed Contract ERC721Enumerable Contract interface ERC721 setApprovalForAll address bool has to be implemented 
 passed Contract ERC721Enumerable Contract interface ERC721 transferFrom address address uint256 has to be implemented 
+passed Contract ERC721Enumerable metadata has a name 
+passed Contract ERC721Enumerable metadata has a symbol 
+passed Contract ERC721Enumerable metadata token URI base URI base URI can be set 
+passed Contract ERC721Enumerable metadata token URI base URI base URI is added as a prefix to the token URI 
+passed Contract ERC721Enumerable metadata token URI base URI token URI can be changed by changing the base URI 
+passed Contract ERC721Enumerable metadata token URI return empty string by default 
+passed Contract ERC721Enumerable metadata token URI reverts when queried for non existent token id 
 passed Contract ERC721Enumerable mint address uint256 reverts with a null destination address 
-broken Contract ERC721Enumerable mint address uint256 with minted token emits a Transfer event 
+passed Contract ERC721Enumerable mint address uint256 with minted token adjusts all tokens list 
+passed Contract ERC721Enumerable mint address uint256 with minted token adjusts owner tokens by index 
+passed Contract ERC721Enumerable mint address uint256 with minted token creates the token 
+passed Contract ERC721Enumerable mint address uint256 with minted token emits a Transfer event 
+passed Contract ERC721Enumerable mint address uint256 with minted token reverts when adding a token id that already exists 
+passed Contract ERC721Enumerable with minted tokens approve when approving a non zero address when there was a prior approval to a different
+passed Contract ERC721Enumerable with minted tokens approve when approving a non zero address when there was a prior approval to a different
+passed Contract ERC721Enumerable with minted tokens approve when approving a non zero address when there was a prior approval to the same
+passed Contract ERC721Enumerable with minted tokens approve when approving a non zero address when there was a prior approval to the same
+passed Contract ERC721Enumerable with minted tokens approve when approving a non zero address when there was no prior approval emits an approval
+passed Contract ERC721Enumerable with minted tokens approve when approving a non zero address when there was no prior approval sets the approval
+passed Contract ERC721Enumerable with minted tokens approve when clearing approval when there was a prior approval clears approval for the token 
+passed Contract ERC721Enumerable with minted tokens approve when clearing approval when there was a prior approval emits an approval event 
+passed Contract ERC721Enumerable with minted tokens approve when clearing approval when there was no prior approval clears approval for the token 
+passed Contract ERC721Enumerable with minted tokens approve when clearing approval when there was no prior approval emits an approval event 
+passed Contract ERC721Enumerable with minted tokens approve when the address that receives the approval is the owner reverts 
+passed Contract ERC721Enumerable with minted tokens approve when the given token ID does not exist reverts 
+passed Contract ERC721Enumerable with minted tokens approve when the sender does not own the given token ID reverts 
+passed Contract ERC721Enumerable with minted tokens approve when the sender is an operator emits an approval event 
+passed Contract ERC721Enumerable with minted tokens approve when the sender is an operator sets the approval for the target address 
+passed Contract ERC721Enumerable with minted tokens approve when the sender is approved for the given token ID reverts 
 passed Contract ERC721Enumerable with minted tokens balanceOf when querying the zero address throws 
 passed Contract ERC721Enumerable with minted tokens balanceOf when the given address does not own any tokens returns 0 
 passed Contract ERC721Enumerable with minted tokens balanceOf when the given address owns some tokens returns the amount of tokens owned by the
+passed Contract ERC721Enumerable with minted tokens getApproved when token has been minted should return the zero address 
+passed Contract ERC721Enumerable with minted tokens getApproved when token has been minted when account has been approved returns approved account 
+passed Contract ERC721Enumerable with minted tokens getApproved when token is not minted reverts 
 passed Contract ERC721Enumerable with minted tokens ownerOf when the given token ID was not tracked by this token reverts 
 passed Contract ERC721Enumerable with minted tokens ownerOf when the given token ID was tracked by this token returns the owner of the
-broken Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract calls onERC721Received 
-broken Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract calls onERC721Received from approved 
-broken Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the approved individual
-broken Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the operator transfers
-broken Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner transfers
-broken Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner without
-broken Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when sent to the owner keeps
+failed Contract ERC721Enumerable with minted tokens safe mint via safeMint to a receiver contract that panics reverts 
+passed Contract ERC721Enumerable with minted tokens safe mint via safeMint calls onERC721Received — with data 
+passed Contract ERC721Enumerable with minted tokens safe mint via safeMint calls onERC721Received — without data 
+passed Contract ERC721Enumerable with minted tokens safe mint via safeMint to a contract that does not implement the required function reverts 
+passed Contract ERC721Enumerable with minted tokens safe mint via safeMint to a receiver contract returning unexpected value reverts 
+passed Contract ERC721Enumerable with minted tokens safe mint via safeMint to a receiver contract that reverts with message reverts 
+passed Contract ERC721Enumerable with minted tokens safe mint via safeMint to a receiver contract that reverts without message reverts 
+passed Contract ERC721Enumerable with minted tokens setApprovalForAll when the operator is the owner reverts 
+passed Contract ERC721Enumerable with minted tokens setApprovalForAll when the operator willing to approve is not the owner when the operator was already
+passed Contract ERC721Enumerable with minted tokens setApprovalForAll when the operator willing to approve is not the owner when the operator was already
+passed Contract ERC721Enumerable with minted tokens setApprovalForAll when the operator willing to approve is not the owner when the operator was set
+passed Contract ERC721Enumerable with minted tokens setApprovalForAll when the operator willing to approve is not the owner when the operator was set
+passed Contract ERC721Enumerable with minted tokens setApprovalForAll when the operator willing to approve is not the owner when the operator was set
+passed Contract ERC721Enumerable with minted tokens setApprovalForAll when the operator willing to approve is not the owner when there is no operator
+passed Contract ERC721Enumerable with minted tokens setApprovalForAll when the operator willing to approve is not the owner when there is no operator
+passed Contract ERC721Enumerable with minted tokens tokenByIndex returns all tokens 
+passed Contract ERC721Enumerable with minted tokens tokenByIndex returns all tokens after burning token 5042 and minting new tokens 
+passed Contract ERC721Enumerable with minted tokens tokenByIndex returns all tokens after burning token 79217 and minting new tokens 
+passed Contract ERC721Enumerable with minted tokens tokenByIndex reverts if index is greater than supply 
+passed Contract ERC721Enumerable with minted tokens tokenOfOwnerByIndex after transferring all tokens to another user returns correct token IDs for target 
+passed Contract ERC721Enumerable with minted tokens tokenOfOwnerByIndex after transferring all tokens to another user returns empty collection for original owner 
+passed Contract ERC721Enumerable with minted tokens tokenOfOwnerByIndex when the given address does not own any token reverts 
+passed Contract ERC721Enumerable with minted tokens tokenOfOwnerByIndex when the given index is lower than the amount of tokens owned by the given
+passed Contract ERC721Enumerable with minted tokens tokenOfOwnerByIndex when the index is greater than or equal to the total tokens owned by the
+passed Contract ERC721Enumerable with minted tokens totalSupply returns total token supply 
+failed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom to a receiver contract that panics reverts 
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom to a contract that does not implement the required function reverts 
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom to a receiver contract returning unexpected value reverts 
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom to a receiver contract that reverts with message reverts 
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom to a receiver contract that reverts without message reverts 
 passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a user account when called by the approved individual adjusts
 passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a user account when called by the approved individual adjusts
 passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a user account when called by the approved individual clears
@@ -682,6 +841,111 @@ passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFr
 passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a user account when the address to transfer the token
 passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a user account when the given token ID does not
 passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a user account when the sender is not authorized for
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract calls onERC721Received 
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract calls onERC721Received from approved 
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the approved individual
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the approved individual
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the approved individual
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the approved individual
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the approved individual
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the approved individual
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the operator adjusts
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the operator adjusts
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the operator clears
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the operator emits
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the operator emits
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the operator transfers
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner adjusts
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner adjusts
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner clears
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner emits
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner emits
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner transfers
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner without
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner without
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner without
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner without
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner without
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner without
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when sent to the owner clears
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when sent to the owner emits
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when sent to the owner keeps
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when sent to the owner keeps
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when sent to the owner keeps
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when the address of the previous
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when the address to transfer the
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when the given token ID does
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when the sender is not authorized
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom with data to a valid receiver contract with an invalid token id reverts
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the approved individual adjusts
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the approved individual adjusts
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the approved individual clears
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the approved individual emits
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the approved individual emits
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the approved individual transfers
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the operator adjusts owners
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the operator adjusts owners
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the operator clears the
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the operator emits a
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the operator emits an
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the operator transfers the
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner adjusts owners
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner adjusts owners
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner clears the
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner emits a
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner emits an
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner transfers the
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner without an
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner without an
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner without an
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner without an
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner without an
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner without an
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when sent to the owner clears the
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when sent to the owner emits only
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when sent to the owner keeps ownership
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when sent to the owner keeps same
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when sent to the owner keeps the
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when the address of the previous owner
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when the address to transfer the token
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when the given token ID does not
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a user account when the sender is not authorized for
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract calls onERC721Received 
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract calls onERC721Received from approved 
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the approved individual
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the approved individual
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the approved individual
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the approved individual
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the approved individual
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the approved individual
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the operator adjusts
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the operator adjusts
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the operator clears
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the operator emits
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the operator emits
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the operator transfers
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner adjusts
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner adjusts
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner clears
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner emits
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner emits
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner transfers
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner without
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner without
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner without
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner without
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner without
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner without
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when sent to the owner clears
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when sent to the owner emits
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when sent to the owner keeps
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when sent to the owner keeps
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when sent to the owner keeps
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when the address of the previous
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when the address to transfer the
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when the given token ID does
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when the sender is not authorized
+passed Contract ERC721Enumerable with minted tokens transfers via safeTransferFrom without data to a valid receiver contract with an invalid token id reverts
 passed Contract ERC721Enumerable with minted tokens transfers via transferFrom when called by the approved individual adjusts owners balances 
 passed Contract ERC721Enumerable with minted tokens transfers via transferFrom when called by the approved individual adjusts owners tokens by index 
 passed Contract ERC721Enumerable with minted tokens transfers via transferFrom when called by the approved individual clears the approval for the token ID
@@ -715,7 +979,7 @@ passed Contract ERC721Enumerable with minted tokens transfers via transferFrom w
 passed Contract ERC721Enumerable with minted tokens transfers via transferFrom when the address to transfer the token to is the zero address reverts
 passed Contract ERC721Enumerable with minted tokens transfers via transferFrom when the given token ID does not exist reverts 
 passed Contract ERC721Enumerable with minted tokens transfers via transferFrom when the sender is not authorized for the token id reverts 
-broken Contract ERC721Holder receives an ERC721 token 
+passed Contract ERC721Holder receives an ERC721 token 
 passed Contract ERC721 metadata has a name 
 passed Contract ERC721 metadata has a symbol 
 skipped Contract ERC721 metadata token URI base URI base URI can be set 
@@ -787,18 +1051,50 @@ passed Contract ERC721URIStorage token URI tokenId is appended to base URI for t
 passed Contract ERC721URIStorage token URI tokens without URI can be burnt 
 passed Contract ERC721URIStorage token URI tokens with URI can be burnt 
 passed Contract ERC721URIStorage token URI token URI can be changed by changing the base URI 
+passed Contract ERC721 with minted tokens approve when approving a non zero address when there was a prior approval to a different
+passed Contract ERC721 with minted tokens approve when approving a non zero address when there was a prior approval to a different
+passed Contract ERC721 with minted tokens approve when approving a non zero address when there was a prior approval to the same
+passed Contract ERC721 with minted tokens approve when approving a non zero address when there was a prior approval to the same
+passed Contract ERC721 with minted tokens approve when approving a non zero address when there was no prior approval emits an approval
+passed Contract ERC721 with minted tokens approve when approving a non zero address when there was no prior approval sets the approval
+passed Contract ERC721 with minted tokens approve when clearing approval when there was a prior approval clears approval for the token 
+passed Contract ERC721 with minted tokens approve when clearing approval when there was a prior approval emits an approval event 
+passed Contract ERC721 with minted tokens approve when clearing approval when there was no prior approval clears approval for the token 
+passed Contract ERC721 with minted tokens approve when clearing approval when there was no prior approval emits an approval event 
+passed Contract ERC721 with minted tokens approve when the address that receives the approval is the owner reverts 
+passed Contract ERC721 with minted tokens approve when the given token ID does not exist reverts 
+passed Contract ERC721 with minted tokens approve when the sender does not own the given token ID reverts 
+passed Contract ERC721 with minted tokens approve when the sender is an operator emits an approval event 
+passed Contract ERC721 with minted tokens approve when the sender is an operator sets the approval for the target address 
+passed Contract ERC721 with minted tokens approve when the sender is approved for the given token ID reverts 
 passed Contract ERC721 with minted tokens balanceOf when querying the zero address throws 
 passed Contract ERC721 with minted tokens balanceOf when the given address does not own any tokens returns 0 
 passed Contract ERC721 with minted tokens balanceOf when the given address owns some tokens returns the amount of tokens owned by the
+passed Contract ERC721 with minted tokens getApproved when token has been minted should return the zero address 
+passed Contract ERC721 with minted tokens getApproved when token has been minted when account has been approved returns approved account 
+passed Contract ERC721 with minted tokens getApproved when token is not minted reverts 
 passed Contract ERC721 with minted tokens ownerOf when the given token ID was not tracked by this token reverts 
 passed Contract ERC721 with minted tokens ownerOf when the given token ID was tracked by this token returns the owner of the
-broken Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract calls onERC721Received 
-broken Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract calls onERC721Received from approved 
-broken Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the approved individual
-broken Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the operator transfers
-broken Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner transfers
-broken Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner without
-broken Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when sent to the owner keeps
+failed Contract ERC721 with minted tokens safe mint via safeMint to a receiver contract that panics reverts 
+passed Contract ERC721 with minted tokens safe mint via safeMint calls onERC721Received — with data 
+passed Contract ERC721 with minted tokens safe mint via safeMint calls onERC721Received — without data 
+passed Contract ERC721 with minted tokens safe mint via safeMint to a contract that does not implement the required function reverts 
+passed Contract ERC721 with minted tokens safe mint via safeMint to a receiver contract returning unexpected value reverts 
+passed Contract ERC721 with minted tokens safe mint via safeMint to a receiver contract that reverts with message reverts 
+passed Contract ERC721 with minted tokens safe mint via safeMint to a receiver contract that reverts without message reverts 
+passed Contract ERC721 with minted tokens setApprovalForAll when the operator is the owner reverts 
+passed Contract ERC721 with minted tokens setApprovalForAll when the operator willing to approve is not the owner when the operator was already
+passed Contract ERC721 with minted tokens setApprovalForAll when the operator willing to approve is not the owner when the operator was already
+passed Contract ERC721 with minted tokens setApprovalForAll when the operator willing to approve is not the owner when the operator was set
+passed Contract ERC721 with minted tokens setApprovalForAll when the operator willing to approve is not the owner when the operator was set
+passed Contract ERC721 with minted tokens setApprovalForAll when the operator willing to approve is not the owner when the operator was set
+passed Contract ERC721 with minted tokens setApprovalForAll when the operator willing to approve is not the owner when there is no operator
+passed Contract ERC721 with minted tokens setApprovalForAll when the operator willing to approve is not the owner when there is no operator
+failed Contract ERC721 with minted tokens transfers via safeTransferFrom to a receiver contract that panics reverts 
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom to a contract that does not implement the required function reverts 
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom to a receiver contract returning unexpected value reverts 
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom to a receiver contract that reverts with message reverts 
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom to a receiver contract that reverts without message reverts 
 passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a user account when called by the approved individual adjusts
 passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a user account when called by the approved individual adjusts
 passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a user account when called by the approved individual clears
@@ -832,9 +1128,111 @@ passed Contract ERC721 with minted tokens transfers via safeTransferFrom with da
 passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a user account when the address to transfer the token
 passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a user account when the given token ID does not
 passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a user account when the sender is not authorized for
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract calls onERC721Received 
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract calls onERC721Received from approved 
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the approved individual
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the approved individual
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the approved individual
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the approved individual
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the approved individual
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the approved individual
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the operator adjusts
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the operator adjusts
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the operator clears
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the operator emits
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the operator emits
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the operator transfers
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner adjusts
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner adjusts
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner clears
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner emits
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner emits
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner transfers
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner without
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner without
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner without
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner without
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner without
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when called by the owner without
 passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when sent to the owner clears
 passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when sent to the owner emits
 passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when sent to the owner keeps
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when sent to the owner keeps
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when sent to the owner keeps
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when the address of the previous
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when the address to transfer the
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when the given token ID does
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract when the sender is not authorized
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom with data to a valid receiver contract with an invalid token id reverts
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the approved individual adjusts
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the approved individual adjusts
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the approved individual clears
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the approved individual emits
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the approved individual emits
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the approved individual transfers
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the operator adjusts owners
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the operator adjusts owners
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the operator clears the
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the operator emits a
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the operator emits an
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the operator transfers the
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner adjusts owners
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner adjusts owners
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner clears the
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner emits a
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner emits an
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner transfers the
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner without an
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner without an
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner without an
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner without an
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner without an
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when called by the owner without an
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when sent to the owner clears the
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when sent to the owner emits only
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when sent to the owner keeps ownership
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when sent to the owner keeps same
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when sent to the owner keeps the
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when the address of the previous owner
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when the address to transfer the token
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when the given token ID does not
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a user account when the sender is not authorized for
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract calls onERC721Received 
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract calls onERC721Received from approved 
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the approved individual
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the approved individual
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the approved individual
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the approved individual
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the approved individual
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the approved individual
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the operator adjusts
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the operator adjusts
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the operator clears
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the operator emits
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the operator emits
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the operator transfers
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner adjusts
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner adjusts
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner clears
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner emits
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner emits
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner transfers
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner without
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner without
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner without
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner without
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner without
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when called by the owner without
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when sent to the owner clears
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when sent to the owner emits
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when sent to the owner keeps
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when sent to the owner keeps
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when sent to the owner keeps
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when the address of the previous
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when the address to transfer the
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when the given token ID does
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract when the sender is not authorized
+passed Contract ERC721 with minted tokens transfers via safeTransferFrom without data to a valid receiver contract with an invalid token id reverts
 passed Contract ERC721 with minted tokens transfers via transferFrom when called by the approved individual adjusts owners balances 
 passed Contract ERC721 with minted tokens transfers via transferFrom when called by the approved individual adjusts owners tokens by index 
 passed Contract ERC721 with minted tokens transfers via transferFrom when called by the approved individual clears the approval for the token ID
@@ -872,23 +1270,20 @@ broken Contract ERC777PresetFixedSupply returns the name
 broken Contract ERC777 relative order of hooks send 
 broken Contract ERC777 with default operators does not emit AuthorizedOperator events for default operators 
 broken Contract ERC777 with no default operators default operators list is empty 
-broken Contract Escrow as an escrow deposits can accept a single deposit 
-broken Contract Escrow as an escrow deposits can add multiple deposits on a single account 
-broken Contract Escrow as an escrow deposits can track deposits to multiple accounts 
+failed Contract Escrow as an escrow deposits can accept a single deposit 
+failed Contract Escrow as an escrow deposits can add multiple deposits on a single account 
+failed Contract Escrow as an escrow deposits can track deposits to multiple accounts 
 passed Contract Escrow as an escrow deposits can accept an empty deposit 
-broken Contract Escrow as an escrow deposits emits a deposited event 
+passed Contract Escrow as an escrow deposits emits a deposited event 
 passed Contract Escrow as an escrow deposits only the owner can deposit 
-broken Contract Escrow as an escrow withdrawals can do an empty withdrawal 
 broken Contract Escrow as an escrow withdrawals can withdraw payments 
-broken Contract Escrow as an escrow withdrawals emits a withdrawn event 
+passed Contract Escrow as an escrow withdrawals can do an empty withdrawal 
+passed Contract Escrow as an escrow withdrawals emits a withdrawn event 
 passed Contract Escrow as an escrow withdrawals only the owner can withdraw 
-broken Contract Governor Cancel After deadline after each hook for run 
 broken Contract Governor Cancel After deadline run 
 failed Contract Governor Cancel After execution after each hook for run 
 broken Contract Governor Cancel After execution run 
-broken Contract Governor Cancel After proposal after each hook for run 
 broken Contract Governor Cancel After proposal run 
-broken Contract Governor Cancel After vote after each hook for run 
 broken Contract Governor Cancel After vote run 
 passed Contract Governor Cancel Before proposal run 
 skipped Contract GovernorCompatibilityBravo deployment check 
@@ -924,20 +1319,18 @@ skipped Contract Governor Proposal length missmatch 1
 skipped Contract Governor Proposal length missmatch 2 
 skipped Contract Governor Proposal length missmatch 3 
 broken Contract Governor scenario double cast run 
-failed Contract Governor scenario duplicate executed proposal after each hook for run 
 broken Contract Governor scenario duplicate executed proposal run 
-failed Contract Governor scenario duplicate pending proposal after each hook for run 
 broken Contract Governor scenario duplicate pending proposal run 
 broken Contract Governor scenario Invalid vote type run 
 passed Contract Governor scenario missing proposal run 
 broken Contract Governor scenario nominal after each hook for run 
-broken Contract Governor scenario nominal run 
+failed Contract Governor scenario nominal run 
 broken Contract Governor scenario quorum not reached run 
 broken Contract Governor scenario receiver revert without reason run 
 broken Contract Governor scenario receiver revert with reason run 
 broken Contract Governor scenario score not reached run 
 broken Contract Governor scenario send ethers after each hook for run 
-broken Contract Governor scenario send ethers run 
+failed Contract Governor scenario send ethers run 
 broken Contract Governor scenario vote not over run 
 failed Contract Governor scenario vote with signature after each hook for run 
 broken Contract Governor scenario vote with signature run 
@@ -951,22 +1344,67 @@ broken Contract Governor Settings update setVotingPeriod to 0 run
 skipped Contract Governor Settings update update protected setProposalThreshold 
 skipped Contract Governor Settings update update protected setVotingDelay 
 skipped Contract Governor Settings update update protected setVotingPeriod 
-broken Contract Governor state Defeated after each hook for run 
 broken Contract Governor state Defeated run 
-broken Contract Governor state Executed after each hook for run 
+failed Contract Governor state Executed after each hook for run 
 broken Contract Governor state Executed run 
-broken Contract Governor state Pending Active after each hook for run 
-broken Contract Governor state Pending Active run 
-broken Contract Governor state Succeeded after each hook for run 
+failed Contract Governor state Pending Active after each hook for run 
+passed Contract Governor state Pending Active run 
+failed Contract Governor state Succeeded after each hook for run 
 broken Contract Governor state Succeeded run 
 passed Contract Governor state Unset run 
-broken Contract GovernorTimelockCompound Contract interface ERC165 ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
+broken Contract GovernorTimelockCompound cancel after queue prevents executing run 
+failed Contract GovernorTimelockCompound cancel after queue prevents executing after each hook for run 
+broken Contract GovernorTimelockCompound cancel before queue prevents scheduling run 
+failed Contract GovernorTimelockCompound cancel before queue prevents scheduling after each hook for run 
+failed Contract GovernorTimelockCompound Contract interface ERC165 ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
+passed Contract GovernorTimelockCompound Contract interface ERC165 ERC165 s supportsInterface bytes4 claims support skip on coverage 
+passed Contract GovernorTimelockCompound Contract interface ERC165 supportsInterface bytes4 has to be implemented 
+passed Contract GovernorTimelockCompound Contract interface Governor castVoteBySig uint256 uint8 uint8 bytes32 bytes32 has to be implemented 
+passed Contract GovernorTimelockCompound Contract interface Governor castVote uint256 uint8 has to be implemented 
+passed Contract GovernorTimelockCompound Contract interface Governor castVoteWithReason uint256 uint8 string has to be implemented 
+passed Contract GovernorTimelockCompound Contract interface Governor COUNTING MODE has to be implemented 
+failed Contract GovernorTimelockCompound Contract interface Governor ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
+passed Contract GovernorTimelockCompound Contract interface Governor ERC165 s supportsInterface bytes4 claims support skip on coverage 
+passed Contract GovernorTimelockCompound Contract interface Governor execute address uint256 bytes bytes32 has to be implemented 
+passed Contract GovernorTimelockCompound Contract interface Governor getVotes address uint256 has to be implemented 
+passed Contract GovernorTimelockCompound Contract interface Governor hashProposal address uint256 bytes bytes32 has to be implemented 
+passed Contract GovernorTimelockCompound Contract interface Governor hasVoted uint256 address has to be implemented 
+passed Contract GovernorTimelockCompound Contract interface Governor name has to be implemented 
+passed Contract GovernorTimelockCompound Contract interface Governor proposalDeadline uint256 has to be implemented 
+passed Contract GovernorTimelockCompound Contract interface Governor proposalSnapshot uint256 has to be implemented 
+passed Contract GovernorTimelockCompound Contract interface Governor propose address uint256 bytes string has to be implemented 
+passed Contract GovernorTimelockCompound Contract interface Governor quorum uint256 has to be implemented 
+passed Contract GovernorTimelockCompound Contract interface Governor state uint256 has to be implemented 
+passed Contract GovernorTimelockCompound Contract interface GovernorTimelock ERC165 s supportsInterface bytes4 claims support skip on coverage 
+passed Contract GovernorTimelockCompound Contract interface GovernorTimelock ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
+passed Contract GovernorTimelockCompound Contract interface GovernorTimelock proposalEta uint256 has to be implemented 
+passed Contract GovernorTimelockCompound Contract interface GovernorTimelock queue address uint256 bytes bytes32 has to be implemented 
+passed Contract GovernorTimelockCompound Contract interface GovernorTimelock timelock has to be implemented 
+passed Contract GovernorTimelockCompound Contract interface Governor version has to be implemented 
+passed Contract GovernorTimelockCompound Contract interface Governor votingDelay has to be implemented 
+passed Contract GovernorTimelockCompound Contract interface Governor votingPeriod has to be implemented 
+broken Contract GovernorTimelockCompound deplicated underlying call run 
 skipped Contract GovernorTimelockCompound doesn t accept ether transfers 
+broken Contract GovernorTimelockCompound nominal after each hook for run 
+broken Contract GovernorTimelockCompound nominal run 
+failed Contract GovernorTimelockCompound not queued after each hook for run 
+broken Contract GovernorTimelockCompound not queued run 
 skipped Contract GovernorTimelockCompound post deployment check 
-broken Contract GovernorTimelockControl cancel after queue prevents execution after each hook for run 
+failed Contract GovernorTimelockCompound re queue re execute after each hook for run 
+broken Contract GovernorTimelockCompound re queue re execute run 
+failed Contract GovernorTimelockCompound to early after each hook for run 
+broken Contract GovernorTimelockCompound to early run 
+failed Contract GovernorTimelockCompound to late after each hook for run 
+broken Contract GovernorTimelockCompound to late run 
+broken Contract GovernorTimelockCompound transfer timelock to new governor using workflow after each hook for run 
+broken Contract GovernorTimelockCompound transfer timelock to new governor using workflow run 
+skipped Contract GovernorTimelockCompound updateTimelock protected 
+broken Contract GovernorTimelockCompound updateTimelock using workflow after each hook for run 
+broken Contract GovernorTimelockCompound updateTimelock using workflow run 
 broken Contract GovernorTimelockControl cancel after queue prevents execution run 
-broken Contract GovernorTimelockControl cancel before queue prevents scheduling after each hook for run 
+failed Contract GovernorTimelockControl cancel after queue prevents execution after each hook for run 
 broken Contract GovernorTimelockControl cancel before queue prevents scheduling run 
+failed Contract GovernorTimelockControl cancel before queue prevents scheduling after each hook for run 
 failed Contract GovernorTimelockControl Contract interface ERC165 ERC165 s supportsInterface bytes4 uses less than 30k gas skip on coverage 
 passed Contract GovernorTimelockControl Contract interface ERC165 ERC165 s supportsInterface bytes4 claims support skip on coverage 
 passed Contract GovernorTimelockControl Contract interface ERC165 supportsInterface bytes4 has to be implemented 
@@ -999,12 +1437,12 @@ broken Contract GovernorTimelockControl executed by other proposer after each ho
 broken Contract GovernorTimelockControl executed by other proposer run 
 broken Contract GovernorTimelockControl nominal after each hook for run 
 broken Contract GovernorTimelockControl nominal run 
-broken Contract GovernorTimelockControl not queued after each hook for run 
+failed Contract GovernorTimelockControl not queued after each hook for run 
 broken Contract GovernorTimelockControl not queued run 
 skipped Contract GovernorTimelockControl post deployment check 
-broken Contract GovernorTimelockControl re queue re execute after each hook for run 
+failed Contract GovernorTimelockControl re queue re execute after each hook for run 
 broken Contract GovernorTimelockControl re queue re execute run 
-broken Contract GovernorTimelockControl to early after each hook for run 
+failed Contract GovernorTimelockControl to early after each hook for run 
 broken Contract GovernorTimelockControl to early run 
 skipped Contract GovernorTimelockControl updateTimelock protected 
 broken Contract GovernorTimelockControl updateTimelock using workflow after each hook for run 
@@ -1053,9 +1491,9 @@ passed Contract MinimalForwarder with message verify invalid signature tampered 
 passed Contract MinimalForwarder with message verify invalid signature tampered to 
 passed Contract MinimalForwarder with message verify invalid signature tampered value 
 failed Contract MinimalForwarder with message verify valid signature success 
-broken Contract MulticallToken batches function calls 
+passed Contract MulticallToken batches function calls 
 passed Contract MulticallToken bubbles up revert reasons 
-broken Contract MulticallToken returns an array with the result of each call 
+passed Contract MulticallToken returns an array with the result of each call 
 passed Contract MulticallToken reverts previous calls 
 passed Contract Ownable has an owner 
 passed Contract Ownable renounce ownership loses owner after renouncement 
@@ -1074,14 +1512,14 @@ passed Contract Pausable when unpaused when paused unpausing when unpaused emits
 passed Contract Pausable when unpaused when paused unpausing when unpaused reverts when re unpausing 
 passed Contract Pausable when unpaused when paused unpausing when unpaused should prevent drastic measure 
 passed Contract Pausable when unpaused when paused unpausing when unpaused should resume allowing normal process 
-broken Contract PaymentSplitter once deployed accepts payments Ether 
+failed Contract PaymentSplitter once deployed accepts payments Ether 
 passed Contract PaymentSplitter once deployed accepts payments Token 
-broken Contract PaymentSplitter once deployed distributes funds to payees Ether 
-broken Contract PaymentSplitter once deployed distributes funds to payees Token 
+failed Contract PaymentSplitter once deployed distributes funds to payees Ether 
+passed Contract PaymentSplitter once deployed distributes funds to payees Token 
 passed Contract PaymentSplitter once deployed has payees 
 passed Contract PaymentSplitter once deployed has total shares 
-broken Contract PaymentSplitter once deployed release Ether reverts if non payee want to claim 
 failed Contract PaymentSplitter once deployed release Ether reverts if no funds to claim 
+passed Contract PaymentSplitter once deployed release Ether reverts if non payee want to claim 
 passed Contract PaymentSplitter once deployed release Token reverts if no funds to claim 
 passed Contract PaymentSplitter once deployed release Token reverts if non payee want to claim 
 passed Contract PaymentSplitter once deployed shares does not store shares if address is not payee 
@@ -1092,26 +1530,26 @@ passed Contract PaymentSplitter rejects more shares than payees
 passed Contract PaymentSplitter rejects null payees 
 passed Contract PaymentSplitter rejects repeated payees 
 passed Contract PaymentSplitter rejects zero valued shares 
-broken Contract ProxyAdmin changeProxyAdmin changes proxy admin 
+passed Contract ProxyAdmin changeProxyAdmin changes proxy admin 
 passed Contract ProxyAdmin changeProxyAdmin fails to change proxy admin if its not the proxy owner 
-passed Contract ProxyAdmin getProxyAdmin call to invalid proxy 
+failed Contract ProxyAdmin getProxyAdmin call to invalid proxy 
 passed Contract ProxyAdmin getProxyAdmin returns proxyAdmin as admin of the proxy 
-passed Contract ProxyAdmin getProxyImplementation call to invalid proxy 
+failed Contract ProxyAdmin getProxyImplementation call to invalid proxy 
 passed Contract ProxyAdmin getProxyImplementation returns proxy implementation address 
 passed Contract ProxyAdmin has an owner 
-broken Contract ProxyAdmin upgradeAndCall with authorized account with valid callData upgrades implementation 
 passed Contract ProxyAdmin upgradeAndCall with authorized account with invalid callData fails to upgrade 
+passed Contract ProxyAdmin upgradeAndCall with authorized account with valid callData upgrades implementation 
 passed Contract ProxyAdmin upgradeAndCall with unauthorized account fails to upgrade 
-broken Contract ProxyAdmin upgrade with authorized account upgrades implementation 
+passed Contract ProxyAdmin upgrade with authorized account upgrades implementation 
 passed Contract ProxyAdmin upgrade with unauthorized account fails to upgrade 
 broken Contract PullPayment payments can record an async payment correctly 
 passed Contract ReentrancyGuard does not allow indirect local recursion 
 passed Contract ReentrancyGuard does not allow local recursion 
 passed Contract ReentrancyGuard does not allow remote callback 
 passed Contract ReentrancyGuard nonReentrant function can be called 
-broken Contract RefundEscrow once deployed active state accepts deposits 
-broken Contract RefundEscrow once deployed active state does not allow beneficiary withdrawal 
-broken Contract RefundEscrow once deployed active state does not refund refundees 
+passed Contract RefundEscrow once deployed active state accepts deposits 
+passed Contract RefundEscrow once deployed active state does not allow beneficiary withdrawal 
+passed Contract RefundEscrow once deployed active state does not refund refundees 
 passed Contract RefundEscrow once deployed active state has beneficiary and state 
 broken Contract RefundEscrow once deployed closed state rejects deposits 
 passed Contract RefundEscrow once deployed only the owner can enter closed state 
@@ -1208,9 +1646,9 @@ passed Contract SafeCast toUint96 downcasts 1
 passed Contract SafeCast toUint96 downcasts 2 96 1 79228162514264337593543950335 
 passed Contract SafeCast toUint96 reverts when downcasting 2 96 1 79228162514264337593543950337 
 passed Contract SafeCast toUint96 reverts when downcasting 2 96 79228162514264337593543950336 
+failed Contract SafeERC20 with address that has no contract code reverts on decreaseAllowance 
+failed Contract SafeERC20 with address that has no contract code reverts on increaseAllowance 
 passed Contract SafeERC20 with address that has no contract code reverts on approve 
-passed Contract SafeERC20 with address that has no contract code reverts on decreaseAllowance 
-passed Contract SafeERC20 with address that has no contract code reverts on increaseAllowance 
 passed Contract SafeERC20 with address that has no contract code reverts on transfer 
 passed Contract SafeERC20 with address that has no contract code reverts on transferFrom 
 passed Contract SafeERC20 with token that returns false on all calls reverts on approve 
@@ -1218,14 +1656,28 @@ passed Contract SafeERC20 with token that returns false on all calls reverts on 
 passed Contract SafeERC20 with token that returns false on all calls reverts on increaseAllowance 
 passed Contract SafeERC20 with token that returns false on all calls reverts on transfer 
 passed Contract SafeERC20 with token that returns false on all calls reverts on transferFrom 
-broken Contract SafeERC20 with token that returns no boolean values approvals with non zero allowance reverts when approving a non zero allowance
-broken Contract SafeERC20 with token that returns no boolean values approvals with zero allowance doesn t revert when approving a non zero
-broken Contract SafeERC20 with token that returns no boolean values doesn t revert on transfer 
-broken Contract SafeERC20 with token that returns no boolean values doesn t revert on transferFrom 
-broken Contract SafeERC20 with token that returns true on all calls approvals with non zero allowance reverts when approving a non zero
-broken Contract SafeERC20 with token that returns true on all calls approvals with zero allowance doesn t revert when approving a non
-broken Contract SafeERC20 with token that returns true on all calls doesn t revert on transfer 
-broken Contract SafeERC20 with token that returns true on all calls doesn t revert on transferFrom 
+passed Contract SafeERC20 with token that returns no boolean values approvals with non zero allowance doesn t revert when approving a zero
+passed Contract SafeERC20 with token that returns no boolean values approvals with non zero allowance doesn t revert when decreasing the allowance
+passed Contract SafeERC20 with token that returns no boolean values approvals with non zero allowance doesn t revert when increasing the allowance
+passed Contract SafeERC20 with token that returns no boolean values approvals with non zero allowance reverts when approving a non zero allowance
+passed Contract SafeERC20 with token that returns no boolean values approvals with non zero allowance reverts when decreasing the allowance to a
+passed Contract SafeERC20 with token that returns no boolean values approvals with zero allowance doesn t revert when approving a non zero
+passed Contract SafeERC20 with token that returns no boolean values approvals with zero allowance doesn t revert when approving a zero allowance
+passed Contract SafeERC20 with token that returns no boolean values approvals with zero allowance doesn t revert when increasing the allowance 
+passed Contract SafeERC20 with token that returns no boolean values approvals with zero allowance reverts when decreasing the allowance 
+passed Contract SafeERC20 with token that returns no boolean values doesn t revert on transfer 
+passed Contract SafeERC20 with token that returns no boolean values doesn t revert on transferFrom 
+passed Contract SafeERC20 with token that returns true on all calls approvals with non zero allowance doesn t revert when approving a
+passed Contract SafeERC20 with token that returns true on all calls approvals with non zero allowance doesn t revert when decreasing the
+passed Contract SafeERC20 with token that returns true on all calls approvals with non zero allowance doesn t revert when increasing the
+passed Contract SafeERC20 with token that returns true on all calls approvals with non zero allowance reverts when approving a non zero
+passed Contract SafeERC20 with token that returns true on all calls approvals with non zero allowance reverts when decreasing the allowance to
+passed Contract SafeERC20 with token that returns true on all calls approvals with zero allowance doesn t revert when approving a non
+passed Contract SafeERC20 with token that returns true on all calls approvals with zero allowance doesn t revert when approving a zero
+passed Contract SafeERC20 with token that returns true on all calls approvals with zero allowance doesn t revert when increasing the allowance
+passed Contract SafeERC20 with token that returns true on all calls approvals with zero allowance reverts when decreasing the allowance 
+passed Contract SafeERC20 with token that returns true on all calls doesn t revert on transfer 
+passed Contract SafeERC20 with token that returns true on all calls doesn t revert on transferFrom 
 passed Contract SafeMath memory leakage add 
 passed Contract SafeMath memory leakage div 
 passed Contract SafeMath memory leakage mod 
@@ -1242,21 +1694,21 @@ passed Contract SafeMath with custom revert message mod modulos correctly when t
 passed Contract SafeMath with custom revert message mod reverts with a 0 divisor 
 passed Contract SafeMath with custom revert message sub reverts if subtraction result would be negative 
 passed Contract SafeMath with custom revert message sub subtracts correctly 
+failed Contract SafeMath with default revert message add reverts on addition overflow 
 passed Contract SafeMath with default revert message add adds correctly 
-passed Contract SafeMath with default revert message add reverts on addition overflow 
+failed Contract SafeMath with default revert message div reverts on division by zero 
 passed Contract SafeMath with default revert message div divides correctly 
 passed Contract SafeMath with default revert message div divides zero correctly 
 passed Contract SafeMath with default revert message div returns complete number result on non even division 
-passed Contract SafeMath with default revert message div reverts on division by zero 
+failed Contract SafeMath with default revert message mod reverts with a 0 divisor 
 passed Contract SafeMath with default revert message mod modulos correctly when the dividend is a multiple of the divisor 
 passed Contract SafeMath with default revert message mod modulos correctly when the dividend is equal to the divisor 
 passed Contract SafeMath with default revert message mod modulos correctly when the dividend is larger than the divisor 
 passed Contract SafeMath with default revert message mod modulos correctly when the dividend is smaller than the divisor 
-passed Contract SafeMath with default revert message mod reverts with a 0 divisor 
+failed Contract SafeMath with default revert message mul reverts on multiplication overflow 
 passed Contract SafeMath with default revert message mul multiplies by zero correctly 
 passed Contract SafeMath with default revert message mul multiplies correctly 
-passed Contract SafeMath with default revert message mul reverts on multiplication overflow 
-passed Contract SafeMath with default revert message sub reverts if subtraction result would be negative 
+failed Contract SafeMath with default revert message sub reverts if subtraction result would be negative 
 passed Contract SafeMath with default revert message sub subtracts correctly 
 passed Contract SafeMath with flag add adds correctly 
 passed Contract SafeMath with flag add reverts on addition overflow 
@@ -1282,19 +1734,19 @@ passed Contract SignatureChecker ERC1271 ERC1271 wallet with invalid signer
 passed Contract SignatureChecker ERC1271 ERC1271 wallet with matching signer and signature 
 passed Contract SignedSafeMath add adds correctly if it does not overflow and the result is negative 
 passed Contract SignedSafeMath add adds correctly if it does not overflow and the result is positive 
-passed Contract SignedSafeMath add reverts on negative addition overflow 
-passed Contract SignedSafeMath add reverts on positive addition overflow 
+failed Contract SignedSafeMath add reverts on negative addition overflow 
+failed Contract SignedSafeMath add reverts on positive addition overflow 
 passed Contract SignedSafeMath div divides correctly 
 passed Contract SignedSafeMath div divides zero correctly 
 passed Contract SignedSafeMath div returns complete number result on non even division 
-passed Contract SignedSafeMath div reverts on division by zero 
-passed Contract SignedSafeMath div reverts on overflow negative second 
+failed Contract SignedSafeMath div reverts on division by zero 
+failed Contract SignedSafeMath div reverts on overflow negative second 
 passed Contract SignedSafeMath mul multiplies by zero correctly 
 passed Contract SignedSafeMath mul multiplies correctly 
-passed Contract SignedSafeMath mul reverts on multiplication overflow positive operands 
-passed Contract SignedSafeMath mul reverts when minimum integer is multiplied by 1 
-passed Contract SignedSafeMath sub reverts on negative subtraction overflow 
-passed Contract SignedSafeMath sub reverts on positive subtraction overflow 
+failed Contract SignedSafeMath mul reverts on multiplication overflow positive operands 
+failed Contract SignedSafeMath mul reverts when minimum integer is multiplied by 1 
+failed Contract SignedSafeMath sub reverts on negative subtraction overflow 
+failed Contract SignedSafeMath sub reverts on positive subtraction overflow 
 passed Contract SignedSafeMath sub subtracts correctly if it does not overflow and the result is negative 
 passed Contract SignedSafeMath sub subtracts correctly if it does not overflow and the result is positive 
 passed Contract StorageSlot address storage slot get from other slot 
@@ -1376,43 +1828,58 @@ passed Contract TokenTimelock with token once deployed cannot be released before
 passed Contract TokenTimelock with token once deployed cannot be released just before time limit 
 passed Contract TokenTimelock with token rejects a release time in the past 
 passed Contract TransparentUpgradeableProxy cannot be initialized with a non contract address 
-passed Contract TransparentUpgradeableProxy changeAdmin when the new proposed admin is not the zero address when the sender is not the admin reverts
+failed Contract TransparentUpgradeableProxy changeAdmin when the new proposed admin is not the zero address when the sender is not the admin reverts
 passed Contract TransparentUpgradeableProxy changeAdmin when the new proposed admin is not the zero address when the sender is the admin assigns new
 passed Contract TransparentUpgradeableProxy changeAdmin when the new proposed admin is not the zero address when the sender is the admin emits an
 passed Contract TransparentUpgradeableProxy changeAdmin when the new proposed admin is the zero address reverts 
 passed Contract TransparentUpgradeableProxy implementation delegates to the implementation 
 passed Contract TransparentUpgradeableProxy implementation returns the current implementation address 
-broken Contract TransparentUpgradeableProxy initialization without parameters non payable when not sending balance initializes the proxy 
-passed Contract TransparentUpgradeableProxy initialization without parameters non payable when sending some balance reverts 
+failed Contract TransparentUpgradeableProxy initialization without parameters non payable when not sending balance has expected balance 
+failed Contract TransparentUpgradeableProxy initialization without parameters non payable when sending some balance reverts 
+passed Contract TransparentUpgradeableProxy initialization without parameters non payable when not sending balance initializes the proxy 
 skipped Contract TransparentUpgradeableProxy initialization without parameters non payable when not sending balance sets the implementation address 
-broken Contract TransparentUpgradeableProxy initialization without parameters payable when not sending balance initializes the proxy 
-broken Contract TransparentUpgradeableProxy initialization without parameters payable when sending some balance initializes the proxy 
+failed Contract TransparentUpgradeableProxy initialization without parameters payable when not sending balance has expected balance 
+failed Contract TransparentUpgradeableProxy initialization without parameters payable when sending some balance has expected balance 
+passed Contract TransparentUpgradeableProxy initialization without parameters payable when not sending balance initializes the proxy 
+passed Contract TransparentUpgradeableProxy initialization without parameters payable when sending some balance initializes the proxy 
 skipped Contract TransparentUpgradeableProxy initialization without parameters payable when not sending balance sets the implementation address 
 skipped Contract TransparentUpgradeableProxy initialization without parameters payable when sending some balance sets the implementation address 
-broken Contract TransparentUpgradeableProxy initialization with parameters non payable when not sending balance initializes the proxy 
-passed Contract TransparentUpgradeableProxy initialization with parameters non payable when sending some balance reverts 
+failed Contract TransparentUpgradeableProxy initialization with parameters non payable when not sending balance has expected balance 
+failed Contract TransparentUpgradeableProxy initialization with parameters non payable when sending some balance reverts 
+passed Contract TransparentUpgradeableProxy initialization with parameters non payable when not sending balance initializes the proxy 
 skipped Contract TransparentUpgradeableProxy initialization with parameters non payable when not sending balance sets the implementation address 
-broken Contract TransparentUpgradeableProxy initialization with parameters payable when not sending balance initializes the proxy 
-broken Contract TransparentUpgradeableProxy initialization with parameters payable when sending some balance initializes the proxy 
+failed Contract TransparentUpgradeableProxy initialization with parameters payable when not sending balance has expected balance 
+failed Contract TransparentUpgradeableProxy initialization with parameters payable when sending some balance has expected balance 
+passed Contract TransparentUpgradeableProxy initialization with parameters payable when not sending balance initializes the proxy 
+passed Contract TransparentUpgradeableProxy initialization with parameters payable when sending some balance initializes the proxy 
 skipped Contract TransparentUpgradeableProxy initialization with parameters payable when not sending balance sets the implementation address 
 skipped Contract TransparentUpgradeableProxy initialization with parameters payable when sending some balance sets the implementation address 
 passed Contract TransparentUpgradeableProxy initialization with parameters reverting initialization reverts 
-broken Contract TransparentUpgradeableProxy regression should add fallback function 
-broken Contract TransparentUpgradeableProxy regression should add new function 
-broken Contract TransparentUpgradeableProxy regression should change function signature 
-passed Contract TransparentUpgradeableProxy regression should remove fallback function 
-broken Contract TransparentUpgradeableProxy regression should remove function 
+passed Contract TransparentUpgradeableProxy regression should add fallback function 
+passed Contract TransparentUpgradeableProxy regression should add new function 
+passed Contract TransparentUpgradeableProxy regression should change function signature 
+failed Contract TransparentUpgradeableProxy regression should remove fallback function 
+failed Contract TransparentUpgradeableProxy regression should remove function 
 passed Contract TransparentUpgradeableProxy storage should store the admin proxy in specified location 
 passed Contract TransparentUpgradeableProxy storage should store the implementation address in specified location 
 passed Contract TransparentUpgradeableProxy transparent proxy proxy admin cannot call delegated functions 
 passed Contract TransparentUpgradeableProxy transparent proxy when function names clash when sender is other should delegate to implementation 
 passed Contract TransparentUpgradeableProxy transparent proxy when function names clash when sender is proxy admin should run the proxy function 
-broken Contract TransparentUpgradeableProxy upgradeToAndCall with migrations when the sender is the admin when upgrading to V1 upgrades to the requested version and
-passed Contract TransparentUpgradeableProxy upgradeToAndCall with migrations when the sender is not the admin reverts 
-broken Contract TransparentUpgradeableProxy upgradeToAndCall without migrations when the call does not fail when the sender is the admin upgrades to the requested
+failed Contract TransparentUpgradeableProxy upgradeToAndCall with migrations when the sender is not the admin reverts 
+failed Contract TransparentUpgradeableProxy upgradeToAndCall with migrations when the sender is the admin when upgrading to V1 calls the initialize function and sends
+failed Contract TransparentUpgradeableProxy upgradeToAndCall with migrations when the sender is the admin when upgrading to V1 when upgrading to V2 calls the
+failed Contract TransparentUpgradeableProxy upgradeToAndCall with migrations when the sender is the admin when upgrading to V1 when upgrading to V2 when upgrading
+passed Contract TransparentUpgradeableProxy upgradeToAndCall with migrations when the sender is the admin when upgrading to V1 upgrades to the requested version and
+passed Contract TransparentUpgradeableProxy upgradeToAndCall with migrations when the sender is the admin when upgrading to V1 when upgrading to V2 upgrades to
+passed Contract TransparentUpgradeableProxy upgradeToAndCall with migrations when the sender is the admin when upgrading to V1 when upgrading to V2 when upgrading
+failed Contract TransparentUpgradeableProxy upgradeToAndCall without migrations when the call does not fail when the sender is not the admin reverts 
+failed Contract TransparentUpgradeableProxy upgradeToAndCall without migrations when the call does not fail when the sender is the admin sends given value to
 passed Contract TransparentUpgradeableProxy upgradeToAndCall without migrations when the call does fail reverts 
-passed Contract TransparentUpgradeableProxy upgradeToAndCall without migrations when the call does not fail when the sender is not the admin reverts 
-passed Contract TransparentUpgradeableProxy upgradeTo when the sender is not the admin reverts 
+passed Contract TransparentUpgradeableProxy upgradeToAndCall without migrations when the call does not fail when the sender is the admin calls the initializer function
+passed Contract TransparentUpgradeableProxy upgradeToAndCall without migrations when the call does not fail when the sender is the admin emits an event 
+passed Contract TransparentUpgradeableProxy upgradeToAndCall without migrations when the call does not fail when the sender is the admin upgrades to the requested
+skipped Contract TransparentUpgradeableProxy upgradeToAndCall without migrations when the call does not fail when the sender is the admin uses the storage of
+failed Contract TransparentUpgradeableProxy upgradeTo when the sender is not the admin reverts 
 passed Contract TransparentUpgradeableProxy upgradeTo when the sender is the admin when the given implementation is different from the current one emits an
 passed Contract TransparentUpgradeableProxy upgradeTo when the sender is the admin when the given implementation is different from the current one upgrades to
 passed Contract TransparentUpgradeableProxy upgradeTo when the sender is the admin when the given implementation is the zero address reverts 
@@ -1430,79 +1897,70 @@ passed Contract UpgradeableBeacon once deployed returns implementation
 passed Contract UUPSUpgradeable reject proxy address as implementation 
 passed Contract UUPSUpgradeable reject upgrade to broken upgradeable implementation 
 passed Contract UUPSUpgradeable reject upgrade to non uups implementation 
-broken Contract UUPSUpgradeable upgrade to and unsafe upgradeable implementation 
-broken Contract UUPSUpgradeable upgrade to upgradeable implementation 
-broken Contract UUPSUpgradeable upgrade to upgradeable implementation with call 
+passed Contract UUPSUpgradeable upgrade to and unsafe upgradeable implementation 
+passed Contract UUPSUpgradeable upgrade to upgradeable implementation 
+passed Contract UUPSUpgradeable upgrade to upgradeable implementation with call 
 passed Contract VestingWallet check vesting contract 
 passed Contract VestingWallet rejects zero address for beneficiary 
 passed Contract VestingWallet vesting schedule ERC20 vesting check vesting schedule 
-broken Contract VestingWallet vesting schedule ERC20 vesting execute vesting schedule 
-broken Contract VestingWallet vesting schedule Eth vesting check vesting schedule 
+failed Contract VestingWallet vesting schedule ERC20 vesting execute vesting schedule 
+failed Contract VestingWallet vesting schedule Eth vesting check vesting schedule 
+failed Contract VestingWallet vesting schedule Eth vesting execute vesting schedule 
 Status Description 
-passed Ethers js shouldCheckStaticJsonRpcProvider 
-passed Ethers js shouldConnectViaEthersJs 
-passed Ethers js shouldCountTransactions 
+broken Ethers js shouldConnectViaEthersJs 
+broken Ethers js shouldCountTransactions 
 broken Ethers js shouldCreateAcccountWithEthersJs 
 passed Ethers js testContracts 
-broken Ethers js testQueryHistoricEvents 
 broken Ethers js testQueryingBlockchain 
-broken Ethers js testReadOnlyMethods 
 passed Ethers js testSigner 
-broken Ethers js testSigningMessages 
-passed Ethers js testStateChangingMethods 
 broken Ethers js testWritingToTheBlockchain 
-passed ethjs Connection test js 
-broken ethjs test01 
 broken Hardhat advanced Greeter Should return the new greeting once it s changed 
 passed migrate imports js every new path exists 
 passed migrate imports js replaces import paths in a file 
-passed tests brownie test brownie test brownie connect 
-passed tests brownie test brownie test brownie deploy 
+failed tests brownie test brownie test brownie connect 
+broken tests brownie test brownie test brownie deploy 
+broken tests brownie token tests test approve test approval event fires 
+broken tests brownie token tests test approve test approve 
+broken tests brownie token tests test approve test approve self 
+broken tests brownie token tests test approve test initial approval is zero 0 
+broken tests brownie token tests test approve test initial approval is zero 1 
+broken tests brownie token tests test approve test initial approval is zero 2 
+broken tests brownie token tests test approve test initial approval is zero 3 
+broken tests brownie token tests test approve test initial approval is zero 4 
+broken tests brownie token tests test approve test modify approve 
+broken tests brownie token tests test approve test only affects target 
 broken tests brownie token tests test approve test returns true 
-passed tests brownie token tests test approve test approval event fires 
-passed tests brownie token tests test approve test approve 
-passed tests brownie token tests test approve test approve self 
-passed tests brownie token tests test approve test initial approval is zero 0 
-passed tests brownie token tests test approve test initial approval is zero 1 
-passed tests brownie token tests test approve test initial approval is zero 2 
-passed tests brownie token tests test approve test initial approval is zero 3 
-passed tests brownie token tests test approve test initial approval is zero 4 
-passed tests brownie token tests test approve test modify approve 
-passed tests brownie token tests test approve test only affects target 
-passed tests brownie token tests test approve test revoke approve 
+broken tests brownie token tests test approve test revoke approve 
+broken tests brownie token tests test transferFrom test caller approval affected 
+broken tests brownie token tests test transferFrom test caller balance not affected 
 broken tests brownie token tests test transferFrom test insufficient approval 
 broken tests brownie token tests test transferFrom test insufficient balance 
+broken tests brownie token tests test transferFrom test no approval 
+broken tests brownie token tests test transferFrom test receiver approval not affected 
+broken tests brownie token tests test transferFrom test receiver balance increases 
 broken tests brownie token tests test transferFrom test returns true 
-failed tests brownie token tests test transferFrom test no approval 
-failed tests brownie token tests test transferFrom test revoked approval 
-failed tests brownie token tests test transferFrom test transfer to self no approval 
-passed tests brownie token tests test transferFrom test caller approval affected 
-passed tests brownie token tests test transferFrom test caller balance not affected 
-passed tests brownie token tests test transferFrom test receiver approval not affected 
-passed tests brownie token tests test transferFrom test receiver balance increases 
-passed tests brownie token tests test transferFrom test sender balance decreases 
-passed tests brownie token tests test transferFrom test total supply not affected 
-passed tests brownie token tests test transferFrom test transfer event fires 
-passed tests brownie token tests test transferFrom test transfer full balance 
-passed tests brownie token tests test transferFrom test transfer to self 
-passed tests brownie token tests test transferFrom test transfer zero tokens 
-passed tests brownie token tests test transferFrom test transfer zero tokens without approval 
+broken tests brownie token tests test transferFrom test revoked approval 
+broken tests brownie token tests test transferFrom test sender balance decreases 
+broken tests brownie token tests test transferFrom test total supply not affected 
+broken tests brownie token tests test transferFrom test transfer event fires 
+broken tests brownie token tests test transferFrom test transfer full balance 
+broken tests brownie token tests test transferFrom test transfer to self 
+broken tests brownie token tests test transferFrom test transfer to self no approval 
+broken tests brownie token tests test transferFrom test transfer zero tokens 
+broken tests brownie token tests test transferFrom test transfer zero tokens without approval 
 broken tests brownie token tests test transfer test insufficient balance 
+broken tests brownie token tests test transfer test receiver balance increases 
 broken tests brownie token tests test transfer test returns true 
-passed tests brownie token tests test transfer test receiver balance increases 
-passed tests brownie token tests test transfer test sender balance decreases 
-passed tests brownie token tests test transfer test total supply not affected 
-passed tests brownie token tests test transfer test transfer event fires 
-passed tests brownie token tests test transfer test transfer full balance 
-passed tests brownie token tests test transfer test transfer to self 
-passed tests brownie token tests test transfer test transfer zero tokens 
+broken tests brownie token tests test transfer test sender balance decreases 
+broken tests brownie token tests test transfer test total supply not affected 
+broken tests brownie token tests test transfer test transfer event fires 
+broken tests brownie token tests test transfer test transfer full balance 
+broken tests brownie token tests test transfer test transfer to self 
+broken tests brownie token tests test transfer test transfer zero tokens 
 skipped tests hardhat test hardhat test hardhat advanced 
 skipped tests hardhat test hardhat test hardhat simple 
 passed tests openzeppelin test openzeppelin test contracts input data0 
 passed tests openzeppelin test openzeppelin test contracts input data1 
 passed tests openzeppelin test openzeppelin test contracts input data2 
 passed tests openzeppelin test openzeppelin test contracts input data3 
-failed tests truffle test truffle test issue 364 self destruct contract 
-passed tests truffle test truffle test truffle contract 
 failed tests truffle test truffle test truffle migration 
-passed tests truffle test truffle test truffle test 
