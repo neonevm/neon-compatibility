@@ -231,7 +231,7 @@ module.exports = {
     reporterOption: {
       configFile: '../reporterConfig.json'
     },
-    diff: true,
+    diff: true
   }
 };
 
