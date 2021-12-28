@@ -16,9 +16,17 @@ on:
           - devnet
           - testnet
           - neonswap.live
-          - aws
+          - devnet-aws
           - ropsten
           - rinkeby
+      runner:
+        type: choice
+        default: self-hosted
+        required: true
+        description: "Where to run openzeppelin tests (self-hosted, ubuntu-20.04)"
+        options:
+          - self-hosted
+          - ubuntu-20.04
       jobsNumber:
         description: "Number of jobs in GNU Parallel"
         required: true
@@ -27,36 +35,46 @@ on:
 env:
   JOBS_NUMBER: "8"
   NETWORK: teststand2
+  RUNNER: self-hosted
 
 jobs:
   prepare-env:
     runs-on: ubuntu-20.04
+    if: always()
     steps:
       - name: Setup env
         id: setup
         run: |
-          if [ -z "${{ github.event.inputs.network }}" ]
-            then
-              NETWORK="${{ env.NETWORK }}"
-            else
-              NETWORK="${{ github.event.inputs.network }}"
-          fi
-          if [ -z "${{ github.event.inputs.jobsNetwork }}" ]
-            then
-              JOBS_NUMBER="${{ env.JOBS_NUMBER }}"
-            else
-              JOBS_NUMBER="${{ github.event.inputs.jobsNumber }}"
-          fi 
+          # $1 - inputs
+          # $2 - env.VAR
+          function setVar {
+            if [ -z "$1" ]
+              then
+                RESULT="$2"
+              else
+                RESULT="$1"
+            fi
+            echo $RESULT
+          }
+
+          NETWORK=$( setVar "${{ github.event.inputs.network }}" "${{ env.NETWORK }}" )
+          RUNNER=$( setVar "${{ github.event.inputs.runner }}" "${{ env.RUNNER }}" )
+          JOBS_NUMBER=$( setVar "${{ github.event.inputs.jobsNumber }}" "${{ env.JOBS_NUMBER }}" )
+          
           echo "Network: ${NETWORK}"
+          echo "Runner: ${RUNNER}"
           echo "Jobs: ${JOBS_NUMBER}"
           echo "::set-output name=network::${NETWORK}"
+          echo "::set-output name=runner::${RUNNER}"
           echo "::set-output name=jobs::${JOBS_NUMBER}"
     outputs:
       network: ${{ steps.setup.outputs.network }}
       jobs: ${{ steps.setup.outputs.jobs }}
+      runner: ${{ steps.setup.outputs.runner }}
 
   python:
     runs-on: ubuntu-20.04
+    if: always()
     needs:
       - prepare-env
     env:
@@ -99,12 +117,13 @@ jobs:
 
   openzeppelin:
     timeout-minutes: 360
-    runs-on: self-hosted
+    runs-on: ${{ needs.prepare-env.outputs.runner }}
     needs:
       - prepare-env
     env:
       JOBS_NUMBER: ${{ needs.prepare-env.outputs.jobs }}
       NETWORK: ${{ needs.prepare-env.outputs.network }}
+      RUNNER: ${{ needs.prepare-env.outputs.runner }}
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/openzeppelin-preparation
@@ -121,17 +140,32 @@ jobs:
         if: always()
       - run: npm run build --if-present
       - name: "Run openzeppelin in parallel"
+        timeout-minutes: 350
         run: |
           cd openzeppelin-contracts
-          cp ../run_parallel.py ./
-          cp ../rrrun.sh ./
-          chmod +x rrrun.sh
+          mkdir pout
           npx hardhat compile
-          python3 run_parallel.py
+          find test -name "*.test.js" | sort | parallel -k --jobs ${{ env.JOBS_NUMBER }} --results pout 'npx hardhat test {}'
+      - name: "Verify count of logs"
+        if: always()
+        run: python3 parallel_report.py
+      - name: "Insert feature to allure"
+        if: always()
+        run: python3 fix_allure.py
       - uses: ./.github/actions/allure-upload
         if: always()
         with:
           folder-name: openzeppelin-contracts/report/allure-results
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: parallel-outputs
+          path: openzeppelin-contracts/pout
+      - name: Cleanup runner
+        if: always()
+        run: |
+          echo "Cleaning up previous run" 
+          rm -rf "${{ github.workspace }}"
 
   node:
     runs-on: ubuntu-20.04
@@ -250,25 +284,12 @@ jobs:
     needs:
       - allure
       - prepare-env
-    env:
-      NETWORK: ${{ needs.prepare-env.outputs.network }}
     steps:
       - name: Send a notification to Teams channel
-        uses: neonlabsorg/teams-notification-action@0.1.1
+        uses: neonlabsorg/teams-notification-action@1.2
         if: always()
         with:
           hookUrl: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
           actionUrl: "https://docs.neon-labs.org/neon-compatibility/${{ needs.allure.outputs.subdir }}/${{ github.run_number }}/"
           title: "OpenZeppelin Contracts Test Suite #${{ github.run_number }}"
-          networkName: ${{ env.NETWORK_NAME }}
-
-  cleaner:
-    runs-on: self-hosted
-    timeout-minutes: 15
-    needs: notification
-    if: always()
-    steps:
-      - name: Cleanup runner
-        run: |
-          echo "Cleaning up previous run" 
-          rm -rf "${{ github.workspace }}"
+          networkName: ${{ needs.prepare-env.outputs.network }}
