@@ -9,7 +9,7 @@ case $STAND in
     LINK=https://docs.neon-labs.org/neon-compatibility/teststand/"$RUN_NN"/data/suites.csv
     ;;
 
-  "nightly")
+  "night")
     LINK=https://docs.neon-labs.org/neon-compatibility/"$RUN_NN"/data/suites.csv
     ;;
 esac
