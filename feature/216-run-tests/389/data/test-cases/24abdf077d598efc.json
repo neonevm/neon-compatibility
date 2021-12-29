@@ -1,0 +1,216 @@
+{
+  "uid" : "24abdf077d598efc",
+  "name" : "test_returns_true",
+  "fullName" : "tests.brownie.token.tests.test_approve#test_returns_true",
+  "historyId" : "83e76b6e4e37ba690728d80678312137",
+  "time" : {
+    "start" : 1640780170267,
+    "stop" : 1640780172055,
+    "duration" : 1788
+  },
+  "status" : "broken",
+  "statusMessage" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+  "statusTrace" : "token = <Token Contract '0xab4e8C559DffF13c1F6f94b0BD68498D8530872c'>\naccounts = <brownie.network.account.Accounts object at 0x7f040c77aac0>\n\n    def test_returns_true(token, accounts):\n        tx = token.approve(accounts[1], 10**19, {'from': accounts[0]})\n    \n>       assert tx.return_value is True\n\ntests/brownie/token/tests/test_approve.py:46: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/transaction.py:53: in wrapper\n    raise exc\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/transaction.py:49: in wrapper\n    return fn(self)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/transaction.py:254: in return_value\n    self._get_trace()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <Transaction '\u001B[0;m0xf2be2f372c3bc04df0142a954c72ed669c5bd4cdf521160f2d18d62992136697\u001B[0;m'>\n\n    def _get_trace(self) -> None:\n        \"\"\"Retrieves the stack trace via debug_traceTransaction and finds the\n        return value, revert message and event logs in the trace.\n        \"\"\"\n    \n        # check if trace has already been retrieved, or the tx warrants it\n        if self._raw_trace is not None:\n            return\n        self._raw_trace = []\n        if self.input == \"0x\" and self.gas_used == 21000:\n            self._modified_state = False\n            self._trace = []\n            return\n    \n        if not web3.supports_traces:\n            raise RPCRequestError(\"Node client does not support `debug_traceTransaction`\")\n        try:\n            trace = web3.provider.make_request(  # type: ignore\n                \"debug_traceTransaction\", (self.txid, {\"disableStorage\": CONFIG.mode != \"console\"})\n            )\n        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:\n            msg = f\"Encountered a {type(e).__name__} while requesting \"\n            msg += \"`debug_traceTransaction`. The local RPC client has likely crashed.\"\n            if CONFIG.argv[\"coverage\"]:\n                msg += \" If the error persists, add the `skip_coverage` marker to this test.\"\n            raise RPCRequestError(msg) from None\n    \n        if \"error\" in trace:\n            self._modified_state = None\n            self._trace_exc = RPCRequestError(trace[\"error\"][\"message\"])\n>           raise self._trace_exc\nE           brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/transaction.py:668: RPCRequestError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1640780136982,
+      "stop" : 1640780136982,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1640780138046,
+      "stop" : 1640780152769,
+      "duration" : 14723
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "setup_env",
+    "time" : {
+      "start" : 1640780155512,
+      "stop" : 1640780155512,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "accounts",
+    "time" : {
+      "start" : 1640780155512,
+      "stop" : 1640780155782,
+      "duration" : 270
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token",
+    "time" : {
+      "start" : 1640780155782,
+      "stop" : 1640780158243,
+      "duration" : 2461
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "testStage" : {
+    "status" : "broken",
+    "statusMessage" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+    "statusTrace" : "token = <Token Contract '0xab4e8C559DffF13c1F6f94b0BD68498D8530872c'>\naccounts = <brownie.network.account.Accounts object at 0x7f040c77aac0>\n\n    def test_returns_true(token, accounts):\n        tx = token.approve(accounts[1], 10**19, {'from': accounts[0]})\n    \n>       assert tx.return_value is True\n\ntests/brownie/token/tests/test_approve.py:46: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/transaction.py:53: in wrapper\n    raise exc\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/transaction.py:49: in wrapper\n    return fn(self)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/transaction.py:254: in return_value\n    self._get_trace()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <Transaction '\u001B[0;m0xf2be2f372c3bc04df0142a954c72ed669c5bd4cdf521160f2d18d62992136697\u001B[0;m'>\n\n    def _get_trace(self) -> None:\n        \"\"\"Retrieves the stack trace via debug_traceTransaction and finds the\n        return value, revert message and event logs in the trace.\n        \"\"\"\n    \n        # check if trace has already been retrieved, or the tx warrants it\n        if self._raw_trace is not None:\n            return\n        self._raw_trace = []\n        if self.input == \"0x\" and self.gas_used == 21000:\n            self._modified_state = False\n            self._trace = []\n            return\n    \n        if not web3.supports_traces:\n            raise RPCRequestError(\"Node client does not support `debug_traceTransaction`\")\n        try:\n            trace = web3.provider.make_request(  # type: ignore\n                \"debug_traceTransaction\", (self.txid, {\"disableStorage\": CONFIG.mode != \"console\"})\n            )\n        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:\n            msg = f\"Encountered a {type(e).__name__} while requesting \"\n            msg += \"`debug_traceTransaction`. The local RPC client has likely crashed.\"\n            if CONFIG.argv[\"coverage\"]:\n                msg += \" If the error persists, add the `skip_coverage` marker to this test.\"\n            raise RPCRequestError(msg) from None\n    \n        if \"error\" in trace:\n            self._modified_state = None\n            self._trace_exc = RPCRequestError(trace[\"error\"][\"message\"])\n>           raise self._trace_exc\nE           brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/transaction.py:668: RPCRequestError",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "93a9f650609de1a5",
+      "name" : "stdout",
+      "source" : "93a9f650609de1a5.txt",
+      "type" : "text/plain",
+      "size" : 307
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ {
+    "name" : "accounts::0",
+    "time" : {
+      "start" : 1640780402466,
+      "stop" : 1640780402466,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_approve"
+  }, {
+    "name" : "host",
+    "value" : "fv-az39-764"
+  }, {
+    "name" : "thread",
+    "value" : "3546-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_approve"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Not supported",
+      "messageRegex" : ".*'EthereumModel' object has no attribute .*",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 4,
+        "skipped" : 0,
+        "passed" : 0,
+        "unknown" : 0,
+        "total" : 4
+      },
+      "items" : [ {
+        "uid" : "39e34cacd392b58f",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/feature/216-run-tests/388//#testresult/39e34cacd392b58f",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1640778392907,
+          "stop" : 1640778394601,
+          "duration" : 1694
+        }
+      }, {
+        "uid" : "f4a86e78a3d29c0c",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/feature/216-run-tests/366//#testresult/f4a86e78a3d29c0c",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1640675090165,
+          "stop" : 1640675091848,
+          "duration" : 1683
+        }
+      }, {
+        "uid" : "b6f31c0c3a0338d3",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/feature/216-run-tests/366//#testresult/b6f31c0c3a0338d3",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1640614881693,
+          "stop" : 1640614884251,
+          "duration" : 2558
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "24abdf077d598efc.json",
+  "parameterValues" : [ ]
+}
