@@ -113,7 +113,7 @@ const requestFaucet = async (wallet, amount) => {
 
 const getBalance = async (address) => {
     try {
-      await web3.eth.getBalance(address);
+      return await web3.eth.getBalance(address);
     } catch (e) {
       console.log(`Failed to get balance for wallet ${address}: ${e}`);
     }
