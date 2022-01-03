@@ -1,0 +1,105 @@
+/home/runner/work/neon-compatibility/neon-compatibility/Metacoin/build/contracts
+============ running command... ============
+cd issues/364; ../../node_modules/.bin/truffle --network neonlabs migrate -f 3 --to 3
+
+Compiling your contracts...
+===========================
+> Compiling ./contracts/ERC20Test.sol
+> Compiling ./contracts/Migrations.sol
+> Compiling ./contracts/SelfDestructTest.sol
+> Compiling @openzeppelin/contracts/access/Ownable.sol
+> Compiling @openzeppelin/contracts/token/ERC20/ERC20.sol
+> Compiling @openzeppelin/contracts/token/ERC20/IERC20.sol
+> Compiling @openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol
+> Compiling @openzeppelin/contracts/utils/Context.sol
+> Compilation warnings encountered:
+
+    Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> project:/contracts/SelfDestructTest.sol
+
+,Warning: This contract has a payable fallback function, but no receive ether function. Consider adding a receive ether function.
+ --> project:/contracts/SelfDestructTest.sol:5:1:
+  |
+5 | contract SelfDestructTest is Ownable{
+  | ^ (Relevant source part starts here and spans across multiple lines).
+Note: The payable fallback function is defined here.
+  --> project:/contracts/SelfDestructTest.sol:20:5:
+   |
+20 |     fallback() external payable {}
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+,Warning: Function state mutability can be restricted to pure
+  --> project:/contracts/SelfDestructTest.sol:12:5:
+   |
+12 |     function staticData() public view returns(string memory) {
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+
+> Artifacts written to /home/runner/work/neon-compatibility/neon-compatibility/issues/364/build/contracts
+> Compiled successfully using:
+   - solc: 0.8.4+commit.c7e474f2.Emscripten.clang
+
+
+
+Starting migrations...
+======================
+> Network name:    'neonlabs'
+> Network id:      245022926
+> Block gas limit: 6721975 (0x6691b7)
+
+
+3_selfDestructTest.js
+=====================
+
+   Deploying 'SelfDestructTest'
+   ----------------------------
+   > transaction hash:    0x35ded3bd6e9493fe0a44dce916d55b922bfda71b45fde7d0cfeb4a813a87bacc
+   > Blocks: 0            Seconds: 0
+   > contract address:    0x3f3FFa10322809E3E1027Be547fC3dFe0aa56334
+   > block number:        105270337
+   > block timestamp:     1641212421
+   > account:             0xbD2d576fc5d4f3931Acd8B6aDeBD79E472B3b250
+   > balance:             999.999871115
+   > gas used:            128885 (0x1f775)
+   > gas price:           1 gwei
+   > value sent:          0 ETH
+   > total cost:          0.000128885 ETH
+
+Sending ether to contract
+
+Error: Client network socket disconnected before secure TLS connection was established
+{
+  "originalError": {
+    "code": "ECONNRESET",
+    "path": null,
+    "host": "proxy.devnet.neonlabs.org",
+    "port": 443
+  }
+}
+    at Object._fireError (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/node_modules/web3-utils/lib/index.js:49:1)
+    at sendTxCallback (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/node_modules/web3-eth/node_modules/web3-core-method/lib/index.js:539:1)
+    at /home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/node_modules/web3/node_modules/web3-core-requestmanager/lib/index.js:299:1
+    at /home/runner/work/neon-compatibility/neon-compatibility/node_modules/@trufflesuite/web3-provider-engine/index.js:238:9
+    at /home/runner/work/neon-compatibility/neon-compatibility/node_modules/async/internal/once.js:12:16
+    at replenish (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/async/internal/eachOfLimit.js:61:25)
+    at /home/runner/work/neon-compatibility/neon-compatibility/node_modules/async/internal/eachOfLimit.js:71:9
+    at eachLimit (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/async/eachLimit.js:43:36)
+    at /home/runner/work/neon-compatibility/neon-compatibility/node_modules/async/internal/doLimit.js:9:16
+    at end (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/@trufflesuite/web3-provider-engine/index.js:217:5)
+    at /home/runner/work/neon-compatibility/neon-compatibility/node_modules/async/internal/once.js:12:16
+    at next (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/async/waterfall.js:21:29)
+    at /home/runner/work/neon-compatibility/neon-compatibility/node_modules/async/internal/onlyOnce.js:12:16
+    at /home/runner/work/neon-compatibility/neon-compatibility/node_modules/async/internal/once.js:12:16
+    at next (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/async/waterfall.js:21:29)
+    at /home/runner/work/neon-compatibility/neon-compatibility/node_modules/async/internal/onlyOnce.js:12:16
+    at /home/runner/work/neon-compatibility/neon-compatibility/node_modules/@trufflesuite/web3-provider-engine/subproviders/hooked-wallet.js:577:23
+    at /home/runner/work/neon-compatibility/neon-compatibility/node_modules/async/internal/once.js:12:16
+    at next (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/async/waterfall.js:21:29)
+    at /home/runner/work/neon-compatibility/neon-compatibility/node_modules/async/internal/onlyOnce.js:12:16
+    at /home/runner/work/neon-compatibility/neon-compatibility/node_modules/@trufflesuite/web3-provider-engine/subproviders/hooked-wallet.js:646:21
+    at /home/runner/work/neon-compatibility/neon-compatibility/node_modules/async/internal/parallel.js:39:9
+Truffle v5.4.14 (core: 5.4.14)
+Node v16.13.1
+
+- Blocks: 0            Seconds: 0
+
