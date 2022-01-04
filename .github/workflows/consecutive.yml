@@ -20,11 +20,12 @@ on:
           - rinkeby
       runner:
         type: choice
-        default: self-hosted
+        default: neon-hosted
         required: true
         description: "Where to run openzeppelin tests (self-hosted, ubuntu-20.04)"
         options:
-          - self-hosted
+          - neon-hosted
+          - aws-hosted
           - ubuntu-20.04
       jobsNumber:
         description: "Number of jobs in GNU Parallel"
@@ -34,7 +35,7 @@ on:
 env:
   JOBS_NUMBER: "8"
   NETWORK: teststand2
-  RUNNER: self-hosted
+  RUNNER: neon-hosted
 
 jobs:
   prepare-env:
