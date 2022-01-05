@@ -1,0 +1,92 @@
+/home/runner/work/neon-compatibility/neon-compatibility/Metacoin/build/contracts
+============ running command... ============
+cd issues/364; ../../node_modules/.bin/truffle --network neonlabs migrate -f 3 --to 3
+
+Compiling your contracts...
+===========================
+> Compiling ./contracts/ERC20Test.sol
+> Compiling ./contracts/Migrations.sol
+> Compiling ./contracts/SelfDestructTest.sol
+> Compiling @openzeppelin/contracts/access/Ownable.sol
+> Compiling @openzeppelin/contracts/token/ERC20/ERC20.sol
+> Compiling @openzeppelin/contracts/token/ERC20/IERC20.sol
+> Compiling @openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol
+> Compiling @openzeppelin/contracts/utils/Context.sol
+> Compilation warnings encountered:
+
+    Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> project:/contracts/SelfDestructTest.sol
+
+,Warning: This contract has a payable fallback function, but no receive ether function. Consider adding a receive ether function.
+ --> project:/contracts/SelfDestructTest.sol:5:1:
+  |
+5 | contract SelfDestructTest is Ownable{
+  | ^ (Relevant source part starts here and spans across multiple lines).
+Note: The payable fallback function is defined here.
+  --> project:/contracts/SelfDestructTest.sol:20:5:
+   |
+20 |     fallback() external payable {}
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+,Warning: Function state mutability can be restricted to pure
+  --> project:/contracts/SelfDestructTest.sol:12:5:
+   |
+12 |     function staticData() public view returns(string memory) {
+   |     ^ (Relevant source part starts here and spans across multiple lines).
+
+
+> Artifacts written to /home/runner/work/neon-compatibility/neon-compatibility/issues/364/build/contracts
+> Compiled successfully using:
+   - solc: 0.8.4+commit.c7e474f2.Emscripten.clang
+
+
+
+Starting migrations...
+======================
+> Network name:    'neonlabs'
+> Network id:      111
+> Block gas limit: 6721975 (0x6691b7)
+
+
+3_selfDestructTest.js
+=====================
+
+   Deploying 'SelfDestructTest'
+   ----------------------------
+
+Error:  *** Deployment Failed ***
+
+"SelfDestructTest" -- Transaction simulation failed: Error processing Instruction 0: custom program error: 0x4
+{
+  "accounts": null,
+  "err": {
+    "InstructionError": [
+      0,
+      {
+        "Custom": 4
+      }
+    ]
+  },
+  "logs": [
+    "Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io invoke [1]",
+    "Program log: program/src/storage_account.rs:76",
+    "Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io consumed 4627 of 500000 compute units",
+    "Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io failed: custom program error: 0x4"
+  ]
+}.
+
+    at /home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/deployer/src/deployment.js:365:1
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at module.exports (/home/runner/work/neon-compatibility/neon-compatibility/issues/364/migrations/3_selfDestructTest.js:6:5)
+    at Migration._deploy (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:75:1)
+    at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:56:1)
+    at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)
+    at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)
+    at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)
+    at runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/migrate.js:253:1)
+    at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/migrate.js:223:1)
+    at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)
+Truffle v5.4.14 (core: 5.4.14)
+Node v16.13.1
+
+
