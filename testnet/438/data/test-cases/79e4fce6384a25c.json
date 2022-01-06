@@ -1,0 +1,190 @@
+{
+  "uid" : "79e4fce6384a25c",
+  "name" : "test_brownie_deploy",
+  "fullName" : "tests.brownie.test_brownie#test_brownie_deploy",
+  "historyId" : "6e83a925951bfd8b9c39b6ea82974dc9",
+  "time" : {
+    "start" : 1641477106297,
+    "stop" : 1641477233401,
+    "duration" : 127104
+  },
+  "status" : "broken",
+  "statusMessage" : "requests.exceptions.HTTPError: 500 Server Error: Internal Server Error for url: https://proxy.testnet.neonlabs.org/solana",
+  "statusTrace" : "brownie_project = <Project 'TokenProject'>\n\n    def test_brownie_deploy(brownie_project):\n>       deployed_contract = brownie_project.Token.deploy(\n            \"Test deploy\", \"TST\", 10, 10000000, {\"from\": accounts[0]}\n        )\n\ntests/brownie/test_brownie.py:13: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:600: in __call__\n    return tx[\"from\"].deploy(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:508: in deploy\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:721: in _make_transaction\n    gas_limit = Wei(gas_limit) or self._gas_limit(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:430: in _gas_limit\n    return min(gas_limit, Chain().block_gas_limit)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/state.py:293: in block_gas_limit\n    block = web3.eth.get_block(\"latest\")\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/eth.py:561: in get_block\n    return self._get_block(block_identifier, full_transactions)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/module.py:57: in caller\n    result = w3.manager.request_blocking(method_str,\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/manager.py:186: in request_blocking\n    response = self._make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/manager.py:147: in _make_request\n    return request_func(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:76: in apply_formatters\n    response = make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/gas_price_strategy.py:90: in middleware\n    return make_request(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:76: in apply_formatters\n    response = make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/attrdict.py:33: in middleware\n    response = make_request(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:74: in apply_formatters\n    response = make_request(method, formatted_params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:76: in apply_formatters\n    response = make_request(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:76: in apply_formatters\n    response = make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/buffered_gas_estimate.py:40: in middleware\n    return make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/exception_retry_request.py:105: in middleware\n    return make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/providers/rpc.py:88: in make_request\n    raw_response = make_post_request(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/_utils/request.py:49: in make_post_request\n    response.raise_for_status()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <Response [500]>\n\n    def raise_for_status(self):\n        \"\"\"Raises :class:`HTTPError`, if one occurred.\"\"\"\n    \n        http_error_msg = ''\n        if isinstance(self.reason, bytes):\n            # We attempt to decode utf-8 first because some servers\n            # choose to localize their reason strings. If the string\n            # isn't utf-8, we fall back to iso-8859-1 for all other\n            # encodings. (See PR #3538)\n            try:\n                reason = self.reason.decode('utf-8')\n            except UnicodeDecodeError:\n                reason = self.reason.decode('iso-8859-1')\n        else:\n            reason = self.reason\n    \n        if 400 <= self.status_code < 500:\n            http_error_msg = u'%s Client Error: %s for url: %s' % (self.status_code, reason, self.url)\n    \n        elif 500 <= self.status_code < 600:\n            http_error_msg = u'%s Server Error: %s for url: %s' % (self.status_code, reason, self.url)\n    \n        if http_error_msg:\n>           raise HTTPError(http_error_msg, response=self)\nE           requests.exceptions.HTTPError: 500 Server Error: Internal Server Error for url: https://proxy.testnet.neonlabs.org/solana\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/requests/models.py:953: HTTPError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ ],
+  "testStage" : {
+    "status" : "broken",
+    "statusMessage" : "requests.exceptions.HTTPError: 500 Server Error: Internal Server Error for url: https://proxy.testnet.neonlabs.org/solana",
+    "statusTrace" : "brownie_project = <Project 'TokenProject'>\n\n    def test_brownie_deploy(brownie_project):\n>       deployed_contract = brownie_project.Token.deploy(\n            \"Test deploy\", \"TST\", 10, 10000000, {\"from\": accounts[0]}\n        )\n\ntests/brownie/test_brownie.py:13: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:600: in __call__\n    return tx[\"from\"].deploy(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:508: in deploy\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:721: in _make_transaction\n    gas_limit = Wei(gas_limit) or self._gas_limit(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:430: in _gas_limit\n    return min(gas_limit, Chain().block_gas_limit)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/state.py:293: in block_gas_limit\n    block = web3.eth.get_block(\"latest\")\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/eth.py:561: in get_block\n    return self._get_block(block_identifier, full_transactions)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/module.py:57: in caller\n    result = w3.manager.request_blocking(method_str,\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/manager.py:186: in request_blocking\n    response = self._make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/manager.py:147: in _make_request\n    return request_func(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:76: in apply_formatters\n    response = make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/gas_price_strategy.py:90: in middleware\n    return make_request(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:76: in apply_formatters\n    response = make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/attrdict.py:33: in middleware\n    response = make_request(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:74: in apply_formatters\n    response = make_request(method, formatted_params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:76: in apply_formatters\n    response = make_request(method, params)\ncytoolz/functoolz.pyx:250: in cytoolz.functoolz.curry.__call__\n    ???\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/formatting.py:76: in apply_formatters\n    response = make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/buffered_gas_estimate.py:40: in middleware\n    return make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/middleware/exception_retry_request.py:105: in middleware\n    return make_request(method, params)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/providers/rpc.py:88: in make_request\n    raw_response = make_post_request(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/web3/_utils/request.py:49: in make_post_request\n    response.raise_for_status()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <Response [500]>\n\n    def raise_for_status(self):\n        \"\"\"Raises :class:`HTTPError`, if one occurred.\"\"\"\n    \n        http_error_msg = ''\n        if isinstance(self.reason, bytes):\n            # We attempt to decode utf-8 first because some servers\n            # choose to localize their reason strings. If the string\n            # isn't utf-8, we fall back to iso-8859-1 for all other\n            # encodings. (See PR #3538)\n            try:\n                reason = self.reason.decode('utf-8')\n            except UnicodeDecodeError:\n                reason = self.reason.decode('iso-8859-1')\n        else:\n            reason = self.reason\n    \n        if 400 <= self.status_code < 500:\n            http_error_msg = u'%s Client Error: %s for url: %s' % (self.status_code, reason, self.url)\n    \n        elif 500 <= self.status_code < 600:\n            http_error_msg = u'%s Server Error: %s for url: %s' % (self.status_code, reason, self.url)\n    \n        if http_error_msg:\n>           raise HTTPError(http_error_msg, response=self)\nE           requests.exceptions.HTTPError: 500 Server Error: Internal Server Error for url: https://proxy.testnet.neonlabs.org/solana\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/requests/models.py:953: HTTPError",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "3d9086e348193a54",
+      "name" : "log",
+      "source" : "3d9086e348193a54.txt",
+      "type" : "text/plain",
+      "size" : 287
+    }, {
+      "uid" : "2d68b85078fedb84",
+      "name" : "stdout",
+      "source" : "2d68b85078fedb84.txt",
+      "type" : "text/plain",
+      "size" : 247
+    }, {
+      "uid" : "9c14d613fdb663f5",
+      "name" : "stderr",
+      "source" : "9c14d613fdb663f5.txt",
+      "type" : "text/plain",
+      "size" : 6660
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 3,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie"
+  }, {
+    "name" : "suite",
+    "value" : "test_brownie"
+  }, {
+    "name" : "host",
+    "value" : "fv-az124-903"
+  }, {
+    "name" : "thread",
+    "value" : "3878-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.test_brownie"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 3,
+        "skipped" : 0,
+        "passed" : 7,
+        "unknown" : 0,
+        "total" : 10
+      },
+      "items" : [ {
+        "uid" : "f4cc58bad79c2b25",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/testnet/435//#testresult/f4cc58bad79c2b25",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='proxy.testnet.neonlabs.org', port=443): Read timed out. (read timeout=30)",
+        "time" : {
+          "start" : 1641443118096,
+          "stop" : 1641443242689,
+          "duration" : 124593
+        }
+      }, {
+        "uid" : "cd00b75ca6e6d975",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/testnet/435//#testresult/cd00b75ca6e6d975",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641439823962,
+          "stop" : 1641439859936,
+          "duration" : 35974
+        }
+      }, {
+        "uid" : "fe036597becc2d99",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/testnet/430//#testresult/fe036597becc2d99",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641390504996,
+          "stop" : 1641390565338,
+          "duration" : 60342
+        }
+      }, {
+        "uid" : "856e2c307cd4a39b",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/testnet/425//#testresult/856e2c307cd4a39b",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641371928939,
+          "stop" : 1641371940903,
+          "duration" : 11964
+        }
+      }, {
+        "uid" : "4a656464b0f6fa84",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/testnet/423//#testresult/4a656464b0f6fa84",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641348770648,
+          "stop" : 1641348788778,
+          "duration" : 18130
+        }
+      }, {
+        "uid" : "1b228da99fc29126",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/testnet/421//#testresult/1b228da99fc29126",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.HTTPError: 500 Server Error: Internal Server Error for url: https://proxy.testnet.neonlabs.org/solana",
+        "time" : {
+          "start" : 1641342287000,
+          "stop" : 1641342302604,
+          "duration" : 15604
+        }
+      }, {
+        "uid" : "fd6bf1ef8bd123a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/testnet/269//#testresult/fd6bf1ef8bd123a",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639951000426,
+          "stop" : 1639951016105,
+          "duration" : 15679
+        }
+      }, {
+        "uid" : "fa3f1a3f6dfb95ea",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/testnet/265//#testresult/fa3f1a3f6dfb95ea",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639910611556,
+          "stop" : 1639910631099,
+          "duration" : 19543
+        }
+      }, {
+        "uid" : "f2e5b534f6682f18",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/testnet/261//#testresult/f2e5b534f6682f18",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639819636629,
+          "stop" : 1639819649893,
+          "duration" : 13264
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "79e4fce6384a25c.json",
+  "parameterValues" : [ ]
+}
