@@ -1,0 +1,369 @@
+{
+  "uid" : "e8483428d0518248",
+  "name" : "test_returns_true",
+  "fullName" : "tests.brownie.token.tests.test_transferFrom#test_returns_true",
+  "historyId" : "592db1f5b525cbb8a4e298823c44ebef",
+  "time" : {
+    "start" : 1641980267870,
+    "stop" : 1641980267870,
+    "duration" : 0
+  },
+  "status" : "broken",
+  "statusMessage" : "ValueError: Gas estimation failed: 'HTTPConnectionPool(host='10.2.0.2', port=8899): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f189460db20>: Failed to establish a new connection: [Errno 111] Connection refused'))'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+  "statusTrace" : "brownie_project = <Project 'TokenProject'>\naccounts = <brownie.network.account.Accounts object at 0x7f4427740d00>\n\n    @pytest.fixture(scope=\"module\")\n    def token(brownie_project, accounts):\n>       return brownie_project.Token.deploy(\"Test Token\", \"TST\", 18, 1e21, {'from': accounts[0]})\n\ntests/brownie/token/tests/conftest.py:49: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:600: in __call__\n    return tx[\"from\"].deploy(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:508: in deploy\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:725: in _make_transaction\n    raise VirtualMachineError(e) from None\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = VirtualMachineError(ValueError(\"Gas estimation failed: 'HTTPConnectionPool(host='10.2.0.2', port=8899): Max retries ex...ion refused'))'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.\"))\nexc = \"Gas estimation failed: 'HTTPConnectionPool(host='10.2.0.2', port=8899): Max retries exceeded with url: / (Caused by N...ction refused'))'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.\"\n\n    def __init__(self, exc: ValueError) -> None:\n        try:\n            exc = exc.args[0]\n        except Exception:\n            pass\n    \n        if isinstance(exc, dict) and \"message\" in exc:\n            if \"data\" not in exc:\n                raise ValueError(exc[\"message\"]) from None\n    \n            self.message: str = exc[\"message\"].rstrip(\".\")\n    \n            if isinstance(exc[\"data\"], str):\n                # handle parity exceptions - this logic probably is not perfect\n                if \"0x08c379a0\" in exc[\"data\"]:\n                    revert_type, err_msg = [i.strip() for i in exc[\"data\"].split(\"0x08c379a0\", 1)]\n                    err_msg = eth_abi.decode_abi([\"string\"], HexBytes(err_msg))\n                    err_msg = f\"{revert_type} '{err_msg}'\"\n                elif exc[\"data\"].endswith(\"0x\"):\n                    err_msg = exc[\"data\"][:-2].strip()\n                else:\n                    err_msg = exc[\"data\"]\n                raise ValueError(f\"{self.message}: {err_msg}\") from None\n    \n            try:\n                txid, data = next((k, v) for k, v in exc[\"data\"].items() if k.startswith(\"0x\"))\n            except StopIteration:\n                raise ValueError(exc[\"message\"]) from None\n    \n            self.txid: str = txid\n            self.source: str = \"\"\n            self.revert_type: str = data[\"error\"]\n            self.pc: Optional[str] = data.get(\"program_counter\")\n            if self.pc and self.revert_type == \"revert\":\n                self.pc -= 1\n    \n            self.revert_msg: Optional[str] = data.get(\"reason\")\n            self.dev_revert_msg = brownie.project.build._get_dev_revert(self.pc)\n            if self.revert_msg is None and self.revert_type in (\"revert\", \"invalid opcode\"):\n                self.revert_msg = self.dev_revert_msg\n            elif self.revert_msg == \"Failed assertion\":\n                self.revert_msg = self.dev_revert_msg or self.revert_msg\n    \n        else:\n>           raise ValueError(str(exc)) from None\nE           ValueError: Gas estimation failed: 'HTTPConnectionPool(host='10.2.0.2', port=8899): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f189460db20>: Failed to establish a new connection: [Errno 111] Connection refused'))'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py:121: ValueError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1641980248843,
+      "stop" : 1641980248843,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1641980249984,
+      "stop" : 1641980264252,
+      "duration" : 14268
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "accounts",
+    "time" : {
+      "start" : 1641980264739,
+      "stop" : 1641980265009,
+      "duration" : 270
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "setup_env",
+    "time" : {
+      "start" : 1641980264739,
+      "stop" : 1641980264739,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token",
+    "time" : {
+      "start" : 1641980267121,
+      "stop" : 1641980267431,
+      "duration" : 310
+    },
+    "status" : "broken",
+    "statusMessage" : "ValueError: Gas estimation failed: 'HTTPConnectionPool(host='10.2.0.2', port=8899): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f189460db20>: Failed to establish a new connection: [Errno 111] Connection refused'))'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.\n",
+    "statusTrace" : "  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/pluggy/_callers.py\", line 39, in _multicall\n    res = hook_impl.function(*args)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/_pytest/fixtures.py\", line 1126, in pytest_fixture_setup\n    result = call_fixture_func(fixturefunc, request, kwargs)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/_pytest/fixtures.py\", line 932, in call_fixture_func\n    fixture_result = fixturefunc(**kwargs)\n  File \"/home/runner/work/neon-compatibility/neon-compatibility/tests/brownie/token/tests/conftest.py\", line 49, in token\n    return brownie_project.Token.deploy(\"Test Token\", \"TST\", 18, 1e21, {'from': accounts[0]})\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py\", line 600, in __call__\n    return tx[\"from\"].deploy(\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py\", line 508, in deploy\n    receipt, exc = self._make_transaction(\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py\", line 725, in _make_transaction\n    raise VirtualMachineError(e) from None\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py\", line 121, in __init__\n    raise ValueError(str(exc)) from None\n",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  } ],
+  "afterStages" : [ {
+    "name" : "accounts::0",
+    "time" : {
+      "start" : 1641980294644,
+      "stop" : 1641980294644,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_transferFrom"
+  }, {
+    "name" : "host",
+    "value" : "fv-az123-753"
+  }, {
+    "name" : "thread",
+    "value" : "3675-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_transferFrom"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 76,
+        "skipped" : 0,
+        "passed" : 0,
+        "unknown" : 0,
+        "total" : 76
+      },
+      "items" : [ {
+        "uid" : "747eeafea5fdb37a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/459//#testresult/747eeafea5fdb37a",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1641975850091,
+          "stop" : 1641975853757,
+          "duration" : 3666
+        }
+      }, {
+        "uid" : "a6bda6f4ab29e595",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/458//#testresult/a6bda6f4ab29e595",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'HTTPConnectionPool(host='10.2.0.2', port=8899): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f189a842400>: Failed to establish a new connection: [Errno 111] Connection refused'))'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1641974827929,
+          "stop" : 1641974827929,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "a59833fc5de53206",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/457//#testresult/a59833fc5de53206",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'HTTPConnectionPool(host='10.2.0.2', port=8899): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f1896042940>: Failed to establish a new connection: [Errno 111] Connection refused'))'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1641974206501,
+          "stop" : 1641974206501,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "1bfadc0f4075ac40",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/456//#testresult/1bfadc0f4075ac40",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ReadTimeout: HTTPConnectionPool(host='proxy.night.stand.neontest.xyz', port=80): Read timed out. (read timeout=30)",
+        "time" : {
+          "start" : 1641958011607,
+          "stop" : 1641958011607,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "f6cf7d3857181712",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/455//#testresult/f6cf7d3857181712",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ReadTimeout: HTTPConnectionPool(host='proxy.night.stand.neontest.xyz', port=80): Read timed out. (read timeout=30)",
+        "time" : {
+          "start" : 1641952207780,
+          "stop" : 1641952207780,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "1c78bd13628edb2a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/454//#testresult/1c78bd13628edb2a",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ReadTimeout: HTTPConnectionPool(host='proxy.night.stand.neontest.xyz', port=80): Read timed out. (read timeout=30)",
+        "time" : {
+          "start" : 1641950685534,
+          "stop" : 1641950685534,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "597cda387448765f",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/453//#testresult/597cda387448765f",
+        "status" : "broken",
+        "statusDetails" : "ValueError: ['Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io invoke [1]', 'Program log: program/src/storage_account.rs:76', 'Program log: program/src/account_data.rs:225', 'Program log: program/src/entrypoint.rs:1251 : Invalid Ethereum transaction nonce: acc 21, trx 20', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io consumed 51427 of 500000 compute units', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io failed: invalid program argument', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io invoke [1]', 'Program log: program/src/storage_account.rs:76', 'Program log: program/src/account_data.rs:225', 'Program log: program/src/entrypoint.rs:1251 : Invalid Ethereum transaction nonce: acc 21, trx 20', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io consumed 51427 of 500000 compute units', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io failed: invalid program argument', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io invoke [1]', 'Program log: program/src/storage_account.rs:76', 'Program log: program/src/account_data.rs:225', 'Program log: program/src/entrypoint.rs:1251 : Invalid Ethereum transaction nonce: acc 21, trx 20', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io consumed 51427 of 500000 compute units', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io failed: invalid program argument', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io invoke [1]', 'Program log: program/src/storage_account.rs:76', 'Program log: program/src/account_data.rs:225', 'Program log: program/src/entrypoint.rs:1251 : Invalid Ethereum transaction nonce: acc 21, trx 20', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io consumed 51427 of 500000 compute units', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io failed: invalid program argument']",
+        "time" : {
+          "start" : 1641947815582,
+          "stop" : 1641947815582,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "b5f39a9419193ba1",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/452//#testresult/b5f39a9419193ba1",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1641871032372,
+          "stop" : 1641871035168,
+          "duration" : 2796
+        }
+      }, {
+        "uid" : "32f53cd8931b2e9c",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/451//#testresult/32f53cd8931b2e9c",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1641861414262,
+          "stop" : 1641861417879,
+          "duration" : 3617
+        }
+      }, {
+        "uid" : "fd45762921aadc30",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/450//#testresult/fd45762921aadc30",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1641784550336,
+          "stop" : 1641784553955,
+          "duration" : 3619
+        }
+      }, {
+        "uid" : "1fc72cf2eb80b93b",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/449//#testresult/1fc72cf2eb80b93b",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Verifying nonce before send transaction: Error processing Instruction 1: invalid program argument",
+        "time" : {
+          "start" : 1641774875210,
+          "stop" : 1641774913304,
+          "duration" : 38094
+        }
+      }, {
+        "uid" : "469ccc5b2ab0b6ba",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/448//#testresult/469ccc5b2ab0b6ba",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1641698332627,
+          "stop" : 1641698335735,
+          "duration" : 3108
+        }
+      }, {
+        "uid" : "64b3c6608fbecdeb",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/447//#testresult/64b3c6608fbecdeb",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1641688844530,
+          "stop" : 1641688848688,
+          "duration" : 4158
+        }
+      }, {
+        "uid" : "a23da111b913e9c6",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/446//#testresult/a23da111b913e9c6",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1641611958168,
+          "stop" : 1641611961955,
+          "duration" : 3787
+        }
+      }, {
+        "uid" : "c3096dfb85b5045c",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/445//#testresult/c3096dfb85b5045c",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1641602239442,
+          "stop" : 1641602243129,
+          "duration" : 3687
+        }
+      }, {
+        "uid" : "a6663f4969a16e3a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/441//#testresult/a6663f4969a16e3a",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1641525589400,
+          "stop" : 1641525593901,
+          "duration" : 4501
+        }
+      }, {
+        "uid" : "6e4e14e50149cca1",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/440//#testresult/6e4e14e50149cca1",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1641515789045,
+          "stop" : 1641515791815,
+          "duration" : 2770
+        }
+      }, {
+        "uid" : "9bab968391cd2a95",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/434//#testresult/9bab968391cd2a95",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1641439094019,
+          "stop" : 1641439098449,
+          "duration" : 4430
+        }
+      }, {
+        "uid" : "fc9549aa38a4245",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/432//#testresult/fc9549aa38a4245",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1641429444656,
+          "stop" : 1641429454487,
+          "duration" : 9831
+        }
+      }, {
+        "uid" : "adb772dd8bdfeeaf",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/431//#testresult/adb772dd8bdfeeaf",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: 'EthereumModel' object has no attribute 'debug_traceTransaction'",
+        "time" : {
+          "start" : 1641394135695,
+          "stop" : 1641394140261,
+          "duration" : 4566
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "e8483428d0518248.json",
+  "parameterValues" : [ ]
+}
