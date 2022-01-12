@@ -1,0 +1,367 @@
+{
+  "uid" : "228fdeb14494b3d7",
+  "name" : "test_insufficient_approval",
+  "fullName" : "tests.brownie.token.tests.test_transferFrom#test_insufficient_approval",
+  "historyId" : "0ae63a08126a8f0616f222dcfe6ba70d",
+  "time" : {
+    "start" : 1641991050878,
+    "stop" : 1641991051069,
+    "duration" : 191
+  },
+  "status" : "broken",
+  "statusMessage" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+  "statusTrace" : "accounts = <brownie.network.account.Accounts object at 0x7f41d53b6d00>\ntoken = <Token Contract '0x3a9101f7E0c5a3575442B5F31FA9838E94dB3C66'>\n\n    def test_insufficient_approval(accounts, token):\n        balance = token.balanceOf(accounts[0])\n    \n>       token.approve(accounts[1], balance - 1, {'from': accounts[0]})\n\ntests/brownie/token/tests/test_transferFrom.py:117: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1693: in __call__\n    return self.transact(*args)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1576: in transact\n    data=self.encode_input(*args),\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1611: in encode_input\n    data = format_input(self.abi, args)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nabi = {'inputs': [{'internalType': 'address', 'name': '_spender', 'type': 'address'}, {'internalType': 'uint256', 'name': '_...e': 'approve', 'outputs': [{'internalType': 'bool', 'name': '', 'type': 'bool'}], 'stateMutability': 'nonpayable', ...}\ninputs = (<LocalAccount '0x4DEa350903955EaF74799c97983625F9c5fec8A3'>, -1)\n\n    def format_input(abi: Dict, inputs: Union[List, Tuple]) -> List:\n        # Format contract inputs based on ABI types\n        if len(inputs) and not len(abi[\"inputs\"]):\n            raise TypeError(f\"{abi['name']} requires no arguments\")\n        abi_types = _get_abi_types(abi[\"inputs\"])\n        try:\n            return _format_tuple(abi_types, inputs)\n        except Exception as e:\n>           raise type(e)(f\"{abi['name']} {e}\") from None\nE           OverflowError: approve '-1' - -1 is outside allowable range for uint256\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/convert/normalize.py:20: OverflowError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1641990941217,
+      "stop" : 1641990941217,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1641990942651,
+      "stop" : 1641990957156,
+      "duration" : 14505
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "accounts",
+    "time" : {
+      "start" : 1641990960517,
+      "stop" : 1641990960752,
+      "duration" : 235
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "setup_env",
+    "time" : {
+      "start" : 1641990960517,
+      "stop" : 1641990960517,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token",
+    "time" : {
+      "start" : 1641991004087,
+      "stop" : 1641991006631,
+      "duration" : 2544
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "afterStages" : [ {
+    "name" : "accounts::0",
+    "time" : {
+      "start" : 1641991209823,
+      "stop" : 1641991209823,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_transferFrom"
+  }, {
+    "name" : "host",
+    "value" : "fv-az123-753"
+  }, {
+    "name" : "thread",
+    "value" : "3637-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_transferFrom"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 79,
+        "skipped" : 0,
+        "passed" : 0,
+        "unknown" : 0,
+        "total" : 79
+      },
+      "items" : [ {
+        "uid" : "94be5ec4ea4aeadf",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/463//#testresult/94be5ec4ea4aeadf",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1641986395730,
+          "stop" : 1641986395871,
+          "duration" : 141
+        }
+      }, {
+        "uid" : "c6cf531b86d04bea",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/461//#testresult/c6cf531b86d04bea",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'HTTPConnectionPool(host='10.2.0.2', port=8899): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f1895fe5e80>: Failed to establish a new connection: [Errno 111] Connection refused'))'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1641982479214,
+          "stop" : 1641982479214,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "686592d6fd201afd",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/460//#testresult/686592d6fd201afd",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'HTTPConnectionPool(host='10.2.0.2', port=8899): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f189460db20>: Failed to establish a new connection: [Errno 111] Connection refused'))'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1641980268252,
+          "stop" : 1641980268252,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "ec4566601bb4db29",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/459//#testresult/ec4566601bb4db29",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1641975867958,
+          "stop" : 1641975868158,
+          "duration" : 200
+        }
+      }, {
+        "uid" : "7732d7c5f933e6b1",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/458//#testresult/7732d7c5f933e6b1",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'HTTPConnectionPool(host='10.2.0.2', port=8899): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f189a842400>: Failed to establish a new connection: [Errno 111] Connection refused'))'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1641974828339,
+          "stop" : 1641974828339,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "3886ea643d3e8b50",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/457//#testresult/3886ea643d3e8b50",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'HTTPConnectionPool(host='10.2.0.2', port=8899): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f1896042940>: Failed to establish a new connection: [Errno 111] Connection refused'))'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1641974206933,
+          "stop" : 1641974206933,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "6ccfa83fd1c31aa1",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/456//#testresult/6ccfa83fd1c31aa1",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ReadTimeout: HTTPConnectionPool(host='proxy.night.stand.neontest.xyz', port=80): Read timed out. (read timeout=30)",
+        "time" : {
+          "start" : 1641958013275,
+          "stop" : 1641958013275,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "b8421c1a1e401944",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/455//#testresult/b8421c1a1e401944",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ReadTimeout: HTTPConnectionPool(host='proxy.night.stand.neontest.xyz', port=80): Read timed out. (read timeout=30)",
+        "time" : {
+          "start" : 1641952209300,
+          "stop" : 1641952209300,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "90fc132d0c3a3a45",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/454//#testresult/90fc132d0c3a3a45",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ReadTimeout: HTTPConnectionPool(host='proxy.night.stand.neontest.xyz', port=80): Read timed out. (read timeout=30)",
+        "time" : {
+          "start" : 1641950686943,
+          "stop" : 1641950686943,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "138eb57d88396da",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/453//#testresult/138eb57d88396da",
+        "status" : "broken",
+        "statusDetails" : "ValueError: ['Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io invoke [1]', 'Program log: program/src/storage_account.rs:76', 'Program log: program/src/account_data.rs:225', 'Program log: program/src/entrypoint.rs:1251 : Invalid Ethereum transaction nonce: acc 21, trx 20', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io consumed 51427 of 500000 compute units', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io failed: invalid program argument', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io invoke [1]', 'Program log: program/src/storage_account.rs:76', 'Program log: program/src/account_data.rs:225', 'Program log: program/src/entrypoint.rs:1251 : Invalid Ethereum transaction nonce: acc 21, trx 20', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io consumed 51427 of 500000 compute units', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io failed: invalid program argument', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io invoke [1]', 'Program log: program/src/storage_account.rs:76', 'Program log: program/src/account_data.rs:225', 'Program log: program/src/entrypoint.rs:1251 : Invalid Ethereum transaction nonce: acc 21, trx 20', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io consumed 51427 of 500000 compute units', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io failed: invalid program argument', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io invoke [1]', 'Program log: program/src/storage_account.rs:76', 'Program log: program/src/account_data.rs:225', 'Program log: program/src/entrypoint.rs:1251 : Invalid Ethereum transaction nonce: acc 21, trx 20', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io consumed 51427 of 500000 compute units', 'Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io failed: invalid program argument']",
+        "time" : {
+          "start" : 1641947815957,
+          "stop" : 1641947815957,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "fdfb2de59091f491",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/452//#testresult/fdfb2de59091f491",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1641871098999,
+          "stop" : 1641871099151,
+          "duration" : 152
+        }
+      }, {
+        "uid" : "8b5b5afc61333214",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/451//#testresult/8b5b5afc61333214",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1641861492971,
+          "stop" : 1641861493175,
+          "duration" : 204
+        }
+      }, {
+        "uid" : "1a264fee0e07a699",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/450//#testresult/1a264fee0e07a699",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1641784607373,
+          "stop" : 1641784607583,
+          "duration" : 210
+        }
+      }, {
+        "uid" : "cb7f12ab8ecfaaae",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/449//#testresult/cb7f12ab8ecfaaae",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1641774926548,
+          "stop" : 1641774926703,
+          "duration" : 155
+        }
+      }, {
+        "uid" : "8c4de1095459a161",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/448//#testresult/8c4de1095459a161",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1641698381267,
+          "stop" : 1641698381412,
+          "duration" : 145
+        }
+      }, {
+        "uid" : "feb0cdb0aa0d7c79",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/447//#testresult/feb0cdb0aa0d7c79",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1641688892108,
+          "stop" : 1641688892323,
+          "duration" : 215
+        }
+      }, {
+        "uid" : "1f3369fd0874a330",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/446//#testresult/1f3369fd0874a330",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1641612001804,
+          "stop" : 1641612002008,
+          "duration" : 204
+        }
+      }, {
+        "uid" : "46f6a59a01a0c946",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/445//#testresult/46f6a59a01a0c946",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1641602285039,
+          "stop" : 1641602285288,
+          "duration" : 249
+        }
+      }, {
+        "uid" : "8e9f985843b3b336",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/441//#testresult/8e9f985843b3b336",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1641525625822,
+          "stop" : 1641525626043,
+          "duration" : 221
+        }
+      }, {
+        "uid" : "d1139a633af7ab2b",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/440//#testresult/d1139a633af7ab2b",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1641515822952,
+          "stop" : 1641515823107,
+          "duration" : 155
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "228fdeb14494b3d7.json",
+  "parameterValues" : [ ]
+}
