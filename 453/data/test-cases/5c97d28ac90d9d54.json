@@ -1,0 +1,348 @@
+{
+  "uid" : "5c97d28ac90d9d54",
+  "name" : "test_approval_event_fires",
+  "fullName" : "tests.brownie.token.tests.test_approve#test_approval_event_fires",
+  "historyId" : "5df85ed43d4eaa83ff87d3ee54c0ba22",
+  "time" : {
+    "start" : 1641947696828,
+    "stop" : 1641947741616,
+    "duration" : 44788
+  },
+  "status" : "broken",
+  "statusMessage" : "ValueError: {\"err\": {\"InstructionError\": [1, \"InvalidArgument\"]}, \"fee\": 10000, \"innerInstructions\": [], \"logMessages\": [\"Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io invoke [1]\", \"Program log: program/src/account_data.rs:225\", \"Program log: program/src/entrypoint.rs:1251 : Invalid Ethereum transaction nonce: acc 11, trx 10\", \"Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io consumed 20646 of 500000 compute units\", \"Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io failed: invalid program argument\"], \"postBalances\": [5777486426800, 417925880, 2039280, 2039280, 2672640, 31967280, 2672640, 1, 0, 1, 1141440, 1130582400], \"postTokenBalances\": [{\"accountIndex\": 2, \"mint\": \"HPsV9Deocecw3GeZv1FkAPNCBRfuVyfw9MMwjwRe1xaU\", \"uiTokenAmount\": {\"amount\": \"938046808160692033\", \"decimals\": 9, \"uiAmount\": 938046808.1606921, \"uiAmountString\": \"938046808.160692033\"}}, {\"accountIndex\": 3, \"mint\": \"HPsV9Deocecw3GeZv1FkAPNCBRfuVyfw9MMwjwRe1xaU\", \"uiTokenAmount\": {\"amount\": \"0\", \"decimals\": 9, \"uiAmount\": null, \"uiAmountString\": \"0\"}}], \"preBalances\": [5777486436800, 417925880, 2039280, 2039280, 2672640, 31967280, 2672640, 1, 0, 1, 1141440, 1130582400], \"preTokenBalances\": [{\"accountIndex\": 2, \"mint\": \"HPsV9Deocecw3GeZv1FkAPNCBRfuVyfw9MMwjwRe1xaU\", \"uiTokenAmount\": {\"amount\": \"938046808160692033\", \"decimals\": 9, \"uiAmount\": 938046808.1606921, \"uiAmountString\": \"938046808.160692033\"}}, {\"accountIndex\": 3, \"mint\": \"HPsV9Deocecw3GeZv1FkAPNCBRfuVyfw9MMwjwRe1xaU\", \"uiTokenAmount\": {\"amount\": \"0\", \"decimals\": 9, \"uiAmount\": null, \"uiAmountString\": \"0\"}}], \"rewards\": [], \"status\": {\"Err\": {\"InstructionError\": [1, \"InvalidArgument\"]}}}",
+  "statusTrace" : "accounts = <brownie.network.account.Accounts object at 0x7f3f6644c7f0>\ntoken = <Token Contract '0x6B262E9eA52E6b21D6264B0d11f21f5927a4Ac86'>\n\n    def test_approval_event_fires(accounts, token):\n>       tx = token.approve(accounts[1], 10**19, {'from': accounts[0]})\n\ntests/brownie/token/tests/test_approve.py:50: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1693: in __call__\n    return self.transact(*args)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1566: in transact\n    return tx[\"from\"].transfer(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:642: in transfer\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:743: in _make_transaction\n    exc = VirtualMachineError(e)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = VirtualMachineError(ValueError({'code': -32000, 'message': '{\"err\": {\"InstructionError\": [1, \"InvalidArgument\"]}, \"fee...t\": null, \"uiAmountString\": \"0\"}}], \"rewards\": [], \"status\": {\"Err\": {\"InstructionError\": [1, \"InvalidArgument\"]}}}'}))\nexc = {'code': -32000, 'message': '{\"err\": {\"InstructionError\": [1, \"InvalidArgument\"]}, \"fee\": 10000, \"innerInstructions\": ...unt\": null, \"uiAmountString\": \"0\"}}], \"rewards\": [], \"status\": {\"Err\": {\"InstructionError\": [1, \"InvalidArgument\"]}}}'}\n\n    def __init__(self, exc: ValueError) -> None:\n        try:\n            exc = exc.args[0]\n        except Exception:\n            pass\n    \n        if isinstance(exc, dict) and \"message\" in exc:\n            if \"data\" not in exc:\n>               raise ValueError(exc[\"message\"]) from None\nE               ValueError: {\"err\": {\"InstructionError\": [1, \"InvalidArgument\"]}, \"fee\": 10000, \"innerInstructions\": [], \"logMessages\": [\"Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io invoke [1]\", \"Program log: program/src/account_data.rs:225\", \"Program log: program/src/entrypoint.rs:1251 : Invalid Ethereum transaction nonce: acc 11, trx 10\", \"Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io consumed 20646 of 500000 compute units\", \"Program 53DfF883gyixYNXnM7s5xhdeyV8mVk9T4i2hGV9vG9io failed: invalid program argument\"], \"postBalances\": [5777486426800, 417925880, 2039280, 2039280, 2672640, 31967280, 2672640, 1, 0, 1, 1141440, 1130582400], \"postTokenBalances\": [{\"accountIndex\": 2, \"mint\": \"HPsV9Deocecw3GeZv1FkAPNCBRfuVyfw9MMwjwRe1xaU\", \"uiTokenAmount\": {\"amount\": \"938046808160692033\", \"decimals\": 9, \"uiAmount\": 938046808.1606921, \"uiAmountString\": \"938046808.160692033\"}}, {\"accountIndex\": 3, \"mint\": \"HPsV9Deocecw3GeZv1FkAPNCBRfuVyfw9MMwjwRe1xaU\", \"uiTokenAmount\": {\"amount\": \"0\", \"decimals\": 9, \"uiAmount\": null, \"uiAmountString\": \"0\"}}], \"preBalances\": [5777486436800, 417925880, 2039280, 2039280, 2672640, 31967280, 2672640, 1, 0, 1, 1141440, 1130582400], \"preTokenBalances\": [{\"accountIndex\": 2, \"mint\": \"HPsV9Deocecw3GeZv1FkAPNCBRfuVyfw9MMwjwRe1xaU\", \"uiTokenAmount\": {\"amount\": \"938046808160692033\", \"decimals\": 9, \"uiAmount\": 938046808.1606921, \"uiAmountString\": \"938046808.160692033\"}}, {\"accountIndex\": 3, \"mint\": \"HPsV9Deocecw3GeZv1FkAPNCBRfuVyfw9MMwjwRe1xaU\", \"uiTokenAmount\": {\"amount\": \"0\", \"decimals\": 9, \"uiAmount\": null, \"uiAmountString\": \"0\"}}], \"rewards\": [], \"status\": {\"Err\": {\"InstructionError\": [1, \"InvalidArgument\"]}}}\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py:85: ValueError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : true,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1641947657613,
+      "stop" : 1641947657613,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1641947658561,
+      "stop" : 1641947676735,
+      "duration" : 18174
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "accounts",
+    "time" : {
+      "start" : 1641947679846,
+      "stop" : 1641947680157,
+      "duration" : 311
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "setup_env",
+    "time" : {
+      "start" : 1641947679846,
+      "stop" : 1641947679846,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token",
+    "time" : {
+      "start" : 1641947680158,
+      "stop" : 1641947682679,
+      "duration" : 2521
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "afterStages" : [ {
+    "name" : "accounts::0",
+    "time" : {
+      "start" : 1641948013300,
+      "stop" : 1641948013300,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_approve"
+  }, {
+    "name" : "host",
+    "value" : "fv-az28-122"
+  }, {
+    "name" : "thread",
+    "value" : "3610-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_approve"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Invalid nonce",
+      "messageRegex" : ".*Invalid Ethereum transaction nonce.*",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 7,
+        "skipped" : 0,
+        "passed" : 62,
+        "unknown" : 0,
+        "total" : 69
+      },
+      "items" : [ {
+        "uid" : "f010600c73b8af1a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/452//#testresult/f010600c73b8af1a",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641870939963,
+          "stop" : 1641870941235,
+          "duration" : 1272
+        }
+      }, {
+        "uid" : "ad136437cea506b6",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/451//#testresult/ad136437cea506b6",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641861330608,
+          "stop" : 1641861332588,
+          "duration" : 1980
+        }
+      }, {
+        "uid" : "72c10645b2fff177",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/450//#testresult/72c10645b2fff177",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641784496094,
+          "stop" : 1641784497765,
+          "duration" : 1671
+        }
+      }, {
+        "uid" : "7ffcca512b7d6ee1",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/449//#testresult/7ffcca512b7d6ee1",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641774833584,
+          "stop" : 1641774834812,
+          "duration" : 1228
+        }
+      }, {
+        "uid" : "807b48cb0fe40cb",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/448//#testresult/807b48cb0fe40cb",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641698157857,
+          "stop" : 1641698159602,
+          "duration" : 1745
+        }
+      }, {
+        "uid" : "d1e3974fd1e570d5",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/447//#testresult/d1e3974fd1e570d5",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641688645994,
+          "stop" : 1641688647992,
+          "duration" : 1998
+        }
+      }, {
+        "uid" : "e7d0adc7f150e00c",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/446//#testresult/e7d0adc7f150e00c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641611780723,
+          "stop" : 1641611805896,
+          "duration" : 25173
+        }
+      }, {
+        "uid" : "39e1880513e87374",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/445//#testresult/39e1880513e87374",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641602056592,
+          "stop" : 1641602058258,
+          "duration" : 1666
+        }
+      }, {
+        "uid" : "f7bad1de28dc132b",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/441//#testresult/f7bad1de28dc132b",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641525460180,
+          "stop" : 1641525462120,
+          "duration" : 1940
+        }
+      }, {
+        "uid" : "3342759c428af6cd",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/440//#testresult/3342759c428af6cd",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641515706477,
+          "stop" : 1641515707988,
+          "duration" : 1511
+        }
+      }, {
+        "uid" : "f7f4b6940f7787d2",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/434//#testresult/f7f4b6940f7787d2",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641439035103,
+          "stop" : 1641439037040,
+          "duration" : 1937
+        }
+      }, {
+        "uid" : "9b9e4f05230b9a0e",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/432//#testresult/9b9e4f05230b9a0e",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641429379291,
+          "stop" : 1641429381541,
+          "duration" : 2250
+        }
+      }, {
+        "uid" : "fa2f5e726d3f4387",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/431//#testresult/fa2f5e726d3f4387",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641394076139,
+          "stop" : 1641394078022,
+          "duration" : 1883
+        }
+      }, {
+        "uid" : "1a26d9fe85908b1c",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/424//#testresult/1a26d9fe85908b1c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641369769984,
+          "stop" : 1641369771722,
+          "duration" : 1738
+        }
+      }, {
+        "uid" : "8a98e76ddec8ada1",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/424//#testresult/8a98e76ddec8ada1",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641352458640,
+          "stop" : 1641352460179,
+          "duration" : 1539
+        }
+      }, {
+        "uid" : "ad2a9ae5a51bf05e",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/422//#testresult/ad2a9ae5a51bf05e",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641342922900,
+          "stop" : 1641342924843,
+          "duration" : 1943
+        }
+      }, {
+        "uid" : "4a36a54d8e74f6f1",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/415//#testresult/4a36a54d8e74f6f1",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641266014018,
+          "stop" : 1641266015677,
+          "duration" : 1659
+        }
+      }, {
+        "uid" : "d4b129a1045820f5",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/414//#testresult/d4b129a1045820f5",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641256486660,
+          "stop" : 1641256488510,
+          "duration" : 1850
+        }
+      }, {
+        "uid" : "c29d50467f729470",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/413//#testresult/c29d50467f729470",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641247392137,
+          "stop" : 1641247394076,
+          "duration" : 1939
+        }
+      }, {
+        "uid" : "e7de43a8ee3e5c6f",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/412//#testresult/e7de43a8ee3e5c6f",
+        "status" : "passed",
+        "time" : {
+          "start" : 1641243245924,
+          "stop" : 1641243247824,
+          "duration" : 1900
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "5c97d28ac90d9d54.json",
+  "parameterValues" : [ ]
+}
