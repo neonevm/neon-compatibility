@@ -148,7 +148,7 @@ jobs:
           node ./get_private_keys.js
           export PRIVATE_KEYS=$(node ./get_private_keys.js)
           echo "PRIVATEKEYS = $PRIVATE_KEYS"
-          find test -name "*.test.js" | sort | parallel -k --jobs ${{ env.JOBS_NUMBER }} --results pout npx hardhat test {}
+#          find test -name "*.test.js" | sort | parallel -k --jobs ${{ env.JOBS_NUMBER }} --results pout npx hardhat test {}
       - name: "Verify count of logs"
         if: always()
         run: python3 parallel_report.py
