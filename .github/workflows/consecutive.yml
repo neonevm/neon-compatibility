@@ -144,11 +144,11 @@ jobs:
         run: |
           cd openzeppelin-contracts
           mkdir pout
-          npx hardhat compile
           node ./get_private_keys.js
           export PRIVATE_KEYS=$(node ./get_private_keys.js)
           echo "PRIVATEKEYS = $PRIVATE_KEYS"
-#          find test -name "*.test.js" | sort | parallel -k --jobs ${{ env.JOBS_NUMBER }} --results pout npx hardhat test {}
+          npx hardhat compile
+          find test -name "*.test.js" | sort | parallel -k --jobs ${{ env.JOBS_NUMBER }} --results pout npx hardhat test {}
       - name: "Verify count of logs"
         if: always()
         run: python3 parallel_report.py
