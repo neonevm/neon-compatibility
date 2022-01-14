@@ -33,6 +33,9 @@ const Config = {
   privateKeys: getArrayValue(process.env.PRIVATE_KEYS)
 };
 
+console.log(Config.privateKeys);
+console.log(process.env.PRIVATE_KEYS);
+
 const web3 = new Web3(
   new Web3.providers.HttpProvider(Config.proxyUrl, 3000000)
 );
