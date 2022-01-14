@@ -147,7 +147,7 @@ jobs:
           npx hardhat compile
           node ./get_private_keys.js
           export PRIVATE_KEYS=$(node ./get_private_keys.js)
-          echo $PRIVATE_KEYS
+          echo "PRIVATEKEYS = $PRIVATE_KEYS"
           find test -name "*.test.js" | sort | parallel -k --jobs ${{ env.JOBS_NUMBER }} --results pout npx hardhat test {}
       - name: "Verify count of logs"
         if: always()
