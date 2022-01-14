@@ -146,6 +146,7 @@ jobs:
           mkdir pout
           npx hardhat compile
           export PRIVATE_KEYS=$(node ./get_private_keys.js)
+          echo $PRIVATE_KEYS
           find test -name "*.test.js" | sort | parallel -k --jobs ${{ env.JOBS_NUMBER }} --results pout npx hardhat test {}
       - name: "Verify count of logs"
         if: always()
