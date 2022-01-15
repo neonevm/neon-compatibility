@@ -145,7 +145,8 @@ jobs:
           cd openzeppelin-contracts
           mkdir pout
           npx hardhat compile
-          find test -name "*.test.js" | sort | parallel -k --jobs ${{ env.JOBS_NUMBER }} --results pout "env PRIVATE_KEYS=\$(node ./get_private_keys.js) npx hardhat test {}"
+          for i in $(seq ${{ env.JOBS_NUMBER }} ); do export LIST_$i=$(node ./get_private_keys.js); done;
+          find test -name "*.test.js" | sort | parallel -k --jobs ${{ env.JOBS_NUMBER }} --results pout "env PRIVATE_KEYS=\$LIST_{#} npx hardhat test {}"
       - name: "Verify count of logs"
         if: always()
         run: python3 parallel_report.py

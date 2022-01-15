@@ -21,7 +21,7 @@ const getBooleanValue = (input) => {
 const Config = {
   faucetUrl: getStringValue(process.env.FAUCET_URL),
   useFaucet: getBooleanValue(process.env.USE_FAUCET),
-  requestAmount: Number.parseInt(getStringValue(process.env.REQUEST_AMOUNT)),
+  requestAmount: Number.parseInt(getStringValue(process.env.REQUEST_AMOUNT)) * 10,
   usersNumber: Number.parseInt(getStringValue(process.env.USERS_NUMBER))
 };
 
