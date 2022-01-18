@@ -1,0 +1,369 @@
+{
+  "uid" : "c8aeae27432ce007",
+  "name" : "test_insufficient_approval",
+  "fullName" : "tests.brownie.token.tests.test_transferFrom#test_insufficient_approval",
+  "historyId" : "0ae63a08126a8f0616f222dcfe6ba70d",
+  "time" : {
+    "start" : 1642475725731,
+    "stop" : 1642475725731,
+    "duration" : 0
+  },
+  "status" : "broken",
+  "statusMessage" : "ValueError: there is no unique or exclusion constraint matching the ON CONFLICT specification",
+  "statusTrace" : "brownie_project = <Project 'TokenProject'>\naccounts = <brownie.network.account.Accounts object at 0x7f1809bb8370>\n\n    @pytest.fixture(scope=\"module\")\n    def token(brownie_project, accounts):\n>       return brownie_project.Token.deploy(\"Test Token\", \"TST\", 18, 1e21, {'from': accounts[0]})\n\ntests/brownie/token/tests/conftest.py:49: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:600: in __call__\n    return tx[\"from\"].deploy(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:508: in deploy\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:725: in _make_transaction\n    raise VirtualMachineError(e) from None\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = VirtualMachineError(ValueError({'code': -32000, 'message': 'there is no unique or exclusion constraint matching the ON CONFLICT specification\\n'}))\nexc = {'code': -32000, 'message': 'there is no unique or exclusion constraint matching the ON CONFLICT specification\\n'}\n\n    def __init__(self, exc: ValueError) -> None:\n        try:\n            exc = exc.args[0]\n        except Exception:\n            pass\n    \n        if isinstance(exc, dict) and \"message\" in exc:\n            if \"data\" not in exc:\n>               raise ValueError(exc[\"message\"]) from None\nE               ValueError: there is no unique or exclusion constraint matching the ON CONFLICT specification\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py:85: ValueError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1642475704568,
+      "stop" : 1642475704568,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1642475705936,
+      "stop" : 1642475720351,
+      "duration" : 14415
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "setup_env",
+    "time" : {
+      "start" : 1642475721524,
+      "stop" : 1642475721524,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "accounts",
+    "time" : {
+      "start" : 1642475721524,
+      "stop" : 1642475721806,
+      "duration" : 282
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token",
+    "time" : {
+      "start" : 1642475724340,
+      "stop" : 1642475724866,
+      "duration" : 526
+    },
+    "status" : "broken",
+    "statusMessage" : "ValueError: there is no unique or exclusion constraint matching the ON CONFLICT specification\n\n",
+    "statusTrace" : "  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/pluggy/_callers.py\", line 39, in _multicall\n    res = hook_impl.function(*args)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/_pytest/fixtures.py\", line 1126, in pytest_fixture_setup\n    result = call_fixture_func(fixturefunc, request, kwargs)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/_pytest/fixtures.py\", line 932, in call_fixture_func\n    fixture_result = fixturefunc(**kwargs)\n  File \"/home/runner/work/neon-compatibility/neon-compatibility/tests/brownie/token/tests/conftest.py\", line 49, in token\n    return brownie_project.Token.deploy(\"Test Token\", \"TST\", 18, 1e21, {'from': accounts[0]})\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py\", line 600, in __call__\n    return tx[\"from\"].deploy(\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py\", line 508, in deploy\n    receipt, exc = self._make_transaction(\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py\", line 725, in _make_transaction\n    raise VirtualMachineError(e) from None\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py\", line 85, in __init__\n    raise ValueError(exc[\"message\"]) from None\n",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  } ],
+  "afterStages" : [ {
+    "name" : "accounts::0",
+    "time" : {
+      "start" : 1642475785220,
+      "stop" : 1642475785220,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_transferFrom"
+  }, {
+    "name" : "host",
+    "value" : "fv-az77-46"
+  }, {
+    "name" : "thread",
+    "value" : "3604-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_transferFrom"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 111,
+        "skipped" : 0,
+        "passed" : 0,
+        "unknown" : 0,
+        "total" : 111
+      },
+      "items" : [ {
+        "uid" : "e48146966975979e",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/512//#testresult/e48146966975979e",
+        "status" : "broken",
+        "statusDetails" : "ValueError: there is no unique or exclusion constraint matching the ON CONFLICT specification",
+        "time" : {
+          "start" : 1642466079456,
+          "stop" : 1642466079456,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "3c38e7c1e5cb3f6c",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/511//#testresult/3c38e7c1e5cb3f6c",
+        "status" : "broken",
+        "statusDetails" : "web3.exceptions.BlockNotFound: Block with id: 'latest' not found.",
+        "time" : {
+          "start" : 1642389396558,
+          "stop" : 1642389396558,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "bafb694e2bd19c8a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/510//#testresult/bafb694e2bd19c8a",
+        "status" : "broken",
+        "statusDetails" : "web3.exceptions.BlockNotFound: Block with id: 'latest' not found.",
+        "time" : {
+          "start" : 1642379647635,
+          "stop" : 1642379647635,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "b84fdd4962405fa4",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/509//#testresult/b84fdd4962405fa4",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1642303028875,
+          "stop" : 1642303029051,
+          "duration" : 176
+        }
+      }, {
+        "uid" : "c08c93ee61668a94",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/508//#testresult/c08c93ee61668a94",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1642293390565,
+          "stop" : 1642293390751,
+          "duration" : 186
+        }
+      }, {
+        "uid" : "dc7aef9ab908b413",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/506//#testresult/dc7aef9ab908b413",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1642216593926,
+          "stop" : 1642216594106,
+          "duration" : 180
+        }
+      }, {
+        "uid" : "59faeec396fd4d1b",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/505//#testresult/59faeec396fd4d1b",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1642206861354,
+          "stop" : 1642206861541,
+          "duration" : 187
+        }
+      }, {
+        "uid" : "f9e57cacb2af3dbf",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/494//#testresult/f9e57cacb2af3dbf",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1642169321868,
+          "stop" : 1642169322053,
+          "duration" : 185
+        }
+      }, {
+        "uid" : "8dd450cb758c7351",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/494//#testresult/8dd450cb758c7351",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1642158844410,
+          "stop" : 1642158844609,
+          "duration" : 199
+        }
+      }, {
+        "uid" : "850c65112fa4264e",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/493//#testresult/850c65112fa4264e",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1642130195805,
+          "stop" : 1642130195992,
+          "duration" : 187
+        }
+      }, {
+        "uid" : "f89307042ad2c08d",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/492//#testresult/f89307042ad2c08d",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1642120631228,
+          "stop" : 1642120631433,
+          "duration" : 205
+        }
+      }, {
+        "uid" : "30c8728ba57b73fa",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/490//#testresult/30c8728ba57b73fa",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1642099357995,
+          "stop" : 1642099358179,
+          "duration" : 184
+        }
+      }, {
+        "uid" : "abd99fa4dbff3b09",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/488//#testresult/abd99fa4dbff3b09",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1642088390039,
+          "stop" : 1642088390250,
+          "duration" : 211
+        }
+      }, {
+        "uid" : "de35f46c077d7c62",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/487//#testresult/de35f46c077d7c62",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1642083141690,
+          "stop" : 1642083141874,
+          "duration" : 184
+        }
+      }, {
+        "uid" : "4ef011d52df7e202",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/485//#testresult/4ef011d52df7e202",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1642075682340,
+          "stop" : 1642075682548,
+          "duration" : 208
+        }
+      }, {
+        "uid" : "411682f0177cfaf8",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/484//#testresult/411682f0177cfaf8",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'HTTPConnectionPool(host='10.2.0.2', port=8899): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f116f627520>: Failed to establish a new connection: [Errno 111] Connection refused'))'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1642074001840,
+          "stop" : 1642074001840,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "c1f52bf8fbdce429",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/483//#testresult/c1f52bf8fbdce429",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1642059480215,
+          "stop" : 1642059480422,
+          "duration" : 207
+        }
+      }, {
+        "uid" : "ec616805e8195152",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/482//#testresult/ec616805e8195152",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1642043778012,
+          "stop" : 1642043778154,
+          "duration" : 142
+        }
+      }, {
+        "uid" : "53bed225bd1bc0a4",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/481//#testresult/53bed225bd1bc0a4",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1642034888009,
+          "stop" : 1642034888199,
+          "duration" : 190
+        }
+      }, {
+        "uid" : "1df9f559b73ce34c",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/479//#testresult/1df9f559b73ce34c",
+        "status" : "broken",
+        "statusDetails" : "OverflowError: approve '-1' - -1 is outside allowable range for uint256",
+        "time" : {
+          "start" : 1642033047850,
+          "stop" : 1642033048038,
+          "duration" : 188
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "c8aeae27432ce007.json",
+  "parameterValues" : [ ]
+}
