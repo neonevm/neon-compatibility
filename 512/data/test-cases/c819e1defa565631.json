@@ -1,0 +1,353 @@
+{
+  "uid" : "c819e1defa565631",
+  "name" : "test_sender_balance_decreases",
+  "fullName" : "tests.brownie.token.tests.test_transferFrom#test_sender_balance_decreases",
+  "historyId" : "cdd38f2d3ff74f7c9e250618c4f315b0",
+  "time" : {
+    "start" : 1642466078124,
+    "stop" : 1642466078124,
+    "duration" : 0
+  },
+  "status" : "broken",
+  "statusMessage" : "ValueError: there is no unique or exclusion constraint matching the ON CONFLICT specification",
+  "statusTrace" : "brownie_project = <Project 'TokenProject'>\naccounts = <brownie.network.account.Accounts object at 0x7fda80a08370>\n\n    @pytest.fixture(scope=\"module\")\n    def token(brownie_project, accounts):\n>       return brownie_project.Token.deploy(\"Test Token\", \"TST\", 18, 1e21, {'from': accounts[0]})\n\ntests/brownie/token/tests/conftest.py:49: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:600: in __call__\n    return tx[\"from\"].deploy(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:508: in deploy\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:725: in _make_transaction\n    raise VirtualMachineError(e) from None\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = VirtualMachineError(ValueError({'code': -32000, 'message': 'there is no unique or exclusion constraint matching the ON CONFLICT specification\\n'}))\nexc = {'code': -32000, 'message': 'there is no unique or exclusion constraint matching the ON CONFLICT specification\\n'}\n\n    def __init__(self, exc: ValueError) -> None:\n        try:\n            exc = exc.args[0]\n        except Exception:\n            pass\n    \n        if isinstance(exc, dict) and \"message\" in exc:\n            if \"data\" not in exc:\n>               raise ValueError(exc[\"message\"]) from None\nE               ValueError: there is no unique or exclusion constraint matching the ON CONFLICT specification\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py:85: ValueError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1642466056603,
+      "stop" : 1642466056603,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1642466057906,
+      "stop" : 1642466074425,
+      "duration" : 16519
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "setup_env",
+    "time" : {
+      "start" : 1642466075344,
+      "stop" : 1642466075344,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "accounts",
+    "time" : {
+      "start" : 1642466075344,
+      "stop" : 1642466075613,
+      "duration" : 269
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token",
+    "time" : {
+      "start" : 1642466078125,
+      "stop" : 1642466078621,
+      "duration" : 496
+    },
+    "status" : "broken",
+    "statusMessage" : "ValueError: there is no unique or exclusion constraint matching the ON CONFLICT specification\n\n",
+    "statusTrace" : "  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/pluggy/_callers.py\", line 39, in _multicall\n    res = hook_impl.function(*args)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/_pytest/fixtures.py\", line 1126, in pytest_fixture_setup\n    result = call_fixture_func(fixturefunc, request, kwargs)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/_pytest/fixtures.py\", line 932, in call_fixture_func\n    fixture_result = fixturefunc(**kwargs)\n  File \"/home/runner/work/neon-compatibility/neon-compatibility/tests/brownie/token/tests/conftest.py\", line 49, in token\n    return brownie_project.Token.deploy(\"Test Token\", \"TST\", 18, 1e21, {'from': accounts[0]})\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py\", line 600, in __call__\n    return tx[\"from\"].deploy(\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py\", line 508, in deploy\n    receipt, exc = self._make_transaction(\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py\", line 725, in _make_transaction\n    raise VirtualMachineError(e) from None\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py\", line 85, in __init__\n    raise ValueError(exc[\"message\"]) from None\n",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  } ],
+  "afterStages" : [ {
+    "name" : "accounts::0",
+    "time" : {
+      "start" : 1642466108725,
+      "stop" : 1642466108725,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_transferFrom"
+  }, {
+    "name" : "host",
+    "value" : "fv-az124-340"
+  }, {
+    "name" : "thread",
+    "value" : "3717-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_transferFrom"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 26,
+        "skipped" : 0,
+        "passed" : 84,
+        "unknown" : 0,
+        "total" : 110
+      },
+      "items" : [ {
+        "uid" : "b34e415b71ab80f3",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/511//#testresult/b34e415b71ab80f3",
+        "status" : "broken",
+        "statusDetails" : "web3.exceptions.BlockNotFound: Block with id: 'latest' not found.",
+        "time" : {
+          "start" : 1642389394422,
+          "stop" : 1642389394422,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "87d893b15f2911ea",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/510//#testresult/87d893b15f2911ea",
+        "status" : "broken",
+        "statusDetails" : "web3.exceptions.BlockNotFound: Block with id: 'latest' not found.",
+        "time" : {
+          "start" : 1642379645570,
+          "stop" : 1642379645570,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "b9bbfb1f426a586d",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/509//#testresult/b9bbfb1f426a586d",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642302986816,
+          "stop" : 1642302991092,
+          "duration" : 4276
+        }
+      }, {
+        "uid" : "41c10cba068e647b",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/508//#testresult/41c10cba068e647b",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642293348753,
+          "stop" : 1642293353128,
+          "duration" : 4375
+        }
+      }, {
+        "uid" : "f83bbdb33ecd6268",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/506//#testresult/f83bbdb33ecd6268",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642216552171,
+          "stop" : 1642216556142,
+          "duration" : 3971
+        }
+      }, {
+        "uid" : "fbb1fbd54f164d2a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/505//#testresult/fbb1fbd54f164d2a",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642206819467,
+          "stop" : 1642206823750,
+          "duration" : 4283
+        }
+      }, {
+        "uid" : "eaa4eb7e7e412950",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/494//#testresult/eaa4eb7e7e412950",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642169278203,
+          "stop" : 1642169282469,
+          "duration" : 4266
+        }
+      }, {
+        "uid" : "ddd5b7154593d3f8",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/494//#testresult/ddd5b7154593d3f8",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642158799299,
+          "stop" : 1642158803487,
+          "duration" : 4188
+        }
+      }, {
+        "uid" : "2300faa6f900043f",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/493//#testresult/2300faa6f900043f",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642130150719,
+          "stop" : 1642130154934,
+          "duration" : 4215
+        }
+      }, {
+        "uid" : "e13f63f09391692a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/492//#testresult/e13f63f09391692a",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642120582467,
+          "stop" : 1642120587122,
+          "duration" : 4655
+        }
+      }, {
+        "uid" : "213af1acdeb84a6d",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/490//#testresult/213af1acdeb84a6d",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642099313471,
+          "stop" : 1642099317695,
+          "duration" : 4224
+        }
+      }, {
+        "uid" : "c63a3c812d10e1f8",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/488//#testresult/c63a3c812d10e1f8",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642088341260,
+          "stop" : 1642088346079,
+          "duration" : 4819
+        }
+      }, {
+        "uid" : "a9e6535543076288",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/487//#testresult/a9e6535543076288",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642083106718,
+          "stop" : 1642083109953,
+          "duration" : 3235
+        }
+      }, {
+        "uid" : "291e1117951a59dd",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/485//#testresult/291e1117951a59dd",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642075634347,
+          "stop" : 1642075638805,
+          "duration" : 4458
+        }
+      }, {
+        "uid" : "1b5fba0bbd4027e5",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/484//#testresult/1b5fba0bbd4027e5",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Gas estimation failed: 'HTTPConnectionPool(host='10.2.0.2', port=8899): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f116f627520>: Failed to establish a new connection: [Errno 111] Connection refused'))'. This transaction will likely revert. If you wish to broadcast, you must set the gas limit manually.",
+        "time" : {
+          "start" : 1642074000838,
+          "stop" : 1642074000838,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "a0cd1ca4c6ec896d",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/483//#testresult/a0cd1ca4c6ec896d",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642059435190,
+          "stop" : 1642059439436,
+          "duration" : 4246
+        }
+      }, {
+        "uid" : "2fbdd614afb049e0",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/482//#testresult/2fbdd614afb049e0",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642043743847,
+          "stop" : 1642043746922,
+          "duration" : 3075
+        }
+      }, {
+        "uid" : "5b81e65083a639ef",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/481//#testresult/5b81e65083a639ef",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642034842844,
+          "stop" : 1642034847278,
+          "duration" : 4434
+        }
+      }, {
+        "uid" : "8eeed4cdd22f320c",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/479//#testresult/8eeed4cdd22f320c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642033005085,
+          "stop" : 1642033009791,
+          "duration" : 4706
+        }
+      }, {
+        "uid" : "e3e156f0d3fe9480",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/478//#testresult/e3e156f0d3fe9480",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url: http://proxy.night.stand.neontest.xyz/solana",
+        "time" : {
+          "start" : 1642032073483,
+          "stop" : 1642032073483,
+          "duration" : 0
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "c819e1defa565631.json",
+  "parameterValues" : [ ]
+}
