@@ -1,0 +1,249 @@
+{
+  "uid" : "ffdbc232d1f3791f",
+  "name" : "test_transfer_to_self_no_approval",
+  "fullName" : "tests.brownie.token.tests.test_transferFrom#test_transfer_to_self_no_approval",
+  "historyId" : "e64c769fe7fbe0824bd4983651fa94bc",
+  "time" : {
+    "start" : 1643368110076,
+    "stop" : 1643368110076,
+    "duration" : 0
+  },
+  "status" : "broken",
+  "statusMessage" : "ValueError: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x4",
+  "statusTrace" : "brownie_project = <Project 'TokenProject'>\naccounts = <brownie.network.account.Accounts object at 0x7fee9261c2b0>\n\n    @pytest.fixture(scope=\"module\")\n    def token(brownie_project, accounts):\n>       return brownie_project.Token.deploy(\"Test Token\", \"TST\", 18, 1e21, {'from': accounts[0]})\n\ntests/brownie/token/tests/conftest.py:49: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:600: in __call__\n    return tx[\"from\"].deploy(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:508: in deploy\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:743: in _make_transaction\n    exc = VirtualMachineError(e)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = VirtualMachineError(ValueError({'code': -32002, 'message': 'Transaction simulation failed: Error processing Instructio...nits', 'Program eeLSJgWzzxrqKv1UxtRVVH8FX3qCQWUs9QuAjJpETGU failed: custom program error: 0x4'], 'unitsConsumed': 0}}))\nexc = {'code': -32002, 'data': {'accounts': None, 'err': {'InstructionError': [0, {'Custom': 4}]}, 'logs': ['Program eeLSJgW...tsConsumed': 0}, 'message': 'Transaction simulation failed: Error processing Instruction 0: custom program error: 0x4'}\n\n    def __init__(self, exc: ValueError) -> None:\n        try:\n            exc = exc.args[0]\n        except Exception:\n            pass\n    \n        if isinstance(exc, dict) and \"message\" in exc:\n            if \"data\" not in exc:\n                raise ValueError(exc[\"message\"]) from None\n    \n            self.message: str = exc[\"message\"].rstrip(\".\")\n    \n            if isinstance(exc[\"data\"], str):\n                # handle parity exceptions - this logic probably is not perfect\n                if \"0x08c379a0\" in exc[\"data\"]:\n                    revert_type, err_msg = [i.strip() for i in exc[\"data\"].split(\"0x08c379a0\", 1)]\n                    err_msg = eth_abi.decode_abi([\"string\"], HexBytes(err_msg))\n                    err_msg = f\"{revert_type} '{err_msg}'\"\n                elif exc[\"data\"].endswith(\"0x\"):\n                    err_msg = exc[\"data\"][:-2].strip()\n                else:\n                    err_msg = exc[\"data\"]\n                raise ValueError(f\"{self.message}: {err_msg}\") from None\n    \n            try:\n                txid, data = next((k, v) for k, v in exc[\"data\"].items() if k.startswith(\"0x\"))\n            except StopIteration:\n>               raise ValueError(exc[\"message\"]) from None\nE               ValueError: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x4\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py:104: ValueError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : true,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1643368067648,
+      "stop" : 1643368067648,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1643368070403,
+      "stop" : 1643368082480,
+      "duration" : 12077
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "accounts",
+    "time" : {
+      "start" : 1643368092297,
+      "stop" : 1643368092567,
+      "duration" : 270
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "setup_env",
+    "time" : {
+      "start" : 1643368092297,
+      "stop" : 1643368092297,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token",
+    "time" : {
+      "start" : 1643368104047,
+      "stop" : 1643368109051,
+      "duration" : 5004
+    },
+    "status" : "broken",
+    "statusMessage" : "ValueError: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x4\n",
+    "statusTrace" : "  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/pluggy/_callers.py\", line 39, in _multicall\n    res = hook_impl.function(*args)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/_pytest/fixtures.py\", line 1126, in pytest_fixture_setup\n    result = call_fixture_func(fixturefunc, request, kwargs)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/_pytest/fixtures.py\", line 932, in call_fixture_func\n    fixture_result = fixturefunc(**kwargs)\n  File \"/home/runner/work/neon-compatibility/neon-compatibility/tests/brownie/token/tests/conftest.py\", line 49, in token\n    return brownie_project.Token.deploy(\"Test Token\", \"TST\", 18, 1e21, {'from': accounts[0]})\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py\", line 600, in __call__\n    return tx[\"from\"].deploy(\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py\", line 508, in deploy\n    receipt, exc = self._make_transaction(\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py\", line 743, in _make_transaction\n    exc = VirtualMachineError(e)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py\", line 104, in __init__\n    raise ValueError(exc[\"message\"]) from None\n",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  } ],
+  "afterStages" : [ {
+    "name" : "accounts::0",
+    "time" : {
+      "start" : 1643368306383,
+      "stop" : 1643368306383,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_transferFrom"
+  }, {
+    "name" : "host",
+    "value" : "fv-az124-118"
+  }, {
+    "name" : "thread",
+    "value" : "3597-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_transferFrom"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 8,
+        "broken" : 1,
+        "skipped" : 0,
+        "passed" : 0,
+        "unknown" : 0,
+        "total" : 9
+      },
+      "items" : [ {
+        "uid" : "599f3485508a2947",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/testnet/435//#testresult/599f3485508a2947",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: Transaction did not revert",
+        "time" : {
+          "start" : 1641443791343,
+          "stop" : 1641443798381,
+          "duration" : 7038
+        }
+      }, {
+        "uid" : "428d6ef64d6538b",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/testnet/435//#testresult/428d6ef64d6538b",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: Transaction did not revert",
+        "time" : {
+          "start" : 1641440156993,
+          "stop" : 1641440162874,
+          "duration" : 5881
+        }
+      }, {
+        "uid" : "b63eda15e7c57f58",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/testnet/425//#testresult/b63eda15e7c57f58",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: Transaction did not revert",
+        "time" : {
+          "start" : 1641372303481,
+          "stop" : 1641372308220,
+          "duration" : 4739
+        }
+      }, {
+        "uid" : "3ebf6e08290fa8e1",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/testnet/423//#testresult/3ebf6e08290fa8e1",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: Transaction did not revert",
+        "time" : {
+          "start" : 1641349132597,
+          "stop" : 1641349138595,
+          "duration" : 5998
+        }
+      }, {
+        "uid" : "f274e6df1debd27f",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/testnet/421//#testresult/f274e6df1debd27f",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: Transaction did not revert",
+        "time" : {
+          "start" : 1641342607700,
+          "stop" : 1641342615314,
+          "duration" : 7614
+        }
+      }, {
+        "uid" : "5eb39c361ab3b656",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/testnet/269//#testresult/5eb39c361ab3b656",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: Transaction did not revert",
+        "time" : {
+          "start" : 1639951323500,
+          "stop" : 1639951332189,
+          "duration" : 8689
+        }
+      }, {
+        "uid" : "75a3d0e9b111887d",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/testnet/265//#testresult/75a3d0e9b111887d",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: Transaction did not revert",
+        "time" : {
+          "start" : 1639910993659,
+          "stop" : 1639910998929,
+          "duration" : 5270
+        }
+      }, {
+        "uid" : "193023e0f698a28e",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/testnet/261//#testresult/193023e0f698a28e",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: Transaction did not revert",
+        "time" : {
+          "start" : 1639820005039,
+          "stop" : 1639820012644,
+          "duration" : 7605
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "ffdbc232d1f3791f.json",
+  "parameterValues" : [ ]
+}
