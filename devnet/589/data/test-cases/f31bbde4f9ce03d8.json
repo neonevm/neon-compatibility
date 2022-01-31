@@ -1,0 +1,228 @@
+{
+  "uid" : "f31bbde4f9ce03d8",
+  "name" : "test_brownie_deploy",
+  "fullName" : "tests.brownie.test_brownie#test_brownie_deploy",
+  "historyId" : "6e83a925951bfd8b9c39b6ea82974dc9",
+  "time" : {
+    "start" : 1643627072344,
+    "stop" : 1643627075375,
+    "duration" : 3031
+  },
+  "status" : "broken",
+  "statusMessage" : "ValueError: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x4",
+  "statusTrace" : "brownie_project = <Project 'TokenProject'>\n\n    def test_brownie_deploy(brownie_project):\n>       deployed_contract = brownie_project.Token.deploy(\n            \"Test deploy\", \"TST\", 10, 10000000, {\"from\": accounts[0]}\n        )\n\ntests/brownie/test_brownie.py:13: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:600: in __call__\n    return tx[\"from\"].deploy(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:508: in deploy\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:743: in _make_transaction\n    exc = VirtualMachineError(e)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = VirtualMachineError(ValueError({'code': -32002, 'message': 'Transaction simulation failed: Error processing Instructio... of 500000 compute units', 'Program eeLSJgWzzxrqKv1UxtRVVH8FX3qCQWUs9QuAjJpETGU failed: custom program error: 0x4']}}))\nexc = {'code': -32002, 'data': {'accounts': None, 'err': {'InstructionError': [0, {'Custom': 4}]}, 'logs': ['Program eeLSJgW...m error: 0x4']}, 'message': 'Transaction simulation failed: Error processing Instruction 0: custom program error: 0x4'}\n\n    def __init__(self, exc: ValueError) -> None:\n        try:\n            exc = exc.args[0]\n        except Exception:\n            pass\n    \n        if isinstance(exc, dict) and \"message\" in exc:\n            if \"data\" not in exc:\n                raise ValueError(exc[\"message\"]) from None\n    \n            self.message: str = exc[\"message\"].rstrip(\".\")\n    \n            if isinstance(exc[\"data\"], str):\n                # handle parity exceptions - this logic probably is not perfect\n                if \"0x08c379a0\" in exc[\"data\"]:\n                    revert_type, err_msg = [i.strip() for i in exc[\"data\"].split(\"0x08c379a0\", 1)]\n                    err_msg = eth_abi.decode_abi([\"string\"], HexBytes(err_msg))\n                    err_msg = f\"{revert_type} '{err_msg}'\"\n                elif exc[\"data\"].endswith(\"0x\"):\n                    err_msg = exc[\"data\"][:-2].strip()\n                else:\n                    err_msg = exc[\"data\"]\n                raise ValueError(f\"{self.message}: {err_msg}\") from None\n    \n            try:\n                txid, data = next((k, v) for k, v in exc[\"data\"].items() if k.startswith(\"0x\"))\n            except StopIteration:\n>               raise ValueError(exc[\"message\"]) from None\nE               ValueError: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x4\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py:104: ValueError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1643627049020,
+      "stop" : 1643627049020,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1643627049765,
+      "stop" : 1643627072343,
+      "duration" : 22578
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "testStage" : {
+    "status" : "broken",
+    "statusMessage" : "ValueError: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x4",
+    "statusTrace" : "brownie_project = <Project 'TokenProject'>\n\n    def test_brownie_deploy(brownie_project):\n>       deployed_contract = brownie_project.Token.deploy(\n            \"Test deploy\", \"TST\", 10, 10000000, {\"from\": accounts[0]}\n        )\n\ntests/brownie/test_brownie.py:13: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:600: in __call__\n    return tx[\"from\"].deploy(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:508: in deploy\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:743: in _make_transaction\n    exc = VirtualMachineError(e)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = VirtualMachineError(ValueError({'code': -32002, 'message': 'Transaction simulation failed: Error processing Instructio... of 500000 compute units', 'Program eeLSJgWzzxrqKv1UxtRVVH8FX3qCQWUs9QuAjJpETGU failed: custom program error: 0x4']}}))\nexc = {'code': -32002, 'data': {'accounts': None, 'err': {'InstructionError': [0, {'Custom': 4}]}, 'logs': ['Program eeLSJgW...m error: 0x4']}, 'message': 'Transaction simulation failed: Error processing Instruction 0: custom program error: 0x4'}\n\n    def __init__(self, exc: ValueError) -> None:\n        try:\n            exc = exc.args[0]\n        except Exception:\n            pass\n    \n        if isinstance(exc, dict) and \"message\" in exc:\n            if \"data\" not in exc:\n                raise ValueError(exc[\"message\"]) from None\n    \n            self.message: str = exc[\"message\"].rstrip(\".\")\n    \n            if isinstance(exc[\"data\"], str):\n                # handle parity exceptions - this logic probably is not perfect\n                if \"0x08c379a0\" in exc[\"data\"]:\n                    revert_type, err_msg = [i.strip() for i in exc[\"data\"].split(\"0x08c379a0\", 1)]\n                    err_msg = eth_abi.decode_abi([\"string\"], HexBytes(err_msg))\n                    err_msg = f\"{revert_type} '{err_msg}'\"\n                elif exc[\"data\"].endswith(\"0x\"):\n                    err_msg = exc[\"data\"][:-2].strip()\n                else:\n                    err_msg = exc[\"data\"]\n                raise ValueError(f\"{self.message}: {err_msg}\") from None\n    \n            try:\n                txid, data = next((k, v) for k, v in exc[\"data\"].items() if k.startswith(\"0x\"))\n            except StopIteration:\n>               raise ValueError(exc[\"message\"]) from None\nE               ValueError: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x4\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py:104: ValueError",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "1ba7be88440a0e2a",
+      "name" : "log",
+      "source" : "1ba7be88440a0e2a.txt",
+      "type" : "text/plain",
+      "size" : 287
+    }, {
+      "uid" : "cbcb58cb8fdc6e2d",
+      "name" : "stdout",
+      "source" : "cbcb58cb8fdc6e2d.txt",
+      "type" : "text/plain",
+      "size" : 252
+    }, {
+      "uid" : "19bebb435c3fd1cb",
+      "name" : "stderr",
+      "source" : "19bebb435c3fd1cb.txt",
+      "type" : "text/plain",
+      "size" : 12301
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 3,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie"
+  }, {
+    "name" : "suite",
+    "value" : "test_brownie"
+  }, {
+    "name" : "host",
+    "value" : "fv-az124-999"
+  }, {
+    "name" : "thread",
+    "value" : "3649-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.test_brownie"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 2,
+        "skipped" : 0,
+        "passed" : 9,
+        "unknown" : 0,
+        "total" : 11
+      },
+      "items" : [ {
+        "uid" : "d505221e133d34f1",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/devnet/576//#testresult/d505221e133d34f1",
+        "status" : "broken",
+        "statusDetails" : "ValueError: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x4",
+        "time" : {
+          "start" : 1643484518086,
+          "stop" : 1643484522945,
+          "duration" : 4859
+        }
+      }, {
+        "uid" : "e957fdc5cbcc74e5",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/devnet/396//#testresult/e957fdc5cbcc74e5",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640878444891,
+          "stop" : 1640878450702,
+          "duration" : 5811
+        }
+      }, {
+        "uid" : "3b86f64a878c4e16",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/devnet/382//#testresult/3b86f64a878c4e16",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640722772084,
+          "stop" : 1640722776798,
+          "duration" : 4714
+        }
+      }, {
+        "uid" : "eab9d610572566ee",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/devnet/381//#testresult/eab9d610572566ee",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640722174844,
+          "stop" : 1640722179138,
+          "duration" : 4294
+        }
+      }, {
+        "uid" : "226d75d0e5a08aba",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/devnet/277//#testresult/226d75d0e5a08aba",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640028529707,
+          "stop" : 1640028549296,
+          "duration" : 19589
+        }
+      }, {
+        "uid" : "39006bddd7d5bc94",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/devnet/276//#testresult/39006bddd7d5bc94",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640014968684,
+          "stop" : 1640014979758,
+          "duration" : 11074
+        }
+      }, {
+        "uid" : "f0f86af4cddee772",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/devnet/275//#testresult/f0f86af4cddee772",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640010674619,
+          "stop" : 1640010705068,
+          "duration" : 30449
+        }
+      }, {
+        "uid" : "8826608e31959173",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/devnet/274//#testresult/8826608e31959173",
+        "status" : "passed",
+        "time" : {
+          "start" : 1640007264150,
+          "stop" : 1640007273802,
+          "duration" : 9652
+        }
+      }, {
+        "uid" : "a46ce31c8478bacb",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/devnet/260//#testresult/a46ce31c8478bacb",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639819552100,
+          "stop" : 1639819567343,
+          "duration" : 15243
+        }
+      }, {
+        "uid" : "1899267646a7dab",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/devnet/256//#testresult/1899267646a7dab",
+        "status" : "passed",
+        "time" : {
+          "start" : 1639739647954,
+          "stop" : 1639739666778,
+          "duration" : 18824
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "f31bbde4f9ce03d8.json",
+  "parameterValues" : [ ]
+}
