@@ -1,0 +1,156 @@
+{
+  "uid" : "9b7d80d5bd58840f",
+  "name" : "test_caller_balance_not_affected",
+  "fullName" : "tests.brownie.token.tests.test_transferFrom#test_caller_balance_not_affected",
+  "historyId" : "5da0d00473da0ab1e6482a13be5b4f69",
+  "time" : {
+    "start" : 1643638569066,
+    "stop" : 1643638570404,
+    "duration" : 1338
+  },
+  "status" : "broken",
+  "statusMessage" : "ValueError: column \"operator\" of relation \"neon_pending_transactions\" does not exist\nLINE 3:                             (neon_sign, slot, operator)\n                                                      ^",
+  "statusTrace" : "accounts = <brownie.network.account.Accounts object at 0x7f4874b67730>\ntoken = <Token Contract '0xa13bA1ec3Ef6C3169AB165C7D50255cD4fcE96eE'>\n\n    def test_caller_balance_not_affected(accounts, token):\n        caller_balance = token.balanceOf(accounts[1])\n        amount = token.balanceOf(accounts[0])\n    \n>       token.approve(accounts[1], amount, {'from': accounts[0]})\n\ntests/brownie/token/tests/test_transferFrom.py:29: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1693: in __call__\n    return self.transact(*args)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:1566: in transact\n    return tx[\"from\"].transfer(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:642: in transfer\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:743: in _make_transaction\n    exc = VirtualMachineError(e)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = VirtualMachineError(ValueError({'code': -32000, 'message': 'column \"operator\" of relation \"neon_pending_transactions\" ...                             (neon_sign, slot, operator)\\n                                                      ^\\n'}))\nexc = {'code': -32000, 'message': 'column \"operator\" of relation \"neon_pending_transactions\" does not exist\\nLINE 3:                             (neon_sign, slot, operator)\\n                                                      ^\\n'}\n\n    def __init__(self, exc: ValueError) -> None:\n        try:\n            exc = exc.args[0]\n        except Exception:\n            pass\n    \n        if isinstance(exc, dict) and \"message\" in exc:\n            if \"data\" not in exc:\n>               raise ValueError(exc[\"message\"]) from None\nE               ValueError: column \"operator\" of relation \"neon_pending_transactions\" does not exist\nE               LINE 3:                             (neon_sign, slot, operator)\nE                                                                     ^\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py:85: ValueError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1643638508025,
+      "stop" : 1643638508025,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false,
+    "stepsCount" : 0
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1643638509405,
+      "stop" : 1643638526816,
+      "duration" : 17411
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false,
+    "stepsCount" : 0
+  }, {
+    "name" : "accounts",
+    "time" : {
+      "start" : 1643638529809,
+      "stop" : 1643638530079,
+      "duration" : 270
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false,
+    "stepsCount" : 0
+  }, {
+    "name" : "setup_env",
+    "time" : {
+      "start" : 1643638529809,
+      "stop" : 1643638529809,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false,
+    "stepsCount" : 0
+  }, {
+    "name" : "token",
+    "time" : {
+      "start" : 1643638556062,
+      "stop" : 1643638561003,
+      "duration" : 4941
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false,
+    "stepsCount" : 0
+  } ],
+  "afterStages" : [ {
+    "name" : "accounts::0",
+    "time" : {
+      "start" : 1643638758231,
+      "stop" : 1643638758231,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false,
+    "stepsCount" : 0
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_transferFrom"
+  }, {
+    "name" : "host",
+    "value" : "fv-az124-999"
+  }, {
+    "name" : "thread",
+    "value" : "3585-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_transferFrom"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "9b7d80d5bd58840f.json",
+  "parameterValues" : [ ]
+}
