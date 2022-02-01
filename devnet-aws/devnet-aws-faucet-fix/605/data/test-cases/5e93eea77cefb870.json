@@ -1,0 +1,174 @@
+{
+  "uid" : "5e93eea77cefb870",
+  "name" : "test_caller_balance_not_affected",
+  "fullName" : "tests.brownie.token.tests.test_transferFrom#test_caller_balance_not_affected",
+  "historyId" : "5da0d00473da0ab1e6482a13be5b4f69",
+  "time" : {
+    "start" : 1643743222289,
+    "stop" : 1643743222289,
+    "duration" : 0
+  },
+  "status" : "broken",
+  "statusMessage" : "ValueError: Transaction simulation failed: Error processing Instruction 0: insufficient funds for instruction",
+  "statusTrace" : "brownie_project = <Project 'TokenProject'>\naccounts = <brownie.network.account.Accounts object at 0x7fd3f626f0d0>\n\n    @pytest.fixture(scope=\"module\")\n    def token(brownie_project, accounts):\n>       return brownie_project.Token.deploy(\"Test Token\", \"TST\", 18, 1e21, {'from': accounts[0]})\n\ntests/brownie/token/tests/conftest.py:49: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:600: in __call__\n    return tx[\"from\"].deploy(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:508: in deploy\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:743: in _make_transaction\n    exc = VirtualMachineError(e)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = VirtualMachineError(ValueError({'code': -32002, 'message': 'Transaction simulation failed: Error processing Instructio...0 compute units', 'Program eeLSJgWzzxrqKv1UxtRVVH8FX3qCQWUs9QuAjJpETGU failed: insufficient funds for instruction']}}))\nexc = {'code': -32002, 'data': {'accounts': None, 'err': {'InstructionError': [0, 'InsufficientFunds']}, 'logs': ['Program e...ion']}, 'message': 'Transaction simulation failed: Error processing Instruction 0: insufficient funds for instruction'}\n\n    def __init__(self, exc: ValueError) -> None:\n        try:\n            exc = exc.args[0]\n        except Exception:\n            pass\n    \n        if isinstance(exc, dict) and \"message\" in exc:\n            if \"data\" not in exc:\n                raise ValueError(exc[\"message\"]) from None\n    \n            self.message: str = exc[\"message\"].rstrip(\".\")\n    \n            if isinstance(exc[\"data\"], str):\n                # handle parity exceptions - this logic probably is not perfect\n                if \"0x08c379a0\" in exc[\"data\"]:\n                    revert_type, err_msg = [i.strip() for i in exc[\"data\"].split(\"0x08c379a0\", 1)]\n                    err_msg = eth_abi.decode_abi([\"string\"], HexBytes(err_msg))\n                    err_msg = f\"{revert_type} '{err_msg}'\"\n                elif exc[\"data\"].endswith(\"0x\"):\n                    err_msg = exc[\"data\"][:-2].strip()\n                else:\n                    err_msg = exc[\"data\"]\n                raise ValueError(f\"{self.message}: {err_msg}\") from None\n    \n            try:\n                txid, data = next((k, v) for k, v in exc[\"data\"].items() if k.startswith(\"0x\"))\n            except StopIteration:\n>               raise ValueError(exc[\"message\"]) from None\nE               ValueError: Transaction simulation failed: Error processing Instruction 0: insufficient funds for instruction\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py:104: ValueError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "token",
+    "time" : {
+      "start" : 1643743068393,
+      "stop" : 1643743222169,
+      "duration" : 153776
+    },
+    "status" : "broken",
+    "statusMessage" : "ValueError: Transaction simulation failed: Error processing Instruction 0: insufficient funds for instruction\n",
+    "statusTrace" : "  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/pluggy/_callers.py\", line 39, in _multicall\n    res = hook_impl.function(*args)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/_pytest/fixtures.py\", line 1126, in pytest_fixture_setup\n    result = call_fixture_func(fixturefunc, request, kwargs)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/_pytest/fixtures.py\", line 932, in call_fixture_func\n    fixture_result = fixturefunc(**kwargs)\n  File \"/home/runner/work/neon-compatibility/neon-compatibility/tests/brownie/token/tests/conftest.py\", line 49, in token\n    return brownie_project.Token.deploy(\"Test Token\", \"TST\", 18, 1e21, {'from': accounts[0]})\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py\", line 600, in __call__\n    return tx[\"from\"].deploy(\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py\", line 508, in deploy\n    receipt, exc = self._make_transaction(\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py\", line 743, in _make_transaction\n    exc = VirtualMachineError(e)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py\", line 104, in __init__\n    raise ValueError(exc[\"message\"]) from None\n",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  } ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_transferFrom"
+  }, {
+    "name" : "host",
+    "value" : "fv-az124-999"
+  }, {
+    "name" : "thread",
+    "value" : "3951-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_transferFrom"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 9,
+        "skipped" : 0,
+        "passed" : 0,
+        "unknown" : 0,
+        "total" : 9
+      },
+      "items" : [ {
+        "uid" : "68b3b6dd97e5d7cc",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/devnet-aws/devnet-aws-faucet-fix/600//#testresult/68b3b6dd97e5d7cc",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ConnectTimeout: HTTPConnectionPool(host='3.13.67.238', port=9090): Max retries exceeded with url: /solana (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x7fe71bfbfc10>, 'Connection to 3.13.67.238 timed out. (connect timeout=30)'))",
+        "time" : {
+          "start" : 1643716634193,
+          "stop" : 1643716634193,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "cdf845712190ab64",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/devnet-aws/devnet-aws-faucet-fix/597//#testresult/cdf845712190ab64",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ConnectTimeout: HTTPConnectionPool(host='3.13.67.238', port=9090): Max retries exceeded with url: /solana (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x7f4a4ea36c10>, 'Connection to 3.13.67.238 timed out. (connect timeout=30)'))",
+        "time" : {
+          "start" : 1643707223145,
+          "stop" : 1643707223145,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "2f65310263f22024",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/devnet-aws/devnet-aws-faucet-fix/594//#testresult/2f65310263f22024",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ConnectTimeout: HTTPConnectionPool(host='3.13.67.238', port=9090): Max retries exceeded with url: /solana (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x7f2a67cd35e0>, 'Connection to 3.13.67.238 timed out. (connect timeout=30)'))",
+        "time" : {
+          "start" : 1643681698564,
+          "stop" : 1643681698564,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "2fdbe166c872ca34",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/devnet-aws/devnet-aws-faucet-fix/588//#testresult/2fdbe166c872ca34",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ConnectTimeout: HTTPConnectionPool(host='3.13.67.238', port=9090): Max retries exceeded with url: /solana (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x7fb98d8576a0>, 'Connection to 3.13.67.238 timed out. (connect timeout=30)'))",
+        "time" : {
+          "start" : 1643617818025,
+          "stop" : 1643617818025,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "e611e5e5b1b3072b",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/devnet-aws/devnet-aws-faucet-fix/583//#testresult/e611e5e5b1b3072b",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ConnectTimeout: HTTPConnectionPool(host='3.13.67.238', port=9090): Max retries exceeded with url: /solana (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x7fa7ce4225e0>, 'Connection to 3.13.67.238 timed out. (connect timeout=30)'))",
+        "time" : {
+          "start" : 1643550760709,
+          "stop" : 1643550760709,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "af7f39df2c7419ff",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/devnet-aws/devnet-aws-faucet-fix/578//#testresult/af7f39df2c7419ff",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ConnectTimeout: HTTPConnectionPool(host='3.13.67.238', port=9090): Max retries exceeded with url: /solana (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x7fccb90931c0>, 'Connection to 3.13.67.238 timed out. (connect timeout=30)'))",
+        "time" : {
+          "start" : 1643486686853,
+          "stop" : 1643486686853,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "539a29a3131fb262",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/devnet-aws/devnet-aws-faucet-fix/575//#testresult/539a29a3131fb262",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ConnectTimeout: HTTPConnectionPool(host='3.13.67.238', port=9090): Max retries exceeded with url: /solana (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x7fd9d72d4190>, 'Connection to 3.13.67.238 timed out. (connect timeout=30)'))",
+        "time" : {
+          "start" : 1643478441613,
+          "stop" : 1643478441613,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "39596bd189d90f82",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/devnet-aws/devnet-aws-faucet-fix/574//#testresult/39596bd189d90f82",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ConnectTimeout: HTTPConnectionPool(host='3.13.67.238', port=9090): Max retries exceeded with url: /solana (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x7f25a07acfd0>, 'Connection to 3.13.67.238 timed out. (connect timeout=30)'))",
+        "time" : {
+          "start" : 1643477736683,
+          "stop" : 1643477736683,
+          "duration" : 0
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "5e93eea77cefb870.json",
+  "parameterValues" : [ ]
+}
