@@ -1,0 +1,385 @@
+{
+  "uid" : "8ec4f0391fe79691",
+  "name" : "test_returns_true",
+  "fullName" : "tests.brownie.token.tests.test_transferFrom#test_returns_true",
+  "historyId" : "592db1f5b525cbb8a4e298823c44ebef",
+  "time" : {
+    "start" : 1644453312217,
+    "stop" : 1644453316732,
+    "duration" : 4515
+  },
+  "status" : "broken",
+  "statusMessage" : "brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported",
+  "statusTrace" : "accounts = <brownie.network.account.Accounts object at 0x7f50d6014460>\ntoken = <Token Contract '0x0e4100Ca3E4Acb35506A0ea8fdaDaf744b7Af0dD'>\n\n    def test_returns_true(accounts, token):\n        amount = token.balanceOf(accounts[0])\n        token.approve(accounts[1], amount, {'from': accounts[0]})\n        tx = token.transferFrom(accounts[0], accounts[2], amount, {'from': accounts[1]})\n    \n>       assert tx.return_value is True\n\ntests/brownie/token/tests/test_transferFrom.py:71: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/transaction.py:53: in wrapper\n    raise exc\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/transaction.py:49: in wrapper\n    return fn(self)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/transaction.py:254: in return_value\n    self._get_trace()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <Transaction '\u001B[0;m0x37c5da9f2f18f639d1352e31edb5e1f679dcdcb070bc253a0a4d56f48705c69f\u001B[0;m'>\n\n    def _get_trace(self) -> None:\n        \"\"\"Retrieves the stack trace via debug_traceTransaction and finds the\n        return value, revert message and event logs in the trace.\n        \"\"\"\n    \n        # check if trace has already been retrieved, or the tx warrants it\n        if self._raw_trace is not None:\n            return\n        self._raw_trace = []\n        if self.input == \"0x\" and self.gas_used == 21000:\n            self._modified_state = False\n            self._trace = []\n            return\n    \n        if not web3.supports_traces:\n            raise RPCRequestError(\"Node client does not support `debug_traceTransaction`\")\n        try:\n            trace = web3.provider.make_request(  # type: ignore\n                \"debug_traceTransaction\", (self.txid, {\"disableStorage\": CONFIG.mode != \"console\"})\n            )\n        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:\n            msg = f\"Encountered a {type(e).__name__} while requesting \"\n            msg += \"`debug_traceTransaction`. The local RPC client has likely crashed.\"\n            if CONFIG.argv[\"coverage\"]:\n                msg += \" If the error persists, add the `skip_coverage` marker to this test.\"\n            raise RPCRequestError(msg) from None\n    \n        if \"error\" in trace:\n            self._modified_state = None\n            self._trace_exc = RPCRequestError(trace[\"error\"][\"message\"])\n>           raise self._trace_exc\nE           brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/transaction.py:668: RPCRequestError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1644453206606,
+      "stop" : 1644453206606,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1644453208091,
+      "stop" : 1644453221463,
+      "duration" : 13372
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "accounts",
+    "time" : {
+      "start" : 1644453225201,
+      "stop" : 1644453225472,
+      "duration" : 271
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "setup_env",
+    "time" : {
+      "start" : 1644453225201,
+      "stop" : 1644453225201,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token",
+    "time" : {
+      "start" : 1644453278372,
+      "stop" : 1644453281437,
+      "duration" : 3065
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "testStage" : {
+    "status" : "broken",
+    "statusMessage" : "brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported",
+    "statusTrace" : "accounts = <brownie.network.account.Accounts object at 0x7f50d6014460>\ntoken = <Token Contract '0x0e4100Ca3E4Acb35506A0ea8fdaDaf744b7Af0dD'>\n\n    def test_returns_true(accounts, token):\n        amount = token.balanceOf(accounts[0])\n        token.approve(accounts[1], amount, {'from': accounts[0]})\n        tx = token.transferFrom(accounts[0], accounts[2], amount, {'from': accounts[1]})\n    \n>       assert tx.return_value is True\n\ntests/brownie/token/tests/test_transferFrom.py:71: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/transaction.py:53: in wrapper\n    raise exc\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/transaction.py:49: in wrapper\n    return fn(self)\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/transaction.py:254: in return_value\n    self._get_trace()\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <Transaction '\u001B[0;m0x37c5da9f2f18f639d1352e31edb5e1f679dcdcb070bc253a0a4d56f48705c69f\u001B[0;m'>\n\n    def _get_trace(self) -> None:\n        \"\"\"Retrieves the stack trace via debug_traceTransaction and finds the\n        return value, revert message and event logs in the trace.\n        \"\"\"\n    \n        # check if trace has already been retrieved, or the tx warrants it\n        if self._raw_trace is not None:\n            return\n        self._raw_trace = []\n        if self.input == \"0x\" and self.gas_used == 21000:\n            self._modified_state = False\n            self._trace = []\n            return\n    \n        if not web3.supports_traces:\n            raise RPCRequestError(\"Node client does not support `debug_traceTransaction`\")\n        try:\n            trace = web3.provider.make_request(  # type: ignore\n                \"debug_traceTransaction\", (self.txid, {\"disableStorage\": CONFIG.mode != \"console\"})\n            )\n        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:\n            msg = f\"Encountered a {type(e).__name__} while requesting \"\n            msg += \"`debug_traceTransaction`. The local RPC client has likely crashed.\"\n            if CONFIG.argv[\"coverage\"]:\n                msg += \" If the error persists, add the `skip_coverage` marker to this test.\"\n            raise RPCRequestError(msg) from None\n    \n        if \"error\" in trace:\n            self._modified_state = None\n            self._trace_exc = RPCRequestError(trace[\"error\"][\"message\"])\n>           raise self._trace_exc\nE           brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/transaction.py:668: RPCRequestError",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "200a4c994f299ad8",
+      "name" : "stdout",
+      "source" : "200a4c994f299ad8.txt",
+      "type" : "text/plain",
+      "size" : 622
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ {
+    "name" : "accounts::0",
+    "time" : {
+      "start" : 1644453502936,
+      "stop" : 1644453502936,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_transferFrom"
+  }, {
+    "name" : "host",
+    "value" : "fv-az131-541"
+  }, {
+    "name" : "thread",
+    "value" : "3649-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_transferFrom"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 170,
+        "skipped" : 0,
+        "passed" : 0,
+        "unknown" : 0,
+        "total" : 170
+      },
+      "items" : [ {
+        "uid" : "917fd4bf3d57b8eb",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/647//#testresult/917fd4bf3d57b8eb",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported",
+        "time" : {
+          "start" : 1644376492500,
+          "stop" : 1644376496185,
+          "duration" : 3685
+        }
+      }, {
+        "uid" : "24da6bb88e3d6d1",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/646//#testresult/24da6bb88e3d6d1",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported",
+        "time" : {
+          "start" : 1644366937220,
+          "stop" : 1644366942262,
+          "duration" : 5042
+        }
+      }, {
+        "uid" : "8ffb94c9d4a0ab4d",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/644//#testresult/8ffb94c9d4a0ab4d",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported",
+        "time" : {
+          "start" : 1644351572329,
+          "stop" : 1644351576018,
+          "duration" : 3689
+        }
+      }, {
+        "uid" : "293864a2999e96c9",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/643//#testresult/293864a2999e96c9",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported",
+        "time" : {
+          "start" : 1644351000662,
+          "stop" : 1644351004440,
+          "duration" : 3778
+        }
+      }, {
+        "uid" : "3305abc016c54015",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/642//#testresult/3305abc016c54015",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported",
+        "time" : {
+          "start" : 1644290013113,
+          "stop" : 1644290016846,
+          "duration" : 3733
+        }
+      }, {
+        "uid" : "bae39ffbd9783208",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/641//#testresult/bae39ffbd9783208",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported",
+        "time" : {
+          "start" : 1644280413166,
+          "stop" : 1644280415958,
+          "duration" : 2792
+        }
+      }, {
+        "uid" : "905493aa3eefe081",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/640//#testresult/905493aa3eefe081",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported",
+        "time" : {
+          "start" : 1644203653642,
+          "stop" : 1644203657433,
+          "duration" : 3791
+        }
+      }, {
+        "uid" : "82f30a2db8c1d725",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/639//#testresult/82f30a2db8c1d725",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported",
+        "time" : {
+          "start" : 1644194045070,
+          "stop" : 1644194049485,
+          "duration" : 4415
+        }
+      }, {
+        "uid" : "4c0f147089790f93",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/638//#testresult/4c0f147089790f93",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported",
+        "time" : {
+          "start" : 1644117152882,
+          "stop" : 1644117156690,
+          "duration" : 3808
+        }
+      }, {
+        "uid" : "78305b97c53b0b26",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/637//#testresult/78305b97c53b0b26",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported",
+        "time" : {
+          "start" : 1644107934756,
+          "stop" : 1644107940165,
+          "duration" : 5409
+        }
+      }, {
+        "uid" : "b475dfa40f01ca96",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/635//#testresult/b475dfa40f01ca96",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported",
+        "time" : {
+          "start" : 1644030916802,
+          "stop" : 1644030920783,
+          "duration" : 3981
+        }
+      }, {
+        "uid" : "5bc15b18459b4398",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/634//#testresult/5bc15b18459b4398",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported",
+        "time" : {
+          "start" : 1644020898356,
+          "stop" : 1644020902037,
+          "duration" : 3681
+        }
+      }, {
+        "uid" : "59d1000453ce9991",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/629//#testresult/59d1000453ce9991",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported",
+        "time" : {
+          "start" : 1643944430584,
+          "stop" : 1643944434570,
+          "duration" : 3986
+        }
+      }, {
+        "uid" : "8c53b1f49819661d",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/628//#testresult/8c53b1f49819661d",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported",
+        "time" : {
+          "start" : 1643934743321,
+          "stop" : 1643934746207,
+          "duration" : 2886
+        }
+      }, {
+        "uid" : "ea5e5694d20b512c",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/621//#testresult/ea5e5694d20b512c",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported",
+        "time" : {
+          "start" : 1643858106829,
+          "stop" : 1643858110863,
+          "duration" : 4034
+        }
+      }, {
+        "uid" : "1708f67216cfc393",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/619//#testresult/1708f67216cfc393",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported",
+        "time" : {
+          "start" : 1643848410320,
+          "stop" : 1643848414476,
+          "duration" : 4156
+        }
+      }, {
+        "uid" : "9c22255f170ef2e8",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/614//#testresult/9c22255f170ef2e8",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported",
+        "time" : {
+          "start" : 1643795314788,
+          "stop" : 1643795318078,
+          "duration" : 3290
+        }
+      }, {
+        "uid" : "6c8461ce101e8590",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/612//#testresult/6c8461ce101e8590",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported",
+        "time" : {
+          "start" : 1643787946385,
+          "stop" : 1643787950479,
+          "duration" : 4094
+        }
+      }, {
+        "uid" : "d354b5a6d8ddfd73",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/611//#testresult/d354b5a6d8ddfd73",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported",
+        "time" : {
+          "start" : 1643771582245,
+          "stop" : 1643771586199,
+          "duration" : 3954
+        }
+      }, {
+        "uid" : "766f8df0b28f4a1b",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/610//#testresult/766f8df0b28f4a1b",
+        "status" : "broken",
+        "statusDetails" : "brownie.exceptions.RPCRequestError: method debug_traceTransaction is not supported",
+        "time" : {
+          "start" : 1643762185944,
+          "stop" : 1643762190378,
+          "duration" : 4434
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "8ec4f0391fe79691.json",
+  "parameterValues" : [ ]
+}
