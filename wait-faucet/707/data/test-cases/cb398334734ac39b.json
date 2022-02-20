@@ -1,0 +1,280 @@
+{
+  "uid" : "cb398334734ac39b",
+  "name" : "test_modify_approve",
+  "fullName" : "tests.brownie.token.tests.test_approve#test_modify_approve",
+  "historyId" : "955e3f6226713de80a392f10c503148c",
+  "time" : {
+    "start" : 1645345657589,
+    "stop" : 1645345657589,
+    "duration" : 0
+  },
+  "status" : "broken",
+  "statusMessage" : "ValueError: The account balance is less than required: Account 003fcc600b9901c76d61a8b0c0a082ac99541156; balance = 0; gasPrice = 1000000000; gasLimit = 6721975; fee = 6721975000000000; value = 0; required_balance = 6721975000000000;",
+  "statusTrace" : "brownie_project = <Project 'TokenProject'>\naccounts = <brownie.network.account.Accounts object at 0x7fc288dc4370>\n\n    @pytest.fixture(scope=\"module\")\n    def token(brownie_project, accounts):\n>       return brownie_project.Token.deploy(\"Test Token\", \"TST\", 18, 1e21, {'from': accounts[0]})\n\ntests/brownie/token/tests/conftest.py:49: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py:600: in __call__\n    return tx[\"from\"].deploy(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:508: in deploy\n    receipt, exc = self._make_transaction(\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py:743: in _make_transaction\n    exc = VirtualMachineError(e)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = VirtualMachineError(ValueError({'code': -32000, 'message': 'The account balance is less than required: Account 003fcc6...gasPrice = 1000000000; gasLimit = 6721975; fee = 6721975000000000; value = 0; required_balance = 6721975000000000; '}))\nexc = {'code': -32000, 'message': 'The account balance is less than required: Account 003fcc600b9901c76d61a8b0c0a082ac995411...; gasPrice = 1000000000; gasLimit = 6721975; fee = 6721975000000000; value = 0; required_balance = 6721975000000000; '}\n\n    def __init__(self, exc: ValueError) -> None:\n        try:\n            exc = exc.args[0]\n        except Exception:\n            pass\n    \n        if isinstance(exc, dict) and \"message\" in exc:\n            if \"data\" not in exc:\n>               raise ValueError(exc[\"message\"]) from None\nE               ValueError: The account balance is less than required: Account 003fcc600b9901c76d61a8b0c0a082ac99541156; balance = 0; gasPrice = 1000000000; gasLimit = 6721975; fee = 6721975000000000; value = 0; required_balance = 6721975000000000;\n\n../../../.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py:85: ValueError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : true,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "configure_neon_network",
+    "time" : {
+      "start" : 1645345640676,
+      "stop" : 1645345640676,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "brownie_project",
+    "time" : {
+      "start" : 1645345642050,
+      "stop" : 1645345654815,
+      "duration" : 12765
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "accounts",
+    "time" : {
+      "start" : 1645345656112,
+      "stop" : 1645345656379,
+      "duration" : 267
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "setup_env",
+    "time" : {
+      "start" : 1645345656112,
+      "stop" : 1645345656112,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "token",
+    "time" : {
+      "start" : 1645345656379,
+      "stop" : 1645345657189,
+      "duration" : 810
+    },
+    "status" : "broken",
+    "statusMessage" : "ValueError: The account balance is less than required: Account 003fcc600b9901c76d61a8b0c0a082ac99541156; balance = 0; gasPrice = 1000000000; gasLimit = 6721975; fee = 6721975000000000; value = 0; required_balance = 6721975000000000; \n",
+    "statusTrace" : "  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/pluggy/_callers.py\", line 39, in _multicall\n    res = hook_impl.function(*args)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/_pytest/fixtures.py\", line 1126, in pytest_fixture_setup\n    result = call_fixture_func(fixturefunc, request, kwargs)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/_pytest/fixtures.py\", line 932, in call_fixture_func\n    fixture_result = fixturefunc(**kwargs)\n  File \"/home/runner/work/neon-compatibility/neon-compatibility/tests/brownie/token/tests/conftest.py\", line 49, in token\n    return brownie_project.Token.deploy(\"Test Token\", \"TST\", 18, 1e21, {'from': accounts[0]})\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/contract.py\", line 600, in __call__\n    return tx[\"from\"].deploy(\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py\", line 508, in deploy\n    receipt, exc = self._make_transaction(\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/network/account.py\", line 743, in _make_transaction\n    exc = VirtualMachineError(e)\n  File \"/home/runner/.local/share/virtualenvs/neon-compatibility-g882AfFF/lib/python3.8/site-packages/brownie/exceptions.py\", line 85, in __init__\n    raise ValueError(exc[\"message\"]) from None\n",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  } ],
+  "afterStages" : [ {
+    "name" : "accounts::0",
+    "time" : {
+      "start" : 1645345806392,
+      "stop" : 1645345806392,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "Brownie"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.brownie.token.tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_approve"
+  }, {
+    "name" : "host",
+    "value" : "fv-az135-693"
+  }, {
+    "name" : "thread",
+    "value" : "3626-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.brownie.token.tests.test_approve"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 0,
+        "broken" : 4,
+        "skipped" : 0,
+        "passed" : 9,
+        "unknown" : 0,
+        "total" : 13
+      },
+      "items" : [ {
+        "uid" : "af915204c226896c",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/wait-faucet/616//#testresult/af915204c226896c",
+        "status" : "passed",
+        "time" : {
+          "start" : 1643812653754,
+          "stop" : 1643812657411,
+          "duration" : 3657
+        }
+      }, {
+        "uid" : "6dc717101ebe45c3",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/wait-faucet/525//#testresult/6dc717101ebe45c3",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642670486656,
+          "stop" : 1642670490380,
+          "duration" : 3724
+        }
+      }, {
+        "uid" : "1fd68c8bfb358e8e",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/wait-faucet/519//#testresult/1fd68c8bfb358e8e",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642506834972,
+          "stop" : 1642506838271,
+          "duration" : 3299
+        }
+      }, {
+        "uid" : "285f8540760655aa",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/wait-faucet/518//#testresult/285f8540760655aa",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ReadTimeout: HTTPConnectionPool(host='proxy.night.stand.neontest.xyz', port=80): Read timed out. (read timeout=30)",
+        "time" : {
+          "start" : 1642502364965,
+          "stop" : 1642502364965,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "bd9ac817e326d69f",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/wait-faucet/516//#testresult/bd9ac817e326d69f",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ReadTimeout: HTTPConnectionPool(host='proxy.night.stand.neontest.xyz', port=80): Read timed out. (read timeout=30)",
+        "time" : {
+          "start" : 1642500761735,
+          "stop" : 1642500761735,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "ed0bc1075b685b91",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/wait-faucet/515//#testresult/ed0bc1075b685b91",
+        "status" : "broken",
+        "statusDetails" : "requests.exceptions.ReadTimeout: HTTPConnectionPool(host='proxy.night.stand.neontest.xyz', port=80): Read timed out. (read timeout=30)",
+        "time" : {
+          "start" : 1642499759913,
+          "stop" : 1642499759913,
+          "duration" : 0
+        }
+      }, {
+        "uid" : "b24828cc4e347d80",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/wait-faucet/507//#testresult/b24828cc4e347d80",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642241268695,
+          "stop" : 1642241272011,
+          "duration" : 3316
+        }
+      }, {
+        "uid" : "db72fa6e0f49bc65",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/wait-faucet/504//#testresult/db72fa6e0f49bc65",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642174711535,
+          "stop" : 1642174715203,
+          "duration" : 3668
+        }
+      }, {
+        "uid" : "46e4cc3747e77390",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/wait-faucet/503//#testresult/46e4cc3747e77390",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642173794423,
+          "stop" : 1642173797854,
+          "duration" : 3431
+        }
+      }, {
+        "uid" : "d08e9209ee70d549",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/wait-faucet/498//#testresult/d08e9209ee70d549",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642172301143,
+          "stop" : 1642172304503,
+          "duration" : 3360
+        }
+      }, {
+        "uid" : "a4bdb84e46b05e34",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/wait-faucet/496//#testresult/a4bdb84e46b05e34",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642166524783,
+          "stop" : 1642166528100,
+          "duration" : 3317
+        }
+      }, {
+        "uid" : "f65ddcdd1193313a",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/wait-faucet/495//#testresult/f65ddcdd1193313a",
+        "status" : "passed",
+        "time" : {
+          "start" : 1642165693988,
+          "stop" : 1642165697700,
+          "duration" : 3712
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "cb398334734ac39b.json",
+  "parameterValues" : [ ]
+}
