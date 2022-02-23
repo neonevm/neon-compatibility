@@ -196,8 +196,9 @@ module.exports = {
       to: process.env.ADDRESS_TO,
       network_id: parseInt(Config.networkId),
       // chainId: null !== Config.networkId ? parseInt(Config.networkId) : 0,
-      gas: "auto",
-      gasPrice: "auto",
+      gas: 3000000,
+      gasPrice: 1000000000,
+      blockGasLimit: 10000000,
       allowUnlimitedContractSize: !withOptimizations,
       timeout: 1000000,
       isFork: true
