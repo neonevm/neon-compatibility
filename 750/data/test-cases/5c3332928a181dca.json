@@ -1,0 +1,810 @@
+{
+  "uid" : "5c3332928a181dca",
+  "name" : "test_contracts[input_data1]",
+  "fullName" : "tests.openzeppelin.test_openzeppelin#test_contracts",
+  "historyId" : "0978f566b0050886014c8f6266a2ba6f",
+  "time" : {
+    "start" : 1645672344447,
+    "stop" : 1645672362417,
+    "duration" : 17970
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\n  'Error: Could not f...ns from any sources' is contained here:\n           ^\n    \n    Error: Could not find artifacts for Migrations from any sources\n        at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\n        at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\n        at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\n        at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\n        at Script.runInContext (node:vm:139:12)\n        at Script.runInNewContext (node:vm:144:17)\n        at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\n        at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\n        at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\n        at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\n        at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\n        at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\n        at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\n    Truffle v5.4.14 (core: 5.4.14)\n    Node v16.14.0\n    /home/runner/work/neon-compatibility/neon-compatibility",
+  "statusTrace" : "input_data = InputData(test_file='access/AccessControl.test.js', test_files=['access/AccessControl.test.js', 'access/AccessControl....on/ERC165.sol', 'interfaces/IERC165.sol', 'utils/introspection/IERC165.sol'], migration_script='2_deploy_contracts.js')\n\n    @pytest.mark.parametrize(\"input_data\", INPUT_DATA)\n    @allure.feature(FEATURE)\n    def test_contracts(input_data: InputData):\n        copy_files(input_data)\n    \n        # truffle --network neonlabs test ./test/access/[test file name]\n        command = f\"--network neonlabs test ./test/{input_data.test_file}\"\n        cmd_res = run_command_line(\n            f\"{Subfolder.CD_OPENZEPPELIN} {RunCommand.TRUFFLE} {command} {CD_BACK}\"\n        )\n        # assert OpenZeppelinSuccess.SUCCESS_PASSING in actual_result\n        # assert OpenZeppelinSuccess.SUCCESS_CONTRACT in actual_result\n        # assert OpenZeppelinSuccess.SUCCESS_1_ETHER in actual_result\n        # assert TruffleBasedError.ERROR_NO_ATTRIBUTE_ETH_ACCOUNTS \\\n        #     not in actual_result\n        actual_result = cmd_res.stdout.decode() + cmd_res.stderr.decode()\n        assert cmd_res.returncode == 0, actual_result\n>       assert OpenZeppelinError.ERROR_NO_ARTIFACTS not in actual_result\nE       AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\nE         'Error: Could not f...ns from any sources' is contained here:\nE                  ^\nE           \nE           Error: Could not find artifacts for Migrations from any sources\nE               at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\nE               at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\nE               at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\nE               at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\nE               at Script.runInContext (node:vm:139:12)\nE               at Script.runInNewContext (node:vm:144:17)\nE               at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\nE               at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\nE               at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\nE               at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\nE               at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\nE               at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\nE               at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\nE               at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\nE               at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\nE               at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\nE           Truffle v5.4.14 (core: 5.4.14)\nE           Node v16.14.0\nE           /home/runner/work/neon-compatibility/neon-compatibility\n\ntests/openzeppelin/test_openzeppelin.py:154: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "newBroken" : false,
+  "newPassed" : false,
+  "retriesCount" : 0,
+  "retriesStatusChange" : false,
+  "beforeStages" : [ {
+    "name" : "prepare_truffle_config",
+    "time" : {
+      "start" : 1645672344434,
+      "stop" : 1645672344446,
+      "duration" : 12
+    },
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Preset variables",
+      "time" : {
+        "start" : 1645672344434,
+        "stop" : 1645672344444,
+        "duration" : 10
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : false
+    }, {
+      "name" : "Clean up folder \"'governance'\"",
+      "time" : {
+        "start" : 1645672344444,
+        "stop" : 1645672344444,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'governance'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'token'\"",
+      "time" : {
+        "start" : 1645672344444,
+        "stop" : 1645672344444,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'token'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'metatx'\"",
+      "time" : {
+        "start" : 1645672344444,
+        "stop" : 1645672344444,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'metatx'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'finance'\"",
+      "time" : {
+        "start" : 1645672344444,
+        "stop" : 1645672344444,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'finance'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'mocks'\"",
+      "time" : {
+        "start" : 1645672344445,
+        "stop" : 1645672344445,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'mocks'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'utils'\"",
+      "time" : {
+        "start" : 1645672344445,
+        "stop" : 1645672344445,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'utils'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'interfaces'\"",
+      "time" : {
+        "start" : 1645672344445,
+        "stop" : 1645672344445,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'interfaces'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'proxy'\"",
+      "time" : {
+        "start" : 1645672344445,
+        "stop" : 1645672344445,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'proxy'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'access'\"",
+      "time" : {
+        "start" : 1645672344445,
+        "stop" : 1645672344445,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'access'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'security'\"",
+      "time" : {
+        "start" : 1645672344445,
+        "stop" : 1645672344445,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'security'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'.gitkeep'\"",
+      "time" : {
+        "start" : 1645672344445,
+        "stop" : 1645672344445,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'.gitkeep'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'2_deploy_contracts.js'\"",
+      "time" : {
+        "start" : 1645672344445,
+        "stop" : 1645672344445,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'2_deploy_contracts.js'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'.gitkeep'\"",
+      "time" : {
+        "start" : 1645672344445,
+        "stop" : 1645672344445,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'.gitkeep'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'1_initial_migration.js'\"",
+      "time" : {
+        "start" : 1645672344445,
+        "stop" : 1645672344445,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'1_initial_migration.js'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'governance'\"",
+      "time" : {
+        "start" : 1645672344445,
+        "stop" : 1645672344445,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'governance'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'token'\"",
+      "time" : {
+        "start" : 1645672344445,
+        "stop" : 1645672344445,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'token'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'metatx'\"",
+      "time" : {
+        "start" : 1645672344445,
+        "stop" : 1645672344445,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'metatx'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'finance'\"",
+      "time" : {
+        "start" : 1645672344445,
+        "stop" : 1645672344445,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'finance'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'mocks'\"",
+      "time" : {
+        "start" : 1645672344446,
+        "stop" : 1645672344446,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'mocks'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'utils'\"",
+      "time" : {
+        "start" : 1645672344446,
+        "stop" : 1645672344446,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'utils'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'interfaces'\"",
+      "time" : {
+        "start" : 1645672344446,
+        "stop" : 1645672344446,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'interfaces'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'proxy'\"",
+      "time" : {
+        "start" : 1645672344446,
+        "stop" : 1645672344446,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'proxy'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'access'\"",
+      "time" : {
+        "start" : 1645672344446,
+        "stop" : 1645672344446,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'access'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'security'\"",
+      "time" : {
+        "start" : 1645672344446,
+        "stop" : 1645672344446,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'security'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    }, {
+      "name" : "Clean up folder \"'.gitkeep'\"",
+      "time" : {
+        "start" : 1645672344446,
+        "stop" : 1645672344446,
+        "duration" : 0
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "folder",
+        "value" : "'.gitkeep'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 26,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  } ],
+  "testStage" : {
+    "status" : "failed",
+    "statusMessage" : "AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\n  'Error: Could not f...ns from any sources' is contained here:\n           ^\n    \n    Error: Could not find artifacts for Migrations from any sources\n        at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\n        at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\n        at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\n        at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\n        at Script.runInContext (node:vm:139:12)\n        at Script.runInNewContext (node:vm:144:17)\n        at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\n        at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\n        at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\n        at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\n        at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\n        at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\n        at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\n    Truffle v5.4.14 (core: 5.4.14)\n    Node v16.14.0\n    /home/runner/work/neon-compatibility/neon-compatibility",
+    "statusTrace" : "input_data = InputData(test_file='access/AccessControl.test.js', test_files=['access/AccessControl.test.js', 'access/AccessControl....on/ERC165.sol', 'interfaces/IERC165.sol', 'utils/introspection/IERC165.sol'], migration_script='2_deploy_contracts.js')\n\n    @pytest.mark.parametrize(\"input_data\", INPUT_DATA)\n    @allure.feature(FEATURE)\n    def test_contracts(input_data: InputData):\n        copy_files(input_data)\n    \n        # truffle --network neonlabs test ./test/access/[test file name]\n        command = f\"--network neonlabs test ./test/{input_data.test_file}\"\n        cmd_res = run_command_line(\n            f\"{Subfolder.CD_OPENZEPPELIN} {RunCommand.TRUFFLE} {command} {CD_BACK}\"\n        )\n        # assert OpenZeppelinSuccess.SUCCESS_PASSING in actual_result\n        # assert OpenZeppelinSuccess.SUCCESS_CONTRACT in actual_result\n        # assert OpenZeppelinSuccess.SUCCESS_1_ETHER in actual_result\n        # assert TruffleBasedError.ERROR_NO_ATTRIBUTE_ETH_ACCOUNTS \\\n        #     not in actual_result\n        actual_result = cmd_res.stdout.decode() + cmd_res.stderr.decode()\n        assert cmd_res.returncode == 0, actual_result\n>       assert OpenZeppelinError.ERROR_NO_ARTIFACTS not in actual_result\nE       AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\nE         'Error: Could not f...ns from any sources' is contained here:\nE                  ^\nE           \nE           Error: Could not find artifacts for Migrations from any sources\nE               at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\nE               at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\nE               at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\nE               at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\nE               at Script.runInContext (node:vm:139:12)\nE               at Script.runInNewContext (node:vm:144:17)\nE               at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\nE               at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\nE               at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\nE               at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\nE               at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\nE               at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\nE               at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\nE               at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\nE               at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\nE               at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\nE           Truffle v5.4.14 (core: 5.4.14)\nE           Node v16.14.0\nE           /home/runner/work/neon-compatibility/neon-compatibility\n\ntests/openzeppelin/test_openzeppelin.py:154: AssertionError",
+    "steps" : [ {
+      "name" : "Run command: \"'cd OpenZeppelin; pwd; ../node_modules/.bin/truffle --network neonlabs test ./test/access/AccessControl.test.js ; cd \"/home/runner/work/neon-compatibility/neon-compatibility\"; pwd;'\"",
+      "time" : {
+        "start" : 1645672344448,
+        "stop" : 1645672362416,
+        "duration" : 17968
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "command",
+        "value" : "'cd OpenZeppelin; pwd; ../node_modules/.bin/truffle --network neonlabs test ./test/access/AccessControl.test.js ; cd \"/home/runner/work/neon-compatibility/neon-compatibility\"; pwd;'"
+      } ],
+      "stepsCount" : 0,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false,
+      "hasContent" : true
+    } ],
+    "attachments" : [ {
+      "uid" : "2eb5fdc1444b5e88",
+      "name" : "stdout",
+      "source" : "2eb5fdc1444b5e88.txt",
+      "type" : "text/plain",
+      "size" : 3766
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 1,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : true,
+    "hasContent" : true
+  },
+  "afterStages" : [ {
+    "name" : "prepare_truffle_config::0",
+    "time" : {
+      "start" : 1645672362423,
+      "stop" : 1645672362423,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "feature",
+    "value" : "OpenZeppelin"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests.openzeppelin"
+  }, {
+    "name" : "suite",
+    "value" : "test_openzeppelin"
+  }, {
+    "name" : "host",
+    "value" : "fv-az131-745"
+  }, {
+    "name" : "thread",
+    "value" : "3848-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.openzeppelin.test_openzeppelin"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "input_data",
+    "value" : "InputData(test_file='access/AccessControl.test.js', test_files=['access/AccessControl.test.js', 'access/AccessControl.behavior.js'], contracts=['mocks/AccessControlMock.sol', 'mocks/AccessControlEnumerableMock.sol', 'access/AccessControlEnumerable.sol', 'access/IAccessControlEnumerable.sol', 'utils/structs/EnumerableSet.sol', 'access/AccessControl.sol', 'utils/Strings.sol', 'utils/introspection/ERC165.sol', 'interfaces/IERC165.sol', 'utils/introspection/IERC165.sol'], migration_script='2_deploy_contracts.js')"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Product defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "history" : {
+      "statistic" : {
+        "failed" : 158,
+        "broken" : 0,
+        "skipped" : 0,
+        "passed" : 38,
+        "unknown" : 0,
+        "total" : 196
+      },
+      "items" : [ {
+        "uid" : "fb6ca7c34e93352d",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/749//#testresult/fb6ca7c34e93352d",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\n  'Error: Could not f...ns from any sources' is contained here:\n           ^\n    \n    Error: Could not find artifacts for Migrations from any sources\n        at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\n        at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\n        at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\n        at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\n        at Script.runInContext (node:vm:139:12)\n        at Script.runInNewContext (node:vm:144:17)\n        at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\n        at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\n        at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\n        at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\n        at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\n        at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\n        at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\n    Truffle v5.4.14 (core: 5.4.14)\n    Node v16.14.0\n    /home/runner/work/neon-compatibility/neon-compatibility",
+        "time" : {
+          "start" : 1645663082434,
+          "stop" : 1645663101054,
+          "duration" : 18620
+        }
+      }, {
+        "uid" : "525f4c83d4bec553",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/745//#testresult/525f4c83d4bec553",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\n  'Error: Could not f...ns from any sources' is contained here:\n           ^\n    \n    Error: Could not find artifacts for Migrations from any sources\n        at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\n        at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\n        at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\n        at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\n        at Script.runInContext (node:vm:139:12)\n        at Script.runInNewContext (node:vm:144:17)\n        at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\n        at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\n        at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\n        at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\n        at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\n        at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\n        at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\n    Truffle v5.4.14 (core: 5.4.14)\n    Node v16.14.0\n    /home/runner/work/neon-compatibility/neon-compatibility",
+        "time" : {
+          "start" : 1645602423820,
+          "stop" : 1645602442212,
+          "duration" : 18392
+        }
+      }, {
+        "uid" : "fe05c1ec5591b684",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/739//#testresult/fe05c1ec5591b684",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\n  'Error: Could not f...ns from any sources' is contained here:\n           ^\n    \n    Error: Could not find artifacts for Migrations from any sources\n        at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\n        at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\n        at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\n        at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\n        at Script.runInContext (node:vm:139:12)\n        at Script.runInNewContext (node:vm:144:17)\n        at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\n        at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\n        at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\n        at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\n        at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\n        at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\n        at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\n    Truffle v5.4.14 (core: 5.4.14)\n    Node v16.14.0\n    /home/runner/work/neon-compatibility/neon-compatibility",
+        "time" : {
+          "start" : 1645586040852,
+          "stop" : 1645586059492,
+          "duration" : 18640
+        }
+      }, {
+        "uid" : "999767af06d92cb8",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/738//#testresult/999767af06d92cb8",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\n  'Error: Could not f...ns from any sources' is contained here:\n           ^\n    \n    Error: Could not find artifacts for Migrations from any sources\n        at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\n        at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\n        at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\n        at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\n        at Script.runInContext (node:vm:139:12)\n        at Script.runInNewContext (node:vm:144:17)\n        at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\n        at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\n        at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\n        at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\n        at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\n        at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\n        at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\n    Truffle v5.4.14 (core: 5.4.14)\n    Node v16.14.0\n    /home/runner/work/neon-compatibility/neon-compatibility",
+        "time" : {
+          "start" : 1645576864294,
+          "stop" : 1645576882571,
+          "duration" : 18277
+        }
+      }, {
+        "uid" : "e3997525459cc07c",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/732//#testresult/e3997525459cc07c",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\n  'Error: Could not f...ns from any sources' is contained here:\n           ^\n    \n    Error: Could not find artifacts for Migrations from any sources\n        at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\n        at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\n        at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\n        at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\n        at Script.runInContext (node:vm:139:12)\n        at Script.runInNewContext (node:vm:144:17)\n        at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\n        at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\n        at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\n        at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\n        at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\n        at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\n        at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\n    Truffle v5.4.14 (core: 5.4.14)\n    Node v16.14.0\n    /home/runner/work/neon-compatibility/neon-compatibility",
+        "time" : {
+          "start" : 1645499684018,
+          "stop" : 1645499704051,
+          "duration" : 20033
+        }
+      }, {
+        "uid" : "db6a3f4d506f9062",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/731//#testresult/db6a3f4d506f9062",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\n  'Error: Could not f...ns from any sources' is contained here:\n           ^\n    \n    Error: Could not find artifacts for Migrations from any sources\n        at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\n        at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\n        at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\n        at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\n        at Script.runInContext (node:vm:139:12)\n        at Script.runInNewContext (node:vm:144:17)\n        at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\n        at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\n        at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\n        at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\n        at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\n        at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\n        at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\n    Truffle v5.4.14 (core: 5.4.14)\n    Node v16.14.0\n    /home/runner/work/neon-compatibility/neon-compatibility",
+        "time" : {
+          "start" : 1645490175221,
+          "stop" : 1645490193618,
+          "duration" : 18397
+        }
+      }, {
+        "uid" : "fa43fa7133ccac5f",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/730//#testresult/fa43fa7133ccac5f",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\n  'Error: Could not f...ns from any sources' is contained here:\n           ^\n    \n    Error: Could not find artifacts for Migrations from any sources\n        at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\n        at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\n        at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\n        at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\n        at Script.runInContext (node:vm:139:12)\n        at Script.runInNewContext (node:vm:144:17)\n        at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\n        at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\n        at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\n        at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\n        at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\n        at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\n        at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\n    Truffle v5.4.14 (core: 5.4.14)\n    Node v16.14.0\n    /home/runner/work/neon-compatibility/neon-compatibility",
+        "time" : {
+          "start" : 1645458278356,
+          "stop" : 1645458300350,
+          "duration" : 21994
+        }
+      }, {
+        "uid" : "1fcefda3cab41f1c",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/727//#testresult/1fcefda3cab41f1c",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\n  'Error: Could not f...ns from any sources' is contained here:\n           ^\n    \n    Error: Could not find artifacts for Migrations from any sources\n        at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\n        at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\n        at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\n        at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\n        at Script.runInContext (node:vm:139:12)\n        at Script.runInNewContext (node:vm:144:17)\n        at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\n        at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\n        at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\n        at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\n        at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\n        at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\n        at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\n    Truffle v5.4.14 (core: 5.4.14)\n    Node v16.14.0\n    /home/runner/work/neon-compatibility/neon-compatibility",
+        "time" : {
+          "start" : 1645437187402,
+          "stop" : 1645437205638,
+          "duration" : 18236
+        }
+      }, {
+        "uid" : "4c31feb180525319",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/717//#testresult/4c31feb180525319",
+        "status" : "passed",
+        "time" : {
+          "start" : 1645403780976,
+          "stop" : 1645403788270,
+          "duration" : 7294
+        }
+      }, {
+        "uid" : "a29e10503751c71",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/718//#testresult/a29e10503751c71",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\n  'Error: Could not f...ns from any sources' is contained here:\n           ^\n    \n    Error: Could not find artifacts for Migrations from any sources\n        at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\n        at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\n        at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\n        at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\n        at Script.runInContext (node:vm:139:12)\n        at Script.runInNewContext (node:vm:144:17)\n        at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\n        at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\n        at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\n        at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\n        at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\n        at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\n        at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\n    Truffle v5.4.14 (core: 5.4.14)\n    Node v16.14.0\n    /home/runner/work/neon-compatibility/neon-compatibility",
+        "time" : {
+          "start" : 1645413251696,
+          "stop" : 1645413269971,
+          "duration" : 18275
+        }
+      }, {
+        "uid" : "afcfdb549989f1f8",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/704//#testresult/afcfdb549989f1f8",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\n  'Error: Could not f...ns from any sources' is contained here:\n           ^\n    \n    Error: Could not find artifacts for Migrations from any sources\n        at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\n        at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\n        at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\n        at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\n        at Script.runInContext (node:vm:139:12)\n        at Script.runInNewContext (node:vm:144:17)\n        at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\n        at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\n        at runNextTicks (node:internal/process/task_queues:61:5)\n        at processTimers (node:internal/timers:499:9)\n        at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\n        at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\n        at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\n        at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\n        at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\n    Truffle v5.4.14 (core: 5.4.14)\n    Node v16.14.0\n    /home/runner/work/neon-compatibility/neon-compatibility",
+        "time" : {
+          "start" : 1645317739355,
+          "stop" : 1645317758667,
+          "duration" : 19312
+        }
+      }, {
+        "uid" : "9ae017dce75ba482",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/705//#testresult/9ae017dce75ba482",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\n  'Error: Could not f...ns from any sources' is contained here:\n           ^\n    \n    Error: Could not find artifacts for Migrations from any sources\n        at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\n        at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\n        at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\n        at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\n        at Script.runInContext (node:vm:139:12)\n        at Script.runInNewContext (node:vm:144:17)\n        at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\n        at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\n        at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\n        at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\n        at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\n        at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\n        at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\n    Truffle v5.4.14 (core: 5.4.14)\n    Node v16.14.0\n    /home/runner/work/neon-compatibility/neon-compatibility",
+        "time" : {
+          "start" : 1645326863721,
+          "stop" : 1645326884784,
+          "duration" : 21063
+        }
+      }, {
+        "uid" : "61b941a0495ffb0",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/702//#testresult/61b941a0495ffb0",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\n  'Error: Could not f...ns from any sources' is contained here:\n           ^\n    \n    Error: Could not find artifacts for Migrations from any sources\n        at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\n        at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\n        at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\n        at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\n        at Script.runInContext (node:vm:139:12)\n        at Script.runInNewContext (node:vm:144:17)\n        at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\n        at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\n        at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\n        at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\n        at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\n        at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\n        at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\n    Truffle v5.4.14 (core: 5.4.14)\n    Node v16.14.0\n    /home/runner/work/neon-compatibility/neon-compatibility",
+        "time" : {
+          "start" : 1645231212768,
+          "stop" : 1645231233943,
+          "duration" : 21175
+        }
+      }, {
+        "uid" : "2e8289956f6748b6",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/703//#testresult/2e8289956f6748b6",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\n  'Error: Could not f...ns from any sources' is contained here:\n           ^\n    \n    Error: Could not find artifacts for Migrations from any sources\n        at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\n        at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\n        at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\n        at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\n        at Script.runInContext (node:vm:139:12)\n        at Script.runInNewContext (node:vm:144:17)\n        at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\n        at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\n        at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\n        at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\n        at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\n        at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\n        at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\n    Truffle v5.4.14 (core: 5.4.14)\n    Node v16.14.0\n    /home/runner/work/neon-compatibility/neon-compatibility",
+        "time" : {
+          "start" : 1645240445768,
+          "stop" : 1645240465223,
+          "duration" : 19455
+        }
+      }, {
+        "uid" : "f4eff1f48c9209b8",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/700//#testresult/f4eff1f48c9209b8",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\n  'Error: Could not f...ns from any sources' is contained here:\n           ^\n    \n    Error: Could not find artifacts for Migrations from any sources\n        at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\n        at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\n        at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\n        at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\n        at Script.runInContext (node:vm:139:12)\n        at Script.runInNewContext (node:vm:144:17)\n        at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\n        at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\n        at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\n        at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\n        at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\n        at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\n        at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\n    Truffle v5.4.14 (core: 5.4.14)\n    Node v16.14.0\n    /home/runner/work/neon-compatibility/neon-compatibility",
+        "time" : {
+          "start" : 1645144755928,
+          "stop" : 1645144776528,
+          "duration" : 20600
+        }
+      }, {
+        "uid" : "904153f5f8f69766",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/697//#testresult/904153f5f8f69766",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\n  'Error: Could not f...ns from any sources' is contained here:\n           ^\n    \n    Error: Could not find artifacts for Migrations from any sources\n        at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\n        at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\n        at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\n        at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\n        at Script.runInContext (node:vm:139:12)\n        at Script.runInNewContext (node:vm:144:17)\n        at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\n        at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\n        at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\n        at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\n        at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\n        at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\n        at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\n    Truffle v5.4.14 (core: 5.4.14)\n    Node v16.13.2\n    /home/runner/work/neon-compatibility/neon-compatibility",
+        "time" : {
+          "start" : 1645067610459,
+          "stop" : 1645067627384,
+          "duration" : 16925
+        }
+      }, {
+        "uid" : "a7bd456a80d55ab8",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/695//#testresult/a7bd456a80d55ab8",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\n  'Error: Could not f...ns from any sources' is contained here:\n           ^\n    \n    Error: Could not find artifacts for Migrations from any sources\n        at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\n        at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\n        at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\n        at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\n        at Script.runInContext (node:vm:139:12)\n        at Script.runInNewContext (node:vm:144:17)\n        at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\n        at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\n        at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\n        at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\n        at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\n        at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\n        at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\n    Truffle v5.4.14 (core: 5.4.14)\n    Node v16.13.2\n    /home/runner/work/neon-compatibility/neon-compatibility",
+        "time" : {
+          "start" : 1645057932852,
+          "stop" : 1645057951411,
+          "duration" : 18559
+        }
+      }, {
+        "uid" : "c88e2875d55cb1e9",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/694//#testresult/c88e2875d55cb1e9",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\n  'Error: Could not f...ns from any sources' is contained here:\n           ^\n    \n    Error: Could not find artifacts for Migrations from any sources\n        at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\n        at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\n        at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\n        at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\n        at Script.runInContext (node:vm:139:12)\n        at Script.runInNewContext (node:vm:144:17)\n        at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\n        at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\n        at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\n        at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\n        at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\n        at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\n        at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\n    Truffle v5.4.14 (core: 5.4.14)\n    Node v16.13.2\n    /home/runner/work/neon-compatibility/neon-compatibility",
+        "time" : {
+          "start" : 1644981191655,
+          "stop" : 1644981209993,
+          "duration" : 18338
+        }
+      }, {
+        "uid" : "9d4ed4196bcc0b6c",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/689//#testresult/9d4ed4196bcc0b6c",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\n  'Error: Could not f...ns from any sources' is contained here:\n           ^\n    \n    Error: Could not find artifacts for Migrations from any sources\n        at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\n        at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\n        at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\n        at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\n        at Script.runInContext (node:vm:139:12)\n        at Script.runInNewContext (node:vm:144:17)\n        at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\n        at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\n        at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\n        at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\n        at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\n        at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\n        at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\n    Truffle v5.4.14 (core: 5.4.14)\n    Node v16.13.2\n    /home/runner/work/neon-compatibility/neon-compatibility",
+        "time" : {
+          "start" : 1644894899557,
+          "stop" : 1644894917641,
+          "duration" : 18084
+        }
+      }, {
+        "uid" : "ea25174da303fdc4",
+        "reportUrl" : "https://neonlabsorg.github.io/neon-compatibility/687//#testresult/ea25174da303fdc4",
+        "status" : "failed",
+        "statusDetails" : "AssertionError: assert 'Error: Coul... any sources' not in '/home/runne...patibility\\n'\n  'Error: Could not f...ns from any sources' is contained here:\n           ^\n    \n    Error: Could not find artifacts for Migrations from any sources\n        at Resolver.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/resolver/dist/lib/resolver.js:61:1)\n        at Object.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:172:1)\n        at ResolverIntercept.require (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/ResolverIntercept.js:22:1)\n        at /home/runner/work/neon-compatibility/neon-compatibility/OpenZeppelin/migrations/1_initial_migration.js:1:30\n        at Script.runInContext (node:vm:139:12)\n        at Script.runInNewContext (node:vm:144:17)\n        at Object.file (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/require/require.js:94:1)\n        at Migration._load (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:44:1)\n        at Migration.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/Migration.js:217:1)\n        at Object.runMigrations (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:150:1)\n        at Object.runFrom (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:110:1)\n        at Object.runAll (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:114:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/migrate/index.js:79:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/testing/Test.js:109:1)\n        at Object.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/commands/test/index.js:177:1)\n        at Command.run (/home/runner/work/neon-compatibility/neon-compatibility/node_modules/truffle/build/webpack:/packages/core/lib/command.js:183:1)\n    Truffle v5.4.14 (core: 5.4.14)\n    Node v16.13.2\n    /home/runner/work/neon-compatibility/neon-compatibility",
+        "time" : {
+          "start" : 1644808533231,
+          "stop" : 1644808553762,
+          "duration" : 20531
+        }
+      } ]
+    },
+    "tags" : [ ]
+  },
+  "source" : "5c3332928a181dca.json",
+  "parameterValues" : [ "InputData(test_file='access/AccessControl.test.js', test_files=['access/AccessControl.test.js', 'access/AccessControl.behavior.js'], contracts=['mocks/AccessControlMock.sol', 'mocks/AccessControlEnumerableMock.sol', 'access/AccessControlEnumerable.sol', 'access/IAccessControlEnumerable.sol', 'utils/structs/EnumerableSet.sol', 'access/AccessControl.sol', 'utils/Strings.sol', 'utils/introspection/ERC165.sol', 'interfaces/IERC165.sol', 'utils/introspection/IERC165.sol'], migration_script='2_deploy_contracts.js')" ]
+}
