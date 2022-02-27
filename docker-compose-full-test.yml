@@ -4,7 +4,7 @@ services:
 
   full_test_suite:
     container_name: full_test_suite
-    image: neonlabsorg/full_test_suite:0.1
+    image: neonlabsorg/full_test_suite:0.5
     environment:
       - NETWORK_NAME=night-stand
       - PROXY_URL=http://proxy.night.stand.neontest.xyz/solana
@@ -20,27 +20,8 @@ services:
       - USERS_NUMBER=15
       - JOBS_NUMBER=8
 
-    networks:
-      - net
-    entrypoint: /bin/sh
-#    entrypoint: npx hardhat compile && npx hardhat test --show-stack-traces
+    network_mode: host
+    entrypoint: ./run-test.sh
     volumes:
       - "./hardhat.config.js:/opt/openzeppelin-contracts/hardhat.config.js"
-networks:
-  net:
-    external: yes
-    name: local
 
-export NETWORK_NAME=night-stand
-export PROXY_URL=http://proxy.night.stand.neontest.xyz/solana
-export NETWORK_ID=111
-export ADDRESS_FROM=
-export ADDRESS_TO=
-export PRIVATE_KEY=
-export REQUEST_AMOUNT=995
-export FAUCET_URL=http://proxy.night.stand.neontest.xyz/request_eth_token
-export USE_FAUCET=true
-export SOLANA_EXPLORER=https://explorer.solana.com/?cluster=custom&customUrl=http://proxy.night.stand.neontest.xyz/node-solana
-export SOLANA_URL=http://proxy.night.stand.neontest.xyz/node-solana
-export USERS_NUMBER=15
-export JOBS_NUMBER=8
