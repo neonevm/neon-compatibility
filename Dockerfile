@@ -6,7 +6,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y parallel
 RUN mkdir -p /opt/openzeppelin-contracts/pout
 
 ADD openzeppelin-contracts/ /opt/openzeppelin-contracts/
-COPY ./reporterConfig.json /opt
+COPY reporterConfig.json parallel_report.py fix_allure.py /opt/
 
 WORKDIR /opt/openzeppelin-contracts
 
