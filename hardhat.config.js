@@ -33,11 +33,11 @@ const Config = {
   privateKeys: getArrayValue(process.env.PRIVATE_KEYS)
 };
 
-const web3 = new Web3(
-  new Web3.providers.HttpProvider(Config.proxyUrl, 3000000)
-);
-
 if (Config.privateKeys.length > 0){
+  const web3 = new Web3(
+    new Web3.providers.HttpProvider(Config.proxyUrl, 3000000)
+  );
+
   process.env.PRIVATE_KEY = Config.privateKeys[0];
   process.env.ADDRESS_FROM = web3.eth.accounts.privateKeyToAccount(Config.privateKeys[0]).address;
   process.env.ADDRESS_TO = web3.eth.accounts.privateKeyToAccount(Config.privateKeys[1]).address;
