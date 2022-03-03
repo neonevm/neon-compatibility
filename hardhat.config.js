@@ -33,14 +33,18 @@ const Config = {
   privateKeys: getArrayValue(process.env.PRIVATE_KEYS)
 };
 
-if (Config.privateKeys.length > 0) {
-  const web3 = new Web3(
-      new Web3.providers.HttpProvider(Config.proxyUrl, 3000000)
-  );
+const web3 = new Web3(
+  new Web3.providers.HttpProvider(Config.proxyUrl, 3000000)
+);
 
+if (Config.privateKeys.length > 0){
   process.env.PRIVATE_KEY = Config.privateKeys[0];
   process.env.ADDRESS_FROM = web3.eth.accounts.privateKeyToAccount(Config.privateKeys[0]).address;
   process.env.ADDRESS_TO = web3.eth.accounts.privateKeyToAccount(Config.privateKeys[1]).address;
+} else {
+  process.env.PRIVATE_KEY = "";
+  process.env.ADDRESS_FROM = "";
+  process.env.ADDRESS_TO = "";
 }
 
 const fs = require('fs');
