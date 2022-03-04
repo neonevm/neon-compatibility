@@ -4,6 +4,7 @@ steps:
     branches: "*full-test-suite* *full_test_suite* develop master"
     commands:
       - "docker build . -t neonlabsorg/full_test_suite:${BUILDKITE_BRANCH}"
-      - "docker push neonlabsorg/proxy:${BUILDKITE_BRANCH}"
+      - "docker login -u $DHUBU -p $DHUBP"
+      - "docker push neonlabsorg/full_test_suite:${BUILDKITE_BRANCH}"
     agents:
       queue: "testing"
