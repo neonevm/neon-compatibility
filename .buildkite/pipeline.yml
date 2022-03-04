@@ -5,6 +5,5 @@ steps:
     commands:
       - "docker build . -t neonlabsorg/full_test_suite:${BUILDKITE_BRANCH}"
       - "docker login -u ${DHUBU} -p ${DHUBP}"
-      - "echo Push the neonlabsorg/full_test_suite:${BUILDKITE_BRANCH} image"
       - "docker push neonlabsorg/full_test_suite:${BUILDKITE_BRANCH}"
-      - "docker rm neonlabsorg/full_test_suite:${BUILDKITE_BRANCH}"
+      - "docker image rm neonlabsorg/full_test_suite:${BUILDKITE_BRANCH}"
