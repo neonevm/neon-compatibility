@@ -17,7 +17,7 @@ def process_test_suite_results() -> Tuple[Dict[str, int], List[str]]:
 
     script_path = os.path.dirname(os.path.realpath(__file__))
     stdout_files = glob.glob(script_path + "/**/stdout", recursive=True)
-    print("`stdout` files found: {}. Processing ...\n".format(str(len(stdout_files))))
+    print("`stdout` files found: {}. Processing ...\n".format(len(stdout_files)))
 
     for stdout in stdout_files:
         with open(stdout, 'r+', encoding="utf8") as f:
