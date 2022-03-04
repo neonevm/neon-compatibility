@@ -25,7 +25,7 @@ runs:
         # the last working version
         # find "$(pwd)/test/${{ inputs.folder-name }}" | grep test.js | ../node_modules/.bin/hardhat test $_
         JOBS_NUMBER=${{ inputs.jobsNumber }}
-        find "test/${{ inputs.folder-name }}" -name '*.js' | parallel --jobs $JOBS_NUMBER npx hardhat test {}
+        find "test/${{ inputs.folder-name }}" -name '*.js' | parallel --jobs $JOBS_NUMBER "env PRIVATE_KEYS=\$(node ./get_private_keys.js) npx hardhat test {}"
 
         #echo "echo \"\$(solcjs --version)\"" > 1.sh
         #echo "npx hardhat test \$1" >> 1.sh
