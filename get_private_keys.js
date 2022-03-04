@@ -55,14 +55,26 @@ const web3 = new Web3(
 );
 
 const main = async () => {
-  let privateKeys = []
+  let privateKeys = [];
+  let publicKeys = [];
+
   const requests = Array.from(Array(Config.usersNumber), (_, x) => {
     const acc = web3.eth.accounts.create();
+
     privateKeys.push(acc.privateKey);
+    publicKeys.push(acc.address);
+
     return (async (address, amount) => requestFaucet(address, amount))(
       acc.address,
       Config.requestAmount
     );
+  });
+  // This need to more balance for 3 first keys for big tests ERC721
+  [0, 1, 2].forEach((i)=>{
+     requests.push((async (address, amount) => requestFaucet(address, amount))(
+      publicKeys[i],
+      Config.requestAmount
+    ))
   });
 
   for (const request of requests) { 
