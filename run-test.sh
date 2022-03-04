@@ -1,6 +1,6 @@
 #!/bin/bash
 
-npx hardhat compile
+npx hardhat compile #TODO: move it to Dockerfile after the funding functionality will be dropped from the hardhat config
 find test -name "*.test.js" | sort | parallel -k --jobs ${JOBS_NUMBER} --results pout 'npx hardhat test {}'
 
 python3 /opt/parallel_report.py
