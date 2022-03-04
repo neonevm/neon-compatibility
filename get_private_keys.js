@@ -69,13 +69,15 @@ const main = async () => {
       Config.requestAmount
     );
   });
-  // This need to more balance for 3 first keys for big tests ERC721
-  [0, 1, 2].forEach((i)=>{
-     requests.push((async (address, amount) => requestFaucet(address, amount))(
-      publicKeys[i],
+
+  [1, 2, 3].forEach(()=>{
+    publicKeys.forEach((key)=>{
+      requests.push((async (address, amount) => requestFaucet(address, amount))(
+      key,
       Config.requestAmount
-    ))
-  });
+      ))
+    })
+  })
 
   for (const request of requests) { 
     await request;
