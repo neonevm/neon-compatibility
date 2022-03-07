@@ -41,7 +41,7 @@ def print_test_suite_results(test_report: Dict[str, int], skipped_files: List[st
 
     for f in skipped_files:
         test_file_name = f.split("/", 3)[3].rsplit("/", 1)[0].replace("_", "")
-        print(format("    {}", test_file_name))
+        print("    {}".format(test_file_name))
      
 
 test_report, skipped_files = process_test_suite_results()
