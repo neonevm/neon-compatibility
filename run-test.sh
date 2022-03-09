@@ -2,7 +2,7 @@
 
 cat << EOF
 Summarize result:
- 
+
     Failing - 33
     Pending - 121
     Passing - 300
@@ -18,7 +18,7 @@ The allure-results archive is creating at: /opt/allure-reports.tar
 
 EOF
 
-
+echo "Fake allure reports output" > /opt/allure-reports.tar
 #
 #
 #npx hardhat compile #TODO: move it to Dockerfile after the funding functionality will be dropped from the hardhat config
