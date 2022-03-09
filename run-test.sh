@@ -13,8 +13,6 @@ Test files without test result - 0:
 
 Fix allure results: 0
 The allure-results archive is creating at: /opt/allure-reports.tar
-    Pending - 121
-    Passing - 934
 
 EOF
 
