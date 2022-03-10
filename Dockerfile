@@ -15,5 +15,6 @@ RUN mkdir /opt/openzeppelin-contracts/pout
 
 RUN npx hardhat compile
 
+COPY README.md /
 
 ENTRYPOINT [ "./run-test.sh" ]
