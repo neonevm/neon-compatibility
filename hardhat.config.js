@@ -8,18 +8,9 @@
 
 require('dotenv').config({ path: '../.env' });
 const Web3 = require('web3');
-const axios = require('axios');
 
 const getStringValue = (input) => {
   return input === undefined ? '' : input;
-};
-
-const getBooleanValue = (input) => {
-  return input === undefined || input === 'false' || input === 'FALSE'
-    ? false
-    : input === 'true' || input === 'TRUE'
-    ? true
-    : false;
 };
 
 const getArrayValue = (input) => {
