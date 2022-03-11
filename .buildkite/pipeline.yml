@@ -1,0 +1,9 @@
+steps:
+
+  - label: ":docker: Build and push full test suite"
+    branches: "*full-test-suite* *full_test_suite* develop master"
+    commands:
+      - "docker build . -t neonlabsorg/full_test_suite:${BUILDKITE_BRANCH}"
+      - "docker login -u ${DHUBU} -p ${DHUBP}"
+      - "docker push neonlabsorg/full_test_suite:${BUILDKITE_BRANCH}"
+      - "docker image rm neonlabsorg/full_test_suite:${BUILDKITE_BRANCH}"
