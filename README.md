@@ -49,6 +49,7 @@ cd openzeppelin-contracts
 mkdir allure-results
 cp ../categories.json allure-results
 cp ../hardhat.config.js ./
+cp ../get_private_keys.js ./
 ```
 
 Now you have:
@@ -59,21 +60,21 @@ Now you have:
 
 ```bash
 # in the neon-compatibility/openzeppelin-contracts folder
-npx hardhat test
+env PRIVATE_KEYS=$(./get_private_keys.js) npx hardhat test
 ```
 
 7. Or run a subfolder with tests, for example
 
 ```bash
 # in the neon-compatibility/openzeppelin-contracts folder
-find "$(pwd)/test/finance" | grep test.js | echo $_ | ../node_modules/.bin/hardhat test $_
+find "$(pwd)/test/finance" | grep test.js | echo $_ | env PRIVATE_KEYS=$(./get_private_keys.js) ../node_modules/.bin/hardhat test $_
 ```
 
 8. Or run a single test
 
 ```bash
 # in the neon-compatibility/openzeppelin-contracts folder
-../node_modules/.bin/hardhat test ./test/access/AccessControl.test.js
+env PRIVATE_KEYS=$(./get_private_keys.js) ../node_modules/.bin/hardhat test ./test/access/AccessControl.test.js
 ```
 
 9. Having finished, tests leave after themselves folder with test results ./openzeppelin-contracts/allure-results
