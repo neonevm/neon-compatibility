@@ -10,13 +10,19 @@ steps:
 
   - label: ":docker: Push README onto neonlabsorg/full_test_suite Docker Hub"
     branches: "develop *full_test_suite*"
-    command: docker run --rm -t \
-                        -v $(pwd)/full_test_suite/:/full_test_suite \
-                        -e DOCKER_USER='${DHUBU}' \
-                        -e DOCKER_PASS='${DHUBP}'\
-                        -e PUSHRM_PROVIDER=dockerhub \
+    command: docker run --rm -t -v $(pwd)/full_test_suite/:/full_test_suite  -e DOCKER_USER='neonlabsorg' \
+                        -e DOCKER_PASS='ded4d578-cd4b-4ec8-9603-b5c494a0290a' -e PUSHRM_PROVIDER=dockerhub \
                         -e PUSHRM_FILE=/full_test_suite/README.md \
                         -e PUSHRM_SHORT='Full test suite neonlabsorg docker image is aimed to facilitate the full testing of Neon EVM' \
-                        -e PUSHRM_TARGET=neonlabsorg/full_test_suite \
-                        -e PUSHRM_DEBUG=1 \
-                        chko/docker-pushrm:1
+                        -e PUSHRM_TARGET=neonlabsorg/full_test_suite -e PUSHRM_DEBUG=1 chko/docker-pushrm:1
+
+#    command: docker run --rm -t \
+#                        -v $(pwd)/full_test_suite/:/full_test_suite \
+#                        -e DOCKER_USER='${DHUBU}' \
+#                        -e DOCKER_PASS='${DHUBP}'\
+#                        -e PUSHRM_PROVIDER=dockerhub \
+#                        -e PUSHRM_FILE=/full_test_suite/README.md \
+#                        -e PUSHRM_SHORT='Full test suite neonlabsorg docker image is aimed to facilitate the full testing of Neon EVM' \
+#                        -e PUSHRM_TARGET=neonlabsorg/full_test_suite \
+#                        -e PUSHRM_DEBUG=1 \
+#                        chko/docker-pushrm:1
