@@ -10,7 +10,8 @@ steps:
 
   - label: ":docker: Push README onto neonlabsorg/full_test_suite Docker Hub"
     branches: "develop *full_test_suite*"
-    command: docker run --rm -t -v ./full_test_suite:/full_test_suite \
+    command: docker run --rm -t \
+                        -v $(pwd)/full_test_suite/:/full_test_suite \
                         -e DOCKER_USER='${DHUBU}' \
                         -e DOCKER_PASS='${DHUBP}'\
                         -e PUSHRM_PROVIDER=dockerhub \
