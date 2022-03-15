@@ -1,12 +1,12 @@
 steps:
 
-  - label: ":docker: Build and push full test suite"
-    branches: "*full-test-suite* *full_test_suite* develop master"
-    commands:
-      - "docker build . -t neonlabsorg/full_test_suite:${BUILDKITE_BRANCH}"
-      - "docker login -u ${DHUBU} -p ${DHUBP}"
-      - "docker push neonlabsorg/full_test_suite:${BUILDKITE_BRANCH}"
-      - "docker image rm neonlabsorg/full_test_suite:${BUILDKITE_BRANCH}"
+#  - label: ":docker: Build and push full test suite"
+#    branches: "*full-test-suite* *full_test_suite* develop master"
+#    commands:
+#      - "docker build . -t neonlabsorg/full_test_suite:${BUILDKITE_BRANCH}"
+#      - "docker login -u ${DHUBU} -p ${DHUBP}"
+#      - "docker push neonlabsorg/full_test_suite:${BUILDKITE_BRANCH}"
+#      - "docker image rm neonlabsorg/full_test_suite:${BUILDKITE_BRANCH}"
 
   - label: ":docker: Push README onto neonlabsorg/full_test_suite Docker Hub"
     branches: "develop *full_test_suite*"
@@ -15,6 +15,8 @@ steps:
                         -e PUSHRM_FILE=/full_test_suite/README.md \
                         -e PUSHRM_SHORT='Full test suite neonlabsorg docker image is aimed to facilitate the full testing of Neon EVM' \
                         -e PUSHRM_TARGET=neonlabsorg/full_test_suite -e PUSHRM_DEBUG=1 chko/docker-pushrm:1
+    agents:
+       queue: "testing"
 
 #    command: docker run --rm -t \
 #                        -v $(pwd)/full_test_suite/:/full_test_suite \
