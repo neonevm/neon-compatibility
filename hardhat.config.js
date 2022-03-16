@@ -125,7 +125,7 @@ const requestFaucetAndGetBalance = async (address, amount) => {
 };
 
 const web3 = new Web3(
-  new Web3.providers.HttpProvider(Config.proxyUrl, 3000000)
+  new Web3.providers.HttpProvider(Config.proxyUrl, 60000)
 );
 const account01 = web3.eth.accounts.create();
 process.env.ADDRESS_FROM = account01.address;
@@ -199,7 +199,7 @@ module.exports = {
       gas: "auto",
       gasPrice: "auto",
       allowUnlimitedContractSize: !withOptimizations,
-      timeout: 1000000,
+      timeout: 60000,
       isFork: true
     }
   },
@@ -209,7 +209,7 @@ module.exports = {
     coinmarketcap: argv.coinmarketcap
   },
   mocha: {
-    timeout: 1000000000,
+    timeout: 1200000,
     reporter: 'mocha-multi-reporters',
     reporterOption: {
       configFile: '../reporterConfig.json'
