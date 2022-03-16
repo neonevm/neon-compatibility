@@ -35,6 +35,7 @@ As an option you can define your own configuration as the `.env` file and pass i
 #### Running docker-compose
 
 ```sh
+$ docker-compose -f docker-compose.yml --env-file night.env pull
 $ docker-compose -f docker-compose.yml --env-file night.env up
 ```
 
