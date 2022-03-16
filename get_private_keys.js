@@ -32,7 +32,14 @@ if (Config.useFaucet) {
     console.error(`Skipping faucet requests: USE_FAUCET set to false`);
 }
 
+
+function delay(ms) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
+
+
 const requestFaucet = async (wallet, amount) => {
+    await delay(Math.round(Math.random() * 1000));
     if (!Config.useFaucet) {
         return;
     }
@@ -70,7 +77,7 @@ const main = async () => {
         publicKeys.forEach((key) => {
             requests.push((async (address, amount) => requestFaucet(address, amount))(
                 key,
-                Config.requestAmount
+                Config.requestAmount - Math.round(Math.random() * 100)
             ))
         })
     })
