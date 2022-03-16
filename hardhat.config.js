@@ -25,7 +25,7 @@ const Config = {
 };
 
 const web3 = new Web3(
-  new Web3.providers.HttpProvider(Config.proxyUrl, 60000)
+  new Web3.providers.HttpProvider(Config.proxyUrl, 180000)
 );
 
 if (Config.privateKeys.length > 0){
@@ -114,7 +114,7 @@ module.exports = {
       gas: "auto",
       gasPrice: "auto",
       allowUnlimitedContractSize: !withOptimizations,
-      timeout: 60000,
+      timeout: 180000,
       isFork: true
     }
   },
@@ -124,7 +124,7 @@ module.exports = {
     coinmarketcap: argv.coinmarketcap
   },
   mocha: {
-    timeout: 1200000,
+    timeout: 1800000,
     reporter: 'mocha-multi-reporters',
     reporterOption: {
       configFile: '../reporterConfig.json'
