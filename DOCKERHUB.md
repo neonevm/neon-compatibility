@@ -35,26 +35,38 @@ As an option you can define your own configuration as the `.env` file and pass i
 #### Running docker-compose
 
 ```sh
-$ docker-compose -f docker-compose.yml --env-file my.env up
+$ docker-compose -f docker-compose.yml --env-file night.env up
 ```
 
-#### my.env
+This reference present two `.env` configurations: for night stand and for local workspace
+
+#### night.env
 
 ```ini
 NETWORK_NAME=night-stand
 PROXY_URL=http://proxy.night.stand.neontest.xyz/solana
 NETWORK_ID=111
-ADDRESS_FROM=
-ADDRESS_TO=
-PRIVATE_KEY=
-REQUEST_AMOUNT=19995
+REQUEST_AMOUNT=20000
 FAUCET_URL=http://proxy.night.stand.neontest.xyz/request_eth_token
 USE_FAUCET=true
-SOLANA_EXPLORER=https://explorer.solana.com/?cluster=custom&customUrl=http://proxy.night.stand.neontest.xyz/node-solana
 SOLANA_URL=http://proxy.night.stand.neontest.xyz/node-solana
 USERS_NUMBER=15
+JOBS_NUMBER=8
 ```
 
+### local.env
+
+```ini
+NETWORK_NAME=local
+PROXY_URL=http://localhost:9090/solana
+NETWORK_ID=111
+REQUEST_AMOUNT=20000
+FAUCET_URL=http://localhost:3333/request_neon
+USE_FAUCET=true
+SOLANA_URL=http://solana:8899
+USERS_NUMBER=15
+JOBS_NUMBER=8
+```
 
 #### docker-compose.yml
 ```yaml
@@ -63,18 +75,18 @@ version: "3"
 services:
   full_test_suite:
     container_name: full_test_suite
-    image: neonlabsorg/full_test_suite:develop
+    image: neonlabsorg/full_test_suite:583-full-test-suite
     entrypoint: ./run-test.sh 2>&1
     environment:
       - NETWORK_NAME=${NETWORK_NAME}
       - PROXY_URL=${PROXY_URL}
-      - NETWORK_ID=111
-      - REQUEST_AMOUNT=20000
-      - FAUCET_URL=http://faucet.addr:3334/request_neon
-      - USE_FAUCET=true
-      - SOLANA_URL=http://solana.addr:8899
-      - USERS_NUMBER=15
-      - JOBS_NUMBER=8
+      - NETWORK_ID=${NETWORK_ID}
+      - REQUEST_AMOUNT=${REQUEST_AMOUNT}
+      - FAUCET_URL=${FAUCET_URL}
+      - USE_FAUCET=${USE_FAUCET}
+      - SOLANA_URL=${SOLANA_URL}
+      - USERS_NUMBER=${USERS_NUMBER}
+      - JOBS_NUMBER=${JOBS_NUMBER}
     network_mode: host
 ```
 
