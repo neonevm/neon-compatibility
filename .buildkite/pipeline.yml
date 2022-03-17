@@ -1,5 +1,5 @@
 steps:
-#
+
 #  - label: ":docker: Build and push full test suite"
 #    branches: "*full-test-suite* *full_test_suite* develop master"
 #    commands:
@@ -10,6 +10,8 @@ steps:
 #      - "docker image rm neonlabsorg/full_test_suite:${BUILDKITE_BRANCH}"
 
   - label: ":docker: Push README onto neonlabsorg/full_test_suite Docker Hub"
-    branches: "develop *full_test_suite* *full-test-suite*"
-    command: .buildkite/steps/push-readme.py 2>&1
+    branches: "develop *full-test-suite*"
+    commands:
+      - echo "--- Push dockerhub full description"
+      - .buildkite/steps/push-readme.py 2>&1
 
