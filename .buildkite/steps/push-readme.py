@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 
 import requests
 import os
@@ -16,7 +16,7 @@ try:
     url = "https://hub.docker.com/v2/repositories/neonlabsorg/full_test_suite/"
     response = requests.post('https://hub.docker.com/v2/users/login', json={"username": username, "password": password})
     if response.status_code != 200:
-        print(f"Failed to get docker hub JWT token: {response.status_code}")
+        print("Failed to get docker hub JWT token: {}".format(response.status_code))
         exit(1)
     token = response.json()["token"]
 
