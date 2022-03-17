@@ -30,11 +30,11 @@ try:
         json_data = json.dumps({"full_description": readme_data})
         response = requests.patch(url, data=json_data, headers=headers)
         if response.status_code != 200:
-            print(f"Failed to patch README at neonlabsorg/full_test_suite: {response.status_code}")
+            print("Failed to patch README at neonlabsorg/full_test_suite: {}".format(response.status_code))
             exit(1)
 
     print("Dockerhub readme at neonlabsorg/full_test_suite updated")
 
 except Exception as e:
-    print(f"Failed to update README at neonlabsorg/full_test_suite. Exception: {e}")
+    print("Failed to update README at neonlabsorg/full_test_suite. Exception: {}".format(e))
     exit(1)
