@@ -41,28 +41,14 @@ $ docker-compose -f docker-compose.yml --env-file night.env up
 
 This reference present two `.env` configurations: for night stand and for local workspace
 
-#### night.env
-
-```ini
-NETWORK_NAME=night-stand
-PROXY_URL=http://proxy.night.stand.neontest.xyz/solana
-NETWORK_ID=111
-REQUEST_AMOUNT=20000
-FAUCET_URL=http://proxy.night.stand.neontest.xyz/request_eth_token
-USE_FAUCET=true
-SOLANA_URL=http://proxy.night.stand.neontest.xyz/node-solana
-USERS_NUMBER=15
-JOBS_NUMBER=8
-```
-
 ### local.env
 
 ```ini
 NETWORK_NAME=local
-PROXY_URL=http://localhost:9090/solana
+PROXY_URL=http://proxy:9090/solana
 NETWORK_ID=111
 REQUEST_AMOUNT=20000
-FAUCET_URL=http://localhost:3333/request_neon
+FAUCET_URL=http://faucet:3333/request_neon
 USE_FAUCET=true
 SOLANA_URL=http://solana:8899
 USERS_NUMBER=15
@@ -88,11 +74,27 @@ services:
       - SOLANA_URL=${SOLANA_URL}
       - USERS_NUMBER=${USERS_NUMBER}
       - JOBS_NUMBER=${JOBS_NUMBER}
-    network_mode: host
+
+    networks:
+      - net
+
+networks:
+  net:
+    external: yes
+    name: local
 ```
 
 
+# Image Variants
 
+* [develop](https://hub.docker.com/layers/195749203/neonlabsorg/full_test_suite/develop/images/sha256-de8ae2d4e4f31779f1960ce013f3de9135c0a19b6c5052c3ec2644247c50e01c?context=repo)
 
-Image Variants
 License
+
+View license information for [Full Test Suite](https://github.com/neonlabsorg/neon-compatibility/blob/develop/LICENSE) in [neonlabsorg/neon-compatibility](https://github.com/neonlabsorg/neon-compatibility/) project.
+
+As with all Docker images, these likely also contain other software which may be under other licenses (such as Bash, etc from the base distribution, along with any direct or indirect dependencies of the primary software being contained).
+
+Some additional license information which was able to be auto-detected might be found in the repo-info repository's node/ directory.
+
+As for any pre-built image usage, it is the image user's responsibility to ensure that any use of this image complies with any relevant licenses for all software contained within.
