@@ -25,7 +25,7 @@ try:
     headers["Authorization"] = "Bearer " + token
     headers["Content-Type"] = "application/json"
 
-    with open("../../DOCKERHUB.md") as readme_file:
+    with open("DOCKERHUB.md") as readme_file:
         readme_data = readme_file.read()
         json_data = json.dumps({"full_description": readme_data})
         response = requests.patch(url, data=json_data, headers=headers)
