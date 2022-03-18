@@ -25,7 +25,7 @@ const Config = {
 };
 
 const web3 = new Web3(
-  new Web3.providers.HttpProvider(Config.proxyUrl, 3000000)
+  new Web3.providers.HttpProvider(Config.proxyUrl, 180000)
 );
 
 if (Config.privateKeys.length > 0){
@@ -86,7 +86,6 @@ for (const f of fs.readdirSync(path.join(__dirname, 'hardhat'))) {
 const withOptimizations =
   argv.enableGasReport || argv.compileMode === 'production';
 
-
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
@@ -115,7 +114,7 @@ module.exports = {
       gas: "auto",
       gasPrice: "auto",
       allowUnlimitedContractSize: !withOptimizations,
-      timeout: 1000000,
+      timeout: 180000,
       isFork: true
     }
   },
@@ -125,7 +124,7 @@ module.exports = {
     coinmarketcap: argv.coinmarketcap
   },
   mocha: {
-    timeout: 1000000000,
+    timeout: 1800000,
     reporter: 'mocha-multi-reporters',
     reporterOption: {
       configFile: '../reporterConfig.json'

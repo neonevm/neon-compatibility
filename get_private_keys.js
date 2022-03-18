@@ -32,6 +32,12 @@ if (Config.useFaucet) {
     console.error(`Skipping faucet requests: USE_FAUCET set to false`);
 }
 
+
+function delay(ms) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
+
+
 const requestFaucet = async (wallet, amount) => {
     if (!Config.useFaucet) {
         return;
@@ -54,7 +60,7 @@ const main = async () => {
     let privateKeys = [];
     let publicKeys = [];
 
-    const requests = Array.from(Array(Config.usersNumber), (_, x) => {
+    const requests = Array.from(Array(Config.usersNumber), async (_, x) => {
         const acc = web3.eth.accounts.create();
 
         privateKeys.push(acc.privateKey);
@@ -66,13 +72,12 @@ const main = async () => {
         );
     });
 
-    [1, 2, 3].forEach(() => {
-        publicKeys.forEach((key) => {
+    await delay(3000);
+    [0, 1, 2].forEach((i) => {
             requests.push((async (address, amount) => requestFaucet(address, amount))(
-                key,
-                Config.requestAmount
+                publicKeys[i],
+                Config.requestAmount - Math.round(Math.random() * 100)
             ))
-        })
     })
 
     for (const request of requests) {
