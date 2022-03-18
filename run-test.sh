@@ -10,4 +10,4 @@ find test -name "*.test.js" | sort | parallel -k --jobs ${JOBS_NUMBER} --results
 python3 /opt/parallel_report.py
 python3 /opt/fix_allure.py
 echo "The allure-results archive is creating at: /opt/allure-reports.tar"
-tar -czvf /opt/allure-reports.tar.gz -C /opt/openzeppelin-contracts/report/allure-results/ .
+tar -czf /opt/allure-reports.tar.gz -C /opt/openzeppelin-contracts/report/allure-results/ .
