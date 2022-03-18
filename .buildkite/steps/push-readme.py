@@ -2,12 +2,19 @@
 
 import requests
 import os
-import json
 from requests.structures import CaseInsensitiveDict
 import logging
+import sys
 
 
-logger = logging.getLogger("neon.dockerhubpushrm")
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+
+handler = logging.StreamHandler(sys.stdout)
+handler.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
 
 try:
     logger.debug("Getting DHUBU, DHUBP from environment")
@@ -32,10 +39,9 @@ try:
     logger.debug("Open DOCKERHUB.md")
     with open("DOCKERHUB.md") as readme_file:
         readme_data = readme_file.read()
-        json_data = json.dumps({"full_description": readme_data})
         url = "https://hub.docker.com/v2/repositories/neonlabsorg/full_test_suite/"
         logger.debug("Request (patch) to update full_description at " + url)
-        response = requests.patch(url, data=json_data, headers=headers)
+        response = requests.patch(url, json={"full_description": readme_data}, headers=headers)
         if response.status_code != 200:
             logger.error("Failed to patch README at neonlabsorg/full_test_suite: {}".format(response.status_code))
             exit(1)
