@@ -7,25 +7,26 @@ on:
     inputs:
       network:
         type: choice
-        default: teststand2
+        default: night-stand
         required: true
-        description: "Network (devnet, testnet, teststand, teststand2, neonswap.live, aws, ropsten, rinkeby)"
+        description: "Network (devnet, testnet, release-stand, night-stand, aws, ropsten, rinkeby)"
         options:
-          - teststand2
-          - teststand
+          - night-stand
+          - release-stand
           - devnet
           - testnet
-          - neonswap.live
+          - private-testnet
           - devnet-aws
           - ropsten
           - rinkeby
       runner:
         type: choice
-        default: self-hosted
+        default: neon-hosted
         required: true
         description: "Where to run openzeppelin tests (self-hosted, ubuntu-20.04)"
         options:
-          - self-hosted
+          - neon-hosted
+          - aws-hosted
           - ubuntu-20.04
       jobsNumber:
         description: "Number of jobs in GNU Parallel"
@@ -34,8 +35,8 @@ on:
 
 env:
   JOBS_NUMBER: "8"
-  NETWORK: teststand2
-  RUNNER: self-hosted
+  NETWORK: night-stand
+  RUNNER: neon-hosted
 
 jobs:
   prepare-env:
@@ -127,6 +128,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/openzeppelin-preparation
+        continue-on-error: true
       - name: Switch network
         run: |
           cp "./.env.$NETWORK" "./.env"
@@ -145,7 +147,8 @@ jobs:
           cd openzeppelin-contracts
           mkdir pout
           npx hardhat compile
-          find test -name "*.test.js" | sort | parallel -k --jobs ${{ env.JOBS_NUMBER }} --results pout 'npx hardhat test {}'
+          for i in $(seq ${{ env.JOBS_NUMBER }} ); do export LIST_$i=$(node ./get_private_keys.js); done;
+          find test -name "*.test.js" | sort | parallel -k --jobs ${{ env.JOBS_NUMBER }} --results pout "env PRIVATE_KEYS=\$LIST_{%} npx hardhat test {}"
       - name: "Verify count of logs"
         if: always()
         run: python3 parallel_report.py
@@ -218,7 +221,7 @@ jobs:
 
   allure:
     runs-on: ubuntu-20.04
-    timeout-minutes: 15
+    timeout-minutes: 60
     if: always()
     needs:
       - openzeppelin
@@ -245,7 +248,7 @@ jobs:
           path=""
           network="${{ env.NETWORK }}"
           ref_name="${{ github.ref_name }}"
-          if [[ "$network" != "teststand2" ]]; then
+          if [[ "$network" != "night-stand" ]]; then
             path="$network"
           fi
           if [[ "$ref_name" != "develop" ]]; then
@@ -266,7 +269,7 @@ jobs:
           subfolder: ${{ env.ALLURE_SUBDIR }}
           allure_report: allure-report
           allure_history: allure-history
-          keep_reports: 50
+          keep_reports: 100
 
       - name: Deploy report to Github Pages
         if: always()
