@@ -1,7 +1,8 @@
 #!/bin/bash
 
 PROC_COUNT=$(nproc)
-JOBS_NUMBER=${JOBS_NUMBER:-$PROC_COUNT}
+JOBS_NUMBER=${FTS_JOBS_NUMBER:-$PROC_COUNT}
+USERS_NUMBER=${FTS_JOBS_NUMBER}
 echo "Open Zeppeling tests are processing. JOBS_NUMBER: ${JOBS_NUMBER}"
 
 for i in $(seq ${JOBS_NUMBER} ); do export LIST_$i=$(node ./get_private_keys.js); done;
