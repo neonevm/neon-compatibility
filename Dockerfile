@@ -10,7 +10,7 @@ RUN npm install
 RUN npm install --save-dev dotenv axios mocha-multi-reporters allure-mocha
 
 COPY reporterConfig.json parallel_report.py fix_allure.py /opt/
-COPY run-test.sh hardhat.config.js get_private_keys.js /opt/openzeppelin-contracts/
+COPY run-full-test-suite.sh hardhat.config.js get_private_keys.js /opt/openzeppelin-contracts/
 RUN mkdir /opt/openzeppelin-contracts/pout
 
 RUN npx hardhat compile
