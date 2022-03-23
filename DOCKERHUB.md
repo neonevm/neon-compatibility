@@ -63,7 +63,7 @@ services:
   full_test_suite:
     container_name: full_test_suite
     image: neonlabsorg/full_test_suite:583-full-test-suite
-    entrypoint: ./run-test.sh 2>&1
+    entrypoint: ./run-full-test-suite.sh 2>&1
     environment:
       - NETWORK_NAME=${NETWORK_NAME}
       - PROXY_URL=${PROXY_URL}
