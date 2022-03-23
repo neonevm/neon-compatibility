@@ -1,8 +1,8 @@
 #!/bin/bash
 
 PROC_COUNT=$(nproc)
-JOBS_NUMBER=${FTS_JOBS_NUMBER:-$PROC_COUNT}
-USERS_NUMBER=${FTS_JOBS_NUMBER}
+export JOBS_NUMBER=${FTS_JOBS_NUMBER:-$PROC_COUNT}
+export USERS_NUMBER=${FTS_JOBS_NUMBER}
 echo "Open Zeppeling tests are processing. JOBS_NUMBER: ${JOBS_NUMBER}"
 
 for i in $(seq ${JOBS_NUMBER} ); do
