@@ -48,7 +48,7 @@ const requestFaucet = async (wallet, amount) => {
         const resp = await axios.post(Config.faucetUrl, data);
         console.error(`Faucet response code: ${resp.status}`);
     } catch (err) {
-        console.error(`Failed to send request to the faucet: ${err.response.status} ${err.response.data}`);
+        console.error(`Failed to send request to the faucet: ${err}`);
     }
 };
 
